@@ -79,6 +79,54 @@ Titiwangsa Central address — for a local service business that drives more enq
 on the page itself.
 
 
+## Automatic deploys (set this up once)
+
+`.github/workflows/deploy.yml` uploads the site to hosting on every push to `main`. Once the four
+secrets below exist, no upload is ever manual again — a push goes live in about a minute.
+
+### 1. Get the FTP details
+
+cPanel → **FTP Accounts**. You need the host, username, password and the folder the site is served
+from (almost always `/public_html`).
+
+### 2. Add them as GitHub secrets
+
+Repo → **Settings → Secrets and variables → Actions → New repository secret**. Add four:
+
+| Secret | Example | Notes |
+| --- | --- | --- |
+| `FTP_HOST` | `ftp.adaircondsolution.com` | host name only, no `ftp://` |
+| `FTP_USER` | `deploy@adaircondsolution.com` | the FTP username |
+| `FTP_PASSWORD` | | never commit this to the repo |
+| `FTP_DIR` | `/public_html` | folder the domain serves from |
+
+Secrets are write-only — GitHub will not show them again, and they never appear in the build logs.
+
+### 3. Push
+
+Push to `main`. Watch it under the **Actions** tab. Green tick means it is live; refresh the site
+with Ctrl+Shift+R to get past the browser cache.
+
+### Notes
+
+- The workflow uses **FTPS** (encrypted). If the host does not support it, the run fails with an
+  SSL error — set `ftp:ssl-force` to `false` in the workflow, though it is better to ask the host
+  to turn FTPS on, since plain FTP sends the password in the clear.
+- `.git/`, `.github/` and the README files are excluded from the upload.
+- Files deleted from the repo are **not** removed from the server by default. Once you have
+  confirmed `FTP_DIR` is correct, uncomment the `--delete` line in the workflow to keep the server
+  an exact mirror.
+- `workflow_dispatch` is enabled, so you can also re-deploy by hand from the Actions tab without
+  pushing anything.
+
+### Alternative: Netlify, Vercel or Cloudflare Pages
+
+If the site is not tied to existing hosting, these are simpler than FTP — connect the repository,
+leave the build command empty, set the publish directory to `.`, and delete
+`.github/workflows/deploy.yml`. You get free SSL, a CDN, atomic deploys and instant rollback, and
+every push deploys automatically with no secrets to manage.
+
+
 ## Structure
 
 ```

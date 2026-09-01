@@ -1,0 +1,106 @@
+# Deploy the site to hosting on every push to main.
+#
+# ONE-TIME SETUP
+# GitHub repo -> Settings -> Secrets and variables -> Actions -> New repository secret.
+# Add these four (values come from cPanel -> FTP Accounts):
+#
+#   FTP_HOST      ftp.yourdomain.com     host name only, no ftp:// prefix
+#   FTP_USER      the FTP username
+#   FTP_PASSWORD  the FTP password
+#   FTP_DIR       /public_html           the folder the site is served from
+#
+# After that nothing is manual: push to main and the site updates in about a minute.
+# Logs live under the repository's Actions tab.
+
+name: Deploy to hosting
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '**/*.md'
+      - '.gitignore'
+  workflow_dispatch:        # re-deploy by hand from the Actions tab
+
+concurrency:
+  group: deploy-production  # never let two deploys overlap
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Upload to hosting
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v4
+
+      - name: Install lftp
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends lftp
+
+      - name: Upload over FTPS
+        env:
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_DIR: ${{ secrets.FTP_DIR }}
+        run: |
+          set -euo pipefail
+
+          : "${FTP_HOST:?Repository secret FTP_HOST is not set}"
+          : "${FTP_USER:?Repository secret FTP_USER is not set}"
+          : "${FTP_PASSWORD:?Repository secret FTP_PASSWORD is not set}"
+          : "${FTP_DIR:?Repository secret FTP_DIR is not set}"
+
+          # Wrap a value in lftp quoting so passwords containing " \ , or #
+          # are passed through intact.
+          lftp_quote() { printf '"%s"' "$(printf '%s' "$1" | sed 's/[\\"]/\\&/g')"; }
+
+          # In the repo, but not wanted on the server.
+          EXCLUDES="--exclude-glob .git/ --exclude-glob .github/ --exclude-glob README.md --exclude-glob assets/img/README.md"
+
+          # Add --delete to also remove server files that no longer exist in the repo.
+          # Leave it off until you have confirmed FTP_DIR points at the right folder —
+          # pointed at the wrong folder, --delete wipes whatever is in there.
+          MIRROR_ARGS="--reverse --verbose --parallel=4"
+          # MIRROR_ARGS="$MIRROR_ARGS --delete"
+
+          # The commands go in a mode-600 file rather than on the command line,
+          # so the password never appears in the process list.
+          umask 077
+          SCRIPT="$(mktemp)"
+          trap 'rm -f "$SCRIPT"' EXIT
+          {
+            echo 'set ftp:ssl-allow true;'
+            echo 'set ftp:ssl-force true;'          # if the host has no FTPS, set this to false
+            echo 'set ftp:ssl-protect-data true;'
+            echo 'set ssl:verify-certificate no;'   # shared hosts often use a mismatched cert
+            echo 'set net:max-retries 3;'
+            echo 'set net:timeout 25;'
+            echo 'set cmd:fail-exit true;'
+            echo 'set xfer:clobber on;'
+            printf 'open %s\n' "$(lftp_quote "$FTP_HOST")"
+            printf 'user %s %s\n' "$(lftp_quote "$FTP_USER")" "$(lftp_quote "$FTP_PASSWORD")"
+            printf 'mirror %s %s ./ %s\n' "$MIRROR_ARGS" "$EXCLUDES" "$(lftp_quote "$FTP_DIR")"
+            echo 'bye'
+          } > "$SCRIPT"
+
+          lftp -f "$SCRIPT"
+
+      - name: If the upload failed
+        if: failure()
+        run: |
+          echo "Deploy failed. The usual causes:"
+          echo "  * Login failed          -> FTP_USER / FTP_PASSWORD are wrong, or the host blocks"
+          echo "                             logins from GitHub's IP range."
+          echo "  * SSL/AUTH TLS error    -> the host does not support FTPS. In this workflow set"
+          echo "                             ftp:ssl-force to false (note: the password then travels"
+          echo "                             unencrypted, so prefer asking the host to enable FTPS)."
+          echo "  * No such directory     -> FTP_DIR is wrong. Check the path in cPanel File Manager;"
+          echo "                             it is usually /public_html."
+          echo "  * Connection timed out  -> FTP_HOST is wrong, or the host only allows SFTP."
+
+      - name: Done
+        run: echo "Deployed ${GITHUB_SHA::7} to hosting."
