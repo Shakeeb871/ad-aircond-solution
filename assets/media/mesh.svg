@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 800" width="1600" height="800" role="img" aria-label="Dark teal gradient mesh with airflow contours">
+  <defs>
+    <linearGradient id="mBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#08222c"/><stop offset="0.55" stop-color="#0a3542"/><stop offset="1" stop-color="#06202a"/></linearGradient>
+    <radialGradient id="mA" cx="0.18" cy="0.2" r="0.55"><stop offset="0" stop-color="#12c9c0" stop-opacity="0.42"/><stop offset="1" stop-color="#12c9c0" stop-opacity="0"/></radialGradient>
+    <radialGradient id="mB" cx="0.86" cy="0.78" r="0.5"><stop offset="0" stop-color="#1a9fd6" stop-opacity="0.34"/><stop offset="1" stop-color="#1a9fd6" stop-opacity="0"/></radialGradient>
+    <linearGradient id="mL" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7ff0e4" stop-opacity="0"/><stop offset="0.5" stop-color="#7ff0e4" stop-opacity="0.35"/><stop offset="1" stop-color="#7ff0e4" stop-opacity="0"/></linearGradient>
+  </defs>
+  <rect width="1600" height="800" fill="url(#mBg)"/>
+  <rect width="1600" height="800" fill="url(#mA)"/>
+  <rect width="1600" height="800" fill="url(#mB)"/>
+  <g fill="none" stroke="url(#mL)" stroke-width="2">
+    <path d="M-40 210C260 120 560 300 900 210s460 40 780-40"/>
+    <path d="M-40 330C280 240 580 420 920 330s440 50 760-30"/>
+    <path d="M-40 450C300 360 600 540 940 450s420 50 740-30"/>
+    <path d="M-40 570C320 490 620 650 960 570s400 40 720-30"/>
+  </g>
+</svg>

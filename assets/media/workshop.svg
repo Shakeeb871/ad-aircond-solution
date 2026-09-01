@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1000" width="1200" height="1000" role="img" aria-label="Technician inspecting an outdoor condenser unit with service tools">
+  <defs>
+    <linearGradient id="wBg" x1="0" y1="0" x2="0.6" y2="1"><stop offset="0" stop-color="#0e4553"/><stop offset="1" stop-color="#062631"/></linearGradient>
+    <linearGradient id="wMetal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eaf5f7"/><stop offset="1" stop-color="#b9d3d9"/></linearGradient>
+    <linearGradient id="wSuit" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#14d0c4"/><stop offset="1" stop-color="#0a92a8"/></linearGradient>
+    <radialGradient id="wGlow" cx="0.7" cy="0.32" r="0.55"><stop offset="0" stop-color="#5cf0df" stop-opacity="0.32"/><stop offset="1" stop-color="#5cf0df" stop-opacity="0"/></radialGradient>
+    <filter id="wSoft" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="18"/></filter>
+  </defs>
+  <rect width="1200" height="1000" fill="url(#wBg)"/>
+  <ellipse cx="840" cy="320" rx="480" ry="340" fill="url(#wGlow)"/>
+  <g stroke="#ffffff" stroke-opacity="0.06" stroke-width="3"><path d="M0 240h1200M0 470h1200M0 700h1200"/></g>
+  <path d="M0 792h1200v208H0z" fill="#05202a"/>
+
+  <!-- condenser -->
+  <g>
+    <rect x="596" y="336" width="452" height="332" rx="26" fill="#04222c" opacity="0.5" filter="url(#wSoft)"/>
+    <rect x="586" y="320" width="452" height="332" rx="24" fill="url(#wMetal)"/>
+    <rect x="586" y="320" width="452" height="332" rx="24" fill="none" stroke="#ffffff" stroke-opacity="0.55" stroke-width="3"/>
+    <circle cx="812" cy="486" r="118" fill="#cfe3e8"/>
+    <circle cx="812" cy="486" r="118" fill="none" stroke="#9dbdc5" stroke-width="6"/>
+    <g fill="#0e7285" opacity="0.9">
+      <path d="M812 486c0-58 22-92 66-108 6 44-16 82-66 108z"/>
+      <path d="M812 486c50 30 62 70 46 112-38-22-56-60-46-112z"/>
+      <path d="M812 486c-58 6-92-16-110-58 42-14 84 4 110 58z"/>
+      <path d="M812 486c-30 50-70 60-112 42 22-38 60-54 112-42z"/>
+    </g>
+    <circle cx="812" cy="486" r="26" fill="#0a5a6b"/>
+    <g stroke="#a9c8cf" stroke-width="5"><path d="M612 350v272M646 350v272M980 350v272M1014 350v272"/></g>
+    <rect x="586" y="652" width="452" height="20" rx="8" fill="#9dbdc5"/>
+    <path d="M640 672v40M984 672v40" stroke="#9dbdc5" stroke-width="16" stroke-linecap="round"/>
+  </g>
+
+  <!-- pipes -->
+  <g fill="none" stroke="#0f8ea1" stroke-width="18" stroke-linecap="round">
+    <path d="M586 560H430a40 40 0 0 0-40 40v120"/>
+    <path d="M586 596H468a40 40 0 0 0-40 40v84"/>
+  </g>
+
+  <!-- technician with gauge -->
+  <g>
+    <ellipse cx="270" cy="800" rx="150" ry="22" fill="#031b23" opacity="0.55" filter="url(#wSoft)"/>
+    <path d="M232 470c-56 12-90 56-98 116l-18 122c-3 18 10 32 28 32h42l10-104 12 116h136l14-138 16 126h42c18 0 30-16 26-34l-32-134c-14-58-48-94-100-102z" fill="url(#wSuit)"/>
+    <path d="M228 606h116" stroke="#ffffff" stroke-opacity="0.2" stroke-width="8" stroke-linecap="round"/>
+    <path d="M340 506c34 18 58 46 68 82" fill="none" stroke="url(#wSuit)" stroke-width="36" stroke-linecap="round"/>
+    <circle cx="412" cy="600" r="23" fill="#f0d9c2"/>
+    <circle cx="286" cy="424" r="52" fill="#f0d9c2"/>
+    <path d="M234 414c2-36 26-58 56-58s54 20 56 56c-16-12-38-16-58-10-22 6-38 8-54 12z" fill="#0b3d4a"/>
+    <path d="M230 410h114v14H230z" fill="#0b3d4a"/>
+    <path d="M256 792h68v40h-68zM200 794h74v38h-74z" fill="#0a2c38"/>
+    <!-- gauge -->
+    <g transform="translate(462 654)">
+      <path d="M-7 -58h14v26h-14z" fill="#0a5a6b"/>
+      <circle r="50" fill="#ffffff"/><circle r="50" fill="none" stroke="#0a5a6b" stroke-width="6"/>
+      <circle r="36" fill="none" stroke="#12c9c0" stroke-width="5" stroke-dasharray="142 84" transform="rotate(140)"/>
+      <path d="M0 0l22-26" stroke="#0a2c38" stroke-width="6" stroke-linecap="round"/>
+      <circle r="6" fill="#0a2c38"/>
+      <path d="M40 22c34 14 62 12 96-6" fill="none" stroke="#0f8ea1" stroke-width="9" stroke-linecap="round"/>
+    </g>
+  </g>
+</svg>

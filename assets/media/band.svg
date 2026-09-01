@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700" width="1600" height="700" role="img" aria-label="Abstract cooling airflow pattern">
+  <defs>
+    <linearGradient id="bBg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b6f80"/><stop offset="0.5" stop-color="#0d8ea0"/><stop offset="1" stop-color="#0a5f76"/></linearGradient>
+    <linearGradient id="bLine" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ffffff" stop-opacity="0"/><stop offset="0.45" stop-color="#c9fff7" stop-opacity="0.75"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+    <radialGradient id="bGlow" cx="0.24" cy="0.3" r="0.6"><stop offset="0" stop-color="#8dfff0" stop-opacity="0.4"/><stop offset="1" stop-color="#8dfff0" stop-opacity="0"/></radialGradient>
+  </defs>
+  <rect width="1600" height="700" fill="url(#bBg)"/>
+  <ellipse cx="380" cy="210" rx="620" ry="420" fill="url(#bGlow)"/>
+  <g fill="none" stroke="url(#bLine)" stroke-linecap="round">
+    <path d="M-60 150C300 60 620 250 1000 150s500 40 700-40" stroke-width="4"/>
+    <path d="M-60 250C280 150 640 350 1010 250s520 60 700-30" stroke-width="6" opacity="0.8"/>
+    <path d="M-60 360C300 260 660 460 1030 360s500 70 700-20" stroke-width="3" opacity="0.7"/>
+    <path d="M-60 470C320 380 660 570 1050 470s480 60 680-30" stroke-width="5" opacity="0.55"/>
+    <path d="M-60 580C340 500 660 660 1060 580s460 50 660-30" stroke-width="3" opacity="0.4"/>
+  </g>
+  <g fill="#ffffff" opacity="0.16">
+    <circle cx="1290" cy="180" r="7"/><circle cx="1382" cy="300" r="5"/><circle cx="1180" cy="420" r="6"/><circle cx="242" cy="520" r="6"/><circle cx="420" cy="120" r="5"/>
+  </g>
+</svg>
