@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000" role="img" aria-label="Technician on a step ladder servicing a wall-mounted split air conditioner in a bright modern room">
+  <defs>
+    <linearGradient id="rWall" x1="0.1" y1="0" x2="0.8" y2="1">
+      <stop offset="0" stop-color="#f9feff"/><stop offset="0.55" stop-color="#e6f6fa"/><stop offset="1" stop-color="#cfe8f1"/>
+    </linearGradient>
+    <linearGradient id="rFloor" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0" stop-color="#dcebf1"/><stop offset="1" stop-color="#c3dae3"/>
+    </linearGradient>
+    <linearGradient id="rShell" x1="0.1" y1="0" x2="0.3" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset="0.7" stop-color="#f3fafc"/><stop offset="1" stop-color="#d6e8ee"/>
+    </linearGradient>
+    <linearGradient id="rCavity" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#456672"/><stop offset="1" stop-color="#213e49"/>
+    </linearGradient>
+    <linearGradient id="rUniform" x1="0.1" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#356093"/><stop offset="0.5" stop-color="#20406a"/><stop offset="1" stop-color="#152b48"/>
+    </linearGradient>
+    <linearGradient id="rFlow" x1="1" y1="0" x2="0" y2="0.55">
+      <stop offset="0" stop-color="#2ec3dc" stop-opacity="0.5"/><stop offset="1" stop-color="#7fe4ea" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="rWindow" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0" stop-color="#e9fbff"/><stop offset="1" stop-color="#b4dfef"/>
+    </linearGradient>
+    <linearGradient id="rSofa" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9fc6d4"/><stop offset="1" stop-color="#7cabbd"/>
+    </linearGradient>
+    <radialGradient id="rHalo" cx="0.3" cy="0.18" r="0.55">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.9"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="rTeal" cx="0.2" cy="0.55" r="0.5">
+      <stop offset="0" stop-color="#5fd4e4" stop-opacity="0.22"/><stop offset="1" stop-color="#5fd4e4" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="rLg" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="26"/></filter>
+    <filter id="rMd" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="12"/></filter>
+    <filter id="rSm" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="5"/></filter>
+  </defs>
+
+  <rect width="1000" height="1000" fill="url(#rWall)"/>
+  <rect width="1000" height="1000" fill="url(#rTeal)"/>
+  <ellipse cx="300" cy="150" rx="430" ry="300" fill="url(#rHalo)"/>
+
+  <!-- floor -->
+  <path d="M0 820h1000v180H0z" fill="url(#rFloor)"/>
+  <path d="M0 820h1000v5H0z" fill="#ffffff" opacity="0.55"/>
+
+  <g transform="translate(-180,0)">
+  <!-- window -->
+  <g>
+    <rect x="744" y="120" width="286" height="470" rx="10" fill="url(#rWindow)"/>
+    <g fill="#8ec9dd" opacity="0.5">
+      <rect x="768" y="404" width="44" height="186"/>
+      <rect x="826" y="356" width="32" height="234"/>
+      <path d="M876 590V330l18-46 18 46v260z"/>
+      <rect x="934" y="378" width="40" height="212"/>
+    </g>
+    <rect x="744" y="120" width="286" height="470" rx="10" fill="none" stroke="#f4fbfd" stroke-width="14"/>
+    <path d="M888 120v470M744 356h286" stroke="#f4fbfd" stroke-width="11"/>
+  </g>
+
+
+  <!-- airflow from the unit -->
+  <g fill="none" stroke="url(#rFlow)" stroke-linecap="round">
+    <path d="M150 372C86 404 50 468 62 546" stroke-width="8"/>
+    <path d="M150 404C74 448 34 528 48 610" stroke-width="6" opacity="0.7"/>
+    <path d="M156 434C86 494 56 574 70 654" stroke-width="4" opacity="0.45"/>
+  </g>
+
+  <!-- ============ split unit, panel open ============ -->
+  <g>
+    <rect x="152" y="256" width="380" height="112" rx="20" fill="#7ea9ba" opacity="0.2" filter="url(#rMd)"/>
+    <!-- lifted panel -->
+    <path d="M176 226h330l30 44H146z" fill="#ffffff"/>
+    <path d="M146 270h390l-6 12H152z" fill="#c9dde5"/>
+    <!-- cavity + fins -->
+    <path d="M158 282h360a16 16 0 0 1 16 16v46H142v-46a16 16 0 0 1 16-16z" fill="url(#rCavity)"/>
+    <g stroke="#a8ccd7" stroke-width="2" opacity="0.42">
+      <path d="M168 292v46M188 292v46M208 292v46M228 292v46M248 292v46M268 292v46M288 292v46M308 292v46M328 292v46M348 292v46M368 292v46M388 292v46M408 292v46M428 292v46M448 292v46M468 292v46M488 292v46M508 292v46"/>
+    </g>
+    <path d="M142 326h392v18H142z" fill="#26454f"/>
+    <!-- lower shell + louvre -->
+    <path d="M142 344h392v34a20 20 0 0 1-20 20H162a20 20 0 0 1-20-20z" fill="url(#rShell)"/>
+    <path d="M162 380h352" stroke="#c4dae1" stroke-width="3.5" stroke-linecap="round"/>
+    <path d="M170 398h336a14 14 0 0 0 12-22H158a14 14 0 0 0 12 22z" fill="#eaf4f7"/>
+    <circle cx="504" cy="362" r="5" fill="#14bdb8"/>
+    <rect x="160" y="352" width="56" height="7" rx="3.5" fill="#dcebef"/>
+  </g>
+
+  <!-- ============ step ladder ============ -->
+  <g>
+    <ellipse cx="600" cy="826" rx="130" ry="16" fill="#5f8b9c" opacity="0.22" filter="url(#rSm)"/>
+    <g stroke="#8fb7c6" stroke-width="11" stroke-linecap="round" fill="none">
+      <path d="M690 820 636 636"/>
+      <path d="M556 820 596 636"/>
+    </g>
+    <g stroke="#a7c8d4" stroke-width="10" stroke-linecap="round" fill="none">
+      <path d="M528 820 574 638"/>
+      <path d="M660 820 620 638"/>
+      <path d="M545 754h100M559 700h86M573 650h72"/>
+    </g>
+    <path d="M574 632h56v12h-56z" fill="#8fb7c6"/>
+  </g>
+
+  <!-- ============ technician, back view, on the ladder ============ -->
+  <g>
+    <!-- legs -->
+    <path d="M578 604h26v96h-26zM610 604h26v96h-26z" fill="#16304e"/>
+    <path d="M570 692h40v14h-40zM606 692h40v14h-40z" fill="#0e2138"/>
+    <!-- torso -->
+    <path d="M607 470c-24 0-40 14-45 38l-14 68c-2 10 5 18 15 18h88c10 0 17-8 15-18l-14-68c-5-24-21-38-45-38z" fill="url(#rUniform)"/>
+    <path d="M568 552h78" stroke="#ffffff" stroke-opacity="0.14" stroke-width="7" stroke-linecap="round"/>
+    <!-- reaching arm -->
+    <path d="M578 484 512 372" fill="none" stroke="url(#rUniform)" stroke-width="24" stroke-linecap="round"/>
+    <circle cx="508" cy="366" r="13" fill="#c9d6dc"/>
+    <!-- second arm, holding a cloth -->
+    <path d="M646 492c16 12 24 30 24 52" fill="none" stroke="url(#rUniform)" stroke-width="22" stroke-linecap="round"/>
+    <circle cx="670" cy="556" r="12" fill="#c9d6dc"/>
+    <rect x="656" y="562" width="34" height="22" rx="7" fill="#a8dfe4"/>
+    <!-- head, back three-quarter: mostly hair, a sliver of cheek and one ear -->
+    <path d="M596 462h22v12c0 7-5 12-11 12s-11-5-11-12z" fill="#c99a74"/>
+    <ellipse cx="607" cy="436" rx="25" ry="27" fill="#1d2c3b"/>
+    <path d="M588 428c-6 12-6 26 1 38 7-10 9-26 5-38z" fill="#deb08a"/>
+    <ellipse cx="589" cy="442" rx="6" ry="8" fill="#d3a37c"/>
+    <path d="M587 438c3 1 4 4 3 8" stroke="#b98d6c" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <!-- cap -->
+    <path d="M580 420c1-18 12-30 27-30s26 12 27 30c0 5-3 8-8 8h-38c-5 0-8-3-8-8z" fill="#1d3a5f"/>
+    <path d="M580 428c-16 1-27 4-31 8-2 3 0 6 4 6h29c5 0 8-3 8-8z" fill="#152b48"/>
+    <circle cx="607" cy="392" r="4" fill="#2f5580"/>
+  </g>
+
+  <!-- toolbox on the floor -->
+  <g>
+    <rect x="744" y="768" width="118" height="54" rx="9" fill="#1f7f92"/>
+    <rect x="744" y="768" width="118" height="16" rx="8" fill="#14bdb8"/>
+    <rect x="784" y="754" width="38" height="10" rx="5" fill="none" stroke="#14bdb8" stroke-width="6"/>
+  </g>
+
+  <!-- plant, right foreground -->
+  <g opacity="0.9">
+    <path d="M916 820V706" stroke="#3f9e84" stroke-width="8"/>
+    <path d="M916 742c-42-16-58-58-52-100 42 8 66 46 52 100zM916 730c42-20 56-62 46-104-42 12-60 50-46 104z" fill="#5fbf9a"/>
+    <path d="M876 818h80l-12 74h-56z" fill="#e7f3f6"/>
+    <path d="M876 818h80l-4 22h-72z" fill="#cfe4ea"/>
+  </g>
+
+  </g>
+
+  <!-- restrained cooling accent -->
+  <g stroke="#5fd2e0" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.4">
+    <g transform="translate(690 190)">
+      <path d="M0-20V20M-17-10 17 10M-17 10 17-10"/>
+      <path d="M0-12l-6-6M0-12l6-6M0 12l-6 6M0 12l6 6"/>
+    </g>
+  </g>
+</svg>

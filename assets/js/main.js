@@ -120,43 +120,49 @@
     sections.forEach(function (s) { spy.observe(s); });
   }
 
-  /* ---------- booking form -> WhatsApp ---------- */
-  var form = doc.getElementById('bookingForm');
-  var formError = doc.getElementById('bookingError');
+  /* ---------- enquiry forms -> WhatsApp ---------- */
+  /* Both the hero request card and the booking form at the foot of the page use
+     this. Neither has a backend: the details are composed into a WhatsApp
+     message and nothing is stored by the page. */
+  var LABELS = {
+    service: 'Service',
+    area: 'Area',
+    message: 'Details'
+  };
 
-  if (form) {
+  Array.prototype.slice.call(doc.querySelectorAll('[data-wa-form]')).forEach(function (form) {
+    var errorBox = form.querySelector('[role="alert"]');
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      var name = form.elements.name;
-      var phone = form.elements.phone;
-      var service = form.elements.service;
-      var area = form.elements.area;
-      var message = form.elements.message;
-
       var missing = [];
-      [name, phone].forEach(function (field) {
+      ['name', 'phone'].forEach(function (key) {
+        var field = form.elements[key];
+        if (!field) return;
         var empty = !field.value.trim();
         field.classList.toggle('is-invalid', empty);
         if (empty) missing.push(field);
       });
 
       if (missing.length) {
-        if (formError) formError.hidden = false;
+        if (errorBox) errorBox.hidden = false;
         missing[0].focus();
         return;
       }
-      if (formError) formError.hidden = true;
+      if (errorBox) errorBox.hidden = true;
 
-      var lines = [
-        'Hi Ad Aircond Solution, I would like to book a service.',
-        '',
-        'Name: ' + name.value.trim(),
-        'Contact: ' + phone.value.trim(),
-        'Service: ' + service.value
-      ];
-      if (area.value.trim()) lines.push('Area: ' + area.value.trim());
-      if (message.value.trim()) lines.push('Details: ' + message.value.trim());
+      var lines = ['Hi Ad Aircond Solution, I would like to book a service.', ''];
+
+      if (form.elements.name) lines.push('Name: ' + form.elements.name.value.trim());
+      if (form.elements.phone) lines.push('Contact: ' + form.elements.phone.value.trim());
+
+      Object.keys(LABELS).forEach(function (key) {
+        var field = form.elements[key];
+        if (!field) return;
+        var value = field.value.trim();
+        if (value) lines.push(LABELS[key] + ': ' + value);
+      });
 
       window.open(
         'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(lines.join('\n')),
@@ -170,7 +176,7 @@
         e.target.classList.remove('is-invalid');
       }
     });
-  }
+  });
 
   /* ---------- footer year ---------- */
   var year = doc.getElementById('year');

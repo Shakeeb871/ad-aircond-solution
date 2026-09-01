@@ -54,53 +54,54 @@
   <symbol id="i-quote" viewBox="0 0 24 24" fill="currentColor"><path d="M9.6 5.4c-3.3 1.4-5.4 4.3-5.4 8.1 0 3.1 1.8 5.1 4.3 5.1 2.2 0 3.8-1.6 3.8-3.7 0-2-1.4-3.5-3.3-3.5-.4 0-.8.1-1 .2.4-1.8 1.8-3.4 3.6-4.3zm9.5 0c-3.3 1.4-5.4 4.3-5.4 8.1 0 3.1 1.8 5.1 4.3 5.1 2.2 0 3.8-1.6 3.8-3.7 0-2-1.4-3.5-3.3-3.5-.4 0-.8.1-1 .2.4-1.8 1.8-3.4 3.6-4.3z"/></symbol>
   <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
   <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.6 20.4a7.6 7.6 0 0 1 14.8 0"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13.2 2.6 4.8 13.2h6L10 21.4l9-11h-6.4z"/></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21.4 2.6 10.6 13.4"/><path d="M21.4 2.6 14.6 21.4l-4-8-8-4z"/></symbol>
+  <symbol id="i-mouse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2.8" width="8" height="18.4" rx="4"/><path d="M12 7v3"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.2" y="3.2" width="7.2" height="7.2" rx="2"/><rect x="13.6" y="3.2" width="7.2" height="7.2" rx="2"/><rect x="3.2" y="13.6" width="7.2" height="7.2" rx="2"/><rect x="13.6" y="13.6" width="7.2" height="7.2" rx="2"/></symbol>
   <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9.5 6 6 6-6"/></symbol>
 </svg>
-
-<!-- ============ UTILITY STRIP ============ -->
-<div class="topbar">
-  <div class="wrap topbar__inner">
-    <p class="topbar__item"><svg class="ico" aria-hidden="true"><use href="#i-pin"></use></svg>14, Jalan Batu Bata, Titiwangsa Central, 50400 Kuala Lumpur</p>
-    <div class="topbar__right">
-      <a class="topbar__item" href="mailto:hello@adaircondsolution.com"><svg class="ico" aria-hidden="true"><use href="#i-mail"></use></svg>hello@adaircondsolution.com</a>
-      <a class="topbar__item topbar__item--strong" href="tel:+60178570744"><svg class="ico" aria-hidden="true"><use href="#i-phone"></use></svg>+60 17-857 0744</a>
-    </div>
-  </div>
-</div>
 
 <!-- ============ HEADER — SOLID WHITE, NEVER TRANSPARENT ============ -->
 <header class="site-header" id="siteHeader">
   <div class="wrap site-header__inner">
     <a class="brand" href="#top" aria-label="Ad Aircond Solution — home">
-      <img class="brand__mark" src="assets/media/logo-mark.svg" alt="" width="44" height="44">
-      <span class="brand__text">
-        <span class="brand__name">Ad Aircond <span>Solution</span></span>
-        <span class="brand__tag">Aircond specialists · Kuala Lumpur</span>
+      <span class="brand__stack">
+        <svg class="brand__swoosh" viewBox="0 0 96 20" aria-hidden="true" focusable="false">
+          <path d="M3 17C20 6 42 1 70 3c9 1 17 3 23 6-9-2-18-3-27-3C44 6 22 10 3 17z" fill="currentColor"/>
+        </svg>
+        <span class="brand__name">Ad Aircond</span>
+        <span class="brand__sub">Solution</span>
       </span>
     </a>
 
     <nav class="nav" id="primaryNav" aria-label="Primary">
       <ul class="nav__list">
         <li><a class="nav__link is-active" href="#top">Home</a></li>
-        <li><a class="nav__link" href="#about">About</a></li>
+        <li><a class="nav__link" href="#about">About Us</a></li>
         <li class="nav__item has-sub">
           <button class="nav__link nav__toggle" type="button" aria-expanded="false" aria-controls="servicesMenu">
-            Aircond Services <svg class="ico ico--sm" aria-hidden="true"><use href="#i-chevron"></use></svg>
+            Our Services <svg class="ico ico--sm" aria-hidden="true"><use href="#i-chevron"></use></svg>
           </button>
           <ul class="subnav" id="servicesMenu">
-            <li><a href="#services">AC Repair</a></li>
-            <li><a href="#services">AC Servicing</a></li>
-            <li><a href="#services">AC Maintenance</a></li>
-            <li><a href="#services">AC Installation</a></li>
-            <li><a href="#services">Commercial AC</a></li>
+            <li><a href="#services">Aircond Servicing</a></li>
+            <li><a href="#services">Gas &amp; Refrigerant Service</a></li>
+            <li><a href="#services">AC Troubleshooting</a></li>
             <li><a href="#services">Split AC Service</a></li>
+            <li><a href="#services">Commercial AC Service</a></li>
+            <li><a href="#packages">Service Packages</a></li>
           </ul>
         </li>
-        <li><a class="nav__link" href="#packages">Packages</a></li>
+        <li><a class="nav__link" href="#services">AC Repair</a></li>
+        <li><a class="nav__link" href="#services">AC Maintenance</a></li>
+        <li><a class="nav__link" href="#services">AC Installation</a></li>
         <li><a class="nav__link" href="#contact">Contact</a></li>
       </ul>
       <div class="nav__cta">
-        <a class="btn btn--ghost-dark" href="tel:+60178570744"><svg class="ico" aria-hidden="true"><use href="#i-phone"></use></svg>+60 17-857 0744</a>
+        <a class="btn btn--phone" href="tel:+60178570744">
+          <svg class="ico" aria-hidden="true"><use href="#i-phone"></use></svg>
+          <span class="btn__label">+60178570744</span>
+        </a>
         <a class="btn btn--primary" href="#contact">Book a Service</a>
       </div>
     </nav>
@@ -118,54 +119,120 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero">
-  <div class="hero__media" aria-hidden="true"></div>
-  <div class="hero__veil" aria-hidden="true"></div>
+  <div class="hero__wash" aria-hidden="true"></div>
+
   <div class="wrap hero__inner">
     <div class="hero__copy">
-      <p class="eyebrow eyebrow--light"><span class="eyebrow__dot"></span>Aircond specialists in Kuala Lumpur</p>
-      <h1 class="hero__title">Keep your home cool.<br>Keep your aircond<br><em>running right.</em></h1>
-      <p class="hero__lede">Repair, servicing, maintenance and installation for homes and businesses across Kuala Lumpur — with the fault diagnosed at the unit before any work is quoted.</p>
-      <ul class="hero__pills" aria-label="Common aircond problems we are called out for">
-        <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-snow"></use></svg>Not cooling</li>
-        <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-drop"></use></svg>Water leaking</li>
-        <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-wind"></use></svg>Weak airflow</li>
-        <li><svg class="ico ico--sm" aria-hidden="true"><use href="#i-gauge"></use></svg>Tripping breaker</li>
-      </ul>
+      <p class="tagpill"><span class="tagpill__dot"></span>Professional Aircond Services in Kuala Lumpur</p>
+
+      <h1 class="hero__title">
+        Stay Cool.<br>
+        Live Comfortable.<br>
+        <em>We Keep Your Aircond <br class="brk-lg">Running Perfectly.</em>
+      </h1>
+
+      <p class="hero__lede">Expert air conditioning repair, servicing, maintenance and installation for homes and businesses across Kuala Lumpur.</p>
+
       <div class="hero__actions">
-        <a class="btn btn--primary btn--lg" href="#contact">Book a Service<svg class="ico" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
-        <a class="btn btn--glass btn--lg" href="tel:+60178570744"><svg class="ico" aria-hidden="true"><use href="#i-phone"></use></svg>+60 17-857 0744</a>
+        <a class="btn btn--primary btn--lg" href="#contact">
+          <svg class="ico" aria-hidden="true"><use href="#i-calendar"></use></svg>
+          Book a Service
+          <svg class="ico" aria-hidden="true"><use href="#i-arrow"></use></svg>
+        </a>
+        <a class="btn btn--card btn--lg" href="tel:+60178570744">
+          <svg class="ico" aria-hidden="true"><use href="#i-phone"></use></svg>
+          +60178570744
+        </a>
       </div>
-      <ul class="hero__meta">
-        <li><svg class="ico" aria-hidden="true"><use href="#i-pin"></use></svg>Titiwangsa Central, KL</li>
-        <li><svg class="ico" aria-hidden="true"><use href="#i-home"></use></svg>Residential &amp; commercial</li>
-        <li><svg class="ico" aria-hidden="true"><use href="#i-tools"></use></svg>Repair · Service · Install</li>
+
+      <ul class="hero__facts">
+        <li>
+          <span class="hero__facts-icon"><svg class="ico" aria-hidden="true"><use href="#i-pin"></use></svg></span>
+          <span><strong>Kuala Lumpur</strong>Based at Titiwangsa Central</span>
+        </li>
+        <li>
+          <span class="hero__facts-icon"><svg class="ico" aria-hidden="true"><use href="#i-building"></use></svg></span>
+          <span><strong>Homes &amp; business</strong>Condos, shops and offices</span>
+        </li>
+        <li>
+          <span class="hero__facts-icon"><svg class="ico" aria-hidden="true"><use href="#i-tools"></use></svg></span>
+          <span><strong>Complete care</strong>Repair, service, install</span>
+        </li>
       </ul>
     </div>
-  </div>
-</section>
 
-<!-- ============ HERO HIGHLIGHT CARDS (overlapping) ============ -->
-<section class="highlights" aria-label="Main services">
-  <div class="wrap highlights__grid">
-    <article class="hcard reveal">
-      <span class="hcard__icon"><svg class="ico" aria-hidden="true"><use href="#i-wrench"></use></svg></span>
-      <h2 class="hcard__title">Aircond Repair</h2>
-      <p class="hcard__text">Cooling loss, leaks, unusual noise and units that keep tripping — traced to the cause, then repaired.</p>
-      <a class="link-arrow" href="#services">See repair work<svg class="ico ico--sm" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
-    </article>
-    <article class="hcard reveal" data-delay="1">
-      <span class="hcard__icon"><svg class="ico" aria-hidden="true"><use href="#i-drop"></use></svg></span>
-      <h2 class="hcard__title">Aircond Servicing</h2>
-      <p class="hcard__text">Coil, blower and filter cleaning that clears the build-up sitting behind weak airflow and stale air.</p>
-      <a class="link-arrow" href="#services">See servicing<svg class="ico ico--sm" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
-    </article>
-    <article class="hcard reveal" data-delay="2">
-      <span class="hcard__icon"><svg class="ico" aria-hidden="true"><use href="#i-install"></use></svg></span>
-      <h2 class="hcard__title">Aircond Installation</h2>
-      <p class="hcard__text">Split and multi-split units placed, piped and commissioned for the room they actually have to cool.</p>
-      <a class="link-arrow" href="#services">See installation<svg class="ico ico--sm" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
-    </article>
+    <div class="hero__photo" aria-hidden="true"></div>
+
+    <div class="hero__side">
+      <form class="reqcard" id="heroRequest" data-wa-form novalidate>
+        <h2 class="reqcard__title">Request AC Service</h2>
+        <p class="reqcard__note">Fill in your details and we will contact you shortly.</p>
+
+        <div class="reqfield">
+          <svg class="ico" aria-hidden="true"><use href="#i-user"></use></svg>
+          <label class="sr-only" for="hrName">Your name</label>
+          <input id="hrName" name="name" type="text" autocomplete="name" placeholder="Your Name" required>
+        </div>
+        <div class="reqfield">
+          <svg class="ico" aria-hidden="true"><use href="#i-phone"></use></svg>
+          <label class="sr-only" for="hrPhone">Phone number</label>
+          <input id="hrPhone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="Phone Number" required>
+        </div>
+        <div class="reqfield">
+          <svg class="ico" aria-hidden="true"><use href="#i-grid"></use></svg>
+          <label class="sr-only" for="hrService">Type of service</label>
+          <select id="hrService" name="service">
+            <option value="" selected>Type of Service</option>
+            <option>Aircond repair</option>
+            <option>Aircond servicing</option>
+            <option>Aircond maintenance</option>
+            <option>Aircond installation</option>
+            <option>Gas / refrigerant service</option>
+            <option>Commercial aircond service</option>
+            <option>Not sure yet</option>
+          </select>
+          <svg class="ico reqfield__chev" aria-hidden="true"><use href="#i-chevron"></use></svg>
+        </div>
+        <div class="reqfield">
+          <svg class="ico" aria-hidden="true"><use href="#i-pin"></use></svg>
+          <label class="sr-only" for="hrArea">Your location</label>
+          <input id="hrArea" name="area" type="text" placeholder="Your Location">
+        </div>
+
+        <p class="reqcard__error" role="alert" hidden>Please add your name and a contact number.</p>
+
+        <button class="btn btn--primary btn--block reqcard__submit" type="submit">
+          Request Now
+          <span class="reqcard__send"><svg class="ico" aria-hidden="true"><use href="#i-send"></use></svg></span>
+        </button>
+        <p class="reqcard__alt">Opens WhatsApp with your details ready to send.</p>
+      </form>
+    </div>
+
+    <ul class="usp">
+      <li class="usp__card">
+        <span class="usp__icon"><svg class="ico" aria-hidden="true"><use href="#i-shield"></use></svg></span>
+        <h2 class="usp__title">Experienced Technicians</h2>
+        <p class="usp__text">People who work on these systems daily and know how different aircond units behave.</p>
+      </li>
+      <li class="usp__card">
+        <span class="usp__icon"><svg class="ico" aria-hidden="true"><use href="#i-bolt"></use></svg></span>
+        <h2 class="usp__title">Fast Response Service</h2>
+        <p class="usp__text">Quick assistance when a unit stops cooling, so the room is comfortable again sooner.</p>
+      </li>
+      <li class="usp__card">
+        <span class="usp__icon"><svg class="ico" aria-hidden="true"><use href="#i-check"></use></svg></span>
+        <h2 class="usp__title">Quality Workmanship</h2>
+        <p class="usp__text">Careful inspection, proper service method and attention to the space we work in.</p>
+      </li>
+    </ul>
   </div>
+
+  <a class="scrolldown" href="#about">
+    <svg class="ico" aria-hidden="true"><use href="#i-mouse"></use></svg>
+    Scroll Down
+    <svg class="ico ico--sm" aria-hidden="true"><use href="#i-chevron"></use></svg>
+  </a>
 </section>
 
 <!-- ============ ABOUT / VALUE PROPOSITION ============ -->
@@ -544,7 +611,7 @@
     <div class="booking reveal" data-delay="1">
       <h3 class="booking__title">Request a service visit</h3>
       <p class="booking__note">Fill this in and it opens WhatsApp with your details ready to send. Nothing is stored on this page.</p>
-      <form class="booking__form" id="bookingForm" novalidate>
+      <form class="booking__form" id="bookingForm" data-wa-form novalidate>
         <div class="field">
           <label for="bName">Your name</label>
           <input id="bName" name="name" type="text" autocomplete="name" placeholder="e.g. Aisyah" required>
@@ -573,7 +640,7 @@
           <label for="bMsg">What is the unit doing?</label>
           <textarea id="bMsg" name="message" rows="3" placeholder="e.g. Two wall units in a condo, one blows warm air and drips water."></textarea>
         </div>
-        <p class="booking__error" id="bookingError" role="alert" hidden>Please add your name and a contact number.</p>
+        <p class="booking__error" role="alert" hidden>Please add your name and a contact number.</p>
         <button class="btn btn--primary btn--block btn--lg" type="submit">
           <svg class="ico" aria-hidden="true"><use href="#i-whatsapp"></use></svg>Send via WhatsApp
         </button>
@@ -590,8 +657,13 @@
   <div class="wrap footer__top">
     <div class="footer__brand">
       <a class="brand brand--footer" href="#top" aria-label="Ad Aircond Solution — home">
-        <img class="brand__mark" src="assets/media/logo-mark.svg" alt="" width="44" height="44">
-        <span class="brand__text"><span class="brand__name">Ad Aircond <span>Solution</span></span></span>
+        <span class="brand__stack">
+          <svg class="brand__swoosh" viewBox="0 0 96 20" aria-hidden="true" focusable="false">
+            <path d="M3 17C20 6 42 1 70 3c9 1 17 3 23 6-9-2-18-3-27-3C44 6 22 10 3 17z" fill="currentColor"/>
+          </svg>
+          <span class="brand__name">Ad Aircond</span>
+          <span class="brand__sub">Solution</span>
+        </span>
       </a>
       <p class="footer__about">Air conditioning repair, servicing, maintenance and installation for homes and businesses in Kuala Lumpur. Based at Titiwangsa Central.</p>
       <div class="footer__social">

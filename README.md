@@ -162,9 +162,15 @@ favicon.svg
 
 ## Page sections
 
-Header (solid white) → Hero → 3 service highlight cards → About → Promotional CTA band →
-Trust strip → Aircond services bento grid → Approach (image + text) → Support cards →
-Service packages → Process → Testimonials → Brand wall → Final CTA with booking form → Footer
+Header (solid white) → Hero (headline, CTAs, request card, 3 USP cards) → About →
+Promotional CTA band → Trust strip → Aircond services bento grid → Approach (image + text) →
+Support cards → Service packages → Process → Testimonials → Brand wall →
+Final CTA with booking form → Footer
+
+The hero uses a split composition: messaging on the left, the service image on the right, a
+floating **Request AC Service** card over it, and three USP cards (Experienced Technicians, Fast
+Response Service, Quality Workmanship) beneath. The cards sell *why this company*; the services
+themselves live in the bento grid further down, so the two never repeat each other.
 
 ## Design system
 
@@ -181,7 +187,11 @@ Display type is Poppins, body type is Inter, both self-hosted so the page does n
 third-party font request at render time.
 
 The header is deliberately **solid white and never transparent** — it sits on its own surface and
-the hero begins beneath it.
+the hero begins beneath it. The active nav item carries a turquoise underline on desktop and a
+tinted pill in the stacked mobile panel.
+
+Below 1180px the navigation becomes a slide-in panel; between 1180 and 1240 the phone CTA keeps
+its icon and drops the number so the seven nav items still fit.
 
 ## Things to replace before launch
 
@@ -199,12 +209,16 @@ Each is flagged with an HTML comment above it in `index.html`.
 There are no invented statistics, certifications or prices anywhere on the page. Packages show
 **Request Quote** rather than a figure, since pricing follows an on-site assessment.
 
-## Booking form
+## Enquiry forms
 
-The form in the final CTA section has no backend. On submit it composes the enquiry and opens
-WhatsApp (`wa.me/60178570744`) with the message prefilled. Nothing is stored or transmitted by the
-page itself. To move to a server-side form later, replace the `submit` handler in
-`assets/js/main.js`.
+Two forms share one handler: the **Request AC Service** card in the hero and the booking form in
+the final CTA section. Neither has a backend. On submit the details are composed into a WhatsApp
+message and `wa.me/60178570744` opens with it prefilled — nothing is stored or transmitted by the
+page itself.
+
+Any form carrying `data-wa-form` is picked up automatically. `name` and `phone` are required;
+`service`, `area` and `message` are included when present. To move to a server-side form later,
+replace the single `submit` handler in `assets/js/main.js`.
 
 ## SEO
 
