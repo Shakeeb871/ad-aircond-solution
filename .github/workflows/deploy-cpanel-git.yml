@@ -1,7 +1,9 @@
-# Trigger a cPanel Git Version Control deployment on every push to main.
+# Trigger a cPanel Git Version Control deployment. MANUAL: Actions -> this workflow ->
+# Run workflow.
 #
-# Use this INSTEAD OF deploy.yml if you prefer cPanel's own Git Version Control feature.
-# Do not run both — they would deploy the same files twice.
+# The automatic route is deploy.yml (FTPS), which needs no SSH key. Switch to this one
+# only if you prefer cPanel's Git Version Control, and then take deploy.yml off `push`
+# so the same files are not deployed twice.
 #
 # ONE-TIME SETUP
 #
@@ -21,14 +23,9 @@
 #      CPANEL_REPO_PATH   /home/<cpanel-user>/repositories/ad-aircond-solution
 #      CPANEL_SSH_PORT    optional, only if the host does not use 22
 
-name: Deploy via cPanel Git
+name: Deploy via cPanel Git (manual)
 
 on:
-  push:
-    branches: [main]
-    paths-ignore:
-      - '**/*.md'
-      - '.gitignore'
   workflow_dispatch:
 
 concurrency:
