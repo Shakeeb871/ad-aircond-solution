@@ -19,7 +19,7 @@
       <stop offset="0" stop-color="#2ec3dc" stop-opacity="0.5"/><stop offset="1" stop-color="#7fe4ea" stop-opacity="0"/>
     </linearGradient>
     <linearGradient id="rWindow" x1="0" y1="0" x2="0.3" y2="1">
-      <stop offset="0" stop-color="#e9fbff"/><stop offset="1" stop-color="#b4dfef"/>
+      <stop offset="0" stop-color="#eefbff"/><stop offset="1" stop-color="#d0ebf5"/>
     </linearGradient>
     <linearGradient id="rSofa" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#9fc6d4"/><stop offset="1" stop-color="#7cabbd"/>
@@ -44,17 +44,19 @@
   <path d="M0 820h1000v5H0z" fill="#ffffff" opacity="0.55"/>
 
   <g transform="translate(-180,0)">
-  <!-- window -->
+  <!-- window, set back -->
+    <g opacity="0.72">
   <g>
-    <rect x="744" y="120" width="286" height="470" rx="10" fill="url(#rWindow)"/>
-    <g fill="#8ec9dd" opacity="0.5">
+    <rect x="744" y="120" width="450" height="470" rx="10" fill="url(#rWindow)"/>
+    <g fill="#9ed3e4" opacity="0.3">
       <rect x="768" y="404" width="44" height="186"/>
       <rect x="826" y="356" width="32" height="234"/>
       <path d="M876 590V330l18-46 18 46v260z"/>
-      <rect x="934" y="378" width="40" height="212"/>
+      <rect x="934" y="378" width="40" height="212"/><rect x="1064" y="410" width="52" height="180"/><rect x="1132" y="352" width="34" height="238"/>
     </g>
-    <rect x="744" y="120" width="286" height="470" rx="10" fill="none" stroke="#f4fbfd" stroke-width="14"/>
-    <path d="M888 120v470M744 356h286" stroke="#f4fbfd" stroke-width="11"/>
+    <rect x="744" y="120" width="450" height="470" rx="10" fill="none" stroke="#f4fbfd" stroke-width="12"/>
+    <path d="M888 120v470M1042 120v470M744 356h450" stroke="#f4fbfd" stroke-width="9"/>
+    </g>
   </g>
 
 
