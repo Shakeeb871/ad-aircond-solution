@@ -17,6 +17,68 @@ npx http-server -p 8080 .
 
 Deploy by uploading the folder to any static host (Netlify, Vercel, cPanel, S3, GitHub Pages).
 
+## Deploying to hosting
+
+The site is static, so "deploying" means copying the files. There is nothing to build and no
+server-side runtime to install.
+
+### cPanel / shared hosting (most Malaysian hosts)
+
+1. In cPanel open **File Manager** and go to `public_html`.
+2. Upload `ad-aircond-solution-site.zip` (or the individual files) into `public_html`.
+3. Right-click the zip and choose **Extract**, then delete the zip.
+4. Check that `index.html` sits directly inside `public_html` — not inside a nested folder.
+   The structure should read `public_html/index.html`, `public_html/assets/...`.
+5. Make sure hidden files are visible (File Manager → Settings → Show Hidden Files) so
+   `.htaccess` uploads too. It is optional but adds gzip and caching.
+6. In cPanel run **SSL/TLS Status → Run AutoSSL** so the domain serves over HTTPS.
+
+FTP works the same way: connect with FileZilla and drop the contents of this folder into
+`public_html`.
+
+### GitHub Pages
+
+The repository is already on GitHub, so this needs no upload:
+
+1. Repository → **Settings → Pages**.
+2. Source: **Deploy from a branch**, branch `main` (or whichever branch holds the site), folder `/ (root)`.
+3. Save. The site appears at `https://<user>.github.io/<repo>/` in a minute or two.
+4. For a custom domain, add it under Pages → Custom domain and point a `CNAME` record at
+   `<user>.github.io`.
+
+### Netlify / Vercel / Cloudflare Pages
+
+Connect the repository, then:
+
+- Build command: **leave empty**
+- Publish directory: **`.`** (the repository root)
+
+Every push to the connected branch redeploys automatically.
+
+### DNS
+
+Point the domain at the host:
+
+| Record | Name | Value |
+| --- | --- | --- |
+| `A` | `@` | your host's server IP |
+| `CNAME` | `www` | your domain (or the host's given target) |
+
+DNS changes take anywhere from a few minutes to a few hours to take effect.
+
+### After the domain is live
+
+Update these three things in `index.html`:
+
+1. `<link rel="canonical" href="https://adaircondsolution.com/">` → the real domain.
+2. Add `<meta property="og:url" content="https://yourdomain.com/">` next to the other OG tags.
+3. Replace the placeholder email `hello@adaircondsolution.com` in the top bar and footer.
+
+Then submit the domain to Google Search Console and create a Google Business Profile with the
+Titiwangsa Central address — for a local service business that drives more enquiries than anything
+on the page itself.
+
+
 ## Structure
 
 ```
