@@ -2,24 +2,18 @@
 
 ## The hero photograph
 
-Put the image here as **`hero.webp`** (or `hero.jpg`). The stylesheet already points at
-`assets/img/hero.webp`, so nothing else needs changing — the file appears and it takes over.
+`hero.webp` — 1672x941, a technician at a wall-mounted split unit. It is composed for this
+layout: the left half is a soft light gradient that the headline sits on, and the subject is in
+the right half where the request card overlaps him.
 
-If the file is missing or misnamed, the illustration in `assets/media/hero-service.svg` shows
-instead, so the panel never ends up empty.
+It runs the **full width** of the hero rather than filling a right-hand panel, because that is
+what its composition asks for. `assets/media/hero-service.svg` stays underneath as the fallback,
+so a missing or misnamed file degrades to the illustration instead of leaving the hero empty.
 
-### What the hero shot needs
-
-The panel covers the right side of the hero, roughly square on desktop, and the request card
-overlaps its right third. So:
-
-- Keep the subject **left of centre**. A technician on the far right disappears behind the card.
-- Landscape or square, at least 1600px wide.
-- The panel's left edge is faded out in CSS, so leave some quiet space on that side — the headline
-  sits over it.
-
-`background-position` for the photo is `62% center`. If the subject sits too far one way, change
-that single value in `.hero__photo`.
+To replace it, keep the same shape: landscape, at least 1600px wide, subject on the right, the
+left third quiet enough for dark text. `background-position` is `center top` on desktop and
+`72% center` once the layout stacks — adjust those two values in `.hero__photo` if a new shot
+sits differently.
 
 ## Other image slots
 

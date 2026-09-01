@@ -276,25 +276,24 @@ address{font-style:normal}
     linear-gradient(158deg,#fbfeff 0%,#e9f6fb 38%,#cfe8f3 100%);
 }
 .hero__photo{
-  position:absolute;top:0;right:0;width:56%;z-index:-2;
-  height:clamp(540px,60vw,880px);
-  /* The real photograph. Drop the file in as assets/img/hero.webp and it takes
-     over; the illustration underneath stays as the fallback, so a missing or
-     misnamed file degrades quietly instead of leaving an empty panel. */
+  position:absolute;top:0;left:0;right:0;width:100%;z-index:-2;
+  height:clamp(520px,62vw,900px);
+  /* The photograph is composed for this layout: a soft light half on the left
+     for the headline, the technician on the right. It runs the full width so
+     that composition lands as intended, rather than being cropped into a panel.
+     The illustration stays underneath as the fallback. */
   --photo:url("../img/hero.webp");
   background-image:var(--photo),url("../media/hero-service.svg");
   background-size:cover,cover;
-  /* photo centred on its subject; the illustration keeps its own framing */
-  background-position:62% center,left center;
+  background-position:center top,left center;
   background-repeat:no-repeat,no-repeat;
-  -webkit-mask-image:linear-gradient(96deg,transparent 0,rgba(0,0,0,.72) 11%,#000 22%,#000 100%);
-  mask-image:linear-gradient(96deg,transparent 0,rgba(0,0,0,.72) 11%,#000 22%,#000 100%);
 }
-/* dissolve the panel's lower edge into the tinted ground */
+/* carry the photograph into the tinted ground instead of ending on an edge */
 .hero__photo::after{
-  content:"";position:absolute;left:0;right:0;bottom:0;height:30%;
-  background:linear-gradient(180deg,rgba(211,233,244,0) 0%,rgba(211,233,244,.8) 62%,#d3e9f4 100%);
+  content:"";position:absolute;left:0;right:0;bottom:0;height:38%;
+  background:linear-gradient(180deg,rgba(233,246,251,0) 0%,rgba(230,244,250,.75) 58%,#e6f4fa 100%);
 }
+
 /* the wave carries the hero into the white section below */
 .hero__wave{
   position:absolute;left:-1px;right:-1px;bottom:-1px;width:calc(100% + 2px);
@@ -835,9 +834,9 @@ address{font-style:normal}
   .hero__inner{display:flex;flex-direction:column}
   .hero__copy{order:1;max-width:none}
   .hero__photo{
-    order:2;position:relative;width:100%;height:clamp(300px,42vw,430px);
-    inset:auto;margin-top:32px;border-radius:var(--r-xl);
-    background-position:center 36%,center 36%;
+    order:2;position:relative;width:100%;height:clamp(260px,40vw,400px);
+    inset:auto;margin-top:30px;border-radius:var(--r-xl);overflow:hidden;
+    background-position:72% center,center 36%;
     -webkit-mask-image:none;mask-image:none;
   }
   .hero__photo::after{display:none}
@@ -874,7 +873,7 @@ address{font-style:normal}
   .brand__swoosh{width:54px;top:-8px}
   .brand__sub{font-size:.55rem;letter-spacing:.36em;text-indent:.36em}
   .tagpill{font-size:.76rem;padding:8px 15px 8px 13px}
-  .hero__photo{height:clamp(230px,54vw,320px)}
+  .hero__photo{height:clamp(210px,52vw,300px);background-position:74% center,center 36%}
   .hero__side{max-width:none}
   .trustrow{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 18px;width:100%}
   .trustrow li{padding-inline:0}
