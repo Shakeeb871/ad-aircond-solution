@@ -4,6 +4,16 @@
 # ---- Default document ----
 DirectoryIndex index.html
 
+# ---- Block repository metadata ----
+# A .git directory left in the web root is readable over HTTP and exposes the
+# project's history. Deny it whether or not one is actually present.
+RedirectMatch 404 /\.git(/|$)
+<IfModule mod_authz_core.c>
+  <DirectoryMatch "/\.git">
+    Require all denied
+  </DirectoryMatch>
+</IfModule>
+
 # ---- Correct MIME types ----
 # X-Content-Type-Options below is "nosniff", so a stylesheet served with the
 # wrong type is refused outright and the page renders unstyled. Declare the
