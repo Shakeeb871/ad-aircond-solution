@@ -1,0 +1,124 @@
+# Trigger a cPanel Git Version Control deployment on every push to main.
+#
+# Use this INSTEAD OF deploy.yml if you prefer cPanel's own Git Version Control feature.
+# Do not run both — they would deploy the same files twice.
+#
+# ONE-TIME SETUP
+#
+# A. In cPanel -> Git(TM) Version Control -> Create:
+#      Clone URL       https://github.com/Shakeeb871/ad-aircond-solution.git
+#      Repository Path /home/<cpanel-user>/repositories/ad-aircond-solution
+#      Branch          main
+#    (The repo is public, so cPanel needs no GitHub credentials to clone it.)
+#
+# B. In cPanel -> SSH Access -> Manage SSH Keys, generate a key, AUTHORIZE it,
+#    and copy the PRIVATE key.
+#
+# C. GitHub repo -> Settings -> Secrets and variables -> Actions:
+#      CPANEL_SSH_HOST    your server host or IP
+#      CPANEL_SSH_USER    your cPanel username
+#      CPANEL_SSH_KEY     the whole private key, BEGIN and END lines included
+#      CPANEL_REPO_PATH   /home/<cpanel-user>/repositories/ad-aircond-solution
+#      CPANEL_SSH_PORT    optional, only if the host does not use 22
+
+name: Deploy via cPanel Git
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '**/*.md'
+      - '.gitignore'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Pull and deploy on cPanel
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Load the SSH key
+        env:
+          SSH_KEY: ${{ secrets.CPANEL_SSH_KEY }}
+          SSH_HOST: ${{ secrets.CPANEL_SSH_HOST }}
+          SSH_PORT: ${{ secrets.CPANEL_SSH_PORT }}
+        run: |
+          set -euo pipefail
+          : "${SSH_KEY:?Repository secret CPANEL_SSH_KEY is not set}"
+          : "${SSH_HOST:?Repository secret CPANEL_SSH_HOST is not set}"
+
+          umask 077
+          mkdir -p "$HOME/.ssh"
+          printf '%s\n' "$SSH_KEY" > "$HOME/.ssh/id_deploy"
+          chmod 600 "$HOME/.ssh/id_deploy"
+
+          # Pin the server's host key so the connection cannot be silently
+          # redirected somewhere else.
+          if ! ssh-keyscan -p "${SSH_PORT:-22}" -H "$SSH_HOST" >> "$HOME/.ssh/known_hosts"; then
+            echo "Could not read the host key from $SSH_HOST:${SSH_PORT:-22}."
+            echo "Check CPANEL_SSH_HOST, and CPANEL_SSH_PORT if the host does not use 22."
+            exit 1
+          fi
+          # An unreachable host makes ssh-keyscan print nothing and still exit 0,
+          # which would fail later with a confusing message. Catch it here.
+          if [ ! -s "$HOME/.ssh/known_hosts" ]; then
+            echo "No host key returned by $SSH_HOST:${SSH_PORT:-22} — the host is unreachable,"
+            echo "or SSH is not open on that port. Shared hosts often require SSH access to be"
+            echo "enabled first, and some use a port other than 22."
+            exit 1
+          fi
+
+      - name: Pull the new commit and run the cPanel deployment
+        env:
+          SSH_HOST: ${{ secrets.CPANEL_SSH_HOST }}
+          SSH_USER: ${{ secrets.CPANEL_SSH_USER }}
+          SSH_PORT: ${{ secrets.CPANEL_SSH_PORT }}
+          REPO_PATH: ${{ secrets.CPANEL_REPO_PATH }}
+        run: |
+          set -euo pipefail
+          : "${SSH_USER:?Repository secret CPANEL_SSH_USER is not set}"
+          : "${REPO_PATH:?Repository secret CPANEL_REPO_PATH is not set}"
+
+          # Paths are given explicitly: ssh expands "~" from the passwd entry rather
+          # than $HOME, which is not always the same directory.
+          ssh -i "$HOME/.ssh/id_deploy" -p "${SSH_PORT:-22}" \
+              -o UserKnownHostsFile="$HOME/.ssh/known_hosts" \
+              -o BatchMode=yes -o ConnectTimeout=20 \
+              "$SSH_USER@$SSH_HOST" \
+              REPO_PATH="$REPO_PATH" 'bash -s' <<'REMOTE'
+          set -euo pipefail
+
+          cd "$REPO_PATH" || { echo "No repository at $REPO_PATH — check CPANEL_REPO_PATH."; exit 1; }
+
+          echo "Fetching origin/main..."
+          git fetch --prune origin main
+          # Discard any local drift so the checkout matches GitHub exactly.
+          git reset --hard origin/main
+          echo "Now at $(git rev-parse --short HEAD): $(git log -1 --pretty=%s)"
+
+          if ! command -v uapi >/dev/null 2>&1; then
+            echo "uapi not found on this host — cannot trigger cPanel's deployment."
+            echo "Use the FTP workflow (.github/workflows/deploy.yml) instead."
+            exit 1
+          fi
+
+          echo "Running the cPanel deployment (.cpanel.yml)..."
+          uapi VersionControlDeployment create repository_root="$REPO_PATH"
+          REMOTE
+
+      - name: If the deploy failed
+        if: failure()
+        run: |
+          echo "Deploy failed. The usual causes:"
+          echo "  * Permission denied (publickey) -> the key is not authorized in cPanel."
+          echo "                                     SSH Access -> Manage SSH Keys -> Authorize."
+          echo "  * Connection refused / timeout   -> wrong host, or the host uses a non-22 port."
+          echo "                                     Set CPANEL_SSH_PORT."
+          echo "  * No repository at ...           -> CPANEL_REPO_PATH does not match the path"
+          echo "                                     shown in cPanel's Git Version Control page."
+          echo "  * uapi not found                 -> the host restricts shell access; use the"
+          echo "                                     FTP workflow in deploy.yml instead."

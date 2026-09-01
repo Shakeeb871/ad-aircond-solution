@@ -17,43 +17,16 @@ npx http-server -p 8080 .
 
 Deploy by uploading the folder to any static host (Netlify, Vercel, cPanel, S3, GitHub Pages).
 
-## Deploying to hosting
+## Getting it online the first time
 
-The site is static, so "deploying" means copying the files. There is nothing to build and no
-server-side runtime to install.
+The site is static, so there is nothing to build and no server-side runtime to install.
 
-### cPanel / shared hosting (most Malaysian hosts)
+For the very first upload, cPanel → **File Manager** → `public_html`, upload the files (or a zip
+of them) and extract. Check that `index.html` sits directly inside `public_html`, not in a nested
+folder. Turn on File Manager → Settings → **Show Hidden Files** so `.htaccess` comes across too.
+Then run cPanel → **SSL/TLS Status → Run AutoSSL** so the domain serves over HTTPS.
 
-1. In cPanel open **File Manager** and go to `public_html`.
-2. Upload `ad-aircond-solution-site.zip` (or the individual files) into `public_html`.
-3. Right-click the zip and choose **Extract**, then delete the zip.
-4. Check that `index.html` sits directly inside `public_html` — not inside a nested folder.
-   The structure should read `public_html/index.html`, `public_html/assets/...`.
-5. Make sure hidden files are visible (File Manager → Settings → Show Hidden Files) so
-   `.htaccess` uploads too. It is optional but adds gzip and caching.
-6. In cPanel run **SSL/TLS Status → Run AutoSSL** so the domain serves over HTTPS.
-
-FTP works the same way: connect with FileZilla and drop the contents of this folder into
-`public_html`.
-
-### GitHub Pages
-
-The repository is already on GitHub, so this needs no upload:
-
-1. Repository → **Settings → Pages**.
-2. Source: **Deploy from a branch**, branch `main` (or whichever branch holds the site), folder `/ (root)`.
-3. Save. The site appears at `https://<user>.github.io/<repo>/` in a minute or two.
-4. For a custom domain, add it under Pages → Custom domain and point a `CNAME` record at
-   `<user>.github.io`.
-
-### Netlify / Vercel / Cloudflare Pages
-
-Connect the repository, then:
-
-- Build command: **leave empty**
-- Publish directory: **`.`** (the repository root)
-
-Every push to the connected branch redeploys automatically.
+After that, set up automatic deploys below and you never upload by hand again.
 
 ### DNS
 
@@ -62,16 +35,16 @@ Point the domain at the host:
 | Record | Name | Value |
 | --- | --- | --- |
 | `A` | `@` | your host's server IP |
-| `CNAME` | `www` | your domain (or the host's given target) |
+| `CNAME` | `www` | your domain, or the target the host gives you |
 
-DNS changes take anywhere from a few minutes to a few hours to take effect.
+DNS changes take anywhere from a few minutes to a few hours.
 
-### After the domain is live
+### Once the domain is live
 
-Update these three things in `index.html`:
+Update three things in `index.html`:
 
 1. `<link rel="canonical" href="https://adaircondsolution.com/">` → the real domain.
-2. Add `<meta property="og:url" content="https://yourdomain.com/">` next to the other OG tags.
+2. Add `<meta property="og:url" content="https://yourdomain.com/">` beside the other OG tags.
 3. Replace the placeholder email `hello@adaircondsolution.com` in the top bar and footer.
 
 Then submit the domain to Google Search Console and create a Google Business Profile with the
@@ -81,50 +54,97 @@ on the page itself.
 
 ## Automatic deploys (set this up once)
 
-`.github/workflows/deploy.yml` uploads the site to hosting on every push to `main`. Once the four
-secrets below exist, no upload is ever manual again — a push goes live in about a minute.
+Goal: push to `main`, the live site updates itself. Nothing to upload by hand.
 
-### 1. Get the FTP details
+One thing to know first: **cPanel's Git Version Control does not deploy on push by its own.**
+It clones the repo and can run `.cpanel.yml`, but something has to tell it to. The options below
+differ only in what does the telling.
 
-cPanel → **FTP Accounts**. You need the host, username, password and the folder the site is served
-from (almost always `/public_html`).
+### Option A — cPanel Git Version Control, triggered by GitHub Actions (active setup)
 
-### 2. Add them as GitHub secrets
+Needs SSH access on the hosting account. Deploys within seconds of a push.
 
-Repo → **Settings → Secrets and variables → Actions → New repository secret**. Add four:
+**1. Create the repository in cPanel**
 
-| Secret | Example | Notes |
-| --- | --- | --- |
-| `FTP_HOST` | `ftp.adaircondsolution.com` | host name only, no `ftp://` |
-| `FTP_USER` | `deploy@adaircondsolution.com` | the FTP username |
-| `FTP_PASSWORD` | | never commit this to the repo |
-| `FTP_DIR` | `/public_html` | folder the domain serves from |
+cPanel → **Git™ Version Control → Create**:
 
-Secrets are write-only — GitHub will not show them again, and they never appear in the build logs.
+| Field | Value |
+| --- | --- |
+| Clone URL | `https://github.com/Shakeeb871/ad-aircond-solution.git` |
+| Repository Path | `/home/<cpanel-user>/repositories/ad-aircond-solution` |
+| Branch | `main` |
 
-### 3. Push
+The repository is public, so cPanel needs no GitHub credentials to clone it.
 
-Push to `main`. Watch it under the **Actions** tab. Green tick means it is live; refresh the site
-with Ctrl+Shift+R to get past the browser cache.
+**2. Create an SSH key**
 
-### Notes
+cPanel → **SSH Access → Manage SSH Keys → Generate a New Key**. Then **Authorize** the public key
+— an unauthorized key is the most common reason this fails. Copy the **private** key.
 
-- The workflow uses **FTPS** (encrypted). If the host does not support it, the run fails with an
-  SSL error — set `ftp:ssl-force` to `false` in the workflow, though it is better to ask the host
-  to turn FTPS on, since plain FTP sends the password in the clear.
-- `.git/`, `.github/` and the README files are excluded from the upload.
-- Files deleted from the repo are **not** removed from the server by default. Once you have
-  confirmed `FTP_DIR` is correct, uncomment the `--delete` line in the workflow to keep the server
-  an exact mirror.
-- `workflow_dispatch` is enabled, so you can also re-deploy by hand from the Actions tab without
-  pushing anything.
+**3. Add the GitHub secrets**
+
+Repo → **Settings → Secrets and variables → Actions → New repository secret**:
+
+| Secret | Value |
+| --- | --- |
+| `CPANEL_SSH_HOST` | server host name or IP |
+| `CPANEL_SSH_USER` | your cPanel username |
+| `CPANEL_SSH_KEY` | the whole private key, `BEGIN`/`END` lines included |
+| `CPANEL_REPO_PATH` | `/home/<cpanel-user>/repositories/ad-aircond-solution` |
+| `CPANEL_SSH_PORT` | only if the host does not use port 22 |
+
+**4. Push**
+
+`.github/workflows/deploy-cpanel-git.yml` then fetches the commit on the server, resets the
+checkout to match GitHub exactly, and runs the `.cpanel.yml` deployment. Watch it under the
+**Actions** tab.
+
+### Option B — cPanel Git Version Control, triggered by cron
+
+No SSH from outside, no GitHub secrets. The trade-off is a delay of up to five minutes.
+
+cPanel → **Cron Jobs**, every five minutes:
+
+```
+*/5 * * * * cd $HOME/repositories/ad-aircond-solution && /usr/local/cpanel/3rdparty/bin/git fetch -q origin main && /usr/local/cpanel/3rdparty/bin/git reset -q --hard origin/main && /usr/local/bin/uapi VersionControlDeployment create repository_root=$HOME/repositories/ad-aircond-solution >/dev/null 2>&1
+```
+
+Check the git and uapi paths against your host — they vary between cPanel builds.
+
+### Option C — FTP, no cPanel Git at all
+
+`.github/workflows/deploy.yml` uploads over FTPS. It works on any host, including ones with no
+SSH and no Git Version Control. It is set to **manual** (Actions → Run workflow) so it cannot
+clash with Option A; to make it the automatic one, uncomment its `push:` block and comment out
+the `on: push:` block in `deploy-cpanel-git.yml`.
+
+Its secrets:
+
+| Secret | Example |
+| --- | --- |
+| `FTP_HOST` | `ftp.adaircondsolution.com` (no `ftp://`) |
+| `FTP_USER` | the FTP username |
+| `FTP_PASSWORD` | the FTP password |
+| `FTP_DIR` | `/public_html` |
+
+Only ever leave **one** workflow on `push`. Two would deploy the same files twice.
+
+### What `.cpanel.yml` does
+
+It copies `index.html`, `favicon.svg`, `.htaccess` and the whole `assets/` folder into
+`$HOME/public_html`, replacing `assets/` wholesale so files deleted from the repo also disappear
+from the server. For an addon domain or subdomain, change `DEPLOYPATH` at the top of the file.
+
+### After deploying
+
+Refresh with Ctrl+Shift+R. `.htaccess` sets a one-year cache on CSS, JS and images, so a normal
+refresh can still show the old version.
 
 ### Alternative: Netlify, Vercel or Cloudflare Pages
 
-If the site is not tied to existing hosting, these are simpler than FTP — connect the repository,
-leave the build command empty, set the publish directory to `.`, and delete
-`.github/workflows/deploy.yml`. You get free SSL, a CDN, atomic deploys and instant rollback, and
-every push deploys automatically with no secrets to manage.
+If the site is ever moved off cPanel, these are simpler than either option above — connect the
+repository, leave the build command empty, set the publish directory to `.`, and delete both
+workflow files. Free SSL, a CDN, atomic deploys and one-click rollback, with no secrets to manage.
 
 
 ## Structure

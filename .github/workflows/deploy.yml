@@ -1,4 +1,14 @@
-# Deploy the site to hosting on every push to main.
+# FTP fallback deployment — MANUAL by default.
+#
+# The active automatic deploy is .github/workflows/deploy-cpanel-git.yml, which uses
+# cPanel's Git Version Control. Keep this one for hosts without SSH access, or as a
+# way to re-upload everything by hand.
+#
+# To run it: repo -> Actions -> "Deploy to hosting (FTP fallback)" -> Run workflow.
+#
+# To make THIS the automatic one instead, uncomment the `push:` block below and comment
+# out the `on: push:` block in deploy-cpanel-git.yml. Never leave both on push — they
+# would deploy the same files twice.
 #
 # ONE-TIME SETUP
 # GitHub repo -> Settings -> Secrets and variables -> Actions -> New repository secret.
@@ -12,15 +22,15 @@
 # After that nothing is manual: push to main and the site updates in about a minute.
 # Logs live under the repository's Actions tab.
 
-name: Deploy to hosting
+name: Deploy to hosting (FTP fallback)
 
 on:
-  push:
-    branches: [main]
-    paths-ignore:
-      - '**/*.md'
-      - '.gitignore'
-  workflow_dispatch:        # re-deploy by hand from the Actions tab
+  # push:
+  #   branches: [main]
+  #   paths-ignore:
+  #     - '**/*.md'
+  #     - '.gitignore'
+  workflow_dispatch:        # run it by hand from the Actions tab
 
 concurrency:
   group: deploy-production  # never let two deploys overlap
