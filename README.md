@@ -52,99 +52,55 @@ Titiwangsa Central address — for a local service business that drives more enq
 on the page itself.
 
 
-## Automatic deploys (set this up once)
+## Getting the site onto the server
 
-Goal: push to `main`, the live site updates itself. Nothing to upload by hand.
+There are two ways. Neither needs Git installed on the hosting.
 
-One thing to know first: **cPanel's Git Version Control does not deploy on push by its own.**
-It clones the repo and can run `.cpanel.yml`, but something has to tell it to. The options below
-differ only in what does the telling.
+### Fastest: upload one file
 
-### Option A — cPanel Git Version Control, triggered by GitHub Actions (active setup)
+`standalone.html` is the entire site in a single file — stylesheet, script, fonts, artwork and
+favicon are all embedded. It needs no `assets` folder, no server and no correct paths.
 
-Needs SSH access on the hosting account. Deploys within seconds of a push.
+cPanel → File Manager → `public_html` → upload it, rename it to `index.html`. Done.
 
-**1. Create the repository in cPanel**
+Regenerate it after any change:
 
-cPanel → **Git™ Version Control → Create**:
+```bash
+python3 build-standalone.py
+```
 
-| Field | Value |
-| --- | --- |
-| Clone URL | `https://github.com/Shakeeb871/ad-aircond-solution.git` |
-| Repository Path | `/home/<cpanel-user>/repositories/ad-aircond-solution` |
-| Branch | `main` |
+### Automatic: push to main, FTPS uploads it
 
-The repository is public, so cPanel needs no GitHub credentials to clone it.
-
-**2. Create an SSH key**
-
-cPanel → **SSH Access → Manage SSH Keys → Generate a New Key**. Then **Authorize** the public key
-— an unauthorized key is the most common reason this fails. Copy the **private** key.
-
-**3. Add the GitHub secrets**
-
-Repo → **Settings → Secrets and variables → Actions → New repository secret**:
+`.github/workflows/deploy.yml` runs on every push to `main`. One-time setup — take four values
+from cPanel → **FTP Accounts**, then add them at GitHub → **Settings → Secrets and variables →
+Actions → New repository secret**:
 
 | Secret | Value |
 | --- | --- |
-| `CPANEL_SSH_HOST` | server host name or IP |
-| `CPANEL_SSH_USER` | your cPanel username |
-| `CPANEL_SSH_KEY` | the whole private key, `BEGIN`/`END` lines included |
-| `CPANEL_REPO_PATH` | `/home/<cpanel-user>/repositories/ad-aircond-solution` |
-| `CPANEL_SSH_PORT` | only if the host does not use port 22 |
-
-**4. Push**
-
-`.github/workflows/deploy-cpanel-git.yml` then fetches the commit on the server, resets the
-checkout to match GitHub exactly, and runs the `.cpanel.yml` deployment. Watch it under the
-**Actions** tab.
-
-### Option B — cPanel Git Version Control, triggered by cron
-
-No SSH from outside, no GitHub secrets. The trade-off is a delay of up to five minutes.
-
-cPanel → **Cron Jobs**, every five minutes:
-
-```
-*/5 * * * * cd $HOME/repositories/ad-aircond-solution && /usr/local/cpanel/3rdparty/bin/git fetch -q origin main && /usr/local/cpanel/3rdparty/bin/git reset -q --hard origin/main && /usr/local/bin/uapi VersionControlDeployment create repository_root=$HOME/repositories/ad-aircond-solution >/dev/null 2>&1
-```
-
-Check the git and uapi paths against your host — they vary between cPanel builds.
-
-### Option C — FTP, no cPanel Git at all
-
-`.github/workflows/deploy.yml` uploads over FTPS. It works on any host, including ones with no
-SSH and no Git Version Control. It is set to **manual** (Actions → Run workflow) so it cannot
-clash with Option A; to make it the automatic one, uncomment its `push:` block and comment out
-the `on: push:` block in `deploy-cpanel-git.yml`.
-
-Its secrets:
-
-| Secret | Example |
-| --- | --- |
-| `FTP_HOST` | `ftp.adaircondsolution.com` (no `ftp://`) |
+| `FTP_HOST` | `ftp.yourdomain.com` — host only, no `ftp://` |
 | `FTP_USER` | the FTP username |
 | `FTP_PASSWORD` | the FTP password |
 | `FTP_DIR` | `/public_html` |
 
-Only ever leave **one** workflow on `push`. Two would deploy the same files twice.
+Until all four exist the run stops on its first step and says which one is missing. Check the
+repository's **Actions** tab: a green tick means it reached the server.
 
-### What `.cpanel.yml` does
+Notes:
 
-It copies `index.html`, `favicon.svg`, `.htaccess` and the whole `assets/` folder into
-`$HOME/public_html`, replacing `assets/` wholesale so files deleted from the repo also disappear
-from the server. For an addon domain or subdomain, change `DEPLOYPATH` at the top of the file.
+- The upload uses FTPS. If the host has no FTPS the run fails with an SSL error — better to ask
+  the host to enable it than to send the password in the clear, but the fallback is a one-line
+  change in the workflow.
+- `.git/`, `.github/` and the README files are excluded from the upload.
+- Files deleted from the repo are not removed from the server by default. Once `FTP_DIR` is
+  confirmed correct, uncomment the `--delete` line in the workflow.
+- After a deploy, refresh with Ctrl+Shift+R — `.htaccess` caches CSS and images for a year, so a
+  normal refresh can still show the old version.
 
-### After deploying
+### If the page looks unstyled
 
-Refresh with Ctrl+Shift+R. `.htaccess` sets a one-year cache on CSS, JS and images, so a normal
-refresh can still show the old version.
-
-### Alternative: Netlify, Vercel or Cloudflare Pages
-
-If the site is ever moved off cPanel, these are simpler than either option above — connect the
-repository, leave the build command empty, set the publish directory to `.`, and delete both
-workflow files. Free SSL, a CDN, atomic deploys and one-click rollback, with no secrets to manage.
+That means the CSS did not load: the `assets` folder is missing, or the zip was extracted into a
+subfolder so `index.html` is not directly inside `public_html`. Upload `standalone.html` instead —
+it cannot fail that way.
 
 
 ## Structure
