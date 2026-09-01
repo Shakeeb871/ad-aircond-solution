@@ -1,0 +1,22 @@
+---
+# cPanel Git Version Control deployment.
+#
+# cPanel runs these tasks as your cPanel user, from inside the cloned repository,
+# when you press Deploy HEAD Commit (Git Version Control -> Manage -> Pull or Deploy).
+# Without this file that button has nothing to run.
+#
+# DEPLOYPATH is the folder the domain serves from. $HOME expands to
+# /home/<your-cpanel-user>, so the username is not hardcoded. For an addon domain
+# or subdomain change it, e.g. $HOME/adaircondsolution.com
+deployment:
+  tasks:
+    - export DEPLOYPATH=$HOME/public_html
+    - /bin/mkdir -p $DEPLOYPATH
+    - /bin/cp -f index.html $DEPLOYPATH/
+    - /bin/cp -f standalone.html $DEPLOYPATH/
+    - /bin/cp -f favicon.svg $DEPLOYPATH/
+    - /bin/cp -f .htaccess $DEPLOYPATH/
+    # replace assets wholesale so files removed from the repo also leave the server
+    - /bin/rm -rf $DEPLOYPATH/assets
+    - /bin/cp -R assets $DEPLOYPATH/
+    - /bin/rm -f $DEPLOYPATH/assets/img/README.md
