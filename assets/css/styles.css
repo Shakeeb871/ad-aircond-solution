@@ -304,7 +304,7 @@ address{font-style:normal}
   display:grid;grid-template-columns:minmax(0,1.42fr) minmax(0,.58fr);
   gap:clamp(20px,2.6vw,44px);align-items:start;
 }
-.hero__copy{position:relative;z-index:2;grid-column:1;grid-row:1;max-width:672px;padding-top:clamp(6px,1.6vw,22px)}
+.hero__copy{position:relative;z-index:2;grid-column:1;grid-row:1;max-width:clamp(530px,43vw,620px);padding-top:clamp(6px,1.6vw,22px)}
 .hero__side{position:relative;z-index:3;grid-column:2;grid-row:1/3;align-self:end;justify-self:end;width:100%;max-width:366px}
 
 .tagpill{
@@ -318,8 +318,8 @@ address{font-style:normal}
 
 .hero__title{
   margin-top:20px;
-  font-size:clamp(2.15rem,1.1rem + 3.5vw,3.6rem);
-  font-weight:700;line-height:1.1;letter-spacing:-.035em;color:var(--navy);
+  font-size:clamp(2rem,.95rem + 2.9vw,3rem);
+  font-weight:700;line-height:1.14;letter-spacing:-.035em;color:var(--navy);
 }
 .hero__title em{
   font-style:normal;
@@ -330,7 +330,7 @@ address{font-style:normal}
 @media (min-width:1181px){.brk-lg{display:inline}}
 
 .hero__lede{
-  margin-top:18px;max-width:530px;
+  margin-top:18px;max-width:100%;
   font-size:clamp(1rem,.96rem + .3vw,1.1rem);line-height:1.72;color:var(--muted);
 }
 .hero__actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:28px}
@@ -339,6 +339,7 @@ address{font-style:normal}
 .trustrow{
   display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
   gap:18px 0;margin-top:clamp(26px,2.8vw,36px);
+  width:min(690px,116%);
 }
 .trustrow li{
   display:flex;align-items:flex-start;gap:10px;
@@ -348,12 +349,12 @@ address{font-style:normal}
 .trustrow li+li{border-left:1px solid rgba(17,42,63,.1)}
 .trustrow__icon{
   display:inline-flex;align-items:center;justify-content:center;flex:none;
-  width:38px;height:38px;border-radius:50%;
+  width:36px;height:36px;border-radius:50%;
   background:#dff0f7;color:var(--b-600);
 }
-.trustrow__icon .ico{width:18px;height:18px}
-.trustrow strong{display:block;font-family:var(--f-display);font-weight:600;font-size:.845rem;color:var(--navy);margin-bottom:2px;line-height:1.25;white-space:nowrap}
-.trustrow span span,.trustrow li>span:last-child{font-size:.765rem;line-height:1.45;color:var(--muted)}
+.trustrow__icon .ico{width:17px;height:17px}
+.trustrow strong{display:block;font-family:var(--f-display);font-weight:600;font-size:.83rem;color:var(--navy);margin-bottom:2px;line-height:1.25;white-space:nowrap}
+.trustrow span span,.trustrow li>span:last-child{font-size:.745rem;line-height:1.45;color:var(--muted)}
 
 /* request card */
 .reqcard{
@@ -403,9 +404,9 @@ address{font-style:normal}
 .usp__card{
   position:relative;
   display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;
-  gap:0 14px;
+  gap:0 11px;
   background:#fff;border:1px solid var(--line);border-radius:var(--r-xl);
-  padding:clamp(20px,2vw,24px);padding-bottom:clamp(56px,5vw,64px);
+  padding:clamp(18px,1.7vw,22px);padding-bottom:clamp(56px,5vw,64px);
   box-shadow:0 26px 54px -28px rgba(15,39,64,.34),0 2px 8px -4px rgba(15,39,64,.1);
   transition:transform .3s cubic-bezier(.3,.8,.4,1),box-shadow .3s ease,border-color .3s ease;
 }
@@ -413,13 +414,13 @@ address{font-style:normal}
 .usp__icon{
   grid-row:1;grid-column:1;
   display:inline-flex;align-items:center;justify-content:center;
-  width:52px;height:52px;border-radius:50%;
+  width:44px;height:44px;border-radius:50%;
   background:#ddeff6;color:var(--b-600);
   transition:background .3s ease,color .3s ease;
 }
 .usp__card:hover .usp__icon{background:var(--grad);color:#fff}
-.usp__icon .ico{width:24px;height:24px}
-.usp__title{grid-row:1;grid-column:2;font-size:1.06rem;color:var(--navy);line-height:1.25}
+.usp__icon .ico{width:22px;height:22px}
+.usp__title{grid-row:1;grid-column:2;font-size:.93rem;letter-spacing:-.025em;color:var(--navy);line-height:1.25}
 .usp__text{grid-row:2;grid-column:1/-1;margin-top:15px;font-size:.87rem;line-height:1.62}
 .usp__go{
   position:absolute;right:clamp(18px,1.8vw,22px);bottom:clamp(16px,1.6vw,20px);
@@ -873,7 +874,7 @@ address{font-style:normal}
   .tagpill{font-size:.76rem;padding:8px 15px 8px 13px}
   .hero__photo{height:clamp(230px,54vw,320px)}
   .hero__side{max-width:none}
-  .trustrow{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 18px}
+  .trustrow{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 18px;width:100%}
   .trustrow li{padding-inline:0}
   .trustrow strong{white-space:normal}
   .trustrow li+li{border-left:0}
