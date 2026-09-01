@@ -5,11 +5,16 @@
 DirectoryIndex index.html
 
 # ---- Correct MIME types ----
+# X-Content-Type-Options below is "nosniff", so a stylesheet served with the
+# wrong type is refused outright and the page renders unstyled. Declare the
+# types explicitly rather than trusting the host's defaults.
 <IfModule mod_mime.c>
+  AddType text/css                 .css
+  AddType application/javascript   .js
+  AddType text/html                .html
   AddType image/svg+xml            .svg
   AddType font/woff2               .woff2
   AddType application/json         .json
-  AddType text/cache-manifest      .appcache
 </IfModule>
 
 # ---- Compression ----
