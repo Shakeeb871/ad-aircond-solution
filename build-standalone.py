@@ -34,14 +34,13 @@ styles = re.sub(r'url\("\.\./media/([^"]+)"\)',
                 lambda m: 'url("' + data_uri(f"assets/media/{m.group(1)}", 'image/svg+xml') + '")',
                 read('assets/css/styles.css'))
 
-html = html.replace(
-    '<link rel="preload" href="assets/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>\n'
-    '<link rel="preload" href="assets/fonts/poppins-600-latin.woff2" as="font" type="font/woff2" crossorigin>\n'
-    '<link rel="stylesheet" href="assets/css/fonts.css">\n'
-    '<link rel="stylesheet" href="assets/css/styles.css">',
-    '<style>\n' + fonts + '\n' + styles + '\n</style>')
-html = html.replace('<script src="assets/js/main.js" defer></script>',
-                    '<script>\n' + read('assets/js/main.js') + '\n</script>')
+# Asset URLs carry a ?v= build id, so match them by pattern rather than literally.
+html = re.sub(r'<link rel="preload"[^>]*>\n', '', html)
+_style_block = '<style>\n' + fonts + '\n' + styles + '\n</style>'
+html = re.sub(r'<link rel="stylesheet" href="assets/css/fonts\.css[^"]*">\n<link rel="stylesheet" href="assets/css/styles\.css[^"]*">',
+              lambda m: _style_block, html, count=1)
+html = re.sub(r'<script src="assets/js/main\.js[^"]*"[^>]*></script>',
+              lambda m: '<script>\n' + read('assets/js/main.js') + '\n</script>', html, count=1)
 html = html.replace('<link rel="icon" href="favicon.svg" type="image/svg+xml">',
                     '<link rel="icon" href="' + data_uri('favicon.svg', 'image/svg+xml') + '" type="image/svg+xml">')
 
