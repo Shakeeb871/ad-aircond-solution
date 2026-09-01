@@ -59,6 +59,7 @@
   <symbol id="i-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21.4 2.6 10.6 13.4"/><path d="M21.4 2.6 14.6 21.4l-4-8-8-4z"/></symbol>
   <symbol id="i-mouse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2.8" width="8" height="18.4" rx="4"/><path d="M12 7v3"/></symbol>
   <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.2" y="3.2" width="7.2" height="7.2" rx="2"/><rect x="13.6" y="3.2" width="7.2" height="7.2" rx="2"/><rect x="3.2" y="13.6" width="7.2" height="7.2" rx="2"/><rect x="13.6" y="13.6" width="7.2" height="7.2" rx="2"/></symbol>
+  <symbol id="i-badge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.6 14.3 5l3.3-.3.5 3.3 2.7 1.9-1.6 2.9 1.6 2.9-2.7 1.9-.5 3.3-3.3-.3L12 22.6 9.7 20.2l-3.3.3-.5-3.3L3.2 15.3l1.6-2.9-1.6-2.9L5.9 7.6l.5-3.3 3.3.3z"/><path d="m9 12.2 2.1 2.1L15.4 10"/></symbol>
   <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9.5 6 6 6-6"/></symbol>
 </svg>
 
@@ -121,6 +122,12 @@
 <section class="hero">
   <div class="hero__wash" aria-hidden="true"></div>
 
+  <!-- the hero flows into the white section below through this wave -->
+  <svg class="hero__wave" viewBox="0 0 1440 190" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path d="M0 26C214 116 508 168 838 150c246-14 448-72 602-134v174H0z" fill="#ffffff" opacity=".55"/>
+    <path d="M0 70C226 158 520 196 846 178c236-13 434-64 594-118v130H0z" fill="#ffffff"/>
+  </svg>
+
   <div class="wrap hero__inner">
     <div class="hero__copy">
       <p class="tagpill"><span class="tagpill__dot"></span>Professional Aircond Services in Kuala Lumpur</p>
@@ -145,18 +152,18 @@
         </a>
       </div>
 
-      <ul class="hero__facts">
+      <ul class="trustrow">
         <li>
-          <span class="hero__facts-icon"><svg class="ico" aria-hidden="true"><use href="#i-pin"></use></svg></span>
-          <span><strong>Kuala Lumpur</strong>Based at Titiwangsa Central</span>
+          <span class="trustrow__icon"><svg class="ico" aria-hidden="true"><use href="#i-shield"></use></svg></span>
+          <span><strong>Trusted Technicians</strong>Experienced professionals providing reliable AC solutions.</span>
         </li>
         <li>
-          <span class="hero__facts-icon"><svg class="ico" aria-hidden="true"><use href="#i-building"></use></svg></span>
-          <span><strong>Homes &amp; business</strong>Condos, shops and offices</span>
+          <span class="trustrow__icon"><svg class="ico" aria-hidden="true"><use href="#i-bolt"></use></svg></span>
+          <span><strong>Fast Response</strong>Quick assistance when your cooling system needs attention.</span>
         </li>
         <li>
-          <span class="hero__facts-icon"><svg class="ico" aria-hidden="true"><use href="#i-tools"></use></svg></span>
-          <span><strong>Complete care</strong>Repair, service, install</span>
+          <span class="trustrow__icon"><svg class="ico" aria-hidden="true"><use href="#i-badge"></use></svg></span>
+          <span><strong>Quality Assured</strong>Professional service with attention to detail.</span>
         </li>
       </ul>
     </div>
@@ -166,7 +173,7 @@
     <div class="hero__side">
       <form class="reqcard" id="heroRequest" data-wa-form novalidate>
         <h2 class="reqcard__title">Request AC Service</h2>
-        <p class="reqcard__note">Fill in your details and we will contact you shortly.</p>
+        <p class="reqcard__note">Fill in your details and we&rsquo;ll contact you shortly.</p>
 
         <div class="reqfield">
           <svg class="ico" aria-hidden="true"><use href="#i-user"></use></svg>
@@ -209,33 +216,36 @@
       </form>
     </div>
 
+    <!-- floating cards, straddling the curve -->
     <ul class="usp">
       <li class="usp__card">
-        <span class="usp__icon"><svg class="ico" aria-hidden="true"><use href="#i-shield"></use></svg></span>
-        <h2 class="usp__title">Experienced Technicians</h2>
-        <p class="usp__text">People who work on these systems daily and know how different aircond units behave.</p>
-              <a class="usp__go" href="#about" aria-label="Read about how we work"><svg class="ico" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+        <span class="usp__icon"><svg class="ico" aria-hidden="true"><use href="#i-tools"></use></svg></span>
+        <h2 class="usp__title">Trusted Technicians</h2>
+        <p class="usp__text">Skilled professionals who understand different air-conditioning systems and provide dependable solutions.</p>
+        <a class="usp__go" href="#about" aria-label="Read about how we work"><svg class="ico" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
       </li>
       <li class="usp__card">
-        <span class="usp__icon"><svg class="ico" aria-hidden="true"><use href="#i-bolt"></use></svg></span>
-        <h2 class="usp__title">Fast Response Service</h2>
-        <p class="usp__text">Quick assistance when a unit stops cooling, so the room is comfortable again sooner.</p>
-              <a class="usp__go" href="#contact" aria-label="Request a service visit"><svg class="ico" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+        <span class="usp__icon"><svg class="ico" aria-hidden="true"><use href="#i-clock"></use></svg></span>
+        <h2 class="usp__title">Fast Response</h2>
+        <p class="usp__text">Quick support when you need air-conditioning assistance.</p>
+        <a class="usp__go" href="#contact" aria-label="Request a service visit"><svg class="ico" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
       </li>
       <li class="usp__card">
         <span class="usp__icon"><svg class="ico" aria-hidden="true"><use href="#i-check"></use></svg></span>
         <h2 class="usp__title">Quality Workmanship</h2>
-        <p class="usp__text">Careful inspection, proper service method and attention to the space we work in.</p>
-              <a class="usp__go" href="#process" aria-label="See how our service works"><svg class="ico" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+        <p class="usp__text">Careful inspection, proper techniques, and reliable service quality.</p>
+        <a class="usp__go" href="#process" aria-label="See how our service works"><svg class="ico" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
       </li>
     </ul>
   </div>
 
-  <a class="scrolldown" href="#about">
-    <svg class="ico" aria-hidden="true"><use href="#i-mouse"></use></svg>
-    Scroll Down
-    <svg class="ico ico--sm" aria-hidden="true"><use href="#i-chevron"></use></svg>
-  </a>
+  <div class="wrap">
+    <a class="scrolldown" href="#about">
+      <svg class="ico" aria-hidden="true"><use href="#i-mouse"></use></svg>
+      Scroll Down
+      <svg class="ico ico--sm" aria-hidden="true"><use href="#i-chevron"></use></svg>
+    </a>
+  </div>
 </section>
 
 <!-- ============ ABOUT / VALUE PROPOSITION ============ -->

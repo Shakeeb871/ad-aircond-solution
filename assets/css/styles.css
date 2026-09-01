@@ -188,13 +188,13 @@ address{font-style:normal}
 /* ---------- 6. Header — SOLID WHITE, never transparent ---------- */
 .site-header{
   position:sticky;top:0;z-index:90;
-  background:#fff;                 /* solid, opaque */
+  background:#fff;                 /* solid, opaque — never over the hero */
   border-bottom:1px solid var(--line);
   transition:box-shadow .25s ease;
 }
 .site-header.is-stuck{box-shadow:0 10px 30px -20px rgba(15,39,64,.4)}
 .site-header .wrap{max-width:1400px}
-.site-header__inner{display:flex;align-items:center;gap:18px;min-height:var(--hdr)}
+.site-header__inner{display:flex;align-items:center;gap:20px;min-height:var(--hdr)}
 
 /* wordmark */
 .brand{display:inline-flex;align-items:center;flex:none}
@@ -212,9 +212,9 @@ address{font-style:normal}
   letter-spacing:.42em;text-indent:.42em;text-transform:uppercase;color:var(--b-600);margin-top:5px;
 }
 
-/* navigation */
-.nav{display:flex;align-items:center;gap:16px;margin-left:auto}
-.nav__list{display:flex;align-items:center;gap:2px}
+/* navigation: links sit in the middle, contact actions to the right */
+.nav{flex:1;display:flex;align-items:center;gap:16px;min-width:0}
+.nav__list{display:flex;align-items:center;gap:2px;margin-inline:auto}
 .nav__item{position:relative}
 .nav__link{
   position:relative;display:inline-flex;align-items:center;gap:5px;
@@ -261,23 +261,23 @@ address{font-style:normal}
 .nav-scrim{position:fixed;inset:0;background:rgba(15,39,64,.45);z-index:88;backdrop-filter:blur(2px)}
 
 /* ---------- 7. Hero ---------- */
+.hero .wrap{max-width:1400px}
 .hero{
   position:relative;isolation:isolate;overflow:hidden;
-  padding:clamp(30px,3.6vw,52px) 0 clamp(52px,5vw,72px);
+  padding:clamp(30px,3.6vw,52px) 0 clamp(44px,4.6vw,66px);
   background:#fff;
 }
-/* the tinted panel behind the hero, with the sweeping bottom-left corner */
+/* tinted ground */
 .hero__wash{
-  position:absolute;inset:0 0 clamp(28px,3vw,44px) 0;z-index:-2;pointer-events:none;
+  position:absolute;inset:0;z-index:-3;pointer-events:none;
   background:
     radial-gradient(58% 46% at 8% 6%,rgba(255,255,255,.95),transparent 70%),
-    radial-gradient(46% 40% at 86% 78%,rgba(95,212,228,.22),transparent 72%),
-    linear-gradient(150deg,#fbfeff 0%,#eaf7fb 42%,#dbeff7 100%);
-  border-bottom-left-radius:clamp(120px,22vw,360px);
+    radial-gradient(46% 40% at 86% 74%,rgba(95,212,228,.22),transparent 72%),
+    linear-gradient(158deg,#fbfeff 0%,#e9f6fb 38%,#cfe8f3 100%);
 }
 .hero__photo{
-  position:absolute;top:0;right:0;width:58%;z-index:-1;
-  height:clamp(520px,58vw,860px);
+  position:absolute;top:0;right:0;width:56%;z-index:-2;
+  height:clamp(540px,60vw,880px);
   /* Swap in real photography by setting --photo, e.g.
      --photo:url("../img/hero-technician.jpg"); */
   --photo:none;
@@ -285,14 +285,18 @@ address{font-style:normal}
   background-size:cover,cover;
   background-position:left center,left center;
   background-repeat:no-repeat,no-repeat;
-  border-bottom-left-radius:clamp(60px,10vw,150px);
   -webkit-mask-image:linear-gradient(96deg,transparent 0,rgba(0,0,0,.72) 11%,#000 22%,#000 100%);
   mask-image:linear-gradient(96deg,transparent 0,rgba(0,0,0,.72) 11%,#000 22%,#000 100%);
 }
-/* soften where the panel meets the rest of the hero */
+/* dissolve the panel's lower edge into the tinted ground */
 .hero__photo::after{
-  content:"";position:absolute;left:0;right:0;bottom:0;height:26%;
-  background:linear-gradient(180deg,rgba(224,241,248,0) 0%,rgba(226,242,248,.7) 60%,rgba(228,243,249,.96) 100%);
+  content:"";position:absolute;left:0;right:0;bottom:0;height:30%;
+  background:linear-gradient(180deg,rgba(211,233,244,0) 0%,rgba(211,233,244,.8) 62%,#d3e9f4 100%);
+}
+/* the wave carries the hero into the white section below */
+.hero__wave{
+  position:absolute;left:-1px;right:-1px;bottom:-1px;width:calc(100% + 2px);
+  height:clamp(190px,24vw,340px);z-index:-1;display:block;pointer-events:none;
 }
 
 .hero__inner{
@@ -300,8 +304,8 @@ address{font-style:normal}
   display:grid;grid-template-columns:minmax(0,1.42fr) minmax(0,.58fr);
   gap:clamp(20px,2.6vw,44px);align-items:start;
 }
-.hero__copy{position:relative;z-index:2;grid-column:1;max-width:660px;padding-top:clamp(6px,1.6vw,22px)}
-.hero__side{position:relative;z-index:2;grid-column:2;grid-row:1/3;align-self:end;justify-self:end;width:100%;max-width:366px}
+.hero__copy{position:relative;z-index:2;grid-column:1;grid-row:1;max-width:672px;padding-top:clamp(6px,1.6vw,22px)}
+.hero__side{position:relative;z-index:3;grid-column:2;grid-row:1/3;align-self:end;justify-self:end;width:100%;max-width:366px}
 
 .tagpill{
   display:inline-flex;align-items:center;gap:10px;
@@ -317,35 +321,39 @@ address{font-style:normal}
   font-size:clamp(2.15rem,1.1rem + 3.5vw,3.6rem);
   font-weight:700;line-height:1.1;letter-spacing:-.035em;color:var(--navy);
 }
-.hero__title em{font-style:normal;color:var(--b-600)}
+.hero__title em{
+  font-style:normal;
+  background:linear-gradient(96deg,#17b9c4,#0d9aa8 55%,#0b8aa0);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
 .brk-lg{display:none}
-@media (min-width:1121px){.brk-lg{display:inline}}
+@media (min-width:1181px){.brk-lg{display:inline}}
 
 .hero__lede{
-  margin-top:18px;max-width:520px;
+  margin-top:18px;max-width:530px;
   font-size:clamp(1rem,.96rem + .3vw,1.1rem);line-height:1.72;color:var(--muted);
 }
-
 .hero__actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:28px}
 
-.hero__facts{
+/* lightweight credibility strip */
+.trustrow{
   display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
   gap:18px 0;margin-top:clamp(26px,2.8vw,36px);
 }
-.hero__facts li{
+.trustrow li{
   display:flex;align-items:flex-start;gap:10px;
   padding-inline:clamp(10px,1.1vw,15px);
 }
-.hero__facts li:first-child{padding-left:0}
-.hero__facts li+li{border-left:1px solid rgba(17,42,63,.1)}
-.hero__facts-icon{
+.trustrow li:first-child{padding-left:0}
+.trustrow li+li{border-left:1px solid rgba(17,42,63,.1)}
+.trustrow__icon{
   display:inline-flex;align-items:center;justify-content:center;flex:none;
   width:38px;height:38px;border-radius:50%;
   background:#dff0f7;color:var(--b-600);
 }
-.hero__facts-icon .ico{width:18px;height:18px}
-.hero__facts strong{display:block;font-family:var(--f-display);font-weight:600;font-size:.845rem;color:var(--navy);margin-bottom:2px;line-height:1.25;white-space:nowrap}
-.hero__facts span span,.hero__facts li>span:last-child{font-size:.765rem;line-height:1.45;color:var(--muted)}
+.trustrow__icon .ico{width:18px;height:18px}
+.trustrow strong{display:block;font-family:var(--f-display);font-weight:600;font-size:.845rem;color:var(--navy);margin-bottom:2px;line-height:1.25;white-space:nowrap}
+.trustrow span span,.trustrow li>span:last-child{font-size:.765rem;line-height:1.45;color:var(--muted)}
 
 /* request card */
 .reqcard{
@@ -385,11 +393,12 @@ address{font-style:normal}
 .reqcard__send .ico{width:18px;height:18px}
 .reqcard__alt{margin:14px 0 0;text-align:center;font-size:.78rem;color:var(--muted-2)}
 
-/* USP cards */
+/* ---------- 8. Floating USP cards over the curve ---------- */
 .usp{
-  position:relative;z-index:2;
-  grid-column:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:clamp(14px,1.6vw,20px);margin-top:clamp(30px,3.2vw,42px);
+  position:relative;z-index:2;grid-column:1;grid-row:2;
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(14px,1.6vw,20px);
+  margin-top:clamp(34px,4.2vw,58px);
 }
 .usp__card{
   position:relative;
@@ -397,7 +406,7 @@ address{font-style:normal}
   gap:0 14px;
   background:#fff;border:1px solid var(--line);border-radius:var(--r-xl);
   padding:clamp(20px,2vw,24px);padding-bottom:clamp(56px,5vw,64px);
-  box-shadow:var(--sh-md);
+  box-shadow:0 26px 54px -28px rgba(15,39,64,.34),0 2px 8px -4px rgba(15,39,64,.1);
   transition:transform .3s cubic-bezier(.3,.8,.4,1),box-shadow .3s ease,border-color .3s ease;
 }
 .usp__card:hover{transform:translateY(-6px);box-shadow:var(--sh-lg);border-color:var(--b-200)}
@@ -422,11 +431,9 @@ address{font-style:normal}
 .usp__go .ico{width:17px;height:17px}
 .usp__card:hover .usp__go{transform:translateX(3px)}
 
-/* scroll cue */
 .scrolldown{
-  position:relative;z-index:3;
-  display:flex;align-items:center;justify-content:center;gap:9px;
-  margin-top:clamp(30px,3.4vw,46px);
+  position:relative;z-index:3;display:flex;align-items:center;justify-content:center;gap:9px;
+  margin-top:clamp(26px,3vw,40px);
   font-family:var(--f-display);font-weight:500;font-size:.84rem;color:var(--muted);
   transition:color .2s ease;
 }
@@ -434,8 +441,6 @@ address{font-style:normal}
 .scrolldown .ico:first-child{color:var(--b-500)}
 .scrolldown .ico:last-child{animation:nudge 1.9s ease-in-out infinite}
 @keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
-
-/* ---------- 8. (reserved) ---------- */
 
 /* ---------- 9. Split sections ---------- */
 .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(36px,5vw,72px);align-items:center}
@@ -834,8 +839,8 @@ address{font-style:normal}
   }
   .hero__photo::after{display:none}
   .hero__side{order:3;width:100%;max-width:520px;margin:26px auto 0 0}
-  .usp{order:4}
-  .hero__wash{border-bottom-left-radius:clamp(70px,12vw,160px)}
+  .usp{order:4;grid-column:auto;grid-row:auto}
+  .hero__wave{height:clamp(80px,11vw,150px)}
 
   .split{grid-template-columns:minmax(0,1fr);gap:44px}
   .split--reverse .split__media{order:0}
@@ -868,10 +873,10 @@ address{font-style:normal}
   .tagpill{font-size:.76rem;padding:8px 15px 8px 13px}
   .hero__photo{height:clamp(230px,54vw,320px)}
   .hero__side{max-width:none}
-  .hero__facts{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 18px}
-  .hero__facts li{padding-inline:0}
-  .hero__facts strong{white-space:normal}
-  .hero__facts li+li{border-left:0}
+  .trustrow{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 18px}
+  .trustrow li{padding-inline:0}
+  .trustrow strong{white-space:normal}
+  .trustrow li+li{border-left:0}
   .brands__wall{grid-template-columns:repeat(2,minmax(0,1fr))}
   .frame{aspect-ratio:4/3}
   .frame__chip{left:12px;right:12px;bottom:14px;max-width:none}
@@ -901,7 +906,7 @@ address{font-style:normal}
 
 @media (max-width:640px){
   .usp{grid-template-columns:minmax(0,1fr)}
-  .hero__facts{grid-template-columns:minmax(0,1fr)}
+  .trustrow{grid-template-columns:minmax(0,1fr)}
 }
 
 @media (max-width:520px){

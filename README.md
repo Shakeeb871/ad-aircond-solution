@@ -167,10 +167,15 @@ Promotional CTA band → Trust strip → Aircond services bento grid → Approac
 Support cards → Service packages → Process → Testimonials → Brand wall →
 Final CTA with booking form → Footer
 
-The hero uses a split composition: messaging on the left, the service image on the right, a
-floating **Request AC Service** card over it, and three USP cards (Experienced Technicians, Fast
-Response Service, Quality Workmanship) beneath. The cards sell *why this company*; the services
-themselves live in the bento grid further down, so the two never repeat each other.
+The hero uses a two-column composition: messaging on the left, the service image on the right, a
+floating **Request AC Service** card overlapping it, and three USP cards (Trusted Technicians,
+Fast Response, Quality Workmanship) sitting beside the form. A full-width wave carries the hero
+into the white section below, and the cards straddle that curve so the boundary reads as depth
+rather than a seam.
+
+Above the cards sits a lightweight trust strip (Trusted Technicians, Fast Response, Quality
+Assured) divided by hairlines. Note that it repeats two of the three card headings — that is
+deliberate, per the brief, not an oversight.
 
 ## Design system
 
