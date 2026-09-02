@@ -520,6 +520,27 @@ h1,h2,h3,h4,
   content:"";position:absolute;left:0;bottom:0;width:64px;height:3px;border-radius:2px;background:var(--b-500);
 }
 
+/* Stacked headline: one accent word set large over the service line, with a
+   quiet qualifier underneath. All three lines run in caps, so the class has
+   to beat the site-wide capitalize rule (element selector, lower specificity). */
+.hstack{display:block;text-transform:uppercase;letter-spacing:0}
+.hstack__lead{
+  display:block;font-family:var(--f-display);font-weight:800;
+  font-size:clamp(2.3rem,1rem + 4.4vw,3.7rem);line-height:.96;letter-spacing:-.028em;
+  background:linear-gradient(96deg,#17b9c4,#0d9aa8 55%,#0b8aa0);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hstack__main{
+  display:block;margin-top:.3em;font-family:var(--f-display);font-weight:800;
+  font-size:clamp(1.06rem,.86rem + .85vw,1.5rem);line-height:1.24;letter-spacing:-.008em;
+  color:var(--navy);
+}
+.hstack__sub{
+  display:block;margin-top:.95em;font-family:var(--f-display);font-weight:700;
+  font-size:clamp(.78rem,.72rem + .2vw,.9rem);line-height:1.45;letter-spacing:.12em;
+  color:var(--muted);
+}
+
 .aboutus__title{
   font-size:clamp(1.9rem,1rem + 2.6vw,2.9rem);
   font-weight:700;line-height:1.14;letter-spacing:-.035em;color:var(--navy);
