@@ -375,6 +375,88 @@ def capability():
 </section>'''
 
 
+def problems():
+    """Every service listed with the faults it covers, so a visitor who knows
+    the symptom but not the service name can still find the right page."""
+    rows = [
+        ("ac-repair", "AC Repair", "i-tools", [
+            "Unit runs but the room does not get cold",
+            "Unit will not switch on, or trips the breaker",
+            "Water dripping from the indoor unit",
+            "Ice forming on the coil or the pipework",
+            "Loud rattling, grinding or buzzing",
+            "Unit short-cycles or shuts off by itself",
+            "Remote or control board not responding",
+            "Burning or musty smell when running"]),
+        ("ac-cleaning", "AC Cleaning", "i-wind", [
+            "Weak airflow from the vents",
+            "Dusty or musty smell when the unit starts",
+            "Filters clogged and grey with dust",
+            "Coil coated and unable to shed heat",
+            "Blower wheel packed with build-up",
+            "Water marking the wall from a blocked drain",
+            "Unit running far longer to reach temperature",
+            "Mould or slime in the drain pan"]),
+        ("ac-installation", "AC Installation", "i-cog", [
+            "First installation in a new home or premises",
+            "Replacing a unit that is beyond repair",
+            "Adding a unit to a room that has none",
+            "Relocating a unit to another wall or room",
+            "Pipe run or drain that was never fitted properly",
+            "Outdoor unit sited where it cannot breathe",
+            "Drain that falls the wrong way and backs up",
+            "Choosing the right capacity for the room"]),
+        ("ac-maintenance", "AC Maintenance", "i-install", [
+            "No service since the unit was installed",
+            "Cooling that has quietly dropped off over months",
+            "Electricity bill climbing with no change in use",
+            "Several units on one premises to keep running",
+            "Rental or shop units that cannot afford downtime",
+            "Small faults you would rather catch early",
+            "Refrigerant pressure never checked",
+            "Electrical connections never inspected"]),
+        ("gas-refilling", "Gas Refilling", "i-snow", [
+            "Cooling faded gradually over weeks",
+            "Unit runs constantly without reaching temperature",
+            "Air from the vents is cool but never cold",
+            "Ice on the pipework or the coil",
+            "Hissing or bubbling from the indoor unit",
+            "Oily residue near a pipe joint",
+            "Cooling worst on the hottest days",
+            "Refrigerant topped up before and lost again"]),
+        ("ac-electrical-service", "AC Electrical Service", "i-bolt", [
+            "Unit hums but the fan will not turn",
+            "Breaker trips whenever the unit runs",
+            "Unit starts then stops after a few seconds",
+            "Capacitor swollen or failed",
+            "Contactor chattering or burnt",
+            "Fan or blower motor not running",
+            "Control board or sensor faults",
+            "Scorched wiring or terminals at the unit"]),
+    ]
+    cards = "".join(f'''
+      <article class="plist reveal" data-delay="{i % 3}">
+        <header class="plist__head">
+          <span class="plist__icon"><svg class="ico" aria-hidden="true"><use href="#{ic}"></use></svg></span>
+          <h3 class="plist__name">{name}</h3>
+        </header>
+        <ul class="plist__items">{"".join(f'<li>{t}</li>' for t in faults)}</ul>
+        <a class="plist__go" href="/{slug}/">See {name}<svg class="ico ico--sm" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+      </article>''' for i, (slug, name, ic, faults) in enumerate(rows))
+    return f'''<section class="section section--alt problems">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="pill">What we repair</p>
+      <h2 class="h2 problems__title">The problems <em>we fix</em></h2>
+      <span class="rule-ico" aria-hidden="true"><i class="rule-ico__line"></i><svg class="ico" aria-hidden="true"><use href="#i-snow"></use></svg><i class="rule-ico__line"></i></span>
+      <p class="sec-head__text">If your unit is doing any of these, it is on our list. Find the symptom and it tells you which service you need.</p>
+    </header>
+    <div class="plist-grid">{cards}
+    </div>
+  </div>
+</section>'''
+
+
 # ---------------------------------------------------------------------- pages
 
 def service_page(slug, nav_name, kicker, title_a, title_b, lede, photo,
@@ -553,6 +635,7 @@ PAGES.append({
     </div>
   </div>
 </section>''',
+        problems(),
         article("Not sure which one you need?", [
             "Most people call about a symptom rather than a service, and that is the right way round. Weak cooling can be a dirty coil, a low refrigerant charge or a failing capacitor, and those are three different jobs.",
             "Tell us what the unit is doing &mdash; how it sounds, when it started, whether it cools at all &mdash; and we will tell you which service fits before anything is booked. If it turns out to be the cheaper job, that is the one we will quote."]),
