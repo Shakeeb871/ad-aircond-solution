@@ -668,10 +668,28 @@ address{font-style:normal}
 /* Decorative corner graphics, shared by Services and Brands. All of them are
    hidden below the tablet breakpoint so they never crowd the copy. */
 .deco{position:absolute;z-index:0;pointer-events:none;opacity:.55;height:auto}
-.deco--unit-r{top:clamp(18px,3vw,46px);right:clamp(-30px,-1vw,0px);width:clamp(180px,17vw,260px)}
-.deco--leaves-l{top:clamp(10px,2vw,34px);left:clamp(-22px,-1vw,-4px);width:clamp(130px,12vw,196px)}
+/* photographic corner art, used where a supplied image exists */
+.deco--photo{background-repeat:no-repeat;background-size:contain;background-position:center}
+.deco--unit-r{
+  top:clamp(18px,3vw,46px);right:clamp(-26px,-1vw,0px);
+  width:clamp(200px,19vw,300px);aspect-ratio:4/3;
+  background-image:url("../img/deco-split-unit.webp");opacity:.9;
+  /* the supplied photo carries a white backdrop — feather the edges so it
+     dissolves into the section instead of reading as a white box */
+  -webkit-mask-image:radial-gradient(94% 88% at 62% 50%,#000 26%,transparent 66%);
+  mask-image:radial-gradient(94% 88% at 62% 50%,#000 26%,transparent 66%);
+}
+.deco--leaves-l{
+  top:clamp(10px,2vw,34px);left:clamp(-30px,-2vw,-8px);
+  width:clamp(150px,14vw,220px);aspect-ratio:4/3;
+  background-image:url("../img/deco-leaves.webp");opacity:.85;
+}
 .deco--leaves-br{bottom:clamp(14px,3vw,52px);right:clamp(-24px,-1vw,-4px);width:clamp(110px,10vw,168px);transform:scaleX(-1)}
-.deco--leaves-r{top:clamp(150px,20vw,300px);right:clamp(-30px,-1.5vw,-8px);width:clamp(96px,8vw,140px);transform:scaleX(-1);opacity:.4}
+.deco--leaves-r{
+  top:clamp(150px,20vw,300px);right:clamp(-24px,-1.5vw,-6px);
+  width:clamp(84px,7vw,124px);aspect-ratio:1;transform:scaleX(-1) rotate(-12deg);
+  background-image:url("../img/deco-leaf.webp");opacity:.6;
+}
 .deco--shield{top:clamp(80px,10vw,150px);left:clamp(-10px,1vw,34px);width:clamp(96px,9vw,132px);opacity:.5}
 
 .services__head{max-width:880px}
@@ -863,15 +881,15 @@ address{font-style:normal}
 .flowcard:hover{transform:translateY(-6px);box-shadow:var(--sh-md);border-color:var(--b-200)}
 
 .flowcard__media{
-  display:block;aspect-ratio:16/10;margin:0 10px;border-radius:var(--r);
+  display:block;aspect-ratio:4/3;margin:0 10px;border-radius:var(--r);
   background-color:var(--b-50);background-size:cover;background-position:center;
   background-repeat:no-repeat;box-shadow:inset 0 0 0 1px rgba(17,42,63,.045);
 }
 /* Photograph slots — see assets/img/README.md to point these at real photos. */
-.flowcard__media--contact{--photo:none;background-image:var(--photo),url("../media/steps/contact.svg")}
-.flowcard__media--schedule{--photo:none;background-image:var(--photo),url("../media/steps/schedule.svg")}
-.flowcard__media--onsite{--photo:none;background-image:var(--photo),url("../media/steps/onsite.svg")}
-.flowcard__media--comfort{--photo:none;background-image:var(--photo),url("../media/steps/comfort.svg")}
+.flowcard__media--contact{--photo:url("../img/step-contact.webp");background-image:var(--photo),url("../media/steps/contact.svg")}
+.flowcard__media--schedule{--photo:url("../img/step-schedule.webp");background-image:var(--photo),url("../media/steps/schedule.svg")}
+.flowcard__media--onsite{--photo:url("../img/step-onsite.webp");background-image:var(--photo),url("../media/steps/onsite.svg")}
+.flowcard__media--comfort{--photo:url("../img/step-comfort.webp");background-image:var(--photo),url("../media/steps/comfort.svg")}
 
 .flowcard__badge{
   position:relative;z-index:1;align-self:center;margin-top:-26px;
@@ -893,16 +911,24 @@ address{font-style:normal}
   box-shadow:var(--sh-lg);
 }
 .callout__scene{
-  position:absolute;top:0;right:0;bottom:0;width:clamp(260px,36%,460px);overflow:hidden;
-  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 30%);
-  mask-image:linear-gradient(90deg,transparent 0,#000 30%);
+  position:absolute;top:0;right:0;bottom:0;width:clamp(260px,38%,480px);
+  background:url("../img/cta-outdoor-unit.webp") center/cover no-repeat;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 34%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 34%);
 }
-.callout__room{position:absolute;inset:0;width:100%;height:100%;display:block}
+/* Kuala Lumpur skyline sitting low on the left, well under the copy */
+.callout__skyline{
+  position:absolute;left:0;bottom:0;width:clamp(280px,42%,560px);
+  aspect-ratio:16/9;
+  background:url("../img/kl-skyline.webp") left bottom/contain no-repeat;
+  /* rendered as a pale silhouette so it reads on the dark panel */
+  filter:brightness(0) invert(1);opacity:.2;
+}
 /* one gradient across the whole banner, so the artwork fades out under the copy
    instead of ending on a visible seam */
 .callout::after{
   content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(90deg,#0b4d5f 0%,rgba(11,77,95,.94) 40%,rgba(11,77,95,.34) 74%,rgba(11,77,95,.12) 100%);
+  background:linear-gradient(90deg,#0b4d5f 0%,rgba(11,77,95,.9) 40%,rgba(11,77,95,.42) 76%,rgba(11,77,95,.16) 100%);
 }
 .callout__body{
   position:relative;z-index:2;
@@ -1279,6 +1305,7 @@ address{font-style:normal}
   /* stacked: the artwork sits behind the whole banner, so the side mask and the
      reserved right gutter both go away and the wash becomes vertical */
   .callout__scene{inset:0;width:auto;-webkit-mask-image:none;mask-image:none}
+  .callout__skyline{width:100%;opacity:.13}
   .callout::after{background:linear-gradient(180deg,rgba(10,70,86,.93),rgba(11,77,95,.88))}
   .callout__body{padding-right:clamp(24px,3.4vw,52px)}
   .callout__facts{grid-template-columns:minmax(0,1fr);gap:20px}

@@ -92,18 +92,30 @@ serviced. Keep each logo in its correct proportions and original colours, do
 not recolour or restyle them, and drop any brand the business does not
 actually work on.
 
-## How It Works step photographs (optional)
+## How It Works step photographs — in use
 
-The four process cards ship with illustrations under `assets/media/steps/`.
-To use photographs, add files here and set the matching `--photo` slot in
-`assets/css/styles.css` (section 16, "How it works"):
+These four are live. The card slot is 4:3 to match the supplied files, so
+nothing is cropped. Replace a file in place (same name, same 4:3 crop) to
+change a step; the illustration under `assets/media/steps/` stays as the
+fallback if a photo ever fails to load.
 
-| File to add          | CSS slot                       | Subject                                  |
-| -------------------- | ------------------------------ | ---------------------------------------- |
-| `step-contact.webp`  | `.flowcard__media--contact`    | Hand holding a phone, calling or texting |
-| `step-schedule.webp` | `.flowcard__media--schedule`   | Calendar or diary, booking a date        |
-| `step-onsite.webp`   | `.flowcard__media--onsite`     | Technician working on a wall-mounted unit|
-| `step-comfort.webp`  | `.flowcard__media--comfort`    | Family relaxing in a cool room           |
+| File                 | CSS slot                     | Subject                        |
+| -------------------- | ---------------------------- | ------------------------------ |
+| `step-contact.webp`  | `.flowcard__media--contact`  | Phone showing the number       |
+| `step-schedule.webp` | `.flowcard__media--schedule` | Desk calendar, date circled    |
+| `step-onsite.webp`   | `.flowcard__media--onsite`   | Technician at the indoor unit  |
+| `step-comfort.webp`  | `.flowcard__media--comfort`  | Family in a cooled living room |
 
-Same crop rules as the service cards: 16:10, at least 960x600, subject
-centred and a little high — the round icon badge overlaps the lower edge.
+## Decorative and banner artwork — in use
+
+| File                    | Where                                                  |
+| ----------------------- | ------------------------------------------------------ |
+| `deco-split-unit.webp`  | Floating split unit, upper right of Services / How It Works / Brands |
+| `deco-leaves.webp`      | Leaf cluster, upper left of the same sections           |
+| `deco-leaf.webp`        | Single leaf accent, right edge of Services              |
+| `cta-outdoor-unit.webp` | Right side of the closing CTA banner                    |
+| `kl-skyline.webp`       | Pale skyline silhouette, lower left of the CTA banner    |
+
+`deco-split-unit.webp` carries a white photo backdrop, so `.deco--unit-r`
+feathers its edges with a radial mask. Keep that mask if you swap the file
+for another photo on a white background; drop it for a cut-out PNG.
