@@ -578,9 +578,15 @@ address{font-style:normal}
   border-radius:var(--r-xl);border:1px solid rgba(20,189,184,.16);
   background:linear-gradient(100deg,#eefafd 0%,#e6f6fb 46%,#dff2fa 100%);
 }
+/* Kuala Lumpur skyline anchored to the bottom right of the banner. It is
+   faded from the left so it dissolves before it reaches the address. */
 .locale__skyline{
-  position:absolute;right:0;bottom:0;height:100%;width:min(48%,340px);
-  color:#8fc9de;opacity:.42;pointer-events:none;
+  position:absolute;right:0;bottom:0;pointer-events:none;
+  width:min(50%,340px);height:76%;
+  background:url("../img/kl-skyline.webp") right bottom/contain no-repeat;
+  opacity:.3;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 52%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 52%);
 }
 .locale__pin{
   position:relative;display:inline-flex;align-items:center;justify-content:center;flex:none;
