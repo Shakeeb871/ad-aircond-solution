@@ -495,9 +495,9 @@ address{font-style:normal}
   gap:clamp(28px,3.6vw,56px);align-items:stretch;
 }
 
-.aboutus__media{position:relative;display:flex;flex-direction:column;gap:clamp(14px,1.6vw,20px)}
+.aboutus__media{position:relative;display:flex;align-self:center}
 .aboutus__photo{
-  flex:none;aspect-ratio:4/3;
+  flex:1;aspect-ratio:4/3;
   border-radius:clamp(14px,1.6vw,20px);overflow:hidden;
   border:1px solid var(--line);
   box-shadow:0 34px 70px -34px rgba(15,39,64,.4);
@@ -560,7 +560,7 @@ address{font-style:normal}
 .locale{
   position:relative;overflow:hidden;
   display:flex;align-items:center;flex-wrap:wrap;gap:clamp(14px,1.6vw,22px);
-  padding:clamp(20px,2vw,26px);
+  margin-top:clamp(16px,1.8vw,22px);padding:clamp(20px,2vw,26px);
   border-radius:var(--r-xl);border:1px solid rgba(20,189,184,.16);
   background:linear-gradient(100deg,#eefafd 0%,#e6f6fb 46%,#dff2fa 100%);
 }
