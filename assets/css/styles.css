@@ -1007,6 +1007,136 @@ address{font-style:normal}
 .faq__foot a{color:var(--b-700);font-weight:600}
 .faq__foot a:hover{color:var(--b-800)}
 
+/* ---------- 16e. About page ---------- */
+.ahero{
+  position:relative;overflow:hidden;isolation:isolate;
+  padding:clamp(52px,7vw,104px) 0 clamp(78px,9vw,140px);
+  background:linear-gradient(180deg,#eef9fb 0%,#f7fdfd 100%);
+}
+/* The photograph sits on the right and is faded out from the left, the same
+   treatment the homepage hero and the CTA banner use, so the copy column is
+   always over flat colour rather than over a busy image. */
+.ahero__photo{
+  position:absolute;top:0;right:0;bottom:0;z-index:-1;
+  width:min(60%,820px);
+  background:url("../img/cta-outdoor-unit.webp") center 38%/cover no-repeat;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 58%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 58%);
+}
+.ahero__inner{position:relative}
+.ahero__inner>*{max-width:min(600px,100%)}
+.ahero__title{
+  margin-top:6px;font-family:var(--f-display);font-weight:600;color:var(--navy);
+  font-size:clamp(2.1rem,1.3rem + 3vw,3.5rem);line-height:1.1;letter-spacing:-.025em;
+}
+.ahero__title em{display:block;font-style:normal;color:var(--b-600)}
+.ahero__lede{margin-top:20px;max-width:56ch;font-size:1.06rem;line-height:1.72;color:var(--ink-2)}
+.ahero__actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:clamp(24px,3vw,34px)}
+.ahero .crumbs{margin-top:clamp(26px,3.2vw,40px);padding-top:clamp(15px,1.8vw,20px);border-top:1px solid rgba(17,42,63,.12)}
+.ahero__wave{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:clamp(46px,6vw,90px);display:block}
+
+/* vision & mission */
+.vm{position:relative;overflow:hidden}
+.vm>.wrap{position:relative;z-index:1}
+.vm__title,.stats__title,.journey__title,.capsec__title,.teamsec__title{color:var(--navy)}
+.vm__title em,.stats__title em,.journey__title em,.capsec__title em,.teamsec__title em{font-style:normal;color:var(--b-600)}
+.vm__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,2.4vw,30px)}
+.vm__card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--r-xl);
+  padding:clamp(26px,3vw,40px);box-shadow:var(--sh-sm);
+  transition:transform .3s cubic-bezier(.3,.8,.4,1),box-shadow .3s ease;
+}
+.vm__card:hover{transform:translateY(-5px);box-shadow:var(--sh-md)}
+.vm__icon{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:60px;height:60px;border-radius:50%;margin-bottom:20px;
+  background:var(--b-50);color:var(--b-700);
+}
+.vm__icon .ico{width:26px;height:26px}
+.vm__name{font-family:var(--f-display);font-weight:600;font-size:1.24rem;color:var(--navy);margin-bottom:12px}
+.vm__text{font-size:.97rem;line-height:1.75;color:var(--muted)}
+.vm__card--accent{background:var(--grad);border-color:transparent;box-shadow:var(--sh-brand)}
+.vm__card--accent .vm__icon{background:rgba(255,255,255,.22);color:#fff}
+.vm__card--accent .vm__name{color:#fff}
+.vm__card--accent .vm__text{color:#dcf7f6}
+
+/* journey timeline */
+.tl{position:relative;list-style:none;padding:0;margin:0;max-width:900px;margin-inline:auto}
+.tl::before{
+  content:"";position:absolute;left:11px;top:8px;bottom:8px;width:2px;
+  background:linear-gradient(180deg,var(--b-300),rgba(20,189,184,.15));
+}
+.tl__item{position:relative;padding-left:46px}
+.tl__item+.tl__item{margin-top:clamp(14px,1.8vw,20px)}
+.tl__dot{
+  position:absolute;left:0;top:22px;width:24px;height:24px;border-radius:50%;
+  background:#fff;border:2px solid var(--b-400);
+  box-shadow:0 0 0 5px var(--surface-alt);
+}
+.tl__dot::after{content:"";position:absolute;inset:5px;border-radius:50%;background:var(--b-500)}
+.tl__card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:clamp(18px,2vw,26px);box-shadow:var(--sh-xs);
+}
+.tl__name{font-family:var(--f-display);font-weight:600;font-size:1.06rem;color:var(--navy);margin-bottom:8px}
+.tl__text{font-size:.93rem;line-height:1.72;color:var(--muted)}
+
+/* at a glance */
+.stats{position:relative;overflow:hidden;background:linear-gradient(180deg,#ffffff,#f6fcfd)}
+.stats>.wrap{position:relative;z-index:1}
+.stats__grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,1.8vw,24px);list-style:none;padding:0;margin:0}
+.stat{
+  background:#fff;border:1px solid var(--line);border-radius:var(--r-xl);
+  padding:clamp(22px,2.4vw,30px);text-align:center;box-shadow:var(--sh-sm);
+  transition:transform .3s cubic-bezier(.3,.8,.4,1),box-shadow .3s ease,border-color .3s ease;
+}
+.stat:hover{transform:translateY(-5px);box-shadow:var(--sh-md);border-color:var(--b-200)}
+.stat__icon{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:54px;height:54px;border-radius:50%;margin-bottom:16px;
+  background:var(--grad);color:#fff;box-shadow:var(--sh-brand);
+}
+.stat__icon .ico{width:24px;height:24px}
+.stat__num{font-family:var(--f-display);font-weight:600;font-size:clamp(1.3rem,1.1rem + .7vw,1.7rem);color:var(--navy);line-height:1.15}
+.stat__label{font-family:var(--f-display);font-weight:600;font-size:.9rem;color:var(--b-700);margin-top:2px}
+.stat__note{margin-top:10px;font-size:.85rem;line-height:1.6;color:var(--muted)}
+
+/* capability cards */
+.cap-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,2vw,26px)}
+.cap{
+  display:flex;align-items:flex-start;gap:18px;
+  background:#fff;border:1px solid var(--line);border-radius:var(--r-xl);
+  padding:clamp(22px,2.4vw,30px);box-shadow:var(--sh-xs);
+  transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+}
+.cap:hover{transform:translateY(-4px);box-shadow:var(--sh-sm);border-color:var(--b-200)}
+.cap__icon{
+  display:inline-flex;align-items:center;justify-content:center;flex:none;
+  width:54px;height:54px;border-radius:var(--r-lg);
+  background:var(--b-50);color:var(--b-700);
+}
+.cap__icon .ico{width:24px;height:24px}
+.cap__body{min-width:0}
+.cap__name{font-family:var(--f-display);font-weight:600;font-size:1.06rem;color:var(--navy);margin-bottom:8px}
+.cap__text{font-size:.93rem;line-height:1.72;color:var(--muted)}
+
+/* team */
+.tm-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2vw,26px)}
+.tm{
+  background:#fff;border:1px solid var(--line);border-radius:var(--r-xl);
+  padding:clamp(24px,2.6vw,32px);text-align:center;box-shadow:var(--sh-sm);
+  transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+}
+.tm:hover{transform:translateY(-5px);box-shadow:var(--sh-md);border-color:var(--b-200)}
+.tm__icon{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:62px;height:62px;border-radius:50%;margin-bottom:18px;
+  background:var(--b-50);color:var(--b-700);box-shadow:0 0 0 6px #fff,var(--sh-xs);
+}
+.tm__icon .ico{width:27px;height:27px}
+.tm__name{font-family:var(--f-display);font-weight:600;font-size:1.08rem;color:var(--navy);margin-bottom:10px}
+.tm__text{font-size:.92rem;line-height:1.72;color:var(--muted)}
+
 /* ---------- 17. Testimonials ---------- */
 .testimonials{background:linear-gradient(180deg,#ffffff 0%,#f6fcfd 100%)}
 .tsplit{
@@ -1332,6 +1462,11 @@ address{font-style:normal}
 
 /* the USP cards need room for the icon, title and arrow */
 @media (max-width:980px){
+  .vm__grid{grid-template-columns:minmax(0,1fr)}
+  .stats__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cap-grid{grid-template-columns:minmax(0,1fr)}
+  .tm-grid{grid-template-columns:minmax(0,1fr)}
+  .ahero__photo{width:100%;opacity:.2;-webkit-mask-image:none;mask-image:none}
   .phero__grid{grid-template-columns:minmax(0,1fr);gap:clamp(24px,4vw,34px)}
   .phero__media{order:-1}
   .prose__grid{grid-template-columns:minmax(0,1fr)}
@@ -1397,6 +1532,8 @@ address{font-style:normal}
   .svc-grid{grid-template-columns:minmax(0,1fr)}
   .brands__wall{grid-template-columns:repeat(2,minmax(0,1fr))}
   .flow{grid-template-columns:minmax(0,1fr)}
+  .stats__grid{grid-template-columns:minmax(0,1fr)}
+  .ahero__actions .btn{width:100%}
   .minigrid{grid-template-columns:minmax(0,1fr)}
   .phero__actions .btn{width:100%}
   .callout__actions .btn{width:100%}
