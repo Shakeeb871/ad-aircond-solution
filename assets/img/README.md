@@ -95,6 +95,33 @@ fallback if a photo ever fails to load.
 | `step-onsite.webp`   | `.flowcard__media--onsite`   | Technician at the indoor unit  |
 | `step-comfort.webp`  | `.flowcard__media--comfort`  | Family in a cooled living room |
 
+## About Us photograph — in use
+
+`about.webp` (1448x1086) fills `.aboutus__photo`. It renders at up to about
+710 CSS px, so the file has enough resolution for a 2x screen. The
+`interior.svg` illustration stays as the fallback.
+
+## Resolution notes
+
+Background images scale to whatever the layout gives them, so the only
+quality limit is the source file. Measured widest render, against what a 2x
+(Retina) screen needs:
+
+| File               | Source width | Widest render | 2x needs | Status         |
+| ------------------ | -----------: | ------------: | -------: | -------------- |
+| `about.webp`       |         1448 |           710 |     1420 | fine           |
+| `cta-outdoor-unit` |         1448 |           710 |     1420 | fine           |
+| `deco-split-unit`  |          600 |           300 |      600 | fine           |
+| `hero.webp`        |         1672 |          1920 |     3840 | short on wide screens |
+| `svc-*.webp`       |          600 |           340 |      680 | slightly short |
+| `step-*.webp`      |          600 |           330 |      660 | slightly short |
+
+To sharpen the last three, re-export the originals larger and drop them in
+under the same names — nothing in the CSS needs to change:
+
+- hero: 2800px wide or more
+- service and step cards: 1200x900 (keep the 4:3 crop)
+
 ## Decorative and banner artwork — in use
 
 | File                    | Where                                                  |
