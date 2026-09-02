@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- BUILD 2026-09-02-badd9e6 · hero: light two-column with wave -->
+<!-- BUILD 2026-09-02-845dc71 · hero: light two-column with wave -->
 <html lang="en-MY">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="build" content="2026-09-02-badd9e6">
+<meta name="build" content="2026-09-02-845dc71">
 <title>Ad Aircond Solution | Aircond Repair, Servicing &amp; Installation in Kuala Lumpur</title>
 <meta name="description" content="Ad Aircond Solution provides air conditioning repair, servicing, maintenance and installation for homes and businesses in Kuala Lumpur. Based at Titiwangsa Central. Call +60 17-857 0744.">
 <meta name="theme-color" content="#0c8a99">
@@ -912,27 +912,132 @@ address{font-style:normal}
   font-size:.87rem;color:var(--muted-2);
 }
 
-/* ---------- 16. Process ---------- */
-.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2.4vw,30px);counter-reset:step}
-.step{
-  position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--r-xl);
-  padding:clamp(28px,3vw,38px);box-shadow:var(--sh-xs);
-  transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+/* ---------- 16. How it works ---------- */
+.works{position:relative;overflow:hidden;background:linear-gradient(180deg,#ffffff 0%,#f6fcfd 100%)}
+.works>.wrap{position:relative;z-index:1}
+.works__head{max-width:1000px}
+.works__head .sec-head__text{max-width:640px;margin-inline:auto}
+.works__title{color:var(--navy)}
+.works__title em{font-style:normal;color:var(--b-600)}
+
+.flow{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:clamp(20px,2.4vw,30px);list-style:none;padding:0;margin:0;
 }
-.step:hover{transform:translateY(-5px);box-shadow:var(--sh-md);border-color:var(--b-200)}
-.step:not(:last-child)::after{
-  content:"";position:absolute;top:50%;right:calc(-1 * clamp(18px,2.4vw,30px));
-  width:clamp(18px,2.4vw,30px);height:2px;
-  background:repeating-linear-gradient(90deg,var(--b-300) 0 6px,transparent 6px 12px);
+.flow__item{position:relative;display:flex;padding-top:22px}
+
+/* dotted connector with an arrow node, drawn between neighbouring cards */
+.flow__item:not(:last-child)::before{
+  content:"";position:absolute;z-index:0;top:31%;
+  right:calc(-1 * clamp(20px,2.4vw,30px));width:clamp(20px,2.4vw,30px);height:2px;
+  background:repeating-linear-gradient(90deg,var(--b-300) 0 5px,transparent 5px 11px);
 }
-.step__num{
-  font-family:var(--f-display);font-weight:700;font-size:2.6rem;letter-spacing:-.04em;
-  color:transparent;-webkit-text-stroke:1.5px var(--b-200);display:block;line-height:1;
+.flow__item:not(:last-child)::after{
+  content:"";position:absolute;z-index:1;top:31%;
+  right:calc(-1 * clamp(20px,2.4vw,30px) / 2 - 11px);
+  width:22px;height:22px;margin-top:-10px;border-radius:50%;
+  background:var(--b-600) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 5 7 7-7 7'/%3E%3C/svg%3E") center/13px no-repeat;
+  box-shadow:0 0 0 4px #f8fdfd;
 }
-.step__icon{width:54px;height:54px;border-radius:10px;margin:18px 0 16px}
-.step:hover .step__icon{background:var(--grad);color:#fff}
-.step__title{font-size:1.14rem;margin-bottom:10px}
-.step__text{font-size:.92rem;line-height:1.68}
+
+.flow__num{
+  position:absolute;z-index:2;top:0;left:50%;transform:translateX(-50%);
+  display:inline-flex;align-items:center;justify-content:center;
+  width:44px;height:44px;border-radius:50%;
+  background:var(--b-600);color:#fff;
+  font-family:var(--f-display);font-weight:600;font-size:.95rem;letter-spacing:.02em;
+  box-shadow:0 0 0 5px #fff,var(--sh-brand);
+}
+
+.flowcard{
+  position:relative;z-index:1;flex:1;
+  display:flex;flex-direction:column;text-align:center;
+  background:#fff;border:1px solid var(--line);border-radius:var(--r-xl);
+  box-shadow:var(--sh-sm);padding-top:24px;
+  transition:transform .3s cubic-bezier(.3,.8,.4,1),box-shadow .3s ease,border-color .3s ease;
+}
+.flowcard:hover{transform:translateY(-6px);box-shadow:var(--sh-md);border-color:var(--b-200)}
+
+.flowcard__media{
+  display:block;aspect-ratio:16/10;margin:0 10px;border-radius:var(--r);
+  background-color:var(--b-50);background-size:cover;background-position:center;
+  background-repeat:no-repeat;box-shadow:inset 0 0 0 1px rgba(17,42,63,.045);
+}
+/* Photograph slots — see assets/img/README.md to point these at real photos. */
+.flowcard__media--contact{--photo:none;background-image:var(--photo),url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNDAwIiByb2xlPSJpbWciIGFyaWEtaGlkZGVuPSJ0cnVlIj4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iYmdhIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZWFmYWY5Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PC9saW5lYXJHcmFkaWVudD4KPGxpbmVhckdyYWRpZW50IGlkPSJ3YSIgeDE9IjAiIHkxPSIwIiB4Mj0iMCIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2VlZjdmOSIvPjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjY0MCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjYmdhKSIvPgo8Y2lyY2xlIGN4PSI0ODAiIGN5PSI4NiIgcj0iMTI0IiBmaWxsPSIjZmZmZmZmIiBvcGFjaXR5PSIuNDUiLz4KPGNpcmNsZSBjeD0iMTQwIiBjeT0iMzIwIiByPSIxNDAiIGZpbGw9IiMwYjgyOTYiIG9wYWNpdHk9Ii4wNSIvPgo8cmVjdCB4PSIwIiB5PSIzMjIiIHdpZHRoPSI2NDAiIGhlaWdodD0iNzgiIGZpbGw9IiMwYjgyOTYiIG9wYWNpdHk9Ii4wNiIvPgo8cGF0aCBkPSJNMCAzMjIgSDY0MCIgc3Ryb2tlPSIjMGI4Mjk2IiBzdHJva2Utd2lkdGg9IjIiIG9wYWNpdHk9Ii4xMiIvPgo8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMjQgNzgpIj4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTc2IiBoZWlnaHQ9IjI0MCIgcng9IjI4IiBmaWxsPSJ1cmwoI3dhKSIgc3Ryb2tlPSIjY2ZlN2VjIiBzdHJva2Utd2lkdGg9IjIuNSIvPgogIDxyZWN0IHg9IjE0IiB5PSIxNiIgd2lkdGg9IjE0OCIgaGVpZ2h0PSIyMDgiIHJ4PSIxOCIgZmlsbD0iI2YyZmFmYiIvPgogIDxyZWN0IHg9IjY4IiB5PSI3IiB3aWR0aD0iNDAiIGhlaWdodD0iNiIgcng9IjMiIGZpbGw9IiNkY2VkZjEiLz4KICA8ZyBmaWxsPSIjY2ZlN2VjIj48cmVjdCB4PSIzMiIgeT0iNDIiIHdpZHRoPSI4OCIgaGVpZ2h0PSI5IiByeD0iNC41Ii8+PHJlY3QgeD0iMzIiIHk9IjYwIiB3aWR0aD0iNTgiIGhlaWdodD0iOSIgcng9IjQuNSIvPjwvZz4KICA8cmVjdCB4PSIzMiIgeT0iODYiIHdpZHRoPSI5NiIgaGVpZ2h0PSIzNiIgcng9IjEzIiBmaWxsPSIjY2RlZWVkIi8+CiAgPHJlY3QgeD0iNjAiIHk9IjEzMiIgd2lkdGg9Ijg0IiBoZWlnaHQ9IjMyIiByeD0iMTMiIGZpbGw9IiNlM2Y0ZjYiLz4KICA8Y2lyY2xlIGN4PSI4OCIgY3k9IjE5NiIgcj0iMjYiIGZpbGw9IiMxNGJkYjgiIG9wYWNpdHk9Ii43NSIvPgogIDxwYXRoIGQ9Ik03NyAxODZjMyA5IDExIDE3IDIwIDIwbDYtNyAxMSA3LTYgMTFjLTE3LTMtMzMtMTktMzYtMzZsNS02eiIgZmlsbD0iI2ZmZmZmZiIvPgo8L2c+CjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzE0YmRiOCIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9Ii40Ij4KICA8cGF0aCBkPSJNNDMwIDEyMHEyNiAxOCA1MiAwIi8+PHBhdGggZD0iTTQ0NiAxNTJxMjIgMTUgNDQgMCIvPgo8L2c+CjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDk2IDIyNCkgc2NhbGUoMC44NSkiIG9wYWNpdHk9Ii40NSI+CiAgPHBhdGggZD0iTTAgNjAgQzAgMjYgMTggNiA0NCAwIEM0MCAzMCAyNCA1MiAwIDYwWiIgZmlsbD0iIzE3YzliZCIgb3BhY2l0eT0iLjU1Ii8+CiAgPHBhdGggZD0iTTAgNjAgQy00IDMyIC0xOCAxNCAtNDAgOCBDLTM0IDM0IC0yMCA1MiAwIDYwWiIgZmlsbD0iIzBiODI5NiIgb3BhY2l0eT0iLjM1Ii8+CiAgPHBhdGggZD0iTTAgNjIgVjk2IiBzdHJva2U9IiMwYjgyOTYiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBvcGFjaXR5PSIuNDUiLz48L2c+PC9zdmc+Cg==")}
+.flowcard__media--schedule{--photo:none;background-image:var(--photo),url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNDAwIiByb2xlPSJpbWciIGFyaWEtaGlkZGVuPSJ0cnVlIj4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iYmdiIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZThmOGZhIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PC9saW5lYXJHcmFkaWVudD4KPGxpbmVhckdyYWRpZW50IGlkPSJ3YiIgeDE9IjAiIHkxPSIwIiB4Mj0iMCIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2VlZjdmOSIvPjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjY0MCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjYmdiKSIvPgo8Y2lyY2xlIGN4PSIxNTAiIGN5PSI5MCIgcj0iMTIwIiBmaWxsPSIjZmZmZmZmIiBvcGFjaXR5PSIuNDUiLz4KPGNpcmNsZSBjeD0iNTEwIiBjeT0iMzEwIiByPSIxNDAiIGZpbGw9IiMwYjgyOTYiIG9wYWNpdHk9Ii4wNSIvPgo8cmVjdCB4PSIwIiB5PSIzMjIiIHdpZHRoPSI2NDAiIGhlaWdodD0iNzgiIGZpbGw9IiMwYjgyOTYiIG9wYWNpdHk9Ii4wNiIvPgo8cGF0aCBkPSJNMCAzMjIgSDY0MCIgc3Ryb2tlPSIjMGI4Mjk2IiBzdHJva2Utd2lkdGg9IjIiIG9wYWNpdHk9Ii4xMiIvPgo8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxOTYgODQpIj4KICA8cmVjdCB4PSIwIiB5PSIyNiIgd2lkdGg9IjI0OCIgaGVpZ2h0PSIxOTYiIHJ4PSIxOCIgZmlsbD0idXJsKCN3YikiIHN0cm9rZT0iI2NmZTdlYyIgc3Ryb2tlLXdpZHRoPSIyLjUiLz4KICA8cGF0aCBkPSJNMCA3NGgyNDgiIHN0cm9rZT0iI2NmZTdlYyIgc3Ryb2tlLXdpZHRoPSIyLjUiLz4KICA8ZyBzdHJva2U9IiNiOWUyZTciIHN0cm9rZS13aWR0aD0iNiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj48cGF0aCBkPSJNNjIgMTJ2MjYiLz48cGF0aCBkPSJNMTg2IDEydjI2Ii8+PC9nPgogIDxnIGZpbGw9IiNkY2VkZjEiPgogICAgPHJlY3QgeD0iMzAiIHk9Ijk2IiB3aWR0aD0iMzQiIGhlaWdodD0iMTAiIHJ4PSI1Ii8+PHJlY3QgeD0iODIiIHk9Ijk2IiB3aWR0aD0iMzQiIGhlaWdodD0iMTAiIHJ4PSI1Ii8+CiAgICA8cmVjdCB4PSIxMzQiIHk9Ijk2IiB3aWR0aD0iMzQiIGhlaWdodD0iMTAiIHJ4PSI1Ii8+PHJlY3QgeD0iMTg2IiB5PSI5NiIgd2lkdGg9IjM0IiBoZWlnaHQ9IjEwIiByeD0iNSIvPgogICAgPHJlY3QgeD0iMzAiIHk9IjEzNCIgd2lkdGg9IjM0IiBoZWlnaHQ9IjEwIiByeD0iNSIvPjxyZWN0IHg9IjEzNCIgeT0iMTM0IiB3aWR0aD0iMzQiIGhlaWdodD0iMTAiIHJ4PSI1Ii8+CiAgICA8cmVjdCB4PSIxODYiIHk9IjEzNCIgd2lkdGg9IjM0IiBoZWlnaHQ9IjEwIiByeD0iNSIvPgogICAgPHJlY3QgeD0iMzAiIHk9IjE3MiIgd2lkdGg9IjM0IiBoZWlnaHQ9IjEwIiByeD0iNSIvPjxyZWN0IHg9IjgyIiB5PSIxNzIiIHdpZHRoPSIzNCIgaGVpZ2h0PSIxMCIgcng9IjUiLz4KICAgIDxyZWN0IHg9IjEzNCIgeT0iMTcyIiB3aWR0aD0iMzQiIGhlaWdodD0iMTAiIHJ4PSI1Ii8+CiAgPC9nPgogIDxyZWN0IHg9Ijc2IiB5PSIxMjQiIHdpZHRoPSI0NiIgaGVpZ2h0PSIzMCIgcng9IjkiIGZpbGw9IiMxNGJkYjgiIG9wYWNpdHk9Ii43OCIvPgogIDxyZWN0IHg9Ijg2IiB5PSIxMzQiIHdpZHRoPSIyNiIgaGVpZ2h0PSIxMCIgcng9IjUiIGZpbGw9IiNmZmZmZmYiLz4KPC9nPgo8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0NjggMTk2KSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMGI4Mjk2IiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgb3BhY2l0eT0iLjQ1Ij4KICA8Y2lyY2xlIGN4PSIwIiBjeT0iMCIgcj0iMjYiLz48cGF0aCBkPSJNLTExIDEgLTMgOSAxMiAtOCIvPgo8L2c+CjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEwMiAyMzYpIHNjYWxlKDAuOCkiIG9wYWNpdHk9Ii40NSI+CiAgPHBhdGggZD0iTTAgNjAgQzAgMjYgMTggNiA0NCAwIEM0MCAzMCAyNCA1MiAwIDYwWiIgZmlsbD0iIzE3YzliZCIgb3BhY2l0eT0iLjU1Ii8+CiAgPHBhdGggZD0iTTAgNjAgQy00IDMyIC0xOCAxNCAtNDAgOCBDLTM0IDM0IC0yMCA1MiAwIDYwWiIgZmlsbD0iIzBiODI5NiIgb3BhY2l0eT0iLjM1Ii8+CiAgPHBhdGggZD0iTTAgNjIgVjk2IiBzdHJva2U9IiMwYjgyOTYiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBvcGFjaXR5PSIuNDUiLz48L2c+PC9zdmc+Cg==")}
+.flowcard__media--onsite{--photo:none;background-image:var(--photo),url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNDAwIiByb2xlPSJpbWciIGFyaWEtaGlkZGVuPSJ0cnVlIj4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iYmdjIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZTdmOGY5Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PC9saW5lYXJHcmFkaWVudD4KPGxpbmVhckdyYWRpZW50IGlkPSJ3YyIgeDE9IjAiIHkxPSIwIiB4Mj0iMCIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2VlZjdmOSIvPjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjY0MCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjYmdjKSIvPgo8Y2lyY2xlIGN4PSI1MDAiIGN5PSI5MiIgcj0iMTIyIiBmaWxsPSIjZmZmZmZmIiBvcGFjaXR5PSIuNDUiLz4KPGNpcmNsZSBjeD0iMTMwIiBjeT0iMzE4IiByPSIxNDAiIGZpbGw9IiMwYjgyOTYiIG9wYWNpdHk9Ii4wNSIvPgo8cmVjdCB4PSIwIiB5PSIzMjIiIHdpZHRoPSI2NDAiIGhlaWdodD0iNzgiIGZpbGw9IiMwYjgyOTYiIG9wYWNpdHk9Ii4wNiIvPgo8cGF0aCBkPSJNMCAzMjIgSDY0MCIgc3Ryb2tlPSIjMGI4Mjk2IiBzdHJva2Utd2lkdGg9IjIiIG9wYWNpdHk9Ii4xMiIvPgo8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxNzAgNzQpIj4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMjc2IiBoZWlnaHQ9Ijg0IiByeD0iMTYiIGZpbGw9InVybCgjd2MpIiBzdHJva2U9IiNjZmU3ZWMiIHN0cm9rZS13aWR0aD0iMi41Ii8+CiAgPHBhdGggZD0iTTAgNThoMjc2djEwYTE2IDE2IDAgMCAxLTE2IDE2SDE2QTE2IDE2IDAgMCAxIDAgNjh6IiBmaWxsPSIjZGNlZGYxIiBvcGFjaXR5PSIuOCIvPgogIDxyZWN0IHg9IjIyIiB5PSIyMCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSI2IiByeD0iMyIgZmlsbD0iI2NmZTdlYyIvPgogIDxyZWN0IHg9IjIyIiB5PSIzNCIgd2lkdGg9IjgyIiBoZWlnaHQ9IjYiIHJ4PSIzIiBmaWxsPSIjZTBmMGYzIi8+CiAgPGNpcmNsZSBjeD0iMjQ2IiBjeT0iMjYiIHI9IjUiIGZpbGw9IiMxNGJkYjgiLz4KICA8cGF0aCBkPSJNOCA4NmgyNjBsLTI2IDM0SDM0eiIgZmlsbD0iI2U2ZjRmNiIgc3Ryb2tlPSIjY2ZlN2VjIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8ZyBzdHJva2U9IiNiOWUyZTciIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj48cGF0aCBkPSJNNTIgOTZ2MTZNMTAwIDk2djE2TTE0OCA5NnYxNk0xOTYgOTZ2MTYiLz48L2c+CjwvZz4KPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzg2IDIyNCkiPgogIDxyZWN0IHg9IjAiIHk9IjIyIiB3aWR0aD0iMTIwIiBoZWlnaHQ9Ijc2IiByeD0iMTIiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iI2NmZTdlYyIgc3Ryb2tlLXdpZHRoPSIyLjUiLz4KICA8cGF0aCBkPSJNNDAgMjJWMTJhMTAgMTAgMCAwIDEgMTAtMTBoMjBhMTAgMTAgMCAwIDEgMTAgMTB2MTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2NmZTdlYyIgc3Ryb2tlLXdpZHRoPSIyLjUiLz4KICA8cmVjdCB4PSIwIiB5PSI1MCIgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMCIgZmlsbD0iI2RjZWRmMSIvPgogIDxyZWN0IHg9IjQ4IiB5PSI0NCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjIyIiByeD0iNSIgZmlsbD0iIzE0YmRiOCIgb3BhY2l0eT0iLjYiLz4KPC9nPgo8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxNTggMjQwKSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMGI4Mjk2IiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgb3BhY2l0eT0iLjQiPgogIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMiAtMTIpIHNjYWxlKDIpIj48cGF0aCBkPSJNMTQuNiA1LjYgMTggMi4ybDMuOCAzLjgtMy40IDMuNCIvPjxwYXRoIGQ9Im0xNy40IDguNi05IDlhMi40IDIuNCAwIDAgMS0zLjQtMy40bDktOSIvPjxwYXRoIGQ9Im0zIDIxIDMuNC0zLjQiLz48cGF0aCBkPSJNOC42IDMuNCA1LjIgNi44IDIuNiA0LjIiLz48L2c+CjwvZz48L3N2Zz4K")}
+.flowcard__media--comfort{--photo:none;background-image:var(--photo),url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNDAwIiByb2xlPSJpbWciIGFyaWEtaGlkZGVuPSJ0cnVlIj4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iYmdkIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZWFmYWY4Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PC9saW5lYXJHcmFkaWVudD4KPGxpbmVhckdyYWRpZW50IGlkPSJ3ZCIgeDE9IjAiIHkxPSIwIiB4Mj0iMCIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2VlZjdmOSIvPjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjY0MCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjYmdkKSIvPgo8Y2lyY2xlIGN4PSIxNDAiIGN5PSI4OCIgcj0iMTIyIiBmaWxsPSIjZmZmZmZmIiBvcGFjaXR5PSIuNDUiLz4KPGNpcmNsZSBjeD0iNTIwIiBjeT0iMzAwIiByPSIxNDIiIGZpbGw9IiMwYjgyOTYiIG9wYWNpdHk9Ii4wNSIvPgo8cmVjdCB4PSIwIiB5PSIzMjIiIHdpZHRoPSI2NDAiIGhlaWdodD0iNzgiIGZpbGw9IiMwYjgyOTYiIG9wYWNpdHk9Ii4wNiIvPgo8cGF0aCBkPSJNMCAzMjIgSDY0MCIgc3Ryb2tlPSIjMGI4Mjk2IiBzdHJva2Utd2lkdGg9IjIiIG9wYWNpdHk9Ii4xMiIvPgo8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzNzIgNjYpIj4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTc2IiBoZWlnaHQ9IjU0IiByeD0iMTIiIGZpbGw9InVybCgjd2QpIiBzdHJva2U9IiNjZmU3ZWMiIHN0cm9rZS13aWR0aD0iMi41Ii8+CiAgPHBhdGggZD0iTTAgNDBoMTc2djJhMTIgMTIgMCAwIDEtMTIgMTJIMTJBMTIgMTIgMCAwIDEgMCA0MnoiIGZpbGw9IiNkY2VkZjEiLz4KICA8cmVjdCB4PSIxNiIgeT0iMTUiIHdpZHRoPSI3NiIgaGVpZ2h0PSI1IiByeD0iMi41IiBmaWxsPSIjZDllZGYxIi8+CiAgPGNpcmNsZSBjeD0iMTU0IiBjeT0iMjAiIHI9IjQiIGZpbGw9IiMxNGJkYjgiLz4KPC9nPgo8ZyBmaWxsPSJub25lIiBzdHJva2U9IiMxNGJkYjgiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBvcGFjaXR5PSIuMzgiPgogIDxwYXRoIGQ9Ik0zMzAgMTQ4cTQwIDI2IDgwIDAiLz48cGF0aCBkPSJNMzAwIDE4MnE0NiAyOCA5MiAwIi8+PHBhdGggZD0iTTMzOCAyMTRxMzQgMjIgNjggMCIvPgo8L2c+CjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDk2IDE5NikiPgogIDxyZWN0IHg9IjAiIHk9IjQ2IiB3aWR0aD0iMjQ4IiBoZWlnaHQ9Ijc2IiByeD0iMjAiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iI2NmZTdlYyIgc3Ryb2tlLXdpZHRoPSIyLjUiLz4KICA8cmVjdCB4PSIxNCIgeT0iMTAiIHdpZHRoPSIyMjAiIGhlaWdodD0iNTIiIHJ4PSIxNiIgZmlsbD0iI2U2ZjRmNiIgc3Ryb2tlPSIjY2ZlN2VjIiBzdHJva2Utd2lkdGg9IjIuNSIvPgogIDxyZWN0IHg9IjQwIiB5PSIyNiIgd2lkdGg9IjYwIiBoZWlnaHQ9IjM4IiByeD0iMTIiIGZpbGw9IiNkM2YwZjEiLz4KICA8cmVjdCB4PSIxMTIiIHk9IjI2IiB3aWR0aD0iNjAiIGhlaWdodD0iMzgiIHJ4PSIxMiIgZmlsbD0iI2QzZjBmMSIvPgogIDxwYXRoIGQ9Ik0xOCAxMjJ2MThNMjMwIDEyMnYxOCIgc3Ryb2tlPSIjY2ZlN2VjIiBzdHJva2Utd2lkdGg9IjciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L2c+CjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDM5MiAyNTgpIHNjYWxlKDAuOSkiIG9wYWNpdHk9Ii40NSI+CiAgPHBhdGggZD0iTTAgNjAgQzAgMjYgMTggNiA0NCAwIEM0MCAzMCAyNCA1MiAwIDYwWiIgZmlsbD0iIzE3YzliZCIgb3BhY2l0eT0iLjU1Ii8+CiAgPHBhdGggZD0iTTAgNjAgQy00IDMyIC0xOCAxNCAtNDAgOCBDLTM0IDM0IC0yMCA1MiAwIDYwWiIgZmlsbD0iIzBiODI5NiIgb3BhY2l0eT0iLjM1Ii8+CiAgPHBhdGggZD0iTTAgNjIgVjk2IiBzdHJva2U9IiMwYjgyOTYiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBvcGFjaXR5PSIuNDUiLz48L2c+PC9zdmc+Cg==")}
+
+.flowcard__badge{
+  position:relative;z-index:1;align-self:center;margin-top:-26px;
+  display:inline-flex;align-items:center;justify-content:center;
+  width:54px;height:54px;border-radius:50%;
+  background:var(--b-100);color:var(--b-700);
+  box-shadow:0 0 0 5px #fff;
+}
+.flowcard__badge .ico{width:24px;height:24px}
+.flowcard__body{padding:14px clamp(18px,1.8vw,24px) clamp(24px,2.4vw,30px);flex:1}
+.flowcard__title{font-size:1.06rem;font-weight:600;color:var(--navy);margin-bottom:9px}
+.flowcard__text{font-size:.875rem;line-height:1.68;color:var(--muted)}
+
+/* ---------- 16b. Closing CTA banner ---------- */
+.callout-wrap{padding-top:0}
+.callout{
+  position:relative;overflow:hidden;border-radius:var(--r-xl);
+  background:linear-gradient(105deg,#0b4d5f 0%,#0d6b80 46%,#0f8195 100%);
+  box-shadow:var(--sh-lg);
+}
+.callout__scene{
+  position:absolute;top:0;right:0;bottom:0;width:clamp(260px,36%,460px);overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 30%);
+  mask-image:linear-gradient(90deg,transparent 0,#000 30%);
+}
+.callout__room{position:absolute;inset:0;width:100%;height:100%;display:block}
+/* one gradient across the whole banner, so the artwork fades out under the copy
+   instead of ending on a visible seam */
+.callout::after{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(90deg,#0b4d5f 0%,rgba(11,77,95,.94) 40%,rgba(11,77,95,.34) 74%,rgba(11,77,95,.12) 100%);
+}
+.callout__body{
+  position:relative;z-index:2;
+  padding:clamp(30px,4vw,54px) clamp(24px,3.4vw,52px);
+  padding-right:clamp(24px,27%,400px);
+}
+.callout__mark{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:56px;height:56px;border-radius:50%;margin-bottom:18px;
+  background:#fff;color:var(--b-700);box-shadow:0 12px 28px -12px rgba(0,0,0,.5);
+}
+.callout__mark .ico{width:25px;height:25px}
+.callout__title{color:#fff;font-size:clamp(1.55rem,1.1rem + 1.75vw,2.4rem);line-height:1.2}
+.callout__title em{display:block;font-style:normal;color:#7ff0e4}
+.callout__lede{margin-top:12px;color:#c8e9ee;font-size:1rem}
+
+.callout__facts{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(16px,2.2vw,28px);margin-top:clamp(24px,3vw,36px);
+  list-style:none;padding:0;
+}
+.callout__facts li{display:flex;align-items:flex-start;gap:14px}
+.callout__facts li+li{border-left:1px solid rgba(255,255,255,.16);padding-left:clamp(16px,2.2vw,28px)}
+.callout__ico{
+  display:inline-flex;align-items:center;justify-content:center;flex:none;
+  width:44px;height:44px;border-radius:50%;
+  border:1.5px solid rgba(255,255,255,.35);color:#fff;
+}
+.callout__ico .ico{width:20px;height:20px}
+.callout__fact{min-width:0}
+.callout__fact strong{
+  display:block;font-family:var(--f-display);font-weight:600;
+  font-size:.78rem;letter-spacing:.09em;text-transform:uppercase;color:#8fdfe4;margin-bottom:5px;
+}
+.callout__fact address{font-style:normal;font-size:.845rem;line-height:1.62;color:#e2f4f6;text-wrap:pretty}
+.callout__tel{font-family:var(--f-display);font-weight:600;font-size:1.08rem;color:#fff}
+.callout__tel:hover{color:#7ff0e4}
+.callout__hours{font-size:.9rem;color:#e2f4f6;line-height:1.55}
+.callout__hours span{display:block;font-size:.845rem;color:#c8e9ee}
 
 /* ---------- 17. Testimonials ---------- */
 .testimonials__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2.2vw,26px)}
@@ -1174,11 +1279,20 @@ address{font-style:normal}
 @media (max-width:1120px){
   .svc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .brands__wall{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .flow{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:clamp(32px,4vw,44px)}
+  .flow__item:nth-child(2n)::before,.flow__item:nth-child(2n)::after{display:none}
   .deco{display:none}
 }
 
 /* the USP cards need room for the icon, title and arrow */
 @media (max-width:980px){
+  /* stacked: the artwork sits behind the whole banner, so the side mask and the
+     reserved right gutter both go away and the wash becomes vertical */
+  .callout__scene{inset:0;width:auto;-webkit-mask-image:none;mask-image:none}
+  .callout::after{background:linear-gradient(180deg,rgba(10,70,86,.93),rgba(11,77,95,.88))}
+  .callout__body{padding-right:clamp(24px,3.4vw,52px)}
+  .callout__facts{grid-template-columns:minmax(0,1fr);gap:20px}
+  .callout__facts li+li{border-left:0;border-top:1px solid rgba(255,255,255,.16);padding-left:0;padding-top:20px}
   .brands__wall{grid-template-columns:repeat(3,minmax(0,1fr))}
   .usp{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
@@ -1234,6 +1348,8 @@ address{font-style:normal}
 @media (max-width:520px){
   .svc-grid{grid-template-columns:minmax(0,1fr)}
   .brands__wall{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .flow{grid-template-columns:minmax(0,1fr)}
+  .flow__item::before,.flow__item::after{display:none}
   .hero__actions .btn{width:100%}
   .hero__title{letter-spacing:-.03em}
   .split__actions .btn{width:100%}
@@ -1425,12 +1541,12 @@ address{font-style:normal}
           <label class="sr-only" for="hrService">Type of service</label>
           <select id="hrService" name="service">
             <option value="" selected>Type of Service</option>
-            <option>Aircond repair</option>
-            <option>Aircond servicing</option>
-            <option>Aircond maintenance</option>
-            <option>Aircond installation</option>
-            <option>Gas / refrigerant service</option>
-            <option>Commercial aircond service</option>
+            <option>AC repair</option>
+            <option>AC cleaning</option>
+            <option>AC installation</option>
+            <option>AC maintenance</option>
+            <option>Gas refilling</option>
+            <option>AC electrical service</option>
             <option>Not sure yet</option>
           </select>
           <svg class="ico reqfield__chev" aria-hidden="true"><use href="#i-chevron"></use></svg>
@@ -1804,33 +1920,151 @@ address{font-style:normal}
   </div>
 </section>
 
-<!-- ============ PROCESS ============ -->
-<section class="section process" id="process">
+<!-- ============ HOW IT WORKS ============ -->
+<section class="section works" id="process">
+  <svg class="deco deco--unit-r" viewBox="0 0 260 190" aria-hidden="true" focusable="false">
+    <rect x="34" y="18" width="196" height="58" rx="14" fill="#ffffff" stroke="#bfe4e8" stroke-width="2"/>
+    <path d="M34 58h196v4a14 14 0 0 1-14 14H48a14 14 0 0 1-14-14z" fill="#dcedf1"/>
+    <rect x="52" y="32" width="92" height="5" rx="2.5" fill="#d9edf1"/>
+    <rect x="52" y="44" width="62" height="5" rx="2.5" fill="#e6f4f6"/>
+    <circle cx="208" cy="40" r="4.5" fill="#14bdb8"/>
+    <g fill="none" stroke="#14bdb8" stroke-width="5" stroke-linecap="round" opacity=".42">
+      <path d="M70 100q34 22 68 0"/>
+      <path d="M104 128q30 20 60 0"/>
+      <path d="M78 154q26 17 52 0"/>
+    </g>
+  </svg>
+  <svg class="deco deco--leaves-l" viewBox="0 0 200 170" aria-hidden="true" focusable="false">
+    <g opacity=".5">
+      <path d="M96 150C96 96 66 58 16 44c8 62 38 98 80 106z" fill="#17c9bd" opacity=".5"/>
+      <path d="M104 150c6-44 32-74 76-84-8 50-34 78-76 84z" fill="#0b8296" opacity=".3"/>
+      <path d="M100 152V96" stroke="#0b8296" stroke-width="5" stroke-linecap="round" fill="none" opacity=".4"/>
+    </g>
+  </svg>
+
   <div class="wrap">
-    <header class="sec-head reveal">
-      <p class="eyebrow"><span class="eyebrow__dot"></span>How to book</p>
-      <h2 class="h2">How our aircond service works</h2>
+    <header class="sec-head works__head reveal">
+      <p class="pill">How It Works</p>
+      <h2 class="h2 works__title">4 Simple Steps <em>to Perfect Comfort</em></h2>
+      <span class="rule-ico" aria-hidden="true">
+        <i class="rule-ico__line"></i>
+        <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-snow"></use></svg>
+        <i class="rule-ico__line"></i>
+      </span>
+      <p class="sec-head__text">We&rsquo;ve made aircond servicing simple, transparent and hassle-free. Just 4 steps and we&rsquo;ll take care of the rest.</p>
     </header>
-    <ol class="steps">
-      <li class="step reveal">
-        <span class="step__num">01</span>
-        <span class="step__icon"><svg class="ico" aria-hidden="true"><use href="#i-chat"></use></svg></span>
-        <h3 class="step__title">Tell us about your aircond</h3>
-        <p class="step__text">Share the unit type, roughly how old it is, and what it has been doing — weak cooling, leaking, noise or no response at all.</p>
+
+    <ol class="flow">
+      <li class="flow__item reveal">
+        <span class="flow__num" aria-hidden="true">01</span>
+        <article class="flowcard">
+          <span class="flowcard__media flowcard__media--contact"></span>
+          <span class="flowcard__badge"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-phone"></use></svg></span>
+          <div class="flowcard__body">
+            <h3 class="flowcard__title">Contact Us</h3>
+            <p class="flowcard__text">Call or WhatsApp us to tell us your aircond issue or request a service appointment.</p>
+          </div>
+        </article>
       </li>
-      <li class="step reveal" data-delay="1">
-        <span class="step__num">02</span>
-        <span class="step__icon"><svg class="ico" aria-hidden="true"><use href="#i-calendar"></use></svg></span>
-        <h3 class="step__title">Choose the required service</h3>
-        <p class="step__text">We confirm which service fits, agree a time that suits the household or business, and set out what the visit covers.</p>
+
+      <li class="flow__item reveal" data-delay="1">
+        <span class="flow__num" aria-hidden="true">02</span>
+        <article class="flowcard">
+          <span class="flowcard__media flowcard__media--schedule"></span>
+          <span class="flowcard__badge"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-calendar"></use></svg></span>
+          <div class="flowcard__body">
+            <h3 class="flowcard__title">Schedule &amp; Confirm</h3>
+            <p class="flowcard__text">We&rsquo;ll check availability, schedule a convenient time and confirm all the details with you.</p>
+          </div>
+        </article>
       </li>
-      <li class="step reveal" data-delay="2">
-        <span class="step__num">03</span>
-        <span class="step__icon"><svg class="ico" aria-hidden="true"><use href="#i-snow"></use></svg></span>
-        <h3 class="step__title">Get your aircond serviced</h3>
-        <p class="step__text">A technician carries out the inspection, repair, servicing or installation, then explains what was done and what to watch.</p>
+
+      <li class="flow__item reveal" data-delay="2">
+        <span class="flow__num" aria-hidden="true">03</span>
+        <article class="flowcard">
+          <span class="flowcard__media flowcard__media--onsite"></span>
+          <span class="flowcard__badge"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-user"></use></svg></span>
+          <div class="flowcard__body">
+            <h3 class="flowcard__title">On-Site Service</h3>
+            <p class="flowcard__text">Our technician arrives at the agreed time and inspects, cleans, repairs or installs your aircond with care and precision.</p>
+          </div>
+        </article>
+      </li>
+
+      <li class="flow__item reveal" data-delay="3">
+        <span class="flow__num" aria-hidden="true">04</span>
+        <article class="flowcard">
+          <span class="flowcard__media flowcard__media--comfort"></span>
+          <span class="flowcard__badge"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-shield"></use></svg></span>
+          <div class="flowcard__body">
+            <h3 class="flowcard__title">Enjoy Total Comfort</h3>
+            <p class="flowcard__text">Sit back and enjoy fresh, cool air and long-lasting performance you can rely on.</p>
+          </div>
+        </article>
       </li>
     </ol>
+  </div>
+</section>
+
+<!-- ============ CTA BANNER ============ -->
+<section class="section callout-wrap">
+  <div class="wrap">
+    <div class="callout reveal">
+      <div class="callout__scene" aria-hidden="true">
+        <svg class="callout__room" viewBox="0 0 380 460" preserveAspectRatio="xMidYMid slice" focusable="false">
+          <rect width="380" height="460" fill="#11809a"/>
+          <rect x="0" y="352" width="380" height="108" fill="#0c6478"/>
+          <rect x="86" y="52" width="208" height="60" rx="13" fill="#eef8fa" opacity=".9"/>
+          <path d="M86 94h208v5a13 13 0 0 1-13 13H99a13 13 0 0 1-13-13z" fill="#bfe4e8" opacity=".85"/>
+          <rect x="108" y="70" width="88" height="6" rx="3" fill="#bfe4e8"/>
+          <circle cx="270" cy="76" r="4.5" fill="#17c9bd"/>
+          <g fill="none" stroke="#8ef0e6" stroke-width="6" stroke-linecap="round" opacity=".38">
+            <path d="M128 146q42 26 84 0"/><path d="M104 186q52 30 104 0"/><path d="M140 226q34 22 68 0"/>
+          </g>
+          <g transform="translate(58 264)">
+            <rect x="0" y="60" width="264" height="82" rx="20" fill="#0a5a6e" opacity=".92"/>
+            <rect x="16" y="16" width="232" height="56" rx="17" fill="#158da3" opacity=".92"/>
+            <rect x="42" y="32" width="70" height="40" rx="13" fill="#1ea5b8" opacity=".9"/>
+            <rect x="152" y="32" width="70" height="40" rx="13" fill="#1ea5b8" opacity=".9"/>
+            <path d="M18 142v22M246 142v22" stroke="#0a5a6e" stroke-width="9" stroke-linecap="round"/>
+          </g>
+          <g transform="translate(330 336)" opacity=".5">
+            <path d="M0 92C0 44-16 14-48 2c4 48 20 78 48 90z" fill="#17c9bd" opacity=".5"/>
+            <path d="M6 92c4-36 22-62 54-70-6 40-26 64-54 70z" fill="#0b8296" opacity=".45"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="callout__body">
+        <span class="callout__mark" aria-hidden="true"><svg class="ico" focusable="false"><use href="#i-phone"></use></svg></span>
+        <h2 class="h2 callout__title">Ready for Better, Cooler Comfort?<em>We&rsquo;re Just One Call Away.</em></h2>
+        <p class="callout__lede">Fast response. Reliable aircond solutions. Professional service you can trust.</p>
+
+        <ul class="callout__facts">
+          <li>
+            <span class="callout__ico"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-phone"></use></svg></span>
+            <span class="callout__fact">
+              <strong>Call / WhatsApp</strong>
+              <a class="callout__tel" href="tel:+60178570744">+60178570744</a>
+            </span>
+          </li>
+          <li>
+            <span class="callout__ico"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-pin"></use></svg></span>
+            <span class="callout__fact">
+              <strong>Our Location</strong>
+              <address>14, Jalan Batu Bata, Titiwangsa Central,<br>50400 Kuala Lumpur,<br>Wilayah Persekutuan Kuala Lumpur</address>
+            </span>
+          </li>
+          <li>
+            <span class="callout__ico"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-clock"></use></svg></span>
+            <span class="callout__fact">
+              <strong>Operating Hours</strong>
+              <span class="callout__hours">Mon &ndash; Sun<span>9:00 AM &ndash; 8:00 PM</span></span>
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1963,12 +2197,12 @@ address{font-style:normal}
         <div class="field">
           <label for="bService">Service needed</label>
           <select id="bService" name="service">
-            <option>Aircond repair</option>
-            <option>Aircond servicing</option>
-            <option>Aircond maintenance</option>
-            <option>Aircond installation</option>
-            <option>Gas / refrigerant service</option>
-            <option>Commercial aircond service</option>
+            <option>AC repair</option>
+            <option>AC cleaning</option>
+            <option>AC installation</option>
+            <option>AC maintenance</option>
+            <option>Gas refilling</option>
+            <option>AC electrical service</option>
             <option>Not sure yet</option>
           </select>
         </div>
@@ -2075,12 +2309,19 @@ address{font-style:normal}
     "addressCountry": "MY"
   },
   "areaServed": { "@type": "City", "name": "Kuala Lumpur" },
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "09:00",
+    "closes": "20:00"
+  }],
   "makesOffer": [
-    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Aircond repair" } },
-    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Aircond servicing" } },
-    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Aircond maintenance" } },
-    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Aircond installation" } },
-    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Commercial aircond service" } }
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AC repair" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AC cleaning" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AC installation" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AC maintenance" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Gas refilling" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AC electrical service" } }
   ]
 }
 </script>

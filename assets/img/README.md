@@ -91,3 +91,19 @@ Note: these are third-party trademarks shown to state which equipment is
 serviced. Keep each logo in its correct proportions and original colours, do
 not recolour or restyle them, and drop any brand the business does not
 actually work on.
+
+## How It Works step photographs (optional)
+
+The four process cards ship with illustrations under `assets/media/steps/`.
+To use photographs, add files here and set the matching `--photo` slot in
+`assets/css/styles.css` (section 16, "How it works"):
+
+| File to add          | CSS slot                       | Subject                                  |
+| -------------------- | ------------------------------ | ---------------------------------------- |
+| `step-contact.webp`  | `.flowcard__media--contact`    | Hand holding a phone, calling or texting |
+| `step-schedule.webp` | `.flowcard__media--schedule`   | Calendar or diary, booking a date        |
+| `step-onsite.webp`   | `.flowcard__media--onsite`     | Technician working on a wall-mounted unit|
+| `step-comfort.webp`  | `.flowcard__media--comfort`    | Family relaxing in a cool room           |
+
+Same crop rules as the service cards: 16:10, at least 960x600, subject
+centred and a little high — the round icon badge overlaps the lower edge.
