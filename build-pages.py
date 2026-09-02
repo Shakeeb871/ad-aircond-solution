@@ -131,25 +131,6 @@ def bc(*items):
     return '<nav class="crumbs" aria-label="Breadcrumb"><ol>' + "".join(out) + "</ol></nav>"
 
 
-def phero(kicker, title_a, title_b, lede, photo, crumb):
-    return f'''<section class="phero">
-  <span class="deco deco--photo deco--leaves-l" aria-hidden="true"></span>
-  <div class="wrap phero__grid">
-    <div class="phero__copy">
-      <p class="kicker">{kicker}</p>
-      <h1 class="phero__title">{title_a} <em>{title_b}</em></h1>
-      <p class="phero__lede">{lede}</p>
-      <div class="phero__actions">
-        <a class="btn btn--primary btn--lg" href="/contact/"><svg class="ico" aria-hidden="true"><use href="#i-calendar"></use></svg>Book a Service</a>
-        <a class="btn btn--card btn--lg" href="tel:+60178570744"><svg class="ico" aria-hidden="true"><use href="#i-phone"></use></svg>+60178570744</a>
-      </div>
-    </div>
-    <div class="phero__media"><span class="phero__photo" style="background-image:url(&quot;/assets/img/{photo}&quot;)"></span></div>
-  </div>
-  <div class="wrap">{crumb}</div>
-</section>'''
-
-
 def checks(title, items):
     lis = "".join(
         '<li><span class="checks__ico"><svg class="ico" aria-hidden="true">'
@@ -224,10 +205,15 @@ def others(current):
 
 # ------------------------------------------------------------------ about page
 
-def ahero(kicker, line_a, line_b, lede, photo):
-    """Full-bleed hero in the homepage's style — no form, no cards."""
+def ahero(kicker, line_a, line_b, lede, photo, crumb):
+    """The standard page hero: homepage styling, no form and no cards.
+
+    The photograph is set here rather than in the stylesheet because a url()
+    written into a custom property resolves against the stylesheet, not the
+    page — so each page can carry its own image.
+    """
     return f'''<section class="ahero">
-  <span class="ahero__photo" aria-hidden="true"></span>
+  <span class="ahero__photo" aria-hidden="true" style="background-image:url(&quot;/assets/img/{photo}&quot;)"></span>
   <div class="wrap ahero__inner">
     <p class="tagpill"><span class="tagpill__dot"></span>{kicker}</p>
     <h1 class="ahero__title">{line_a}<em>{line_b}</em></h1>
@@ -236,7 +222,7 @@ def ahero(kicker, line_a, line_b, lede, photo):
       <a class="btn btn--primary btn--lg" href="/contact/"><svg class="ico" aria-hidden="true"><use href="#i-calendar"></use></svg>Book a Service</a>
       <a class="btn btn--card btn--lg" href="tel:+60178570744"><svg class="ico" aria-hidden="true"><use href="#i-phone"></use></svg>+60178570744</a>
     </div>
-    <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li aria-current="page">About Us</li></ol></nav>
+    {crumb}
   </div>
   <svg class="ahero__wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true" focusable="false">
     <path d="M0 46c220 44 460 44 720 12s500-44 720-12v44H0z" fill="#ffffff"/>
@@ -397,7 +383,7 @@ def service_page(slug, nav_name, kicker, title_a, title_b, lede, photo,
     url = f"{slug}/"
     crumb = bc(("Home", "/"), ("Our Services", "/services/"), (nav_name, None))
     body = "\n".join([
-        phero(kicker, title_a, title_b, lede, photo, crumb),
+        ahero(kicker, title_a, title_b, lede, photo, crumb),
         article(intro_h, intro_p, checks(list_title, list_items)),
         article(second_h, second_p),
         others(slug),
@@ -552,7 +538,7 @@ PAGES.append({
     "title": "Our Services | Aircond Repair, Cleaning &amp; Installation in Kuala Lumpur",
     "description": "The six air conditioning services Ad Aircond Solution provides in Kuala Lumpur: repair, cleaning, installation, maintenance, gas refilling and electrical work.",
     "body": "\n".join([
-        phero("Our Services", "Complete AC care,", "all in one place",
+        ahero("Our Services", "Complete AC care,", "all in one place",
               "Repair, cleaning, installation, maintenance, gas refilling and electrical work &mdash; for homes and business premises across Kuala Lumpur.",
               "svc-installation.webp",
               bc(("Home", "/"), ("Our Services", None))),
@@ -591,7 +577,8 @@ PAGES.append({
               "The team keeping",
               "Kuala Lumpur cool.",
               "Air conditioning repair, cleaning, installation and maintenance for homes and business premises &mdash; from a workshop at Titiwangsa Central, Kuala Lumpur.",
-              "cta-outdoor-unit.webp"),
+              "cta-outdoor-unit.webp",
+              bc(("Home", "/"), ("About Us", None))),
         # The homepage block carries Our Story and Our Mission cards. This page
         # covers both at more length in Our Journey and Vision & Mission below,
         # so the cards come out rather than saying it twice.
@@ -626,7 +613,7 @@ PAGES.append({
     "title": "Contact | Ad Aircond Solution, Kuala Lumpur",
     "description": "Call or WhatsApp Ad Aircond Solution on +60178570744, or send your details through the form. 14, Jalan Batu Bata, Titiwangsa Central, 50400 Kuala Lumpur.",
     "body": "\n".join([
-        phero("Contact", "Tell us what", "your aircond is doing",
+        ahero("Contact", "Tell us what", "your aircond is doing",
               "Call, WhatsApp, or send the details through the form and we will confirm the service and a time that suits you.",
               "step-contact.webp",
               bc(("Home", "/"), ("Contact", None))),

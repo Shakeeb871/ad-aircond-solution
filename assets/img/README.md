@@ -82,6 +82,17 @@ serviced. Keep each logo in its correct proportions and original colours, do
 not recolour or restyle them, and drop any brand the business does not
 actually work on.
 
+## Page hero photographs
+
+Every inner page uses the same hero: the photograph fills the right side under
+a left-to-right fade, with the copy over flat colour on the left. Each page
+names its own file in `build-pages.py` — About uses `cta-outdoor-unit.webp`,
+each service page its own `svc-*.webp`, Contact `step-contact.webp`.
+
+The hero renders the photo up to about 860 CSS px wide, so the 600px service
+photos are upscaled there. Replacing them with larger originals under the same
+names sharpens both the hero and the service cards at once.
+
 ## Resolution notes
 
 Background images scale to whatever the layout gives them, so the only
@@ -94,7 +105,7 @@ quality limit is the source file. Measured widest render, against what a 2x
 | `cta-outdoor-unit` |         1448 |           710 |     1420 | fine           |
 | `deco-split-unit`  |          600 |           300 |      600 | fine           |
 | `hero.webp`        |         1672 |          1920 |     3840 | short on wide screens |
-| `svc-*.webp`       |          600 |           340 |      680 | slightly short |
+| `svc-*.webp`       |          600 |           860 |     1720 | short in the hero |
 | `approach.webp`    |          300 |           710 |     1420 | short          |
 | `step-*.webp`      |          600 |           330 |      660 | slightly short |
 
