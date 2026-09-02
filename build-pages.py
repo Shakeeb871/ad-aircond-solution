@@ -631,7 +631,11 @@ PAGES.append({
         f'''<section class="section services">
   <div class="wrap">
     <header class="sec-head services__head">
-      <h2 class="h2 services__title">Six services, <em>one team</em></h2>
+      <h2 class="hstack services__title">
+        <span class="hstack__lead">Complete</span>
+        <span class="hstack__main">Aircond repair, cleaning, installation &amp; maintenance</span>
+        <span class="hstack__sub">For homes &amp; businesses in Kuala Lumpur</span>
+      </h2>
       <span class="rule-ico" aria-hidden="true"><i class="rule-ico__line"></i><svg class="ico" aria-hidden="true"><use href="#i-snow"></use></svg><i class="rule-ico__line"></i></span>
       <p class="sec-head__text">Whichever one you need, the visit starts the same way &mdash; we look at the unit before recommending anything.</p>
     </header>
