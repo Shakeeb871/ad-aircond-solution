@@ -3,51 +3,61 @@
   <url>
     <loc>https://adaircondsolution.com/</loc>
     <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://adaircondsolution.com/about.html</loc>
+    <loc>https://adaircondsolution.com/about/</loc>
     <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://adaircondsolution.com/services.html</loc>
+    <loc>https://adaircondsolution.com/services/</loc>
     <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://adaircondsolution.com/ac-repair.html</loc>
+    <loc>https://adaircondsolution.com/ac-repair/</loc>
     <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://adaircondsolution.com/ac-cleaning.html</loc>
+    <loc>https://adaircondsolution.com/ac-cleaning/</loc>
     <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://adaircondsolution.com/ac-installation.html</loc>
+    <loc>https://adaircondsolution.com/ac-installation/</loc>
     <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://adaircondsolution.com/ac-maintenance.html</loc>
+    <loc>https://adaircondsolution.com/ac-maintenance/</loc>
     <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://adaircondsolution.com/gas-refilling.html</loc>
+    <loc>https://adaircondsolution.com/gas-refilling/</loc>
     <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://adaircondsolution.com/ac-electrical-service.html</loc>
+    <loc>https://adaircondsolution.com/ac-electrical-service/</loc>
     <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://adaircondsolution.com/contact.html</loc>
+    <loc>https://adaircondsolution.com/contact/</loc>
     <lastmod>2026-09-02</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 </urlset>

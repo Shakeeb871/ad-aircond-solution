@@ -1,8 +1,32 @@
 # Ad Aircond Solution — Apache / cPanel configuration
-# Static site: no rewrites needed, only compression, caching and MIME types.
 
 # ---- Default document ----
+# Every page other than the homepage lives at <name>/index.html, so a request
+# for /ac-repair/ is served without any rewriting. The rules below only tidy
+# up the URLs that should not be used.
 DirectoryIndex index.html
+
+# ---- One canonical URL per page ----
+# Order matters. The index.html rule runs first, otherwise the .html rule below
+# would turn /ac-repair/index.html into /ac-repair/index/.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # /ac-repair/index.html and /index.html -> /ac-repair/ and /
+  RewriteCond %{THE_REQUEST} "\s/+(.*/)?index\.html[\s?]" [NC]
+  RewriteRule ^ /%1 [R=301,L]
+
+  # /ac-repair.html -> /ac-repair/  (the flat URLs this site used before).
+  # standalone.html is a real file that must keep its own URL.
+  RewriteCond %{REQUEST_URI} !^/standalone\.html$
+  RewriteCond %{THE_REQUEST} "\s/+([^\s?]+)\.html[\s?]" [NC]
+  RewriteRule ^ /%1/ [R=301,L]
+
+  # /ac-repair -> /ac-repair/  (add the trailing slash on real directories)
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteCond %{REQUEST_URI} !/$
+  RewriteRule ^(.*)$ /$1/ [R=301,L]
+</IfModule>
 
 # ---- Block repository metadata ----
 # A .git directory left in the web root is readable over HTTP and exposes the

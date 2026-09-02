@@ -27,7 +27,7 @@ HEADER  = between('<header class="site-header"', '</header>\n')
 SCRIM   = '<div class="nav-scrim" id="navScrim" hidden></div>\n'
 FOOTER  = between('<footer class="footer">', '</footer>\n')
 QUICK   = between('<div class="quickbar"', '</div>\n')
-SCRIPT  = re.search(r'<script src="assets/js/main\.js[^"]*"[^>]*></script>', home).group(0)
+SCRIPT  = re.search(r'<script src="/assets/js/main\.js[^"]*"[^>]*></script>', home).group(0)
 
 BIZ = {
     "@type": "HVACBusiness",
@@ -50,20 +50,23 @@ def head(page):
 <title>{page["title"]}</title>
 <meta name="description" content="{page["description"]}">
 <meta name="theme-color" content="#0c8a99">
-<link rel="canonical" href="{SITE}{page["slug"]}">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="{SITE}{page["url"]}">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="{page["title"]}">
 <meta property="og:description" content="{page["description"]}">
-<meta property="og:url" content="{SITE}{page["slug"]}">
+<meta property="og:url" content="{SITE}{page["url"]}">
+<meta property="og:site_name" content="Ad Aircond Solution">
+<meta property="og:image" content="{SITE}assets/img/{page["image"]}">
 <meta property="og:locale" content="en_MY">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{SITE}assets/img/{page["image"]}">
 
-<link rel="preload" href="assets/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="assets/fonts/poppins-600-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/css/fonts.css{css}">
-<link rel="stylesheet" href="assets/css/styles.css{css}">
+<link rel="preload" href="/assets/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/poppins-600-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/fonts.css{css}">
+<link rel="stylesheet" href="/assets/css/styles.css{css}">
 </head>
 <body>
 {SPRITE}
@@ -115,13 +118,9 @@ def service_ld(name, desc, slug):
 # ---------------------------------------------------------------- components
 
 def bc(*items):
-    """Visible breadcrumb trail; the last item is the current page."""
-    out = []
-    for i, (name, href) in enumerate(items):
-        if i == len(items) - 1:
-            out.append(f'<li aria-current="page">{name}</li>')
-        else:
-            out.append(f'<li><a href="{href}">{name}</a></li>')
+    """Visible breadcrumb trail; an item with no href is the current page."""
+    out = [f'<li aria-current="page">{n}</li>' if h is None else f'<li><a href="{h}">{n}</a></li>'
+           for n, h in items]
     return '<nav class="crumbs" aria-label="Breadcrumb"><ol>' + "".join(out) + "</ol></nav>"
 
 
@@ -130,17 +129,17 @@ def phero(kicker, title_a, title_b, lede, photo, crumb):
   <span class="deco deco--photo deco--leaves-l" aria-hidden="true"></span>
   <div class="wrap phero__grid">
     <div class="phero__copy">
-      {crumb}
       <p class="kicker">{kicker}</p>
       <h1 class="phero__title">{title_a} <em>{title_b}</em></h1>
       <p class="phero__lede">{lede}</p>
       <div class="phero__actions">
-        <a class="btn btn--primary btn--lg" href="contact.html"><svg class="ico" aria-hidden="true"><use href="#i-calendar"></use></svg>Book a Service</a>
+        <a class="btn btn--primary btn--lg" href="/contact/"><svg class="ico" aria-hidden="true"><use href="#i-calendar"></use></svg>Book a Service</a>
         <a class="btn btn--card btn--lg" href="tel:+60178570744"><svg class="ico" aria-hidden="true"><use href="#i-phone"></use></svg>+60178570744</a>
       </div>
     </div>
-    <div class="phero__media"><span class="phero__photo" style="background-image:url(&quot;assets/img/{photo}&quot;)"></span></div>
+    <div class="phero__media"><span class="phero__photo" style="background-image:url(&quot;/assets/img/{photo}&quot;)"></span></div>
   </div>
+  <div class="wrap">{crumb}</div>
 </section>'''
 
 
@@ -177,7 +176,7 @@ CTA = '''<section class="section callout-wrap">
         <h2 class="h2 callout__title">Not sure what your unit needs?<em>Tell us what it is doing.</em></h2>
         <p class="callout__lede">Describe the symptom and we will confirm which service fits before anything is booked.</p>
         <div class="callout__actions">
-          <a class="btn btn--white btn--lg" href="contact.html"><svg class="ico" aria-hidden="true"><use href="#i-calendar"></use></svg>Request a Service Visit</a>
+          <a class="btn btn--white btn--lg" href="/contact/"><svg class="ico" aria-hidden="true"><use href="#i-calendar"></use></svg>Request a Service Visit</a>
           <a class="btn btn--glass btn--lg" href="https://wa.me/60178570744" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-whatsapp"></use></svg>WhatsApp us</a>
         </div>
       </div>
@@ -186,20 +185,20 @@ CTA = '''<section class="section callout-wrap">
 </section>'''
 
 
-# slug, name, sprite icon, photo, the .svc__media-- modifier the CSS defines
+# directory, name, sprite icon, photo, the .svc__media-- modifier the CSS defines
 SERVICES = [
-    ("ac-repair.html",             "AC Repair",             "i-tools",   "svc-repair.webp",       "repair"),
-    ("ac-cleaning.html",           "AC Cleaning",           "i-wind",    "svc-cleaning.webp",     "cleaning"),
-    ("ac-installation.html",       "AC Installation",       "i-cog",     "svc-installation.webp", "installation"),
-    ("ac-maintenance.html",        "AC Maintenance",        "i-install", "svc-maintenance.webp",  "maintenance"),
-    ("gas-refilling.html",         "Gas Refilling",         "i-snow",    "svc-gas.webp",          "gas"),
-    ("ac-electrical-service.html", "AC Electrical Service", "i-bolt",    "svc-electrical.webp",   "electrical"),
+    ("ac-repair",             "AC Repair",             "i-tools",   "svc-repair.webp",       "repair"),
+    ("ac-cleaning",           "AC Cleaning",           "i-wind",    "svc-cleaning.webp",     "cleaning"),
+    ("ac-installation",       "AC Installation",       "i-cog",     "svc-installation.webp", "installation"),
+    ("ac-maintenance",        "AC Maintenance",        "i-install", "svc-maintenance.webp",  "maintenance"),
+    ("gas-refilling",         "Gas Refilling",         "i-snow",    "svc-gas.webp",          "gas"),
+    ("ac-electrical-service", "AC Electrical Service", "i-bolt",    "svc-electrical.webp",   "electrical"),
 ]
 
 
 def others(current):
     cards = "".join(f'''
-      <a class="minicard" href="{slug}">
+      <a class="minicard" href="/{slug}/">
         <span class="minicard__icon"><svg class="ico" aria-hidden="true"><use href="#{icon}"></use></svg></span>
         <span class="minicard__name">{name}</span>
         <svg class="ico ico--sm minicard__go" aria-hidden="true"><use href="#i-arrow"></use></svg>
@@ -221,7 +220,8 @@ def others(current):
 def service_page(slug, nav_name, kicker, title_a, title_b, lede, photo,
                  intro_h, intro_p, list_title, list_items,
                  second_h, second_p, meta_title, meta_desc):
-    crumb = bc(("Home", "index.html"), ("Our Services", "services.html"), (nav_name, slug))
+    url = f"{slug}/"
+    crumb = bc(("Home", "/"), ("Our Services", "/services/"), (nav_name, None))
     body = "\n".join([
         phero(kicker, title_a, title_b, lede, photo, crumb),
         article(intro_h, intro_p, checks(list_title, list_items)),
@@ -230,18 +230,18 @@ def service_page(slug, nav_name, kicker, title_a, title_b, lede, photo,
         CTA,
     ])
     return {
-        "slug": slug, "nav": "services", "title": meta_title, "description": meta_desc,
-        "body": body,
+        "dir": slug, "url": url, "nav": "services", "image": photo,
+        "title": meta_title, "description": meta_desc, "body": body,
         # two graphs in one tag must be a JSON array, not two objects
-        "jsonld": "[\n" + service_ld(nav_name, meta_desc, slug) + ",\n" + crumbs(
-            ("Home", ""), ("Our Services", "services.html"), (nav_name, slug)) + "\n]",
+        "jsonld": "[\n" + service_ld(nav_name, meta_desc, url) + ",\n" + crumbs(
+            ("Home", ""), ("Our Services", "services/"), (nav_name, url)) + "\n]",
     }
 
 
 PAGES = []
 
 PAGES.append(service_page(
-    "ac-repair.html", "AC Repair", "AC Repair",
+    "ac-repair", "AC Repair", "AC Repair",
     "Aircond repair,", "diagnosed before it is fixed",
     "A unit that has stopped cooling, stopped starting or failed mid-use gets inspected first, so the repair answers the actual fault rather than the symptom.",
     "svc-repair.webp",
@@ -261,7 +261,7 @@ PAGES.append(service_page(
     "Aircond repair in Kuala Lumpur for units that have stopped cooling, will not start, leak water or trip the breaker. Inspection first, then the fix. Call +60178570744."))
 
 PAGES.append(service_page(
-    "ac-cleaning.html", "AC Cleaning", "AC Cleaning",
+    "ac-cleaning", "AC Cleaning", "AC Cleaning",
     "Deep cleaning that", "restores airflow",
     "Filters, coils, the blower wheel and the drain line are cleaned properly, so the unit moves the air it was built to move and sheds heat the way it should.",
     "svc-cleaning.webp",
@@ -280,7 +280,7 @@ PAGES.append(service_page(
     "Aircond cleaning in Kuala Lumpur: filters, coil, blower wheel and drain line cleaned so airflow and cooling come back. Call +60178570744."))
 
 PAGES.append(service_page(
-    "ac-installation.html", "AC Installation", "AC Installation",
+    "ac-installation", "AC Installation", "AC Installation",
     "Installation done", "properly the first time",
     "Mounting, piping, drainage, electrical connection and commissioning &mdash; set up so the system performs as it was designed to from the day it is switched on.",
     "svc-installation.webp",
@@ -300,7 +300,7 @@ PAGES.append(service_page(
     "Air conditioner installation in Kuala Lumpur: mounting, pipework, drainage, electrical connection and commissioning. Call +60178570744."))
 
 PAGES.append(service_page(
-    "ac-maintenance.html", "AC Maintenance", "AC Maintenance",
+    "ac-maintenance", "AC Maintenance", "AC Maintenance",
     "Maintenance that", "catches faults early",
     "Scheduled visits that keep a system running at its best and flag small issues while they are still small jobs.",
     "svc-maintenance.webp",
@@ -320,7 +320,7 @@ PAGES.append(service_page(
     "Scheduled aircond maintenance in Kuala Lumpur for homes and business premises. Cleaning, checks and early warning of faults. Call +60178570744."))
 
 PAGES.append(service_page(
-    "gas-refilling.html", "Gas Refilling", "Gas Refilling",
+    "gas-refilling", "Gas Refilling", "Gas Refilling",
     "Refrigerant checked,", "then topped up",
     "Weak cooling often means low refrigerant. We check the system for the leak that caused it before refilling, so the gas stays in.",
     "svc-gas.webp",
@@ -340,7 +340,7 @@ PAGES.append(service_page(
     "Aircond gas refilling in Kuala Lumpur. Leak check and pressure test first, then refilled with the correct refrigerant. Call +60178570744."))
 
 PAGES.append(service_page(
-    "ac-electrical-service.html", "AC Electrical Service", "AC Electrical Service",
+    "ac-electrical-service", "AC Electrical Service", "AC Electrical Service",
     "Electrical faults", "traced and handled safely",
     "From a failed capacitor to wiring and control faults &mdash; the electrical side of an air conditioner, diagnosed and repaired properly.",
     "svc-electrical.webp",
@@ -363,7 +363,7 @@ PAGES.append(service_page(
 # --- services hub -----------------------------------------------------------
 
 _svc_cards = "".join(f'''
-      <a class="svc svc--link" href="{slug}">
+      <a class="svc svc--link" href="/{slug}/">
         <span class="svc__media svc__media--{mod}"></span>
         <span class="svc__badge"><svg class="ico" aria-hidden="true"><use href="#{icon}"></use></svg></span>
         <span class="svc__body">
@@ -374,14 +374,14 @@ _svc_cards = "".join(f'''
       </a>''' for slug, name, icon, _, mod in SERVICES)
 
 PAGES.append({
-    "slug": "services.html", "nav": "services",
+    "dir": "services", "url": "services/", "nav": "services", "image": "svc-installation.webp",
     "title": "Our Services | Aircond Repair, Cleaning &amp; Installation in Kuala Lumpur",
     "description": "The six air conditioning services Ad Aircond Solution provides in Kuala Lumpur: repair, cleaning, installation, maintenance, gas refilling and electrical work.",
     "body": "\n".join([
         phero("Our Services", "Complete AC care,", "all in one place",
               "Repair, cleaning, installation, maintenance, gas refilling and electrical work &mdash; for homes and business premises across Kuala Lumpur.",
               "svc-installation.webp",
-              bc(("Home", "index.html"), ("Our Services", "services.html"))),
+              bc(("Home", "/"), ("Our Services", None))),
         f'''<section class="section services">
   <div class="wrap">
     <header class="sec-head services__head">
@@ -398,7 +398,7 @@ PAGES.append({
             "Tell us what the unit is doing &mdash; how it sounds, when it started, whether it cools at all &mdash; and we will tell you which service fits before anything is booked. If it turns out to be the cheaper job, that is the one we will quote."]),
         CTA,
     ]),
-    "jsonld": crumbs(("Home", ""), ("Our Services", "services.html")),
+    "jsonld": crumbs(("Home", ""), ("Our Services", "services/")),
 })
 
 
@@ -409,14 +409,14 @@ def _pull(start, end):
     return between(start, end)
 
 PAGES.append({
-    "slug": "about.html", "nav": "about",
+    "dir": "about", "url": "about/", "nav": "about", "image": "about.webp",
     "title": "About Us | Ad Aircond Solution, Kuala Lumpur",
     "description": "Ad Aircond Solution provides air conditioning repair, servicing, maintenance and installation for homes and businesses across Kuala Lumpur. Based at Titiwangsa Central.",
     "body": "\n".join([
         phero("About Us", "Built on service.", "Driven by comfort.",
               "Air conditioning repair, servicing, maintenance and installation for homes and businesses across Kuala Lumpur, from a workshop at Titiwangsa Central.",
               "about.webp",
-              bc(("Home", "index.html"), ("About Us", "about.html"))),
+              bc(("Home", "/"), ("About Us", None))),
         _pull('<!-- ============ ABOUT US ============ -->', '</section>\n'),
         article("How we work", [
             "Every job starts with looking at the unit. A room that is not getting cold can point to a dirty coil, a blocked drain, a low refrigerant charge, a failing capacitor or a control fault, and the only way to know which is to inspect rather than assume.",
@@ -431,31 +431,33 @@ PAGES.append({
                 "A straight answer when a repair is not worth it"])),
         CTA,
     ]),
-    "jsonld": crumbs(("Home", ""), ("About Us", "about.html")),
+    "jsonld": crumbs(("Home", ""), ("About Us", "about/")),
 })
 
 
 # --- contact ----------------------------------------------------------------
 
 PAGES.append({
-    "slug": "contact.html", "nav": "contact",
+    "dir": "contact", "url": "contact/", "nav": "contact", "image": "step-contact.webp",
     "title": "Contact | Ad Aircond Solution, Kuala Lumpur",
     "description": "Call or WhatsApp Ad Aircond Solution on +60178570744, or send your details through the form. 14, Jalan Batu Bata, Titiwangsa Central, 50400 Kuala Lumpur.",
     "body": "\n".join([
         phero("Contact", "Tell us what", "your aircond is doing",
               "Call, WhatsApp, or send the details through the form and we will confirm the service and a time that suits you.",
               "step-contact.webp",
-              bc(("Home", "index.html"), ("Contact", "contact.html"))),
-        _pull('<!-- ============ FINAL CTA + BOOKING ============ -->', '</section>\n'),
+              bc(("Home", "/"), ("Contact", None))),
+        read("partials/booking.html"),
     ]),
-    "jsonld": crumbs(("Home", ""), ("Contact", "contact.html")),
+    "jsonld": crumbs(("Home", ""), ("Contact", "contact/")),
 })
 
 
 if __name__ == "__main__":
     for page in PAGES:
         out = head(page)
-        with open(os.path.join(ROOT, page["slug"]), "w", encoding="utf-8") as fh:
+        folder = os.path.join(ROOT, page["dir"])
+        os.makedirs(folder, exist_ok=True)
+        with open(os.path.join(folder, "index.html"), "w", encoding="utf-8") as fh:
             fh.write(out)
-        print(f'{page["slug"]:30s} {len(out) // 1024:>3} KB')
+        print(f'/{page["url"]:28s} {len(out) // 1024:>3} KB')
     print(f"{len(PAGES)} pages built from index.html")
