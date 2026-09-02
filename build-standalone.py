@@ -51,9 +51,16 @@ html = re.sub(r'<script src="assets/js/main\.js[^"]*"[^>]*></script>',
 html = html.replace('<link rel="icon" href="favicon.svg" type="image/svg+xml">',
                     '<link rel="icon" href="' + data_uri('favicon.svg', 'image/svg+xml') + '" type="image/svg+xml">')
 
-# Refuse to ship a file that still depends on something outside itself —
+# Refuse to ship a file that still depends on an asset outside itself —
 # attributes and CSS url() alike.
-external = re.findall(r'(?:src|href)="(?!#|data:|https?://|tel:|mailto:)([^"]+)"', html)
+#
+# Links to the site's own pages are the one exception: the nav and footer point
+# at about.html, the service pages and so on. standalone.html is a single-file
+# copy of the HOMEPAGE for handing over or opening from disk; those links only
+# resolve when the real site is deployed alongside it.
+site_pages = re.compile(r'^[a-z0-9-]+\.html(#.*)?$')
+external = [h for h in re.findall(r'(?:src|href)="(?!#|data:|https?://|tel:|mailto:)([^"]+)"', html)
+            if not site_pages.match(h)]
 external += re.findall(r'url\(["\']?(?!#|data:|https?://)([^"\')]+)', html)
 if external:
     raise SystemExit(f"standalone.html would still reference: {external}")

@@ -13,9 +13,10 @@ deployment:
   tasks:
     - export DEPLOYPATH=$HOME/adaircondsolution.com
     - /bin/mkdir -p $DEPLOYPATH
-    - /bin/cp -f index.html $DEPLOYPATH/
-    - /bin/cp -f standalone.html $DEPLOYPATH/
+    # index.html, standalone.html and every generated page
+    - /bin/cp -f *.html $DEPLOYPATH/
     - /bin/cp -f favicon.svg $DEPLOYPATH/
+    - /bin/cp -f robots.txt sitemap.xml $DEPLOYPATH/
     - /bin/cp -f .htaccess $DEPLOYPATH/
     # replace assets wholesale so files removed from the repo also leave the server
     - /bin/rm -rf $DEPLOYPATH/assets

@@ -68,11 +68,18 @@
     var toggle = item.querySelector('.nav__toggle');
     if (!toggle) return;
     toggle.addEventListener('click', function (e) {
-      e.stopPropagation();
-      var open = !item.classList.contains('is-open');
-      closeSubmenus(item);
-      item.classList.toggle('is-open', open);
-      toggle.setAttribute('aria-expanded', String(open));
+      /* The toggle is a real link to the services page. On desktop the submenu
+         opens on hover, so the link just works. Inside the mobile drawer there
+         is no hover, so the first tap opens the submenu and a second tap
+         follows the link. */
+      var inDrawer = window.matchMedia('(max-width:1180px)').matches;
+      if (inDrawer && !item.classList.contains('is-open')) {
+        e.preventDefault();
+        e.stopPropagation();
+        closeSubmenus(item);
+        item.classList.add('is-open');
+        toggle.setAttribute('aria-expanded', 'true');
+      }
     });
   });
 
