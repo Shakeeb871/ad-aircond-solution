@@ -727,19 +727,19 @@ address{font-style:normal}
 .svc:hover{transform:translateY(-6px);box-shadow:var(--sh-md);border-color:var(--b-200)}
 
 .svc__media{
-  display:block;aspect-ratio:16/10;border-radius:calc(var(--r-xl) - 1px) calc(var(--r-xl) - 1px) var(--r) var(--r);
+  display:block;aspect-ratio:4/3;border-radius:calc(var(--r-xl) - 1px) calc(var(--r-xl) - 1px) var(--r) var(--r);
   margin:7px 7px 0;background-color:var(--b-50);
   background-size:cover;background-position:center;background-repeat:no-repeat;
   box-shadow:inset 0 0 0 1px rgba(17,42,63,.045);
 }
 /* Each slot layers an optional photograph over the illustrated fallback.
    Drop a photo at the named path and change --photo to url("...") to use it. */
-.svc__media--repair{--photo:none;background-image:var(--photo),url("../media/services/repair.svg")}
-.svc__media--cleaning{--photo:none;background-image:var(--photo),url("../media/services/cleaning.svg")}
-.svc__media--installation{--photo:none;background-image:var(--photo),url("../media/services/installation.svg")}
-.svc__media--maintenance{--photo:none;background-image:var(--photo),url("../media/services/maintenance.svg")}
-.svc__media--gas{--photo:none;background-image:var(--photo),url("../media/services/gas.svg")}
-.svc__media--electrical{--photo:none;background-image:var(--photo),url("../media/services/electrical.svg")}
+.svc__media--repair{--photo:url("../img/svc-repair.webp");background-image:var(--photo),url("../media/services/repair.svg")}
+.svc__media--cleaning{--photo:url("../img/svc-cleaning.webp");background-image:var(--photo),url("../media/services/cleaning.svg")}
+.svc__media--installation{--photo:url("../img/svc-installation.webp");background-image:var(--photo),url("../media/services/installation.svg")}
+.svc__media--maintenance{--photo:url("../img/svc-maintenance.webp");background-image:var(--photo),url("../media/services/maintenance.svg")}
+.svc__media--gas{--photo:url("../img/svc-gas.webp");background-image:var(--photo),url("../media/services/gas.svg")}
+.svc__media--electrical{--photo:url("../img/svc-electrical.webp");background-image:var(--photo),url("../media/services/electrical.svg")}
 
 /* circular badge straddling the image / body boundary */
 .svc__badge{

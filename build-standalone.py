@@ -30,9 +30,16 @@ html = read('index.html')
 fonts = re.sub(r"url\('\.\./fonts/([^']+)'\)",
                lambda m: "url('" + data_uri(f"assets/fonts/{m.group(1)}", 'font/woff2') + "')",
                read('assets/css/fonts.css'))
+styles = read('assets/css/styles.css')
+# Comments can name files that do not exist (they document optional slots), so
+# drop them before anything tries to resolve a URL inside one.
+styles = re.sub(r'/\*.*?\*/', '', styles, flags=re.S)
 styles = re.sub(r'url\("\.\./media/([^"]+)"\)',
                 lambda m: 'url("' + data_uri(f"assets/media/{m.group(1)}", 'image/svg+xml') + '")',
-                read('assets/css/styles.css'))
+                styles)
+styles = re.sub(r'url\("\.\./img/([^"]+)"\)',
+                lambda m: 'url("' + data_uri(f"assets/img/{m.group(1)}", 'image/webp') + '")',
+                styles)
 
 # Asset URLs carry a ?v= build id, so match them by pattern rather than literally.
 html = re.sub(r'<link rel="preload"[^>]*>\n', '', html)
@@ -44,8 +51,10 @@ html = re.sub(r'<script src="assets/js/main\.js[^"]*"[^>]*></script>',
 html = html.replace('<link rel="icon" href="favicon.svg" type="image/svg+xml">',
                     '<link rel="icon" href="' + data_uri('favicon.svg', 'image/svg+xml') + '" type="image/svg+xml">')
 
-# Refuse to ship a file that still depends on something outside itself.
+# Refuse to ship a file that still depends on something outside itself —
+# attributes and CSS url() alike.
 external = re.findall(r'(?:src|href)="(?!#|data:|https?://|tel:|mailto:)([^"]+)"', html)
+external += re.findall(r'url\(["\']?(?!#|data:|https?://)([^"\')]+)', html)
 if external:
     raise SystemExit(f"standalone.html would still reference: {external}")
 
