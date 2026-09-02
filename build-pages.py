@@ -608,16 +608,21 @@ PAGES.append(service_page(
 
 # --- services hub -----------------------------------------------------------
 
-_svc_cards = "".join(f'''
-      <a class="svc svc--link" href="/{slug}/">
-        <span class="svc__media svc__media--{mod}"></span>
-        <span class="svc__badge"><svg class="ico" aria-hidden="true"><use href="#{icon}"></use></svg></span>
-        <span class="svc__body">
-          <span class="svc__title">{name}</span>
-          <span class="svc__rule" aria-hidden="true"></span>
-          <span class="svc__go">View service<svg class="ico ico--sm" aria-hidden="true"><use href="#i-arrow"></use></svg></span>
-        </span>
-      </a>''' for slug, name, icon, _, mod in SERVICES)
+# The six cards are lifted from the homepage rather than written again, so the
+# section has one layout wherever it appears and the two can never drift. Here
+# each card is the link to its own service; <a> takes flow content, so the
+# heading and the fault list carry over unchanged.
+_home_cards = re.findall(r'<article class="svc\b[^"]*"[^>]*>.*?</article>', home, re.S)
+assert len(_home_cards) == len(SERVICES), (len(_home_cards), len(SERVICES))
+
+def _as_link(card, slug):
+    card = re.sub(r'^<article class="svc\b[^"]*"[^>]*>',
+                  f'<a class="svc svc--link reveal" href="/{slug}/">', card, count=1)
+    return card[:-len('</article>')] + '</a>'
+
+_svc_cards = "".join(
+    "\n      " + _as_link(card, slug).replace("\n", "\n  ")
+    for card, (slug, *_r) in zip(_home_cards, SERVICES))
 
 PAGES.append({
     "dir": "services", "url": "services/", "nav": "services", "image": "svc-installation.webp",

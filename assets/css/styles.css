@@ -336,7 +336,9 @@ h1,h2,h3,h4,
 
 .hero__lede{
   margin-top:18px;max-width:100%;
-  font-size:clamp(1rem,.96rem + .3vw,1.1rem);line-height:1.72;color:var(--muted);
+  /* --muted only just clears 4.5:1 over the photograph, and misses it where the
+     technician falls behind the text, so the hero lede runs a step darker. */
+  font-size:clamp(1rem,.96rem + .3vw,1.1rem);line-height:1.72;color:var(--ink-2);
 }
 .hero__actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:28px}
 
@@ -951,15 +953,12 @@ h1,h2,h3,h4,
 .minicard:hover .minicard__go{transform:translateX(4px)}
 
 /* service cards used as links on the services page */
+/* On the services hub the whole card is the link. It carries the same body as
+   the homepage card, so the only difference is the cue on hover. */
 .svc--link{text-decoration:none}
-.svc--link .svc__body{display:flex;flex-direction:column;align-items:flex-start}
-.svc--link .svc__title{display:block}
-.svc__go{
-  display:inline-flex;align-items:center;gap:7px;margin-top:4px;
-  font-family:var(--f-display);font-weight:600;font-size:.86rem;color:var(--b-700);
-}
-.svc--link:hover .svc__go .ico{transform:translateX(4px)}
-.svc__go .ico{transition:transform .25s ease}
+.svc--link:hover .svc__title,.svc--link:focus-visible .svc__title{color:var(--b-700)}
+.svc--link:focus-visible{outline:2px solid var(--b-500);outline-offset:3px}
+.svc__title{transition:color .2s ease}
 
 .callout__actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:clamp(20px,2.4vw,28px)}
 
@@ -1461,16 +1460,25 @@ h1,h2,h3,h4,
   .nav__cta .btn--phone{padding:12px 20px}
   .nav__cta .btn--phone .btn__label{display:inline}
 
-  /* hero stacks: copy -> image -> form -> cards */
+  /* The hero keeps its wide-screen shape: copy, form and cards stack, but the
+     photograph stays a full-bleed background behind them rather than dropping
+     into the stack as a card. A veil over it holds the headline contrast. */
   .hero__inner{display:flex;flex-direction:column}
   .hero__copy{order:1;max-width:none}
   .hero__photo{
-    order:2;position:relative;width:100%;height:clamp(260px,40vw,400px);
-    inset:auto;margin-top:30px;border-radius:var(--r-xl);overflow:hidden;
-    background-position:72% center,center 36%;
-    -webkit-mask-image:none;mask-image:none;
+    position:absolute;top:0;left:0;right:0;width:100%;
+    height:clamp(430px,86vw,680px);
+    background-position:64% top,center 30%;
   }
-  .hero__photo::after{display:none}
+  .hero__photo::after{
+    inset:0;height:auto;
+    background:linear-gradient(180deg,
+      rgba(247,253,255,.86) 0%,
+      rgba(242,251,254,.70) 28%,
+      rgba(238,249,253,.84) 50%,
+      rgba(235,247,252,.88) 70%,
+      #e6f4fa 100%);
+  }
   .hero__side{order:3;width:100%;max-width:520px;margin:26px auto 0 0}
   .usp{order:4;grid-column:auto;grid-row:auto}
   .hero__wave{height:clamp(80px,11vw,150px)}
@@ -1524,7 +1532,17 @@ h1,h2,h3,h4,
   .brand--footer{padding:10px 14px}
   .brand--footer .brand__logo{height:44px}
   .tagpill{font-size:.76rem;padding:8px 15px 8px 13px}
-  .hero__photo{height:clamp(210px,52vw,300px);background-position:74% center,center 36%}
+  /* A narrow box crops a 16:9 photo hard, so the frame moves onto the unit and
+     the technician and the veil eases off where no copy sits over it. */
+  .hero__photo{height:clamp(520px,145vw,700px);background-position:70% top,center 30%}
+  .hero__photo::after{
+    background:linear-gradient(180deg,
+      rgba(247,253,255,.84) 0%,
+      rgba(243,251,254,.70) 24%,
+      rgba(239,249,253,.86) 46%,
+      rgba(236,248,252,.90) 66%,
+      #e6f4fa 100%);
+  }
   .hero__side{max-width:none}
   .trustrow{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 18px;width:100%}
   .trustrow li{padding-inline:0}
