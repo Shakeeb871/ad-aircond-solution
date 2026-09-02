@@ -48,8 +48,20 @@ html = re.sub(r'<link rel="stylesheet" href="/assets/css/fonts\.css[^"]*">\n<lin
               lambda m: _style_block, html, count=1)
 html = re.sub(r'<script src="/assets/js/main\.js[^"]*"[^>]*></script>',
               lambda m: '<script>\n' + read('assets/js/main.js') + '\n</script>', html, count=1)
-html = html.replace('<link rel="icon" href="/favicon.svg" type="image/svg+xml">',
-                    '<link rel="icon" href="' + data_uri('favicon.svg', 'image/svg+xml') + '" type="image/svg+xml">')
+# The root icon files and the manifest cannot travel with a single file, so the
+# standalone copy carries one inlined PNG icon instead.
+html = re.sub(r'<link rel="(?:icon|apple-touch-icon|manifest)"[^>]*>\n?', '', html, count=5)
+html = html.replace('<meta name="theme-color"',
+                    '<link rel="icon" href="' + data_uri('favicon-32.png', 'image/png')
+                    + '" type="image/png" sizes="32x32">\n<meta name="theme-color"', 1)
+
+# <img> artwork referenced straight from the markup (the logo).
+MIME = {'.webp': 'image/webp', '.png': 'image/png', '.svg': 'image/svg+xml',
+        '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.ico': 'image/x-icon'}
+html = re.sub(r'src="/assets/img/([^"?]+)(\?[^"]*)?"',
+              lambda m: 'src="' + data_uri('assets/img/' + m.group(1),
+                                           MIME[os.path.splitext(m.group(1))[1].lower()]) + '"',
+              html)
 
 # Refuse to ship a file that still depends on an asset outside itself —
 # attributes and CSS url() alike.
