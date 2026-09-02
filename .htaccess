@@ -28,14 +28,30 @@ DirectoryIndex index.html
   RewriteRule ^(.*)$ /$1/ [R=301,L]
 </IfModule>
 
-# ---- Block repository metadata ----
-# A .git directory left in the web root is readable over HTTP and exposes the
-# project's history. Deny it whether or not one is actually present.
+# ---- Block repository and source files ----
+# On this account the repository is checked out in the website folder itself,
+# so .git, the build scripts and the partials all sit next to the pages. None
+# of them should be readable over HTTP. These rules are harmless when the
+# repository lives elsewhere, so they stay either way.
 RedirectMatch 404 /\.git(/|$)
+RedirectMatch 404 ^/partials(/|$)
+RedirectMatch 404 ^/\.github(/|$)
 <IfModule mod_authz_core.c>
-  <DirectoryMatch "/\.git">
+  <DirectoryMatch "/(\.git|\.github|partials)">
     Require all denied
   </DirectoryMatch>
+  <FilesMatch "\.(py|ya?ml|md|lock|sh)$">
+    Require all denied
+  </FilesMatch>
+  <Files ".gitignore">
+    Require all denied
+  </Files>
+</IfModule>
+<IfModule !mod_authz_core.c>
+  <FilesMatch "\.(py|ya?ml|md|lock|sh)$">
+    Order allow,deny
+    Deny from all
+  </FilesMatch>
 </IfModule>
 
 # ---- Correct MIME types ----

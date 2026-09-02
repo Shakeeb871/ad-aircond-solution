@@ -1,17 +1,28 @@
 ---
 # cPanel Git Version Control deployment.
 #
-# IMPORTANT: the repository itself must NOT live in the website folder. Clone it
-# somewhere separate, e.g. /home/<user>/repositories/adaircond, and these tasks
-# copy the files across into the folder the domain serves from.
+# Two layouts are possible and this file handles both.
+#
+# 1. Repository checked out INSIDE the website folder. cPanel updates the
+#    working tree, which IS the live site, so the files are already in place
+#    and there is nothing to copy. The guard below detects this and stops.
+#    Copying in this layout is not merely redundant, it is destructive:
+#    "rm -rf $DEPLOYPATH/assets" would delete the repository's own assets
+#    folder and the copy that follows would then have no source.
+#
+# 2. Repository checked out somewhere separate, e.g.
+#    /home/<user>/repositories/adaircond. The tasks copy the built site across
+#    into the folder the domain serves from.
 #
 # DEPLOYPATH is that website folder. For the addon domain adaircondsolution.com
-# on this account it is $HOME/adaircondsolution.com. If the site is served from
-# somewhere else, change this one line — for a primary domain it is usually
-# $HOME/public_html.
+# on this account it is $HOME/adaircondsolution.com. For a primary domain it is
+# usually $HOME/public_html.
 deployment:
   tasks:
     - export DEPLOYPATH=$HOME/adaircondsolution.com
+    - export REPOPATH="$(pwd -P)"
+    - export LIVEPATH="$(cd "$DEPLOYPATH" 2>/dev/null && pwd -P || echo none)"
+    - if [ "$LIVEPATH" = "$REPOPATH" ]; then echo "Repository is the website folder - the working tree is already the live site, nothing to copy."; exit 0; fi
     - /bin/mkdir -p $DEPLOYPATH
     # homepage and the single-file copy
     - /bin/cp -f index.html standalone.html $DEPLOYPATH/
