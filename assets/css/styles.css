@@ -514,10 +514,8 @@ address{font-style:normal}
   border-radius:clamp(14px,1.6vw,20px);overflow:hidden;
   border:1px solid var(--line);
   box-shadow:0 34px 70px -34px rgba(15,39,64,.4);
-  /* Add the photograph as assets/img/about.webp, then change this one line to
-     --photo:url("../img/about.webp"); the illustration below stays as fallback.
-     Left as none for now so a file that does not exist is not requested. */
-  --photo:none;
+  /* The illustration below stays as the fallback if the photo ever fails. */
+  --photo:url("../img/about.webp");
   background-image:var(--photo),url("../media/interior.svg");
   background-size:cover,cover;
   background-position:center,center;
@@ -768,71 +766,6 @@ address{font-style:normal}
 .feature-list strong{display:block;font-family:var(--f-display);font-weight:600;color:var(--ink);font-size:1rem;margin-bottom:3px}
 .feature-list span span,.feature-list li>span:last-child{font-size:.92rem;line-height:1.65}
 .approach .btn{margin-top:32px}
-
-/* ---------- 14. Support cards ---------- */
-.support__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2vw,26px)}
-.pcard{
-  background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);
-  padding:clamp(26px,2.6vw,36px);text-align:center;box-shadow:var(--sh-xs);
-  display:flex;flex-direction:column;align-items:center;
-  transition:transform .3s ease,box-shadow .3s ease;
-}
-.pcard:hover{transform:translateY(-5px);box-shadow:var(--sh-md)}
-.pcard__icon{width:60px;height:60px;border-radius:12px}
-.pcard__title{font-size:1.14rem;margin-bottom:10px}
-.pcard__text{font-size:.92rem;line-height:1.65;margin-bottom:22px;flex:1}
-.pcard--accent{background:var(--grad);border-color:transparent;box-shadow:var(--sh-brand)}
-.pcard--accent .pcard__icon{background:rgba(255,255,255,.2);color:#fff}
-.pcard--accent .pcard__title{color:#fff}
-.pcard--accent .pcard__text{color:#dcf7f6}
-.pcard--accent .btn--soft{background:#fff;color:var(--b-800)}
-
-/* ---------- 15. Packages ---------- */
-.packages__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(18px,2.2vw,28px);align-items:center}
-.pkg{
-  position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--r-xl);
-  padding:clamp(28px,3vw,40px);box-shadow:var(--sh-sm);
-  display:flex;flex-direction:column;
-  transition:transform .3s ease,box-shadow .3s ease;
-}
-.pkg:hover{transform:translateY(-5px);box-shadow:var(--sh-md)}
-.pkg__name{font-size:1.28rem;margin-bottom:8px}
-.pkg__for{font-size:.9rem;line-height:1.6;min-height:44px}
-.pkg__price{
-  font-family:var(--f-display);font-weight:700;font-size:1.72rem;color:var(--ink);
-  letter-spacing:-.03em;margin:22px 0 4px;
-}
-.pkg__price span{
-  display:block;font-family:var(--f-body);font-weight:500;font-size:.76rem;
-  letter-spacing:.13em;text-transform:uppercase;color:var(--muted-2);margin-top:6px;
-}
-.pkg__list{display:grid;gap:11px;margin:24px 0 28px;padding-top:24px;border-top:1px solid var(--line);flex:1}
-.pkg__list li{display:flex;align-items:flex-start;gap:11px;font-size:.9rem;color:var(--ink-2)}
-.pkg__list .ico{
-  width:19px;height:19px;padding:3px;border-radius:50%;
-  background:#d5f4f2;color:var(--b-700);margin-top:3px;flex:none;
-}
-.pkg--featured{
-  background:var(--grad);border-color:transparent;color:#fff;
-  box-shadow:0 40px 76px -34px rgba(11,130,150,.72);
-  transform:scale(1.03);
-}
-.pkg--featured:hover{transform:scale(1.03) translateY(-5px)}
-.pkg--featured .pkg__name,.pkg--featured .pkg__price{color:#fff}
-.pkg--featured .pkg__for,.pkg--featured .pkg__list li{color:#e0f8f7}
-.pkg--featured .pkg__price span{color:#bdefec}
-.pkg--featured .pkg__list{border-top-color:rgba(255,255,255,.28)}
-.pkg--featured .pkg__list .ico{background:rgba(255,255,255,.22);color:#fff}
-.pkg__flag{
-  position:absolute;top:-14px;left:50%;transform:translateX(-50%);
-  background:var(--b-950);color:#7ff0e4;font-family:var(--f-display);font-weight:600;
-  font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
-  padding:7px 16px;border-radius:5px;white-space:nowrap;
-}
-.packages__note{
-  max-width:640px;margin:clamp(30px,3.5vw,44px) auto 0;text-align:center;
-  font-size:.87rem;color:var(--muted-2);
-}
 
 /* ---------- 16. How it works ---------- */
 .works{position:relative;overflow:hidden;background:linear-gradient(180deg,#ffffff 0%,#f6fcfd 100%)}
@@ -1278,10 +1211,6 @@ address{font-style:normal}
   .locale__tel{width:100%;padding-top:6px}
   .split--reverse .split__media{order:0}
   .band__inner{grid-template-columns:minmax(0,1fr)}
-  .support__grid{grid-template-columns:minmax(0,1fr)}
-  .packages__grid{grid-template-columns:minmax(0,1fr);max-width:520px;margin-inline:auto}
-  .pkg--featured{transform:none}
-  .pkg--featured:hover{transform:translateY(-5px)}
   .steps{grid-template-columns:minmax(0,1fr)}
   .step:not(:last-child)::after{display:none}
   .finale__inner{grid-template-columns:minmax(0,1fr)}
