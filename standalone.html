@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- BUILD 2026-09-01-d78c716 · hero: light two-column with wave -->
+<!-- BUILD 2026-09-02-1e80e33 · hero: light two-column with wave -->
 <html lang="en-MY">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="build" content="2026-09-01-d78c716">
+<meta name="build" content="2026-09-02-1e80e33">
 <title>Ad Aircond Solution | Aircond Repair, Servicing &amp; Installation in Kuala Lumpur</title>
 <meta name="description" content="Ad Aircond Solution provides air conditioning repair, servicing, maintenance and installation for homes and businesses in Kuala Lumpur. Based at Titiwangsa Central. Call +60 17-857 0744.">
 <meta name="theme-color" content="#0c8a99">
@@ -589,10 +589,151 @@ address{font-style:normal}
 .frame__badge span strong{color:#fff}
 .frame__badge span{font-size:.78rem;line-height:1.45}
 
+
+/* ---------- About Us ---------- */
+.aboutus{position:relative;overflow:hidden;background:#fff}
+/* restrained cooling motifs, kept to the edges */
+.aboutus__deco{
+  position:absolute;inset:auto 0 0 0;height:220px;z-index:0;pointer-events:none;opacity:.5;
+  background:
+    radial-gradient(38% 60% at 4% 92%,rgba(95,212,228,.16),transparent 70%),
+    radial-gradient(34% 56% at 97% 88%,rgba(95,212,228,.14),transparent 70%);
+}
+.aboutus>.wrap{position:relative;z-index:1}
+
+.aboutus__grid{
+  display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);
+  gap:clamp(28px,3.6vw,56px);align-items:stretch;
+}
+
+.aboutus__media{position:relative;display:flex}
+.aboutus__photo{
+  flex:1;min-height:clamp(420px,42vw,620px);
+  border-radius:clamp(14px,1.6vw,20px);overflow:hidden;
+  border:1px solid var(--line);
+  box-shadow:0 34px 70px -34px rgba(15,39,64,.4);
+  /* Add the photograph as assets/img/about.webp, then change this one line to
+     --photo:url("../img/about.webp"); the illustration below stays as fallback.
+     Left as none for now so a file that does not exist is not requested. */
+  --photo:none;
+  background-image:var(--photo),url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAwIDEwMDAiIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjEwMDAiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iU3BsaXQgYWlyIGNvbmRpdGlvbmVyIGNvb2xpbmcgYSBtb2Rlcm4gbGl2aW5nIHJvb20gd2l0aCBhIEt1YWxhIEx1bXB1ciBza3lsaW5lIHZpZXciPgogIDxkZWZzPgogICAgPGxpbmVhckdyYWRpZW50IGlkPSJpV2FsbCIgeDE9IjAiIHkxPSIwIiB4Mj0iMC4zIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZWFmN2Y5Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjY2ZlN2VjIi8+PC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iaUFjY2VudCIgeDE9IjAiIHkxPSIwIiB4Mj0iMCIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzBmOGVhMCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzBiNjU3NyIvPjwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImlVbml0IiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjZmZmZmZmIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZDNlN2VjIi8+PC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iaUZsb3ciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIwLjYiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzVjZTZkYyIgc3RvcC1vcGFjaXR5PSIwLjkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM1Y2U2ZGMiIHN0b3Atb3BhY2l0eT0iMCIvPjwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImlTb2ZhIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMGQ3YThkIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMDc1MDVmIi8+PC9saW5lYXJHcmFkaWVudD4KICAgIDxsaW5lYXJHcmFkaWVudCBpZD0iaVNreSIgeDE9IjAiIHkxPSIwIiB4Mj0iMCIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2JmZjBmNyIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzdmZDhlNCIvPjwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImlGbG9vckciIHgxPSIwIiB5MT0iMCIgeDI9IjAiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiNiN2Q2ZGQiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM5M2JjYzYiLz48L2xpbmVhckdyYWRpZW50PgogICAgPHJhZGlhbEdyYWRpZW50IGlkPSJpQ29vbCIgY3g9IjAuMyIgY3k9IjAuMjQiIHI9IjAuNDYiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzdmZjBlNCIgc3RvcC1vcGFjaXR5PSIwLjU1Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjN2ZmMGU0IiBzdG9wLW9wYWNpdHk9IjAiLz48L3JhZGlhbEdyYWRpZW50PgogICAgPGZpbHRlciBpZD0iaVNvZnQiIHg9Ii00MCUiIHk9Ii00MCUiIHdpZHRoPSIxODAlIiBoZWlnaHQ9IjE4MCUiPjxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjE4Ii8+PC9maWx0ZXI+CiAgPC9kZWZzPgoKICA8cmVjdCB3aWR0aD0iMTIwMCIgaGVpZ2h0PSIxMDAwIiBmaWxsPSJ1cmwoI2lXYWxsKSIvPgogIDwhLS0gZGVlcGVyIGFjY2VudCB3YWxsIGJlaGluZCB0aGUgdW5pdCAtLT4KICA8cGF0aCBkPSJNMCAwaDYyMHY3NjBIMHoiIGZpbGw9InVybCgjaUFjY2VudCkiIG9wYWNpdHk9IjAuMTQiLz4KICA8cmVjdCB5PSI3NjAiIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjI0MCIgZmlsbD0idXJsKCNpRmxvb3JHKSIvPgogIDxwYXRoIGQ9Ik0wIDc2MGgxMjAwdjZIMHoiIGZpbGw9IiNmZmZmZmYiIG9wYWNpdHk9IjAuNyIvPgogIDxlbGxpcHNlIGN4PSIzNjAiIGN5PSIyNTAiIHJ4PSI0NzAiIHJ5PSIzMzAiIGZpbGw9InVybCgjaUNvb2wpIi8+CgogIDwhLS0gd2luZG93IHdpdGggS0wgc2t5bGluZSAtLT4KICA8Zz4KICAgIDxyZWN0IHg9IjcxNiIgeT0iMTE2IiB3aWR0aD0iMzkyIiBoZWlnaHQ9IjQ4MCIgcng9IjE0IiBmaWxsPSJ1cmwoI2lTa3kpIi8+CiAgICA8ZyBmaWxsPSIjNGZiNmM4IiBvcGFjaXR5PSIwLjY1Ij4KICAgICAgPHJlY3QgeD0iNzQyIiB5PSIzODAiIHdpZHRoPSI1MiIgaGVpZ2h0PSIyMTYiLz4KICAgICAgPHJlY3QgeD0iODA2IiB5PSIzMzAiIHdpZHRoPSIzOCIgaGVpZ2h0PSIyNjYiLz4KICAgICAgPHBhdGggZD0iTTg2OCA1OTZWMzAwbDIyLTU4IDIyIDU4djI5NnoiLz4KICAgICAgPHJlY3QgeD0iOTI4IiB5PSIzNTYiIHdpZHRoPSI0NiIgaGVpZ2h0PSIyNDAiLz4KICAgICAgPHJlY3QgeD0iOTg4IiB5PSI0MDQiIHdpZHRoPSI2MCIgaGVpZ2h0PSIxOTIiLz4KICAgICAgPHJlY3QgeD0iMTA1OCIgeT0iMzQyIiB3aWR0aD0iMzQiIGhlaWdodD0iMjU0Ii8+CiAgICA8L2c+CiAgICA8cmVjdCB4PSI3MTYiIHk9IjExNiIgd2lkdGg9IjM5MiIgaGVpZ2h0PSI0ODAiIHJ4PSIxNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZWVmOGZhIiBzdHJva2Utd2lkdGg9IjE0Ii8+CiAgICA8cGF0aCBkPSJNOTEyIDExNnY0ODBNNzE2IDM1NmgzOTIiIHN0cm9rZT0iI2VlZjhmYSIgc3Ryb2tlLXdpZHRoPSIxMiIvPgogIDwvZz4KCiAgPCEtLSBhaXJmbG93IC0tPgogIDxnIGZpbGw9Im5vbmUiIHN0cm9rZT0idXJsKCNpRmxvdykiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+CiAgICA8cGF0aCBkPSJNNDQ4IDI4NmMxMDggMzIgMjA4IDM4IDMxMiAyMCIgc3Ryb2tlLXdpZHRoPSIxNSIvPgogICAgPHBhdGggZD0iTTQ0OCAzMzZjMTMyIDYyIDI2OCA4MiA0MDAgNjIiIHN0cm9rZS13aWR0aD0iMTEiIG9wYWNpdHk9IjAuNzgiLz4KICAgIDxwYXRoIGQ9Ik00NDggMzg2YzExMiA5MiAyNTQgMTQyIDM4NiAxNDgiIHN0cm9rZS13aWR0aD0iOCIgb3BhY2l0eT0iMC41NSIvPgogIDwvZz4KCiAgPCEtLSBpbmRvb3Igc3BsaXQgdW5pdCAtLT4KICA8Zz4KICAgIDxyZWN0IHg9IjEyOCIgeT0iMjA2IiB3aWR0aD0iMzIyIiBoZWlnaHQ9IjExNCIgcng9IjI2IiBmaWxsPSIjMDYzNzQ0IiBvcGFjaXR5PSIwLjIyIiBmaWx0ZXI9InVybCgjaVNvZnQpIi8+CiAgICA8cmVjdCB4PSIxMjIiIHk9IjE5MiIgd2lkdGg9IjMyMiIgaGVpZ2h0PSIxMTQiIHJ4PSIyNSIgZmlsbD0idXJsKCNpVW5pdCkiLz4KICAgIDxyZWN0IHg9IjEyMiIgeT0iMTkyIiB3aWR0aD0iMzIyIiBoZWlnaHQ9IjExNCIgcng9IjI1IiBmaWxsPSJub25lIiBzdHJva2U9IiM5ZmM0Y2MiIHN0cm9rZS13aWR0aD0iMyIvPgogICAgPHBhdGggZD0iTTE0NiAyNzBoMjc0IiBzdHJva2U9IiNhOWNiZDIiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgICA8cGF0aCBkPSJNMTU0IDI4OGgyNThhMTYgMTYgMCAwIDAgMTQtMjNIMTQwYTE2IDE2IDAgMCAwIDE0IDIzeiIgZmlsbD0iI2UwZjBmMyIvPgogICAgPGNpcmNsZSBjeD0iNDA2IiBjeT0iMjM0IiByPSI3LjUiIGZpbGw9IiMxNGJkYjgiLz4KICAgIDxyZWN0IHg9IjE1MiIgeT0iMjI0IiB3aWR0aD0iNzQiIGhlaWdodD0iMTAiIHJ4PSI1IiBmaWxsPSIjZDNlOGVjIi8+CiAgPC9nPgoKICA8IS0tIHNvZmEgLS0+CiAgPGc+CiAgICA8cmVjdCB4PSIxNTAiIHk9IjU4OCIgd2lkdGg9IjQ4MCIgaGVpZ2h0PSIzNiIgcng9IjE4IiBmaWxsPSIjMDc1MDVmIi8+CiAgICA8cmVjdCB4PSIxNjAiIHk9IjQ2OCIgd2lkdGg9IjQ2MCIgaGVpZ2h0PSIxMzYiIHJ4PSIyOCIgZmlsbD0idXJsKCNpU29mYSkiLz4KICAgIDxyZWN0IHg9IjE5OCIgeT0iNTAwIiB3aWR0aD0iMTg0IiBoZWlnaHQ9IjEwMCIgcng9IjE4IiBmaWxsPSIjMTJhOWJkIi8+CiAgICA8cmVjdCB4PSI0MDAiIHk9IjUwMCIgd2lkdGg9IjE4NCIgaGVpZ2h0PSIxMDAiIHJ4PSIxOCIgZmlsbD0iIzEyYTliZCIvPgogICAgPHJlY3QgeD0iMjI4IiB5PSI1MjIiIHdpZHRoPSI3MCIgaGVpZ2h0PSI1NiIgcng9IjEyIiBmaWxsPSIjN2ZlM2RjIiBvcGFjaXR5PSIwLjg1Ii8+CiAgICA8cGF0aCBkPSJNMTgyIDYyNHY1OE02MDAgNjI0djU4IiBzdHJva2U9IiMwNjNmNGMiIHN0cm9rZS13aWR0aD0iMTciIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDwvZz4KCiAgPCEtLSBzaWRlIHRhYmxlICsgbGFtcCAtLT4KICA8Zz4KICAgIDxyZWN0IHg9IjY3NiIgeT0iNjI2IiB3aWR0aD0iMTg4IiBoZWlnaHQ9IjE3IiByeD0iOCIgZmlsbD0iIzBjNmQ4MCIvPgogICAgPHBhdGggZD0iTTY5OCA2NDN2NDZNODQyIDY0M3Y0NiIgc3Ryb2tlPSIjMGM2ZDgwIiBzdHJva2Utd2lkdGg9IjEzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICAgIDxjaXJjbGUgY3g9Ijc3MCIgY3k9IjU5MiIgcj0iMzAiIGZpbGw9IiM3ZmUzZGMiLz4KICAgIDxwYXRoIGQ9Ik03NTIgNjIyaDM2djhoLTM2eiIgZmlsbD0iIzBjNmQ4MCIvPgogIDwvZz4KCiAgPCEtLSBwbGFudCAtLT4KICA8Zz4KICAgIDxwYXRoIGQ9Ik0xMDEwIDc2MFY2NDgiIHN0cm9rZT0iIzBkN2E4ZCIgc3Ryb2tlLXdpZHRoPSIxMSIvPgogICAgPHBhdGggZD0iTTEwMTAgNjc2Yy00OC0xOC02Ni02NC02MC0xMTIgNDggOCA3NCA1MiA2MCAxMTJ6TTEwMTAgNjY0YzQ4LTIyIDYyLTcwIDUyLTExNi00OCAxMi02OCA1Ni01MiAxMTZ6IiBmaWxsPSIjMTJhOWJkIi8+CiAgICA8cGF0aCBkPSJNOTY0IDc1OGg5MmwtMTQgODBoLTY0eiIgZmlsbD0iIzA3NTA1ZiIvPgogIDwvZz4KPC9zdmc+Cg==");
+  background-size:cover,cover;
+  background-position:center,center;
+  background-repeat:no-repeat,no-repeat;
+}
+
+/* eyebrow with the rule under it */
+.kicker{
+  font-family:var(--f-display);font-weight:700;font-size:.78rem;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--b-700);
+  padding-bottom:10px;margin-bottom:22px;position:relative;
+}
+.kicker::after{
+  content:"";position:absolute;left:0;bottom:0;width:64px;height:3px;border-radius:2px;background:var(--b-500);
+}
+
+.aboutus__title{
+  font-size:clamp(1.9rem,1rem + 2.6vw,2.9rem);
+  font-weight:700;line-height:1.14;letter-spacing:-.035em;color:var(--navy);
+}
+.aboutus__title em{
+  font-style:normal;
+  background:linear-gradient(96deg,#17b9c4,#0d9aa8 55%,#0b8aa0);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.aboutus__lede{
+  margin-top:20px;max-width:600px;
+  font-size:clamp(.97rem,.94rem + .2vw,1.04rem);line-height:1.75;color:var(--muted);
+}
+
+/* identity cards */
+.idcards{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(14px,1.6vw,20px);margin-top:clamp(26px,3vw,36px);
+}
+.idcard{
+  background:#fff;border:1px solid var(--line);border-radius:var(--r-xl);
+  padding:clamp(20px,2vw,26px);box-shadow:0 18px 40px -26px rgba(15,39,64,.28);
+  transition:transform .3s cubic-bezier(.3,.8,.4,1),box-shadow .3s ease,border-color .3s ease;
+}
+.idcard:hover{transform:translateY(-4px);box-shadow:0 26px 54px -28px rgba(15,39,64,.34);border-color:var(--b-200)}
+.idcard__icon{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:52px;height:52px;border-radius:50%;margin-bottom:16px;
+  background:#fff;border:1.5px solid var(--b-200);color:var(--b-600);
+}
+.idcard__icon .ico{width:24px;height:24px}
+.idcard__title{
+  font-family:var(--f-display);font-weight:600;font-size:1.06rem;
+  color:var(--navy);margin-bottom:9px;
+}
+.idcard__text{font-size:.875rem;line-height:1.68;color:var(--muted)}
+
+/* location identity banner — presence, not a call to action */
+.locale{
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;gap:clamp(16px,2vw,26px);
+  margin-top:clamp(16px,1.8vw,22px);
+  padding:clamp(20px,2vw,26px);
+  border-radius:var(--r-xl);border:1px solid rgba(20,189,184,.16);
+  background:linear-gradient(100deg,#eefafd 0%,#e6f6fb 46%,#dff2fa 100%);
+}
+.locale__skyline{
+  position:absolute;right:0;bottom:0;height:100%;width:min(48%,340px);
+  color:#8fc9de;opacity:.42;pointer-events:none;
+}
+.locale__pin{
+  position:relative;display:inline-flex;align-items:center;justify-content:center;flex:none;
+  width:44px;height:44px;border-radius:50%;background:#fff;color:var(--b-600);
+  box-shadow:0 8px 20px -12px rgba(15,39,64,.4);
+}
+.locale__where{position:relative;flex:1;min-width:0}
+.locale__where strong{
+  display:block;font-family:var(--f-display);font-weight:600;font-size:1rem;
+  color:var(--navy);line-height:1.35;margin-bottom:6px;
+}
+.locale__where address{font-size:.82rem;line-height:1.6;color:var(--muted);max-width:34ch}
+.locale__tel{
+  position:relative;display:inline-flex;align-items:center;gap:11px;flex:none;
+  font-family:var(--f-display);font-weight:600;font-size:1.02rem;color:var(--navy);
+  transition:color .2s ease;
+}
+.locale__tel:hover{color:var(--b-700)}
+.locale__tel-icon{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:40px;height:40px;border-radius:50%;background:#fff;color:var(--b-600);
+  box-shadow:0 8px 20px -12px rgba(15,39,64,.4);
+}
+
+/* scope strip */
+.scope{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  margin-top:clamp(34px,4vw,54px);
+  padding:clamp(20px,2.2vw,28px) clamp(14px,2vw,26px);
+  border-radius:var(--r-xl);border:1px solid var(--line-2);
+  background:linear-gradient(100deg,#f8fdfe,#eef8fc);
+}
+.scope li{
+  display:flex;align-items:flex-start;gap:14px;
+  padding-inline:clamp(12px,1.6vw,24px);
+}
+.scope li+li{border-left:1px solid rgba(17,42,63,.09)}
+.scope__icon{
+  display:inline-flex;align-items:center;justify-content:center;flex:none;
+  width:48px;height:48px;border-radius:50%;
+  background:#fff;border:1.5px solid var(--b-200);color:var(--b-600);
+}
+.scope__icon .ico{width:22px;height:22px}
+.scope strong{
+  display:block;font-family:var(--f-display);font-weight:600;font-size:.97rem;
+  color:var(--navy);margin-bottom:5px;line-height:1.3;
+}
+.scope span span,.scope li>span:last-child{font-size:.83rem;line-height:1.6;color:var(--muted)}
+
 /* ---------- 10. Promotional band ---------- */
 .band{
   position:relative;isolation:isolate;overflow:hidden;
-  padding:clamp(64px,7vw,100px) 0 clamp(110px,11vw,150px);
+  padding:clamp(64px,7vw,100px) 0;
   background:var(--b-800);
 }
 .band__media{
@@ -617,19 +758,6 @@ address{font-style:normal}
 .band__points .ico{color:#7ff0e4;margin-top:3px;width:23px;height:23px}
 .band__points strong{display:block;font-family:var(--f-display);font-weight:600;color:#fff;font-size:.98rem}
 .band__points span{font-size:.87rem;color:#c4e7ec;line-height:1.6}
-
-/* ---------- 11. Trust strip (overlaps band) ---------- */
-.trust{position:relative;z-index:4;margin-top:clamp(-96px,-7vw,-64px);padding-bottom:clamp(56px,6vw,84px)}
-.trust__grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,1.6vw,22px)}
-.tcard{
-  background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);
-  padding:clamp(22px,2.2vw,30px);box-shadow:var(--sh-md);
-  transition:transform .3s ease,box-shadow .3s ease;
-}
-.tcard:hover{transform:translateY(-5px);box-shadow:var(--sh-lg)}
-.tcard__icon{width:48px;height:48px;border-radius:10px;margin-bottom:14px}
-.tcard__title{font-size:1.03rem;margin-bottom:7px}
-.tcard__text{font-size:.89rem;line-height:1.6}
 
 /* ---------- 12. Services bento ---------- */
 .bento{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,1.6vw,22px)}
@@ -943,6 +1071,10 @@ address{font-style:normal}
   .hero__wave{height:clamp(80px,11vw,150px)}
 
   .split{grid-template-columns:minmax(0,1fr);gap:44px}
+  .aboutus__grid{grid-template-columns:minmax(0,1fr);gap:34px}
+  .aboutus__photo{min-height:0;aspect-ratio:4/3}
+  .locale{flex-wrap:wrap}
+  .locale__tel{width:100%;padding-top:6px}
   .split--reverse .split__media{order:0}
   .band__inner{grid-template-columns:minmax(0,1fr)}
   .support__grid{grid-template-columns:minmax(0,1fr)}
@@ -958,7 +1090,6 @@ address{font-style:normal}
 
 @media (max-width:1120px){
   .bento{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .trust__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 
 /* the USP cards need room for the icon, title and arrow */
@@ -978,6 +1109,11 @@ address{font-style:normal}
   .trustrow strong{white-space:normal}
   .trustrow li+li{border-left:0}
   .brands__wall{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .idcards{grid-template-columns:minmax(0,1fr)}
+  .scope{grid-template-columns:minmax(0,1fr);gap:22px}
+  .scope li{padding-inline:0}
+  .scope li+li{border-left:0;border-top:1px solid rgba(17,42,63,.09);padding-top:22px}
+  .locale__skyline{width:60%;opacity:.28}
   .frame{aspect-ratio:4/3}
   .frame__chip{left:12px;right:12px;bottom:14px;max-width:none}
   .frame__chip--right{left:12px;right:12px}
@@ -1011,7 +1147,6 @@ address{font-style:normal}
 
 @media (max-width:520px){
   .bento{grid-template-columns:minmax(0,1fr)}
-  .trust__grid{grid-template-columns:minmax(0,1fr)}
   .hero__actions .btn{width:100%}
   .hero__title{letter-spacing:-.03em}
   .split__actions .btn{width:100%}
@@ -1072,6 +1207,9 @@ address{font-style:normal}
   <symbol id="i-mouse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2.8" width="8" height="18.4" rx="4"/><path d="M12 7v3"/></symbol>
   <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.2" y="3.2" width="7.2" height="7.2" rx="2"/><rect x="13.6" y="3.2" width="7.2" height="7.2" rx="2"/><rect x="3.2" y="13.6" width="7.2" height="7.2" rx="2"/><rect x="13.6" y="13.6" width="7.2" height="7.2" rx="2"/></symbol>
   <symbol id="i-badge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.6 14.3 5l3.3-.3.5 3.3 2.7 1.9-1.6 2.9 1.6 2.9-2.7 1.9-.5 3.3-3.3-.3L12 22.6 9.7 20.2l-3.3.3-.5-3.3L3.2 15.3l1.6-2.9-1.6-2.9L5.9 7.6l.5-3.3 3.3.3z"/><path d="m9 12.2 2.1 2.1L15.4 10"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.4"/><path d="M2.8 20.2a6.2 6.2 0 0 1 12.4 0"/><path d="M16.2 5.2a3.4 3.4 0 0 1 0 6.6"/><path d="M17.6 14.6a6.2 6.2 0 0 1 3.6 5.6"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.6"/><circle cx="12" cy="12" r="4.8"/><circle cx="12" cy="12" r="1.3"/><path d="M18.4 5.6 21.6 2.4M17.4 2.6l.4 3.6 3.6.4"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.4S3.6 15.2 3.6 9.4a4.6 4.6 0 0 1 8.4-2.6 4.6 4.6 0 0 1 8.4 2.6c0 5.8-8.4 11-8.4 11z"/></symbol>
   <symbol id="i-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9.5 6 6 6-6"/></symbol>
 </svg>
 
@@ -1260,41 +1398,79 @@ address{font-style:normal}
   </div>
 </section>
 
-<!-- ============ ABOUT / VALUE PROPOSITION ============ -->
-<section class="section about" id="about">
-  <div class="wrap split">
-    <div class="split__copy reveal">
-      <p class="eyebrow"><span class="eyebrow__dot"></span>Who we are</p>
-      <h2 class="h2">Aircond solutions for homes and businesses across Kuala Lumpur</h2>
-      <p class="lede">Ad Aircond Solution is an air conditioning service company working out of Titiwangsa Central in Kuala Lumpur. We cover wall-mounted splits in condos and terrace houses, and the multi-unit systems running in offices, clinics and retail lots.</p>
-      <p class="body">Most jobs reach us the same way: a unit that no longer cools the way it did. We check airflow, drainage, the electrical side and the refrigerant circuit before recommending anything, so the work you pay for addresses the actual fault instead of replacing parts on a guess.</p>
-      <ul class="ticks">
-        <li><svg class="ico" aria-hidden="true"><use href="#i-check"></use></svg>Residential aircond for condos, apartments and landed homes</li>
-        <li><svg class="ico" aria-hidden="true"><use href="#i-check"></use></svg>Commercial aircond for offices, shops and clinics</li>
-        <li><svg class="ico" aria-hidden="true"><use href="#i-check"></use></svg>Repair, troubleshooting and fault diagnosis</li>
-        <li><svg class="ico" aria-hidden="true"><use href="#i-check"></use></svg>Scheduled servicing and preventive maintenance</li>
-        <li><svg class="ico" aria-hidden="true"><use href="#i-check"></use></svg>New installation and unit relocation</li>
-      </ul>
-      <div class="split__actions">
-        <a class="btn btn--primary" href="#contact">Arrange AC Service<svg class="ico" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
-        <a class="btn btn--ghost" href="#services">Browse all services</a>
-      </div>
+<!-- ============ ABOUT US ============ -->
+<section class="section aboutus" id="about">
+  <div class="aboutus__deco" aria-hidden="true"></div>
+
+  <div class="wrap aboutus__grid">
+    <div class="aboutus__media reveal">
+      <div class="aboutus__photo"></div>
     </div>
 
-    <div class="split__media reveal" data-delay="1">
-      <div class="frame frame--interior"></div>
-      <div class="frame__chip">
-        <span class="frame__chip-icon"><svg class="ico" aria-hidden="true"><use href="#i-pin"></use></svg></span>
-        <span>
-          <strong>Based in Kuala Lumpur</strong>
-          Titiwangsa Central, 50400 KL
-        </span>
+    <div class="aboutus__copy reveal" data-delay="1">
+      <p class="kicker">About Us</p>
+
+      <h2 class="aboutus__title">Built on Service.<br><em>Driven by Comfort.</em></h2>
+
+      <p class="aboutus__lede">Ad Aircond Solution provides professional air-conditioning repair, servicing, maintenance and installation for homes and businesses across Kuala Lumpur. We combine skilled workmanship, practical solutions and genuine care to keep every space cool, efficient and comfortable.</p>
+
+      <div class="idcards">
+        <article class="idcard">
+          <span class="idcard__icon"><svg class="ico" aria-hidden="true"><use href="#i-users"></use></svg></span>
+          <h3 class="idcard__title">Our Story</h3>
+          <p class="idcard__text">Ad Aircond Solution was created with a simple goal — providing dependable air-conditioning solutions with honest service, careful workmanship and respect for every customer&rsquo;s space.</p>
+        </article>
+        <article class="idcard">
+          <span class="idcard__icon"><svg class="ico" aria-hidden="true"><use href="#i-target"></use></svg></span>
+          <h3 class="idcard__title">Our Mission</h3>
+          <p class="idcard__text">Our mission is to deliver reliable cooling solutions through professional service, clear communication and customer-focused care.</p>
+        </article>
       </div>
-      <div class="frame__badge">
-        <svg class="ico" aria-hidden="true"><use href="#i-therm"></use></svg>
-        <span><strong>Diagnosis first</strong>Then the quote</span>
+
+      <div class="locale">
+        <svg class="locale__skyline" viewBox="0 0 420 130" preserveAspectRatio="xMaxYMax slice" aria-hidden="true" focusable="false">
+          <g fill="currentColor">
+            <path d="M18 130V78h26v52zM52 130V62h20v68zM322 130V86h22v44zM352 130V70h18v60zM378 130V92h24v38z" opacity=".5"/>
+            <path d="M96 130V54h30v76zM272 130V60h28v70z" opacity=".65"/>
+            <!-- KL Tower -->
+            <path d="M232 130v-46h10V64l-9-6h20l-9 6v20h10v46z" opacity=".8"/>
+            <ellipse cx="237" cy="58" rx="15" ry="7" opacity=".8"/>
+            <path d="M236 44h3v9h-3z" opacity=".8"/>
+            <!-- Petronas Twin Towers -->
+            <path d="M150 130V44l7-9 7 9v86zM186 130V44l7-9 7 9v86z" opacity=".9"/>
+            <path d="M155.5 22h3v14h-3zM191.5 22h3v14h-3z" opacity=".9"/>
+            <path d="M164 74h22v7h-22z" opacity=".9"/>
+          </g>
+        </svg>
+
+        <span class="locale__pin"><svg class="ico" aria-hidden="true"><use href="#i-pin"></use></svg></span>
+        <div class="locale__where">
+          <strong>Serving Homes &amp; Businesses Across Kuala Lumpur</strong>
+          <address>14, Jalan Batu Bata, Titiwangsa Central, 50400 Kuala Lumpur, Wilayah Persekutuan Kuala Lumpur</address>
+        </div>
+        <a class="locale__tel" href="tel:+60178570744">
+          <span class="locale__tel-icon"><svg class="ico" aria-hidden="true"><use href="#i-phone"></use></svg></span>
+          +60178570744
+        </a>
       </div>
     </div>
+  </div>
+
+  <div class="wrap">
+    <ul class="scope reveal">
+      <li>
+        <span class="scope__icon"><svg class="ico" aria-hidden="true"><use href="#i-building"></use></svg></span>
+        <span><strong>Residential &amp; Commercial</strong>Solutions designed for homes, offices, shops and business spaces.</span>
+      </li>
+      <li>
+        <span class="scope__icon"><svg class="ico" aria-hidden="true"><use href="#i-wrench"></use></svg></span>
+        <span><strong>Repair to Installation</strong>Complete air-conditioning solutions from inspection to installation.</span>
+      </li>
+      <li>
+        <span class="scope__icon"><svg class="ico" aria-hidden="true"><use href="#i-heart"></use></svg></span>
+        <span><strong>Careful Service Approach</strong>We treat every job with attention, cleanliness and respect.</span>
+      </li>
+    </ul>
   </div>
 </section>
 
@@ -1316,32 +1492,6 @@ address{font-style:normal}
       <li><svg class="ico" aria-hidden="true"><use href="#i-drop"></use></svg><span><strong>Drainage kept clear</strong>Blocked drain lines are the usual reason water ends up on your wall.</span></li>
       <li><svg class="ico" aria-hidden="true"><use href="#i-gauge"></use></svg><span><strong>Faults caught early</strong>Small issues get flagged before they turn into a compressor problem.</span></li>
     </ul>
-  </div>
-</section>
-
-<!-- ============ TRUST STRIP ============ -->
-<section class="trust" aria-label="Why customers work with us">
-  <div class="wrap trust__grid">
-    <article class="tcard reveal">
-      <span class="tcard__icon"><svg class="ico" aria-hidden="true"><use href="#i-building"></use></svg></span>
-      <h3 class="tcard__title">Residential &amp; commercial</h3>
-      <p class="tcard__text">Condos, landed homes, offices, shoplots and clinics.</p>
-    </article>
-    <article class="tcard reveal" data-delay="1">
-      <span class="tcard__icon"><svg class="ico" aria-hidden="true"><use href="#i-tools"></use></svg></span>
-      <h3 class="tcard__title">Complete AC solutions</h3>
-      <p class="tcard__text">Repair, servicing, maintenance and installation from one team.</p>
-    </article>
-    <article class="tcard reveal" data-delay="2">
-      <span class="tcard__icon"><svg class="ico" aria-hidden="true"><use href="#i-gauge"></use></svg></span>
-      <h3 class="tcard__title">Diagnosis before quote</h3>
-      <p class="tcard__text">We identify what is wrong before recommending the work.</p>
-    </article>
-    <article class="tcard reveal" data-delay="3">
-      <span class="tcard__icon"><svg class="ico" aria-hidden="true"><use href="#i-pin"></use></svg></span>
-      <h3 class="tcard__title">Kuala Lumpur based</h3>
-      <p class="tcard__text">Working from Titiwangsa Central, serving customers across KL.</p>
-    </article>
   </div>
 </section>
 

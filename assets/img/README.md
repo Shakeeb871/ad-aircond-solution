@@ -15,6 +15,15 @@ left third quiet enough for dark text. `background-position` is `center top` on 
 `72% center` once the layout stacks — adjust those two values in `.hero__photo` if a new shot
 sits differently.
 
+## The About Us photograph
+
+Two technicians servicing a wall-mounted split unit in a bright modern living room, portrait or
+square — the panel is tall and sits beside the copy.
+
+Add it as `about.webp`, then in `.aboutus__photo` change `--photo:none` to
+`--photo:url("../img/about.webp")`. Until then the panel shows the illustration from
+`assets/media/interior.svg`.
+
 ## Other image slots
 
 The remaining artwork is illustration and lives in `assets/media/`. To replace any of it with
