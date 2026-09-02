@@ -101,6 +101,24 @@ fallback if a photo ever fails to load.
 710 CSS px, so the file has enough resolution for a 2x screen. The
 `interior.svg` illustration stays as the fallback.
 
+## Our Approach photograph — in use
+
+`approach.webp` fills `.frame--workshop`. It is the photograph cropped out of
+the supplied poster (`approach-poster.webp`), taken from the region clear of
+every text overlay: the technician working at the indoor unit.
+
+The poster itself is not placed anywhere. Its headline and its three cards
+(Experienced Technicians / Practical Recommendations / Quality Workmanship)
+say the same thing this section already renders as real HTML, so using it
+whole would print that text twice — and text baked into an image cannot
+reflow, so on a phone the poster's body copy would be too small to read and
+search engines could not read any of it.
+
+`approach.webp` is only 300x250, because that is how large the clean area of
+the poster is. It renders up to 710px wide, so it is soft. Replacing it with
+the original photograph — no text overlay, 1200px wide or more, 6:5 crop —
+under the same name fixes that with no code change.
+
 ## Resolution notes
 
 Background images scale to whatever the layout gives them, so the only
@@ -114,6 +132,7 @@ quality limit is the source file. Measured widest render, against what a 2x
 | `deco-split-unit`  |          600 |           300 |      600 | fine           |
 | `hero.webp`        |         1672 |          1920 |     3840 | short on wide screens |
 | `svc-*.webp`       |          600 |           340 |      680 | slightly short |
+| `approach.webp`    |          300 |           710 |     1420 | short          |
 | `step-*.webp`      |          600 |           330 |      660 | slightly short |
 
 To sharpen the last three, re-export the originals larger and drop them in
