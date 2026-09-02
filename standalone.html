@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- BUILD 2026-09-02-1e80e33 · hero: light two-column with wave -->
+<!-- BUILD 2026-09-02-4ab9f9a · hero: light two-column with wave -->
 <html lang="en-MY">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="build" content="2026-09-02-1e80e33">
+<meta name="build" content="2026-09-02-4ab9f9a">
 <title>Ad Aircond Solution | Aircond Repair, Servicing &amp; Installation in Kuala Lumpur</title>
 <meta name="description" content="Ad Aircond Solution provides air conditioning repair, servicing, maintenance and installation for homes and businesses in Kuala Lumpur. Based at Titiwangsa Central. Call +60 17-857 0744.">
 <meta name="theme-color" content="#0c8a99">
@@ -759,31 +759,78 @@ address{font-style:normal}
 .band__points strong{display:block;font-family:var(--f-display);font-weight:600;color:#fff;font-size:.98rem}
 .band__points span{font-size:.87rem;color:#c4e7ec;line-height:1.6}
 
-/* ---------- 12. Services bento ---------- */
-.bento{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,1.6vw,22px)}
-.scard{
-  position:relative;overflow:hidden;
-  background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);
-  padding:clamp(22px,2.2vw,30px);box-shadow:var(--sh-xs);
-  display:flex;flex-direction:column;
+/* ---------- 12. Services ---------- */
+.services{position:relative;overflow:hidden;background:linear-gradient(180deg,#f6fcfd 0%,#ffffff 46%)}
+.services>.wrap{position:relative;z-index:1}
+
+/* Decorative top corners — a floating split unit at upper right, leaves at
+   upper left. Both fade out before the tablet breakpoint. */
+.services__deco{position:absolute;z-index:0;pointer-events:none;opacity:.55}
+.services__deco--unit{top:clamp(18px,3vw,46px);right:clamp(-30px,-1vw,0px);width:clamp(180px,17vw,260px);height:auto}
+.services__deco--leaves{top:clamp(10px,2vw,34px);left:clamp(-22px,-1vw,-4px);width:clamp(130px,12vw,196px);height:auto}
+
+.services__head{max-width:880px}
+.services__title{color:var(--navy)}
+.services__title em{font-style:normal;color:var(--b-600)}
+.services__accent{
+  margin-top:10px;font-family:var(--f-display);font-weight:500;
+  font-size:.92rem;color:var(--b-700);
+}
+
+/* pill eyebrow */
+.pill{
+  display:inline-flex;align-items:center;
+  padding:6px 16px;margin-bottom:16px;border-radius:999px;
+  background:var(--b-100);color:var(--b-800);
+  font-family:var(--f-display);font-weight:600;
+  font-size:.74rem;letter-spacing:.13em;text-transform:uppercase;
+}
+
+/* short divider with a centred snowflake */
+.rule-ico{display:flex;align-items:center;justify-content:center;gap:12px;margin:18px 0 4px}
+.rule-ico__line{display:block;width:clamp(34px,5vw,54px);height:2px;border-radius:1px;background:linear-gradient(90deg,rgba(20,189,184,0),var(--b-300))}
+.rule-ico__line:last-child{background:linear-gradient(90deg,var(--b-300),rgba(20,189,184,0))}
+.rule-ico .ico{width:22px;height:22px;color:var(--b-400)}
+
+/* card grid — two rows of three */
+.svc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(22px,2.6vw,34px)}
+.svc{
+  position:relative;background:#fff;border:1px solid var(--line);
+  border-radius:var(--r-xl);box-shadow:var(--sh-sm);
+  display:flex;flex-direction:column;text-align:center;
   transition:transform .3s cubic-bezier(.3,.8,.4,1),box-shadow .3s ease,border-color .3s ease;
 }
-.scard::after{
-  content:"";position:absolute;inset:auto -40% -60% auto;width:180px;height:180px;border-radius:50%;
-  background:radial-gradient(circle,rgba(20,189,184,.16),transparent 70%);
-  opacity:0;transition:opacity .35s ease;
+.svc:hover{transform:translateY(-6px);box-shadow:var(--sh-md);border-color:var(--b-200)}
+
+.svc__media{
+  display:block;aspect-ratio:16/10;border-radius:calc(var(--r-xl) - 1px) calc(var(--r-xl) - 1px) var(--r) var(--r);
+  margin:7px 7px 0;background-color:var(--b-50);
+  background-size:cover;background-position:center;background-repeat:no-repeat;
+  box-shadow:inset 0 0 0 1px rgba(17,42,63,.045);
 }
-.scard:hover{transform:translateY(-6px);box-shadow:var(--sh-md);border-color:var(--b-200)}
-.scard:hover::after{opacity:1}
-.scard__icon{width:50px;height:50px;border-radius:10px;margin-bottom:16px}
-.scard__title{font-size:1.06rem;margin-bottom:9px;position:relative}
-.scard__text{font-size:.885rem;line-height:1.65;margin-bottom:18px;flex:1;position:relative}
-.scard__cta{
-  display:inline-flex;align-items:center;gap:7px;position:relative;
-  font-family:var(--f-display);font-weight:600;font-size:.83rem;color:var(--b-700);
+/* Each slot layers an optional photograph over the illustrated fallback.
+   Drop a photo at the named path and change --photo to url("...") to use it. */
+.svc__media--repair{--photo:none;background-image:var(--photo),url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNDAwIiByb2xlPSJpbWciIGFyaWEtaGlkZGVuPSJ0cnVlIj4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iYmdyIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+CjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2U4ZjhmOCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPgo8L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9InVuaXRyIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+CjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2VlZjdmOSIvPgo8L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9ImFjY3IiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMTdjOWJkIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMGI4Mjk2Ii8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjY0MCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjYmdyKSIvPgo8Y2lyY2xlIGN4PSIxMjAiIGN5PSI5MCIgcj0iMTIwIiBmaWxsPSIjZmZmZmZmIiBvcGFjaXR5PSIuNDUiLz4KPGNpcmNsZSBjeD0iNTQwIiBjeT0iMzIwIiByPSIxNTAiIGZpbGw9IiMwYjgyOTYiIG9wYWNpdHk9Ii4wNSIvPgo8cmVjdCB4PSIwIiB5PSIzMjIiIHdpZHRoPSI2NDAiIGhlaWdodD0iNzgiIGZpbGw9IiMwYjgyOTYiIG9wYWNpdHk9Ii4wNiIvPgo8cGF0aCBkPSJNMCAzMjIgSDY0MCIgc3Ryb2tlPSIjMGI4Mjk2IiBzdHJva2Utd2lkdGg9IjIiIG9wYWNpdHk9Ii4xMiIvPgoKPGc+CiAgPHJlY3QgeD0iMTUwIiB5PSI5NiIgd2lkdGg9IjI4NiIgaGVpZ2h0PSI4NiIgcng9IjE2IiBmaWxsPSJ1cmwoI3VuaXRyKSIgc3Ryb2tlPSIjY2ZlN2VjIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8cGF0aCBkPSJNMTUwIDE1NiBoMjg2IHYxMCBhMTYgMTYgMCAwIDEgLTE2IDE2IGgtMjU0IGExNiAxNiAwIDAgMSAtMTYgLTE2IHoiIGZpbGw9IiNkY2VkZjEiIG9wYWNpdHk9Ii43NSIvPgogIDxyZWN0IHg9IjE3MiIgeT0iMTE4IiB3aWR0aD0iMTQ2IiBoZWlnaHQ9IjUiIHJ4PSIyLjUiIGZpbGw9IiNjZmU3ZWMiLz4KICA8cmVjdCB4PSIxNzIiIHk9IjEzMiIgd2lkdGg9Ijk2IiBoZWlnaHQ9IjUiIHJ4PSIyLjUiIGZpbGw9IiNkZmVmZjIiLz4KICA8Y2lyY2xlIGN4PSI0MDQiIGN5PSIxMjQiIHI9IjUiIGZpbGw9IiMxNGJkYjgiLz4KICA8cmVjdCB4PSIzNzgiIHk9IjEyMCIgd2lkdGg9IjE0IiBoZWlnaHQ9IjgiIHJ4PSI0IiBmaWxsPSIjY2ZlN2VjIi8+CjwvZz4KPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTUwIDE4MikiPgogIDxwYXRoIGQ9Ik0wIDAgaDI4NiBsLTI2IDM0IGgtMjM0IHoiIGZpbGw9IiNkY2VkZjEiIG9wYWNpdHk9Ii43Ii8+CjwvZz4KPHBhdGggZD0iTTE5NiAyNDYgcSA2MC4wIDIyIDEyMCAwIiBmaWxsPSJub25lIiBzdHJva2U9IiMxNGJkYjgiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBvcGFjaXR5PSIuNTUiLz4KPHBhdGggZD0iTTE5NiAyNzIgcSA1MS4wIDIyIDEwMiAwIiBmaWxsPSJub25lIiBzdHJva2U9IiMxNGJkYjgiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBvcGFjaXR5PSIuNTUiLz4KPHBhdGggZD0iTTE5NiAyOTggcSA0Mi4wIDIyIDg0IDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzE0YmRiOCIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9Ii41NSIvPgoKPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDY4IDIzMCkgc2NhbGUoMi4xKSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMGI4Mjk2IgogICBzdHJva2Utd2lkdGg9IjEuOSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBvcGFjaXR5PSIuNDIiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xMiAtMTIpIj48cGF0aCBkPSJNMTQuNiA1LjYgMTggMi4ybDMuOCAzLjgtMy40IDMuNCIvPjxwYXRoIGQ9Im0xNy40IDguNi05IDlhMi40IDIuNCAwIDAgMS0zLjQtMy40bDktOSIvPjxwYXRoIGQ9Im0zIDIxIDMuNC0zLjQiLz48cGF0aCBkPSJNOC42IDMuNCA1LjIgNi44IDIuNiA0LjIiLz48L2c+PC9nPgoKPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNzIgMjM4KSBzY2FsZSgwLjkpIiBvcGFjaXR5PSIuNSI+CiAgPHBhdGggZD0iTTAgNjAgQzAgMjYgMTggNiA0NCAwIEM0MCAzMCAyNCA1MiAwIDYwWiIgZmlsbD0iIzE3YzliZCIgb3BhY2l0eT0iLjU1Ii8+CiAgPHBhdGggZD0iTTAgNjAgQy00IDMyIC0xOCAxNCAtNDAgOCBDLTM0IDM0IC0yMCA1MiAwIDYwWiIgZmlsbD0iIzBiODI5NiIgb3BhY2l0eT0iLjM1Ii8+CiAgPHBhdGggZD0iTTAgNjIgVjk2IiBzdHJva2U9IiMwYjgyOTYiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBvcGFjaXR5PSIuNDUiLz4KPC9nPgo8L3N2Zz4K")}
+.svc__media--cleaning{--photo:none;background-image:var(--photo),url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNDAwIiByb2xlPSJpbWciIGFyaWEtaGlkZGVuPSJ0cnVlIj4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iYmdjIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+CjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2VhZmFmOSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPgo8L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9InVuaXRjIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+CjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2VlZjdmOSIvPgo8L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9ImFjY2MiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMTdjOWJkIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMGI4Mjk2Ii8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjY0MCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjYmdjKSIvPgo8Y2lyY2xlIGN4PSI1MjAiIGN5PSI4MCIgcj0iMTMwIiBmaWxsPSIjZmZmZmZmIiBvcGFjaXR5PSIuNDUiLz4KPGNpcmNsZSBjeD0iMTEwIiBjeT0iMzMwIiByPSIxNDAiIGZpbGw9IiMwYjgyOTYiIG9wYWNpdHk9Ii4wNSIvPgo8cmVjdCB4PSIwIiB5PSIzMjIiIHdpZHRoPSI2NDAiIGhlaWdodD0iNzgiIGZpbGw9IiMwYjgyOTYiIG9wYWNpdHk9Ii4wNiIvPgo8cGF0aCBkPSJNMCAzMjIgSDY0MCIgc3Ryb2tlPSIjMGI4Mjk2IiBzdHJva2Utd2lkdGg9IjIiIG9wYWNpdHk9Ii4xMiIvPgoKPGc+CiAgPHJlY3QgeD0iMTc4IiB5PSI5MCIgd2lkdGg9IjI4NiIgaGVpZ2h0PSI4NiIgcng9IjE2IiBmaWxsPSJ1cmwoI3VuaXRjKSIgc3Ryb2tlPSIjY2ZlN2VjIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8cGF0aCBkPSJNMTc4IDE1MCBoMjg2IHYxMCBhMTYgMTYgMCAwIDEgLTE2IDE2IGgtMjU0IGExNiAxNiAwIDAgMSAtMTYgLTE2IHoiIGZpbGw9IiNkY2VkZjEiIG9wYWNpdHk9Ii43NSIvPgogIDxyZWN0IHg9IjIwMCIgeT0iMTEyIiB3aWR0aD0iMTQ2IiBoZWlnaHQ9IjUiIHJ4PSIyLjUiIGZpbGw9IiNjZmU3ZWMiLz4KICA8cmVjdCB4PSIyMDAiIHk9IjEyNiIgd2lkdGg9Ijk2IiBoZWlnaHQ9IjUiIHJ4PSIyLjUiIGZpbGw9IiNkZmVmZjIiLz4KICA8Y2lyY2xlIGN4PSI0MzIiIGN5PSIxMTgiIHI9IjUiIGZpbGw9IiMxNGJkYjgiLz4KICA8cmVjdCB4PSI0MDYiIHk9IjExNCIgd2lkdGg9IjE0IiBoZWlnaHQ9IjgiIHJ4PSI0IiBmaWxsPSIjY2ZlN2VjIi8+CjwvZz4KPGcgZmlsbD0iIzE0YmRiOCIgb3BhY2l0eT0iLjU1Ij4KICA8cGF0aCBkPSJNMjMyIDIwOCBjMCAxMiAtOCAxOCAtMTQgMTggcy0xNCAtNiAtMTQgLTE4IGMwIC0xMCAxNCAtMjYgMTQgLTI2IHMxNCAxNiAxNCAyNloiLz4KICA8cGF0aCBkPSJNMzAwIDIzNiBjMCAxMCAtNyAxNSAtMTIgMTUgcy0xMiAtNSAtMTIgLTE1IGMwIC04IDEyIC0yMiAxMiAtMjIgczEyIDE0IDEyIDIyWiIgb3BhY2l0eT0iLjgiLz4KICA8cGF0aCBkPSJNMzY2IDIwNiBjMCAxMiAtOCAxOCAtMTQgMTggcy0xNCAtNiAtMTQgLTE4IGMwIC0xMCAxNCAtMjYgMTQgLTI2IHMxNCAxNiAxNCAyNloiIG9wYWNpdHk9Ii42NSIvPgo8L2c+CjxnIHN0cm9rZT0iIzBiODI5NiIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9Ii4zNSIgZmlsbD0ibm9uZSI+CiAgPHBhdGggZD0iTTE5OCAyNjQgcTM0IDE4IDY4IDAiLz48cGF0aCBkPSJNMzMwIDI2OCBxMzQgMTggNjggMCIvPgo8L2c+Cgo8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg0NjggMjM4KSBzY2FsZSgyLjApIiBmaWxsPSJub25lIiBzdHJva2U9IiMwYjgyOTYiCiAgIHN0cm9rZS13aWR0aD0iMy4wIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIG9wYWNpdHk9Ii40MiI+PHBhdGggZD0iTS00IC0xOCAtMSAtOCA5IC01IC0xIC0yIC00IDggLTcgLTIgLTE3IC01IC03IC04WiIvPjxwYXRoIGQ9Ik0xNCA4IDE2IDE0IDIyIDE2IDE2IDE4IDE0IDI0IDEyIDE4IDYgMTYgMTIgMTRaIi8+PC9nPgoKPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoODAgMjUwKSBzY2FsZSgwLjg1KSIgb3BhY2l0eT0iLjUiPgogIDxwYXRoIGQ9Ik0wIDYwIEMwIDI2IDE4IDYgNDQgMCBDNDAgMzAgMjQgNTIgMCA2MFoiIGZpbGw9IiMxN2M5YmQiIG9wYWNpdHk9Ii41NSIvPgogIDxwYXRoIGQ9Ik0wIDYwIEMtNCAzMiAtMTggMTQgLTQwIDggQy0zNCAzNCAtMjAgNTIgMCA2MFoiIGZpbGw9IiMwYjgyOTYiIG9wYWNpdHk9Ii4zNSIvPgogIDxwYXRoIGQ9Ik0wIDYyIFY5NiIgc3Ryb2tlPSIjMGI4Mjk2IiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgb3BhY2l0eT0iLjQ1Ii8+CjwvZz4KPC9zdmc+Cg==")}
+.svc__media--installation{--photo:none;background-image:var(--photo),url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNDAwIiByb2xlPSJpbWciIGFyaWEtaGlkZGVuPSJ0cnVlIj4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iYmdpIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+CjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2U2ZjdmOSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPgo8L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9InVuaXRpIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+CjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2VlZjdmOSIvPgo8L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9ImFjY2kiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMTdjOWJkIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMGI4Mjk2Ii8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjY0MCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjYmdpKSIvPgo8Y2lyY2xlIGN4PSIxNTAiIGN5PSI4MCIgcj0iMTI1IiBmaWxsPSIjZmZmZmZmIiBvcGFjaXR5PSIuNDUiLz4KPGNpcmNsZSBjeD0iNTIwIiBjeT0iMzAwIiByPSIxNDAiIGZpbGw9IiMwYjgyOTYiIG9wYWNpdHk9Ii4wNSIvPgo8cmVjdCB4PSIwIiB5PSIzMjIiIHdpZHRoPSI2NDAiIGhlaWdodD0iNzgiIGZpbGw9IiMwYjgyOTYiIG9wYWNpdHk9Ii4wNiIvPgo8cGF0aCBkPSJNMCAzMjIgSDY0MCIgc3Ryb2tlPSIjMGI4Mjk2IiBzdHJva2Utd2lkdGg9IjIiIG9wYWNpdHk9Ii4xMiIvPgo8ZyBzdHJva2U9IiMwYjgyOTYiIHN0cm9rZS13aWR0aD0iMiIgb3BhY2l0eT0iLjIiIHN0cm9rZS1kYXNoYXJyYXk9IjggOCIgZmlsbD0ibm9uZSI+CiAgPHBhdGggZD0iTTEyMCA4NCBINTIwIi8+PHBhdGggZD0iTTEyMCA4NCBWMzAwIi8+CjwvZz4KCjxnPgogIDxyZWN0IHg9IjE3MCIgeT0iMTEwIiB3aWR0aD0iMjg2IiBoZWlnaHQ9Ijg2IiByeD0iMTYiIGZpbGw9InVybCgjdW5pdGkpIiBzdHJva2U9IiNjZmU3ZWMiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxwYXRoIGQ9Ik0xNzAgMTcwIGgyODYgdjEwIGExNiAxNiAwIDAgMSAtMTYgMTYgaC0yNTQgYTE2IDE2IDAgMCAxIC0xNiAtMTYgeiIgZmlsbD0iI2RjZWRmMSIgb3BhY2l0eT0iLjc1Ii8+CiAgPHJlY3QgeD0iMTkyIiB5PSIxMzIiIHdpZHRoPSIxNDYiIGhlaWdodD0iNSIgcng9IjIuNSIgZmlsbD0iI2NmZTdlYyIvPgogIDxyZWN0IHg9IjE5MiIgeT0iMTQ2IiB3aWR0aD0iOTYiIGhlaWdodD0iNSIgcng9IjIuNSIgZmlsbD0iI2RmZWZmMiIvPgogIDxjaXJjbGUgY3g9IjQyNCIgY3k9IjEzOCIgcj0iNSIgZmlsbD0iIzE0YmRiOCIvPgogIDxyZWN0IHg9IjM5OCIgeT0iMTM0IiB3aWR0aD0iMTQiIGhlaWdodD0iOCIgcng9IjQiIGZpbGw9IiNjZmU3ZWMiLz4KPC9nPgo8ZyBmaWxsPSJub25lIiBzdHJva2U9IiMwYjgyOTYiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBvcGFjaXR5PSIuNCI+CiAgPHBhdGggZD0iTTE3MCAxMTAgdi0yNiBNNDU2IDExMCB2LTI2Ii8+CiAgPHBhdGggZD0iTTMxMiAyMDYgdjU0IHEwIDIwIC0yMCAyMCBoLTcwIi8+CjwvZz4KPGcgZmlsbD0iIzE0YmRiOCIgb3BhY2l0eT0iLjUiPgogIDxyZWN0IHg9IjE1MCIgeT0iMjg2IiB3aWR0aD0iNjYiIGhlaWdodD0iMTIiIHJ4PSI2Ii8+CiAgPHJlY3QgeD0iMTUwIiB5PSIzMDQiIHdpZHRoPSI0MiIgaGVpZ2h0PSIxMiIgcng9IjYiLz4KPC9nPgoKPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDc4IDI0MCkgc2NhbGUoMS41KSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMGI4Mjk2IgogICBzdHJva2Utd2lkdGg9IjMuMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBvcGFjaXR5PSIuNDIiPjxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIxNSIvPjxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSI2Ii8+PHBhdGggZD0iTTAuMCAtMTUuMCBMMC4wIC0yMS4wIi8+PHBhdGggZD0iTTEwLjYgLTEwLjYgTDE0LjggLTE0LjgiLz48cGF0aCBkPSJNMTUuMCAtMC4wIEwyMS4wIC0wLjAiLz48cGF0aCBkPSJNMTAuNiAxMC42IEwxNC44IDE0LjgiLz48cGF0aCBkPSJNMC4wIDE1LjAgTDAuMCAyMS4wIi8+PHBhdGggZD0iTS0xMC42IDEwLjYgTC0xNC44IDE0LjgiLz48cGF0aCBkPSJNLTE1LjAgMC4wIEwtMjEuMCAwLjAiLz48cGF0aCBkPSJNLTEwLjYgLTEwLjYgTC0xNC44IC0xNC44Ii8+PC9nPgoKPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNTY4IDI0Nikgc2NhbGUoMC44KSIgb3BhY2l0eT0iLjUiPgogIDxwYXRoIGQ9Ik0wIDYwIEMwIDI2IDE4IDYgNDQgMCBDNDAgMzAgMjQgNTIgMCA2MFoiIGZpbGw9IiMxN2M5YmQiIG9wYWNpdHk9Ii41NSIvPgogIDxwYXRoIGQ9Ik0wIDYwIEMtNCAzMiAtMTggMTQgLTQwIDggQy0zNCAzNCAtMjAgNTIgMCA2MFoiIGZpbGw9IiMwYjgyOTYiIG9wYWNpdHk9Ii4zNSIvPgogIDxwYXRoIGQ9Ik0wIDYyIFY5NiIgc3Ryb2tlPSIjMGI4Mjk2IiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgb3BhY2l0eT0iLjQ1Ii8+CjwvZz4KPC9zdmc+Cg==")}
+.svc__media--maintenance{--photo:none;background-image:var(--photo),url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNDAwIiByb2xlPSJpbWciIGFyaWEtaGlkZGVuPSJ0cnVlIj4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iYmdtIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+CjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2VhZmFmOCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPgo8L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9InVuaXRtIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+CjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2VlZjdmOSIvPgo8L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9ImFjY20iIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMTdjOWJkIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMGI4Mjk2Ii8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjY0MCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjYmdtKSIvPgo8Y2lyY2xlIGN4PSI1MDAiIGN5PSI5NiIgcj0iMTIwIiBmaWxsPSIjZmZmZmZmIiBvcGFjaXR5PSIuNDUiLz4KPGNpcmNsZSBjeD0iMTIwIiBjeT0iMzIwIiByPSIxNDAiIGZpbGw9IiMwYjgyOTYiIG9wYWNpdHk9Ii4wNSIvPgo8cmVjdCB4PSIwIiB5PSIzMjIiIHdpZHRoPSI2NDAiIGhlaWdodD0iNzgiIGZpbGw9IiMwYjgyOTYiIG9wYWNpdHk9Ii4wNiIvPgo8cGF0aCBkPSJNMCAzMjIgSDY0MCIgc3Ryb2tlPSIjMGI4Mjk2IiBzdHJva2Utd2lkdGg9IjIiIG9wYWNpdHk9Ii4xMiIvPgoKPGc+CiAgPHJlY3QgeD0iMTIwIiB5PSI5NiIgd2lkdGg9IjI0NiIgaGVpZ2h0PSI4MCIgcng9IjE2IiBmaWxsPSJ1cmwoI3VuaXRtKSIgc3Ryb2tlPSIjY2ZlN2VjIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8cGF0aCBkPSJNMTIwIDE1MCBoMjQ2IHYxMCBhMTYgMTYgMCAwIDEgLTE2IDE2IGgtMjE0IGExNiAxNiAwIDAgMSAtMTYgLTE2IHoiIGZpbGw9IiNkY2VkZjEiIG9wYWNpdHk9Ii43NSIvPgogIDxyZWN0IHg9IjE0MiIgeT0iMTE4IiB3aWR0aD0iMTA2IiBoZWlnaHQ9IjUiIHJ4PSIyLjUiIGZpbGw9IiNjZmU3ZWMiLz4KICA8cmVjdCB4PSIxNDIiIHk9IjEzMiIgd2lkdGg9IjU2IiBoZWlnaHQ9IjUiIHJ4PSIyLjUiIGZpbGw9IiNkZmVmZjIiLz4KICA8Y2lyY2xlIGN4PSIzMzQiIGN5PSIxMjQiIHI9IjUiIGZpbGw9IiMxNGJkYjgiLz4KICA8cmVjdCB4PSIzMDgiIHk9IjEyMCIgd2lkdGg9IjE0IiBoZWlnaHQ9IjgiIHJ4PSI0IiBmaWxsPSIjY2ZlN2VjIi8+CjwvZz4KPHBhdGggZD0iTTE1OCAyMDAgcSA1Mi4wIDIyIDEwNCAwIiBmaWxsPSJub25lIiBzdHJva2U9IiMxNGJkYjgiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBvcGFjaXR5PSIuNCIvPgo8cGF0aCBkPSJNMTU4IDIyNCBxIDQzLjAgMjIgODYgMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMTRiZGI4IiBzdHJva2Utd2lkdGg9IjUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgb3BhY2l0eT0iLjQiLz4KPHBhdGggZD0iTTE1OCAyNDggcSAzNC4wIDIyIDY4IDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzE0YmRiOCIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9Ii40Ii8+CjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDQwMCAxMjApIj4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTUwIiBoZWlnaHQ9IjE4MCIgcng9IjE0IiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiNjZmU3ZWMiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxyZWN0IHg9IjQ2IiB5PSItMTIiIHdpZHRoPSI1OCIgaGVpZ2h0PSIyNCIgcng9IjgiIGZpbGw9IiNkY2VkZjEiLz4KICA8ZyBzdHJva2U9IiMxNGJkYjgiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBmaWxsPSJub25lIj4KICAgIDxwYXRoIGQ9Ik0yNCA0NiBsOCA4IDE0IC0xNiIvPjxwYXRoIGQ9Ik0yNCA5MiBsOCA4IDE0IC0xNiIvPjxwYXRoIGQ9Ik0yNCAxMzggbDggOCAxNCAtMTYiLz4KICA8L2c+CiAgPGcgZmlsbD0iI2RjZWRmMSI+CiAgICA8cmVjdCB4PSI2MCIgeT0iNDQiIHdpZHRoPSI2NiIgaGVpZ2h0PSI4IiByeD0iNCIvPgogICAgPHJlY3QgeD0iNjAiIHk9IjkwIiB3aWR0aD0iNjYiIGhlaWdodD0iOCIgcng9IjQiLz4KICAgIDxyZWN0IHg9IjYwIiB5PSIxMzYiIHdpZHRoPSI0OCIgaGVpZ2h0PSI4IiByeD0iNCIvPgogIDwvZz4KPC9nPgoKPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzIwIDI3Mikgc2NhbGUoMS44KSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMGI4Mjk2IgogICBzdHJva2Utd2lkdGg9IjMuMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBvcGFjaXR5PSIuNDIiPjxjaXJjbGUgY3g9IjAiIGN5PSIwIiByPSIxNyIvPjxwYXRoIGQ9Ik0wIC0xMCBWMSBsNyA1Ii8+PC9nPgoKPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNzIgMjU0KSBzY2FsZSgwLjgpIiBvcGFjaXR5PSIuNSI+CiAgPHBhdGggZD0iTTAgNjAgQzAgMjYgMTggNiA0NCAwIEM0MCAzMCAyNCA1MiAwIDYwWiIgZmlsbD0iIzE3YzliZCIgb3BhY2l0eT0iLjU1Ii8+CiAgPHBhdGggZD0iTTAgNjAgQy00IDMyIC0xOCAxNCAtNDAgOCBDLTM0IDM0IC0yMCA1MiAwIDYwWiIgZmlsbD0iIzBiODI5NiIgb3BhY2l0eT0iLjM1Ii8+CiAgPHBhdGggZD0iTTAgNjIgVjk2IiBzdHJva2U9IiMwYjgyOTYiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBvcGFjaXR5PSIuNDUiLz4KPC9nPgo8L3N2Zz4K")}
+.svc__media--gas{--photo:none;background-image:var(--photo),url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNDAwIiByb2xlPSJpbWciIGFyaWEtaGlkZGVuPSJ0cnVlIj4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iYmdnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+CjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2U3ZjhmYSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPgo8L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9InVuaXRnIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+CjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2VlZjdmOSIvPgo8L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9ImFjY2ciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMTdjOWJkIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMGI4Mjk2Ii8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjY0MCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjYmdnKSIvPgo8Y2lyY2xlIGN4PSIxMzAiIGN5PSI5NiIgcj0iMTI0IiBmaWxsPSIjZmZmZmZmIiBvcGFjaXR5PSIuNDUiLz4KPGNpcmNsZSBjeD0iNTEwIiBjeT0iMzEwIiByPSIxNDIiIGZpbGw9IiMwYjgyOTYiIG9wYWNpdHk9Ii4wNSIvPgo8cmVjdCB4PSIwIiB5PSIzMjIiIHdpZHRoPSI2NDAiIGhlaWdodD0iNzgiIGZpbGw9IiMwYjgyOTYiIG9wYWNpdHk9Ii4wNiIvPgo8cGF0aCBkPSJNMCAzMjIgSDY0MCIgc3Ryb2tlPSIjMGI4Mjk2IiBzdHJva2Utd2lkdGg9IjIiIG9wYWNpdHk9Ii4xMiIvPgo8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxNDYgMTIwKSI+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjIyMCIgaGVpZ2h0PSIxNzYiIHJ4PSIxNiIgZmlsbD0idXJsKCN1bml0ZykiIHN0cm9rZT0iI2NmZTdlYyIgc3Ryb2tlLXdpZHRoPSIyIi8+CiAgPGNpcmNsZSBjeD0iMTEwIiBjeT0iODgiIHI9IjU4IiBmaWxsPSIjZWVmN2Y5IiBzdHJva2U9IiNjZmU3ZWMiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxnIHN0cm9rZT0iIzE0YmRiOCIgc3Ryb2tlLXdpZHRoPSI3IiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9Ii43IiBmaWxsPSJub25lIj4KICAgIDxwYXRoIGQ9Ik0xMTAgODggTDExMCAzNiIvPjxwYXRoIGQ9Ik0xMTAgODggTDE1NSAxMTQiLz48cGF0aCBkPSJNMTEwIDg4IEw2NSAxMTQiLz4KICA8L2c+CiAgPGNpcmNsZSBjeD0iMTEwIiBjeT0iODgiIHI9IjEwIiBmaWxsPSIjMGI4Mjk2Ii8+CiAgPHJlY3QgeD0iMTgiIHk9IjE1MCIgd2lkdGg9IjUyIiBoZWlnaHQ9IjgiIHJ4PSI0IiBmaWxsPSIjZGNlZGYxIi8+CjwvZz4KPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDMwIDEzMCkiPgogIDxjaXJjbGUgY3g9IjYwIiBjeT0iNTYiIHI9IjQ4IiBmaWxsPSIjZmZmZmZmIiBzdHJva2U9IiNjZmU3ZWMiIHN0cm9rZS13aWR0aD0iMyIvPgogIDxwYXRoIGQ9Ik02MCA1NiBMODggMzQiIHN0cm9rZT0iIzBiODI5NiIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8Y2lyY2xlIGN4PSI2MCIgY3k9IjU2IiByPSI2IiBmaWxsPSIjMGI4Mjk2Ii8+CiAgPHBhdGggZD0iTTIyIDQ4IGE0MCA0MCAwIDAgMSA3NiAwIiBmaWxsPSJub25lIiBzdHJva2U9IiMxNGJkYjgiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBvcGFjaXR5PSIuNiIvPgogIDxwYXRoIGQ9Ik02MCAxMDQgdjQwIHEwIDE2IC0xNiAxNiBoLTMwIiBmaWxsPSJub25lIiBzdHJva2U9IiMwYjgyOTYiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBvcGFjaXR5PSIuMzUiLz4KPC9nPgoKPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDUyIDI5Nikgc2NhbGUoMS41KSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMGI4Mjk2IgogICBzdHJva2Utd2lkdGg9IjMuMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBvcGFjaXR5PSIuNDIiPjxwYXRoIGQ9Ik0wIC0xOCBWMTggTS0xNS42IC05IEwxNS42IDkgTTE1LjYgLTkgTC0xNS42IDkgTTAgLTExIGwtNSAtNSBNMCAtMTEgbDUgLTUgTTAgMTEgbC01IDUgTTAgMTEgbDUgNSIvPjwvZz4KPC9zdmc+Cg==")}
+.svc__media--electrical{--photo:none;background-image:var(--photo),url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNDAwIiByb2xlPSJpbWciIGFyaWEtaGlkZGVuPSJ0cnVlIj4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iYmdlIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+CjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2U5ZjdmYSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPgo8L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9InVuaXRlIiB4MT0iMCIgeTE9IjAiIHgyPSIwIiB5Mj0iMSI+CjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2VlZjdmOSIvPgo8L2xpbmVhckdyYWRpZW50Pgo8bGluZWFyR3JhZGllbnQgaWQ9ImFjY2UiIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMTdjOWJkIi8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMGI4Mjk2Ii8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjY0MCIgaGVpZ2h0PSI0MDAiIGZpbGw9InVybCgjYmdlKSIvPgo8Y2lyY2xlIGN4PSI1MTAiIGN5PSI4OCIgcj0iMTI2IiBmaWxsPSIjZmZmZmZmIiBvcGFjaXR5PSIuNDUiLz4KPGNpcmNsZSBjeD0iMTIwIiBjeT0iMzE4IiByPSIxNDIiIGZpbGw9IiMwYjgyOTYiIG9wYWNpdHk9Ii4wNSIvPgo8cmVjdCB4PSIwIiB5PSIzMjIiIHdpZHRoPSI2NDAiIGhlaWdodD0iNzgiIGZpbGw9IiMwYjgyOTYiIG9wYWNpdHk9Ii4wNiIvPgo8cGF0aCBkPSJNMCAzMjIgSDY0MCIgc3Ryb2tlPSIjMGI4Mjk2IiBzdHJva2Utd2lkdGg9IjIiIG9wYWNpdHk9Ii4xMiIvPgoKPGc+CiAgPHJlY3QgeD0iMTU4IiB5PSI5MiIgd2lkdGg9IjI3MCIgaGVpZ2h0PSI4NCIgcng9IjE2IiBmaWxsPSJ1cmwoI3VuaXRlKSIgc3Ryb2tlPSIjY2ZlN2VjIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8cGF0aCBkPSJNMTU4IDE1MCBoMjcwIHYxMCBhMTYgMTYgMCAwIDEgLTE2IDE2IGgtMjM4IGExNiAxNiAwIDAgMSAtMTYgLTE2IHoiIGZpbGw9IiNkY2VkZjEiIG9wYWNpdHk9Ii43NSIvPgogIDxyZWN0IHg9IjE4MCIgeT0iMTE0IiB3aWR0aD0iMTMwIiBoZWlnaHQ9IjUiIHJ4PSIyLjUiIGZpbGw9IiNjZmU3ZWMiLz4KICA8cmVjdCB4PSIxODAiIHk9IjEyOCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjUiIHJ4PSIyLjUiIGZpbGw9IiNkZmVmZjIiLz4KICA8Y2lyY2xlIGN4PSIzOTYiIGN5PSIxMjAiIHI9IjUiIGZpbGw9IiMxNGJkYjgiLz4KICA8cmVjdCB4PSIzNzAiIHk9IjExNiIgd2lkdGg9IjE0IiBoZWlnaHQ9IjgiIHJ4PSI0IiBmaWxsPSIjY2ZlN2VjIi8+CjwvZz4KPGcgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMGI4Mjk2IiBzdHJva2Utd2lkdGg9IjMuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBvcGFjaXR5PSIuMzUiPgogIDxwYXRoIGQ9Ik0yMTIgMTc2IHY0NiBoLTU4IHY0MiIvPgogIDxwYXRoIGQ9Ik0yOTIgMTc2IHY3NiIvPgogIDxwYXRoIGQ9Ik0zNzIgMTc2IHY0NiBoNjAgdjQyIi8+CjwvZz4KPGcgZmlsbD0iIzE0YmRiOCIgb3BhY2l0eT0iLjU1Ij4KICA8Y2lyY2xlIGN4PSIxNTQiIGN5PSIyNjgiIHI9IjkiLz48Y2lyY2xlIGN4PSIyOTIiIGN5PSIyNTYiIHI9IjkiLz48Y2lyY2xlIGN4PSI0MzIiIGN5PSIyNjgiIHI9IjkiLz4KPC9nPgo8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1MDYgMTU4KSIgb3BhY2l0eT0iLjUiPgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSI3NiIgaGVpZ2h0PSIxMDQiIHJ4PSIxMiIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSIjY2ZlN2VjIiBzdHJva2Utd2lkdGg9IjIiLz4KICA8ZyBzdHJva2U9IiMxNGJkYjgiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj48cGF0aCBkPSJNMjAgMjYgaDM2IE0yMCA1MiBoMzYgTTIwIDc4IGgyMiIvPjwvZz4KPC9nPgoKPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjkyIDIzMikgc2NhbGUoMS41KSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMGI4Mjk2IgogICBzdHJva2Utd2lkdGg9IjMuMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBvcGFjaXR5PSIuNDIiPjxwYXRoIGQ9Ik00IC0yMCAtMTIgNCBoMTAgbC00IDE2IDE2IC0yNCBoLTEwIHoiLz48L2c+Cgo8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg3NCAyNTIpIHNjYWxlKDAuOCkiIG9wYWNpdHk9Ii41Ij4KICA8cGF0aCBkPSJNMCA2MCBDMCAyNiAxOCA2IDQ0IDAgQzQwIDMwIDI0IDUyIDAgNjBaIiBmaWxsPSIjMTdjOWJkIiBvcGFjaXR5PSIuNTUiLz4KICA8cGF0aCBkPSJNMCA2MCBDLTQgMzIgLTE4IDE0IC00MCA4IEMtMzQgMzQgLTIwIDUyIDAgNjBaIiBmaWxsPSIjMGI4Mjk2IiBvcGFjaXR5PSIuMzUiLz4KICA8cGF0aCBkPSJNMCA2MiBWOTYiIHN0cm9rZT0iIzBiODI5NiIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9Ii40NSIvPgo8L2c+Cjwvc3ZnPgo=")}
+
+/* circular badge straddling the image / body boundary */
+.svc__badge{
+  position:relative;z-index:1;align-self:center;margin-top:-29px;
+  display:inline-flex;align-items:center;justify-content:center;
+  width:58px;height:58px;border-radius:50%;
+  background:var(--grad);color:#fff;
+  box-shadow:0 0 0 6px #fff,var(--sh-brand);
 }
-.scard__cta .ico{transition:transform .25s ease}
-.scard:hover .scard__cta .ico{transform:translateX(4px)}
+.svc__badge .ico{width:26px;height:26px}
+
+.svc__body{padding:16px clamp(20px,2vw,28px) clamp(24px,2.4vw,30px);display:flex;flex-direction:column;align-items:center;flex:1}
+.svc__title{font-size:1.1rem;font-weight:600;color:var(--navy)}
+.svc__rule{display:block;width:40px;height:3px;border-radius:2px;margin:11px 0 13px;background:var(--b-400)}
+.svc__text{font-size:.895rem;line-height:1.68;color:var(--muted)}
 
 /* ---------- 13. Approach feature list ---------- */
 .feature-list{display:grid;gap:20px;margin-top:30px}
@@ -1089,7 +1136,8 @@ address{font-style:normal}
 }
 
 @media (max-width:1120px){
-  .bento{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .svc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .services__deco{display:none}
 }
 
 /* the USP cards need room for the icon, title and arrow */
@@ -1146,7 +1194,7 @@ address{font-style:normal}
 }
 
 @media (max-width:520px){
-  .bento{grid-template-columns:minmax(0,1fr)}
+  .svc-grid{grid-template-columns:minmax(0,1fr)}
   .hero__actions .btn{width:100%}
   .hero__title{letter-spacing:-.03em}
   .split__actions .btn{width:100%}
@@ -1235,11 +1283,9 @@ address{font-style:normal}
             Our Services <svg class="ico ico--sm" aria-hidden="true"><use href="#i-chevron"></use></svg>
           </button>
           <ul class="subnav" id="servicesMenu">
-            <li><a href="#services">Aircond Servicing</a></li>
-            <li><a href="#services">Gas &amp; Refrigerant Service</a></li>
-            <li><a href="#services">AC Troubleshooting</a></li>
-            <li><a href="#services">Split AC Service</a></li>
-            <li><a href="#services">Commercial AC Service</a></li>
+            <li><a href="#services">AC Cleaning</a></li>
+            <li><a href="#services">Gas Refilling</a></li>
+            <li><a href="#services">AC Electrical Service</a></li>
             <li><a href="#packages">Service Packages</a></li>
           </ul>
         </li>
@@ -1495,63 +1541,100 @@ address{font-style:normal}
   </div>
 </section>
 
-<!-- ============ SERVICES — BENTO GRID ============ -->
+<!-- ============ SERVICES ============ -->
 <section class="section services" id="services">
+  <svg class="services__deco services__deco--unit" viewBox="0 0 260 190" aria-hidden="true" focusable="false">
+    <rect x="34" y="18" width="196" height="58" rx="14" fill="#ffffff" stroke="#bfe4e8" stroke-width="2"/>
+    <path d="M34 58h196v4a14 14 0 0 1-14 14H48a14 14 0 0 1-14-14z" fill="#dcedf1"/>
+    <rect x="52" y="32" width="92" height="5" rx="2.5" fill="#d9edf1"/>
+    <rect x="52" y="44" width="62" height="5" rx="2.5" fill="#e6f4f6"/>
+    <circle cx="208" cy="40" r="4.5" fill="#14bdb8"/>
+    <g fill="none" stroke="#14bdb8" stroke-width="5" stroke-linecap="round" opacity=".42">
+      <path d="M70 100q34 22 68 0"/>
+      <path d="M104 128q30 20 60 0"/>
+      <path d="M78 154q26 17 52 0"/>
+    </g>
+  </svg>
+  <svg class="services__deco services__deco--leaves" viewBox="0 0 200 170" aria-hidden="true" focusable="false">
+    <g opacity=".5">
+      <path d="M96 150C96 96 66 58 16 44c8 62 38 98 80 106z" fill="#17c9bd" opacity=".5"/>
+      <path d="M104 150c6-44 32-74 76-84-8 50-34 78-76 84z" fill="#0b8296" opacity=".3"/>
+      <path d="M100 152V96" stroke="#0b8296" stroke-width="5" stroke-linecap="round" opacity=".4" fill="none"/>
+    </g>
+  </svg>
+
   <div class="wrap">
-    <header class="sec-head reveal">
-      <p class="eyebrow"><span class="eyebrow__dot"></span>What we do</p>
-      <h2 class="h2">Complete aircond services for every need</h2>
-      <p class="sec-head__text">Whether the unit has stopped cooling, is overdue a clean, or the space needs a new system altogether — the work is covered here.</p>
+    <header class="sec-head services__head reveal">
+      <p class="pill">Our Services</p>
+      <h2 class="h2 services__title">Complete AC Care, <em>All in One Place</em></h2>
+      <span class="rule-ico" aria-hidden="true">
+        <i class="rule-ico__line"></i>
+        <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-snow"></use></svg>
+        <i class="rule-ico__line"></i>
+      </span>
+      <p class="sec-head__text">From quick fixes to complete care, we offer expert air conditioning services to keep your space perfectly cool and comfortable.</p>
+      <p class="services__accent">Residential and commercial work, carried out by technicians who handle these systems every day.</p>
     </header>
 
-    <div class="bento">
-      <article class="scard reveal">
-        <span class="scard__icon"><svg class="ico" aria-hidden="true"><use href="#i-wrench"></use></svg></span>
-        <h3 class="scard__title">Aircond Repair</h3>
-        <p class="scard__text">Diagnosis and repair for units that have lost cooling, stopped starting, or developed a fault mid-use.</p>
-        <a class="scard__cta" href="#contact">Request service<svg class="ico ico--sm" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+    <div class="svc-grid">
+      <article class="svc reveal">
+        <span class="svc__media svc__media--repair"></span>
+        <span class="svc__badge"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-tools"></use></svg></span>
+        <div class="svc__body">
+          <h3 class="svc__title">AC Repair</h3>
+          <span class="svc__rule" aria-hidden="true"></span>
+          <p class="svc__text">Fast, reliable repair for units that stop cooling or fail mid-use. We diagnose the actual fault and fix it right the first time.</p>
+        </div>
       </article>
-      <article class="scard reveal" data-delay="1">
-        <span class="scard__icon"><svg class="ico" aria-hidden="true"><use href="#i-drop"></use></svg></span>
-        <h3 class="scard__title">Aircond Servicing</h3>
-        <p class="scard__text">Cleaning of filters, coils, blower wheel and drain line so the unit moves air and sheds heat properly again.</p>
-        <a class="scard__cta" href="#contact">Request service<svg class="ico ico--sm" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+
+      <article class="svc reveal" data-delay="1">
+        <span class="svc__media svc__media--cleaning"></span>
+        <span class="svc__badge"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-wind"></use></svg></span>
+        <div class="svc__body">
+          <h3 class="svc__title">AC Cleaning</h3>
+          <span class="svc__rule" aria-hidden="true"></span>
+          <p class="svc__text">Deep cleaning improves air quality and efficiency, clearing dust, dirt and bacteria from filters, coils and the blower wheel.</p>
+        </div>
       </article>
-      <article class="scard reveal" data-delay="2">
-        <span class="scard__icon"><svg class="ico" aria-hidden="true"><use href="#i-calendar"></use></svg></span>
-        <h3 class="scard__title">Aircond Maintenance</h3>
-        <p class="scard__text">Scheduled preventive maintenance for homes and business premises running several units at once.</p>
-        <a class="scard__cta" href="#contact">Request service<svg class="ico ico--sm" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+
+      <article class="svc reveal" data-delay="2">
+        <span class="svc__media svc__media--installation"></span>
+        <span class="svc__badge"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-cog"></use></svg></span>
+        <div class="svc__body">
+          <h3 class="svc__title">AC Installation</h3>
+          <span class="svc__rule" aria-hidden="true"></span>
+          <p class="svc__text">Professional installation for all AC types — mounting, piping, drainage and commissioning set up properly for real performance.</p>
+        </div>
       </article>
-      <article class="scard reveal" data-delay="3">
-        <span class="scard__icon"><svg class="ico" aria-hidden="true"><use href="#i-install"></use></svg></span>
-        <h3 class="scard__title">Aircond Installation</h3>
-        <p class="scard__text">New system installation — mounting, piping, drainage, electrical connection and commissioning.</p>
-        <a class="scard__cta" href="#contact">Request service<svg class="ico ico--sm" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+
+      <article class="svc reveal">
+        <span class="svc__media svc__media--maintenance"></span>
+        <span class="svc__badge"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-install"></use></svg></span>
+        <div class="svc__body">
+          <h3 class="svc__title">AC Maintenance</h3>
+          <span class="svc__rule" aria-hidden="true"></span>
+          <p class="svc__text">Regular maintenance keeps your AC working at its best and catches small issues before they turn into an unexpected breakdown.</p>
+        </div>
       </article>
-      <article class="scard reveal">
-        <span class="scard__icon"><svg class="ico" aria-hidden="true"><use href="#i-gauge"></use></svg></span>
-        <h3 class="scard__title">Gas &amp; Refrigerant Service</h3>
-        <p class="scard__text">Pressure checks, leak inspection and refrigerant top-up where the system genuinely calls for it.</p>
-        <a class="scard__cta" href="#contact">Request service<svg class="ico ico--sm" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+
+      <article class="svc reveal" data-delay="1">
+        <span class="svc__media svc__media--gas"></span>
+        <span class="svc__badge"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-snow"></use></svg></span>
+        <div class="svc__body">
+          <h3 class="svc__title">Gas Refilling</h3>
+          <span class="svc__rule" aria-hidden="true"></span>
+          <p class="svc__text">Weak cooling often points to low refrigerant. We check the system for leaks first, then refill with the right gas for your unit.</p>
+        </div>
       </article>
-      <article class="scard reveal" data-delay="1">
-        <span class="scard__icon"><svg class="ico" aria-hidden="true"><use href="#i-cog"></use></svg></span>
-        <h3 class="scard__title">AC Troubleshooting</h3>
-        <p class="scard__text">For the symptoms that are hard to place: uneven cooling, odd smells, noise, short cycling or tripping.</p>
-        <a class="scard__cta" href="#contact">Request service<svg class="ico ico--sm" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
-      </article>
-      <article class="scard reveal" data-delay="2">
-        <span class="scard__icon"><svg class="ico" aria-hidden="true"><use href="#i-home"></use></svg></span>
-        <h3 class="scard__title">Split AC Service</h3>
-        <p class="scard__text">Dedicated attention for residential wall-mounted splits, including indoor and outdoor unit work.</p>
-        <a class="scard__cta" href="#contact">Request service<svg class="ico ico--sm" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
-      </article>
-      <article class="scard reveal" data-delay="3">
-        <span class="scard__icon"><svg class="ico" aria-hidden="true"><use href="#i-building"></use></svg></span>
-        <h3 class="scard__title">Commercial AC Service</h3>
-        <p class="scard__text">Support for offices, retail lots and other commercial spaces where downtime affects trading hours.</p>
-        <a class="scard__cta" href="#contact">Request service<svg class="ico ico--sm" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+
+      <article class="svc reveal" data-delay="2">
+        <span class="svc__media svc__media--electrical"></span>
+        <span class="svc__badge"><svg class="ico" aria-hidden="true" focusable="false"><use href="#i-bolt"></use></svg></span>
+        <div class="svc__body">
+          <h3 class="svc__title">AC Electrical Service</h3>
+          <span class="svc__rule" aria-hidden="true"></span>
+          <p class="svc__text">From a failed capacitor to wiring and control faults, electrical problems are traced and handled safely at the unit.</p>
+        </div>
       </article>
     </div>
   </div>
@@ -1851,12 +1934,12 @@ address{font-style:normal}
     <nav class="footer__col" aria-label="Services">
       <h2 class="footer__head">Services</h2>
       <ul>
-        <li><a href="#services">Aircond repair</a></li>
-        <li><a href="#services">Aircond servicing</a></li>
-        <li><a href="#services">Aircond maintenance</a></li>
-        <li><a href="#services">Aircond installation</a></li>
-        <li><a href="#services">Commercial AC service</a></li>
-        <li><a href="#services">Split AC service</a></li>
+        <li><a href="#services">AC repair</a></li>
+        <li><a href="#services">AC cleaning</a></li>
+        <li><a href="#services">AC installation</a></li>
+        <li><a href="#services">AC maintenance</a></li>
+        <li><a href="#services">Gas refilling</a></li>
+        <li><a href="#services">AC electrical service</a></li>
       </ul>
     </nav>
 

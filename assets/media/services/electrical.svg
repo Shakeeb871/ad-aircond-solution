@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-hidden="true">
+<defs>
+<linearGradient id="bge" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#e9f7fa"/><stop offset="1" stop-color="#ffffff"/>
+</linearGradient>
+<linearGradient id="unite" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#eef7f9"/>
+</linearGradient>
+<linearGradient id="acce" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#17c9bd"/><stop offset="1" stop-color="#0b8296"/>
+</linearGradient>
+</defs>
+<rect width="640" height="400" fill="url(#bge)"/>
+<circle cx="510" cy="88" r="126" fill="#ffffff" opacity=".45"/>
+<circle cx="120" cy="318" r="142" fill="#0b8296" opacity=".05"/>
+<rect x="0" y="322" width="640" height="78" fill="#0b8296" opacity=".06"/>
+<path d="M0 322 H640" stroke="#0b8296" stroke-width="2" opacity=".12"/>
+
+<g>
+  <rect x="158" y="92" width="270" height="84" rx="16" fill="url(#unite)" stroke="#cfe7ec" stroke-width="2"/>
+  <path d="M158 150 h270 v10 a16 16 0 0 1 -16 16 h-238 a16 16 0 0 1 -16 -16 z" fill="#dcedf1" opacity=".75"/>
+  <rect x="180" y="114" width="130" height="5" rx="2.5" fill="#cfe7ec"/>
+  <rect x="180" y="128" width="80" height="5" rx="2.5" fill="#dfeff2"/>
+  <circle cx="396" cy="120" r="5" fill="#14bdb8"/>
+  <rect x="370" y="116" width="14" height="8" rx="4" fill="#cfe7ec"/>
+</g>
+<g fill="none" stroke="#0b8296" stroke-width="3.4" stroke-linecap="round" opacity=".35">
+  <path d="M212 176 v46 h-58 v42"/>
+  <path d="M292 176 v76"/>
+  <path d="M372 176 v46 h60 v42"/>
+</g>
+<g fill="#14bdb8" opacity=".55">
+  <circle cx="154" cy="268" r="9"/><circle cx="292" cy="256" r="9"/><circle cx="432" cy="268" r="9"/>
+</g>
+<g transform="translate(506 158)" opacity=".5">
+  <rect x="0" y="0" width="76" height="104" rx="12" fill="#ffffff" stroke="#cfe7ec" stroke-width="2"/>
+  <g stroke="#14bdb8" stroke-width="4" stroke-linecap="round"><path d="M20 26 h36 M20 52 h36 M20 78 h22"/></g>
+</g>
+
+<g transform="translate(292 232) scale(1.5)" fill="none" stroke="#0b8296"
+   stroke-width="3.0" stroke-linecap="round" stroke-linejoin="round" opacity=".42"><path d="M4 -20 -12 4 h10 l-4 16 16 -24 h-10 z"/></g>
+
+<g transform="translate(74 252) scale(0.8)" opacity=".5">
+  <path d="M0 60 C0 26 18 6 44 0 C40 30 24 52 0 60Z" fill="#17c9bd" opacity=".55"/>
+  <path d="M0 60 C-4 32 -18 14 -40 8 C-34 34 -20 52 0 60Z" fill="#0b8296" opacity=".35"/>
+  <path d="M0 62 V96" stroke="#0b8296" stroke-width="4" stroke-linecap="round" opacity=".45"/>
+</g>
+</svg>

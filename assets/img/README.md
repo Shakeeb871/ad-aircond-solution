@@ -39,3 +39,30 @@ photography, set `--photo` on the matching rule:
 Keep one look across all of them: real service work rather than posed shots, natural light, cool
 white balance, Malaysian homes and premises, and equipment that matches the service described.
 Export as WebP or JPEG around quality 80 and compress before committing.
+
+## Service card photographs (optional)
+
+The six Our Services cards ship with hand-drawn illustrations that always
+render, so the section is complete as-is. To use photographs instead, drop
+files here and point the matching slot at them in `assets/css/styles.css`
+(section 12, "Services"):
+
+| File to add            | CSS slot to edit                 |
+| ---------------------- | -------------------------------- |
+| `svc-repair.webp`      | `.svc__media--repair`            |
+| `svc-cleaning.webp`    | `.svc__media--cleaning`          |
+| `svc-installation.webp`| `.svc__media--installation`      |
+| `svc-maintenance.webp` | `.svc__media--maintenance`       |
+| `svc-gas.webp`         | `.svc__media--gas`               |
+| `svc-electrical.webp`  | `.svc__media--electrical`        |
+
+Each slot is a one-line change, e.g.
+
+    .svc__media--repair{--photo:url("../img/svc-repair.webp"); ...}
+
+The illustration stays underneath as the fallback, so a missing or slow
+photo never leaves an empty card.
+
+**Shoot/crop notes** — 16:10 landscape, at least 960x600, subject centred
+and slightly high in the frame (the circular icon badge overlaps the bottom
+edge of the image). Keep the lower third calm: no faces or text there.
