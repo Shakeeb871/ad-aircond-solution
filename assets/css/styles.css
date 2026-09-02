@@ -665,11 +665,13 @@ address{font-style:normal}
 .services{position:relative;overflow:hidden;background:linear-gradient(180deg,#f6fcfd 0%,#ffffff 46%)}
 .services>.wrap{position:relative;z-index:1}
 
-/* Decorative top corners — a floating split unit at upper right, leaves at
-   upper left. Both fade out before the tablet breakpoint. */
-.services__deco{position:absolute;z-index:0;pointer-events:none;opacity:.55}
-.services__deco--unit{top:clamp(18px,3vw,46px);right:clamp(-30px,-1vw,0px);width:clamp(180px,17vw,260px);height:auto}
-.services__deco--leaves{top:clamp(10px,2vw,34px);left:clamp(-22px,-1vw,-4px);width:clamp(130px,12vw,196px);height:auto}
+/* Decorative corner graphics, shared by Services and Brands. All of them are
+   hidden below the tablet breakpoint so they never crowd the copy. */
+.deco{position:absolute;z-index:0;pointer-events:none;opacity:.55;height:auto}
+.deco--unit-r{top:clamp(18px,3vw,46px);right:clamp(-30px,-1vw,0px);width:clamp(180px,17vw,260px)}
+.deco--leaves-l{top:clamp(10px,2vw,34px);left:clamp(-22px,-1vw,-4px);width:clamp(130px,12vw,196px)}
+.deco--leaves-br{bottom:clamp(14px,3vw,52px);right:clamp(-24px,-1vw,-4px);width:clamp(110px,10vw,168px);transform:scaleX(-1)}
+.deco--shield{top:clamp(80px,10vw,150px);left:clamp(-10px,1vw,34px);width:clamp(96px,9vw,132px);opacity:.5}
 
 .services__head{max-width:880px}
 .services__title{color:var(--navy)}
@@ -856,19 +858,53 @@ address{font-style:normal}
 .quote figcaption span{font-size:.82rem;color:var(--muted-2)}
 
 /* ---------- 18. Brand wall ---------- */
+.brands{position:relative;overflow:hidden;background:linear-gradient(180deg,#ffffff 0%,#f6fcfd 100%)}
+.brands>.wrap{position:relative;z-index:1}
+.brands__head{max-width:760px;margin-bottom:clamp(22px,2.6vw,34px)}
+.brands__title{color:var(--navy)}
+.brands__title em{display:block;font-style:normal;color:var(--b-600)}
+
+/* showcase heading with a hairline rule running out on both sides */
+.brands__lead{
+  display:flex;align-items:center;justify-content:center;gap:clamp(14px,2vw,26px);
+  margin:clamp(6px,1.5vw,16px) 0 clamp(26px,3vw,38px);
+  font-family:var(--f-display);font-weight:600;font-size:clamp(1.02rem,.9rem + .4vw,1.24rem);
+  color:var(--navy);text-align:center;
+}
+.brands__lead::before,.brands__lead::after{
+  content:"";flex:1;max-width:clamp(60px,12vw,168px);height:2px;border-radius:1px;
+  background:linear-gradient(90deg,rgba(20,189,184,0),var(--b-300));
+}
+.brands__lead::after{background:linear-gradient(90deg,var(--b-300),rgba(20,189,184,0))}
+.brands__lead span{flex:none}
+
 .brands__wall{
-  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:clamp(12px,1.4vw,18px);
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:clamp(12px,1.5vw,20px);list-style:none;padding:0;margin:0;
 }
 .brands__item{
-  display:flex;align-items:center;justify-content:center;text-align:center;
-  min-height:92px;padding:16px 12px;
-  background:var(--surface-alt);border:1px solid var(--line-2);border-radius:var(--r);
-  font-family:var(--f-display);font-weight:600;font-size:1.1rem;
-  color:#6f8a95;letter-spacing:-.02em;
-  transition:color .25s ease,border-color .25s ease,transform .25s ease,box-shadow .25s ease;
+  --logo:none;
+  display:flex;align-items:center;justify-content:center;
+  min-height:clamp(84px,7.2vw,106px);padding:16px clamp(10px,1.4vw,20px);
+  background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);
+  box-shadow:var(--sh-sm);
+  background-image:var(--logo);background-repeat:no-repeat;
+  background-position:center;background-size:auto 42%;
+  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
 }
-.brands__item:hover{color:var(--b-700);background:#fff;border-color:var(--b-200);transform:translateY(-3px);box-shadow:var(--sh-sm)}
+.brands__item:hover{transform:translateY(-3px);box-shadow:var(--sh-md);border-color:var(--b-200)}
+.brands__mark{
+  font-family:var(--f-display);font-weight:600;
+  font-size:clamp(.88rem,.76rem + .36vw,1.1rem);
+  letter-spacing:.045em;line-height:1.22;
+  color:var(--ink);text-align:center;text-transform:uppercase;
+}
+/* Add the --logo modifier once a real logo file is wired up: the wordmark
+   stays in the DOM for screen readers but gives the image the space. */
+.brands__item--logo .brands__mark{
+  position:absolute;width:1px;height:1px;overflow:hidden;
+  clip-path:inset(50%);white-space:nowrap;
+}
 
 /* ---------- 19. Final CTA + booking ---------- */
 .finale{position:relative;isolation:isolate;overflow:hidden;background:var(--b-950);padding:clamp(64px,7.5vw,110px) 0}
@@ -1039,11 +1075,13 @@ address{font-style:normal}
 
 @media (max-width:1120px){
   .svc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .services__deco{display:none}
+  .brands__wall{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .deco{display:none}
 }
 
 /* the USP cards need room for the icon, title and arrow */
 @media (max-width:980px){
+  .brands__wall{grid-template-columns:repeat(3,minmax(0,1fr))}
   .usp{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 
@@ -1097,6 +1135,7 @@ address{font-style:normal}
 
 @media (max-width:520px){
   .svc-grid{grid-template-columns:minmax(0,1fr)}
+  .brands__wall{grid-template-columns:repeat(2,minmax(0,1fr))}
   .hero__actions .btn{width:100%}
   .hero__title{letter-spacing:-.03em}
   .split__actions .btn{width:100%}

@@ -66,3 +66,28 @@ photo never leaves an empty card.
 **Shoot/crop notes** — 16:10 landscape, at least 960x600, subject centred
 and slightly high in the frame (the circular icon badge overlaps the bottom
 edge of the image). Keep the lower third calm: no faces or text there.
+
+## Brand logos (optional)
+
+The Brands We Service cards render each brand as a wordmark set in the site's
+own typeface, so the section is complete without any files. Official logo
+artwork can be swapped in per card, one at a time.
+
+For each brand, add the logo file here (SVG preferred, otherwise a
+transparent PNG at least 400px wide) and in `assets/css/styles.css` give that
+card a `--logo` value, e.g.
+
+    .brands__item--daikin{--logo:url("../img/brands/daikin.svg")}
+
+then add the `brands__item--logo` class next to `brands__item` in
+`index.html` on that card. The wordmark stays in the markup for screen
+readers and search engines; the class only moves it out of sight so the logo
+has the card to itself.
+
+Logos are drawn at 42% of the card height and centred, so supply artwork with
+the brand's own padding trimmed off.
+
+Note: these are third-party trademarks shown to state which equipment is
+serviced. Keep each logo in its correct proportions and original colours, do
+not recolour or restyle them, and drop any brand the business does not
+actually work on.

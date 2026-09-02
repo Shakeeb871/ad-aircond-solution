@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- BUILD 2026-09-02-4ab9f9a · hero: light two-column with wave -->
+<!-- BUILD 2026-09-02-badd9e6 · hero: light two-column with wave -->
 <html lang="en-MY">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="build" content="2026-09-02-4ab9f9a">
+<meta name="build" content="2026-09-02-badd9e6">
 <title>Ad Aircond Solution | Aircond Repair, Servicing &amp; Installation in Kuala Lumpur</title>
 <meta name="description" content="Ad Aircond Solution provides air conditioning repair, servicing, maintenance and installation for homes and businesses in Kuala Lumpur. Based at Titiwangsa Central. Call +60 17-857 0744.">
 <meta name="theme-color" content="#0c8a99">
@@ -763,11 +763,13 @@ address{font-style:normal}
 .services{position:relative;overflow:hidden;background:linear-gradient(180deg,#f6fcfd 0%,#ffffff 46%)}
 .services>.wrap{position:relative;z-index:1}
 
-/* Decorative top corners — a floating split unit at upper right, leaves at
-   upper left. Both fade out before the tablet breakpoint. */
-.services__deco{position:absolute;z-index:0;pointer-events:none;opacity:.55}
-.services__deco--unit{top:clamp(18px,3vw,46px);right:clamp(-30px,-1vw,0px);width:clamp(180px,17vw,260px);height:auto}
-.services__deco--leaves{top:clamp(10px,2vw,34px);left:clamp(-22px,-1vw,-4px);width:clamp(130px,12vw,196px);height:auto}
+/* Decorative corner graphics, shared by Services and Brands. All of them are
+   hidden below the tablet breakpoint so they never crowd the copy. */
+.deco{position:absolute;z-index:0;pointer-events:none;opacity:.55;height:auto}
+.deco--unit-r{top:clamp(18px,3vw,46px);right:clamp(-30px,-1vw,0px);width:clamp(180px,17vw,260px)}
+.deco--leaves-l{top:clamp(10px,2vw,34px);left:clamp(-22px,-1vw,-4px);width:clamp(130px,12vw,196px)}
+.deco--leaves-br{bottom:clamp(14px,3vw,52px);right:clamp(-24px,-1vw,-4px);width:clamp(110px,10vw,168px);transform:scaleX(-1)}
+.deco--shield{top:clamp(80px,10vw,150px);left:clamp(-10px,1vw,34px);width:clamp(96px,9vw,132px);opacity:.5}
 
 .services__head{max-width:880px}
 .services__title{color:var(--navy)}
@@ -954,19 +956,53 @@ address{font-style:normal}
 .quote figcaption span{font-size:.82rem;color:var(--muted-2)}
 
 /* ---------- 18. Brand wall ---------- */
+.brands{position:relative;overflow:hidden;background:linear-gradient(180deg,#ffffff 0%,#f6fcfd 100%)}
+.brands>.wrap{position:relative;z-index:1}
+.brands__head{max-width:760px;margin-bottom:clamp(22px,2.6vw,34px)}
+.brands__title{color:var(--navy)}
+.brands__title em{display:block;font-style:normal;color:var(--b-600)}
+
+/* showcase heading with a hairline rule running out on both sides */
+.brands__lead{
+  display:flex;align-items:center;justify-content:center;gap:clamp(14px,2vw,26px);
+  margin:clamp(6px,1.5vw,16px) 0 clamp(26px,3vw,38px);
+  font-family:var(--f-display);font-weight:600;font-size:clamp(1.02rem,.9rem + .4vw,1.24rem);
+  color:var(--navy);text-align:center;
+}
+.brands__lead::before,.brands__lead::after{
+  content:"";flex:1;max-width:clamp(60px,12vw,168px);height:2px;border-radius:1px;
+  background:linear-gradient(90deg,rgba(20,189,184,0),var(--b-300));
+}
+.brands__lead::after{background:linear-gradient(90deg,var(--b-300),rgba(20,189,184,0))}
+.brands__lead span{flex:none}
+
 .brands__wall{
-  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:clamp(12px,1.4vw,18px);
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:clamp(12px,1.5vw,20px);list-style:none;padding:0;margin:0;
 }
 .brands__item{
-  display:flex;align-items:center;justify-content:center;text-align:center;
-  min-height:92px;padding:16px 12px;
-  background:var(--surface-alt);border:1px solid var(--line-2);border-radius:var(--r);
-  font-family:var(--f-display);font-weight:600;font-size:1.1rem;
-  color:#6f8a95;letter-spacing:-.02em;
-  transition:color .25s ease,border-color .25s ease,transform .25s ease,box-shadow .25s ease;
+  --logo:none;
+  display:flex;align-items:center;justify-content:center;
+  min-height:clamp(84px,7.2vw,106px);padding:16px clamp(10px,1.4vw,20px);
+  background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);
+  box-shadow:var(--sh-sm);
+  background-image:var(--logo);background-repeat:no-repeat;
+  background-position:center;background-size:auto 42%;
+  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
 }
-.brands__item:hover{color:var(--b-700);background:#fff;border-color:var(--b-200);transform:translateY(-3px);box-shadow:var(--sh-sm)}
+.brands__item:hover{transform:translateY(-3px);box-shadow:var(--sh-md);border-color:var(--b-200)}
+.brands__mark{
+  font-family:var(--f-display);font-weight:600;
+  font-size:clamp(.88rem,.76rem + .36vw,1.1rem);
+  letter-spacing:.045em;line-height:1.22;
+  color:var(--ink);text-align:center;text-transform:uppercase;
+}
+/* Add the --logo modifier once a real logo file is wired up: the wordmark
+   stays in the DOM for screen readers but gives the image the space. */
+.brands__item--logo .brands__mark{
+  position:absolute;width:1px;height:1px;overflow:hidden;
+  clip-path:inset(50%);white-space:nowrap;
+}
 
 /* ---------- 19. Final CTA + booking ---------- */
 .finale{position:relative;isolation:isolate;overflow:hidden;background:var(--b-950);padding:clamp(64px,7.5vw,110px) 0}
@@ -1137,11 +1173,13 @@ address{font-style:normal}
 
 @media (max-width:1120px){
   .svc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .services__deco{display:none}
+  .brands__wall{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .deco{display:none}
 }
 
 /* the USP cards need room for the icon, title and arrow */
 @media (max-width:980px){
+  .brands__wall{grid-template-columns:repeat(3,minmax(0,1fr))}
   .usp{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 
@@ -1195,6 +1233,7 @@ address{font-style:normal}
 
 @media (max-width:520px){
   .svc-grid{grid-template-columns:minmax(0,1fr)}
+  .brands__wall{grid-template-columns:repeat(2,minmax(0,1fr))}
   .hero__actions .btn{width:100%}
   .hero__title{letter-spacing:-.03em}
   .split__actions .btn{width:100%}
@@ -1543,7 +1582,7 @@ address{font-style:normal}
 
 <!-- ============ SERVICES ============ -->
 <section class="section services" id="services">
-  <svg class="services__deco services__deco--unit" viewBox="0 0 260 190" aria-hidden="true" focusable="false">
+  <svg class="deco deco--unit-r" viewBox="0 0 260 190" aria-hidden="true" focusable="false">
     <rect x="34" y="18" width="196" height="58" rx="14" fill="#ffffff" stroke="#bfe4e8" stroke-width="2"/>
     <path d="M34 58h196v4a14 14 0 0 1-14 14H48a14 14 0 0 1-14-14z" fill="#dcedf1"/>
     <rect x="52" y="32" width="92" height="5" rx="2.5" fill="#d9edf1"/>
@@ -1555,7 +1594,7 @@ address{font-style:normal}
       <path d="M78 154q26 17 52 0"/>
     </g>
   </svg>
-  <svg class="services__deco services__deco--leaves" viewBox="0 0 200 170" aria-hidden="true" focusable="false">
+  <svg class="deco deco--leaves-l" viewBox="0 0 200 170" aria-hidden="true" focusable="false">
     <g opacity=".5">
       <path d="M96 150C96 96 66 58 16 44c8 62 38 98 80 106z" fill="#17c9bd" opacity=".5"/>
       <path d="M104 150c6-44 32-74 76-84-8 50-34 78-76 84z" fill="#0b8296" opacity=".3"/>
@@ -1827,26 +1866,69 @@ address{font-style:normal}
   </div>
 </section>
 
-<!-- ============ BRAND WALL ============
-     PLACEHOLDER LIST — confirm which brands Ad Aircond Solution actually services,
-     then replace the names below (and drop in official logo files if licensed).
+<!-- ============ BRANDS WE SERVICE ============
+     Brand list supplied by the business. Wordmarks are set in the site's own
+     type by default; see assets/img/README.md to drop in official logo files.
 ================================================================== -->
-<section class="section brands">
+<section class="section brands" id="brands">
+  <svg class="deco deco--unit-r" viewBox="0 0 260 190" aria-hidden="true" focusable="false">
+    <rect x="34" y="18" width="196" height="58" rx="14" fill="#ffffff" stroke="#bfe4e8" stroke-width="2"/>
+    <path d="M34 58h196v4a14 14 0 0 1-14 14H48a14 14 0 0 1-14-14z" fill="#dcedf1"/>
+    <rect x="52" y="32" width="92" height="5" rx="2.5" fill="#d9edf1"/>
+    <rect x="52" y="44" width="62" height="5" rx="2.5" fill="#e6f4f6"/>
+    <circle cx="208" cy="40" r="4.5" fill="#14bdb8"/>
+    <g fill="none" stroke="#14bdb8" stroke-width="5" stroke-linecap="round" opacity=".42">
+      <path d="M70 100q34 22 68 0"/>
+      <path d="M104 128q30 20 60 0"/>
+      <path d="M78 154q26 17 52 0"/>
+    </g>
+  </svg>
+  <svg class="deco deco--shield" viewBox="0 0 190 200" aria-hidden="true" focusable="false">
+    <path d="M95 12 22 40v66c0 42 31 68 73 82 42-14 73-40 73-82V40z" fill="#e9f8f9" stroke="#8fdcdd" stroke-width="3"/>
+    <path d="M64 104l22 23 44-50" fill="none" stroke="#0ca0a3" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <g fill="none" stroke="#14bdb8" stroke-width="4" stroke-linecap="round" opacity=".38">
+      <path d="M2 152q26 16 52 0"/>
+      <path d="M20 174q22 14 44 0"/>
+    </g>
+  </svg>
+  <svg class="deco deco--leaves-br" viewBox="0 0 200 170" aria-hidden="true" focusable="false">
+    <g opacity=".5">
+      <path d="M96 150C96 96 66 58 16 44c8 62 38 98 80 106z" fill="#17c9bd" opacity=".5"/>
+      <path d="M104 150c6-44 32-74 76-84-8 50-34 78-76 84z" fill="#0b8296" opacity=".3"/>
+      <path d="M100 152V96" stroke="#0b8296" stroke-width="5" stroke-linecap="round" fill="none" opacity=".4"/>
+    </g>
+  </svg>
+
   <div class="wrap">
-    <header class="sec-head sec-head--tight reveal">
-      <p class="eyebrow"><span class="eyebrow__dot"></span>Systems we work on</p>
-      <h2 class="h2 h2--sm">Air conditioning brands we service</h2>
-      <p class="sec-head__text">Brand list shown for reference and confirmed on enquiry. Tell us the make and model on your unit and we will confirm before booking.</p>
+    <header class="sec-head brands__head reveal">
+      <p class="pill">Brands We Service</p>
+      <h2 class="h2 brands__title">We Repair All Major <em>Aircond Brands</em></h2>
+      <p class="sec-head__text">Our experienced technicians are trained to diagnose and repair all leading air conditioner brands. No matter the make or model, we&rsquo;ve got you covered.</p>
+      <span class="rule-ico" aria-hidden="true">
+        <i class="rule-ico__line"></i>
+        <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-snow"></use></svg>
+        <i class="rule-ico__line"></i>
+      </span>
     </header>
+
+    <h3 class="brands__lead reveal"><span>Brands We Repair &amp; Service</span></h3>
+
     <ul class="brands__wall reveal">
-      <li class="brands__item">Daikin</li>
-      <li class="brands__item">Panasonic</li>
-      <li class="brands__item">Mitsubishi Electric</li>
-      <li class="brands__item">LG</li>
-      <li class="brands__item">Samsung</li>
-      <li class="brands__item">Hitachi</li>
-      <li class="brands__item">York</li>
-      <li class="brands__item">Midea</li>
+      <li class="brands__item"><span class="brands__mark">Daikin</span></li>
+      <li class="brands__item"><span class="brands__mark">Mitsubishi Electric</span></li>
+      <li class="brands__item"><span class="brands__mark">Panasonic</span></li>
+      <li class="brands__item"><span class="brands__mark">Samsung</span></li>
+      <li class="brands__item"><span class="brands__mark">LG</span></li>
+      <li class="brands__item"><span class="brands__mark">Sharp</span></li>
+      <li class="brands__item"><span class="brands__mark">Hitachi</span></li>
+      <li class="brands__item"><span class="brands__mark">Toshiba</span></li>
+      <li class="brands__item"><span class="brands__mark">York</span></li>
+      <li class="brands__item"><span class="brands__mark">Fujitsu</span></li>
+      <li class="brands__item"><span class="brands__mark">Midea</span></li>
+      <li class="brands__item"><span class="brands__mark">Hisense</span></li>
+      <li class="brands__item"><span class="brands__mark">Gree</span></li>
+      <li class="brands__item"><span class="brands__mark">Haier</span></li>
+      <li class="brands__item"><span class="brands__mark">Sanyo</span></li>
     </ul>
   </div>
 </section>
