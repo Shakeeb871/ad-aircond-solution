@@ -22,8 +22,13 @@ deployment:
     - export DEPLOYPATH=$HOME/adaircondsolution.com
     - export REPOPATH="$(pwd -P)"
     - export LIVEPATH="$(cd "$DEPLOYPATH" 2>/dev/null && pwd -P || echo none)"
-    - if [ "$LIVEPATH" = "$REPOPATH" ]; then echo "Repository is the website folder - the working tree is already the live site, nothing to copy."; exit 0; fi
     - /bin/mkdir -p $DEPLOYPATH
+    # .htaccess is NOT tracked by git: the host rewrites it and the repository
+    # sits in the website folder, so a tracked copy collided with those edits
+    # and aborted every deploy. It is installed from deploy/htaccess.conf here
+    # instead, before the guard below, so it lands in both layouts.
+    - /bin/cp -f deploy/htaccess.conf $DEPLOYPATH/.htaccess
+    - if [ "$LIVEPATH" = "$REPOPATH" ]; then echo "Repository is the website folder - the working tree is already the live site, nothing else to copy."; exit 0; fi
     # homepage and the single-file copy
     - /bin/cp -f index.html standalone.html $DEPLOYPATH/
     # every generated page lives at <name>/index.html so the URL is /<name>/
@@ -33,7 +38,6 @@ deployment:
     - /bin/rm -f $DEPLOYPATH/about.html $DEPLOYPATH/services.html $DEPLOYPATH/contact.html $DEPLOYPATH/ac-repair.html $DEPLOYPATH/ac-cleaning.html $DEPLOYPATH/ac-installation.html $DEPLOYPATH/ac-maintenance.html $DEPLOYPATH/gas-refilling.html $DEPLOYPATH/ac-electrical-service.html
     - /bin/cp -f favicon.svg $DEPLOYPATH/
     - /bin/cp -f robots.txt sitemap.xml $DEPLOYPATH/
-    - /bin/cp -f .htaccess $DEPLOYPATH/
     # replace assets wholesale so files removed from the repo also leave the server
     - /bin/rm -rf $DEPLOYPATH/assets
     - /bin/cp -R assets $DEPLOYPATH/

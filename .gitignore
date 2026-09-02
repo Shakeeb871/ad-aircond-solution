@@ -1,0 +1,6 @@
+# The live .htaccess is not tracked.
+# The host rewrites it (PHP handlers, security rules) and the repository is
+# checked out in the website folder, so a tracked copy collided with those
+# edits and blocked every deploy. The real config lives at
+# deploy/htaccess.conf and .cpanel.yml installs it on each deploy.
+.htaccess
