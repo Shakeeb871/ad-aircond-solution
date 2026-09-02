@@ -13,8 +13,13 @@ deployment:
   tasks:
     - export DEPLOYPATH=$HOME/adaircondsolution.com
     - /bin/mkdir -p $DEPLOYPATH
-    # index.html, standalone.html and every generated page
-    - /bin/cp -f *.html $DEPLOYPATH/
+    # homepage and the single-file copy
+    - /bin/cp -f index.html standalone.html $DEPLOYPATH/
+    # every generated page lives at <name>/index.html so the URL is /<name>/
+    - /bin/rm -rf $DEPLOYPATH/about $DEPLOYPATH/services $DEPLOYPATH/contact $DEPLOYPATH/ac-repair $DEPLOYPATH/ac-cleaning $DEPLOYPATH/ac-installation $DEPLOYPATH/ac-maintenance $DEPLOYPATH/gas-refilling $DEPLOYPATH/ac-electrical-service
+    - /bin/cp -R about services contact ac-repair ac-cleaning ac-installation ac-maintenance gas-refilling ac-electrical-service $DEPLOYPATH/
+    # the flat pages this site used before are gone; clear any left on the server
+    - /bin/rm -f $DEPLOYPATH/about.html $DEPLOYPATH/services.html $DEPLOYPATH/contact.html $DEPLOYPATH/ac-repair.html $DEPLOYPATH/ac-cleaning.html $DEPLOYPATH/ac-installation.html $DEPLOYPATH/ac-maintenance.html $DEPLOYPATH/gas-refilling.html $DEPLOYPATH/ac-electrical-service.html
     - /bin/cp -f favicon.svg $DEPLOYPATH/
     - /bin/cp -f robots.txt sitemap.xml $DEPLOYPATH/
     - /bin/cp -f .htaccess $DEPLOYPATH/

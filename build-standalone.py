@@ -44,11 +44,11 @@ styles = re.sub(r'url\("\.\./img/([^"]+)"\)',
 # Asset URLs carry a ?v= build id, so match them by pattern rather than literally.
 html = re.sub(r'<link rel="preload"[^>]*>\n', '', html)
 _style_block = '<style>\n' + fonts + '\n' + styles + '\n</style>'
-html = re.sub(r'<link rel="stylesheet" href="assets/css/fonts\.css[^"]*">\n<link rel="stylesheet" href="assets/css/styles\.css[^"]*">',
+html = re.sub(r'<link rel="stylesheet" href="/assets/css/fonts\.css[^"]*">\n<link rel="stylesheet" href="/assets/css/styles\.css[^"]*">',
               lambda m: _style_block, html, count=1)
-html = re.sub(r'<script src="assets/js/main\.js[^"]*"[^>]*></script>',
+html = re.sub(r'<script src="/assets/js/main\.js[^"]*"[^>]*></script>',
               lambda m: '<script>\n' + read('assets/js/main.js') + '\n</script>', html, count=1)
-html = html.replace('<link rel="icon" href="favicon.svg" type="image/svg+xml">',
+html = html.replace('<link rel="icon" href="/favicon.svg" type="image/svg+xml">',
                     '<link rel="icon" href="' + data_uri('favicon.svg', 'image/svg+xml') + '" type="image/svg+xml">')
 
 # Refuse to ship a file that still depends on an asset outside itself —
@@ -58,7 +58,8 @@ html = html.replace('<link rel="icon" href="favicon.svg" type="image/svg+xml">',
 # at about.html, the service pages and so on. standalone.html is a single-file
 # copy of the HOMEPAGE for handing over or opening from disk; those links only
 # resolve when the real site is deployed alongside it.
-site_pages = re.compile(r'^[a-z0-9-]+\.html(#.*)?$')
+# the site's own pages are directory URLs now: /, /about/, /#process
+site_pages = re.compile(r'^/([a-z0-9-]+/)?(#.*)?$')
 external = [h for h in re.findall(r'(?:src|href)="(?!#|data:|https?://|tel:|mailto:)([^"]+)"', html)
             if not site_pages.match(h)]
 external += re.findall(r'url\(["\']?(?!#|data:|https?://)([^"\')]+)', html)

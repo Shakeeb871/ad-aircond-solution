@@ -36,12 +36,12 @@ def version(match):
     attr, url = match.group(1), match.group(2).split('?')[0]
     return f'{attr}="{url}?v={build}"'
 
-html = re.sub(r'(href|src)="(assets/(?:css|js)/[^"?]+)(?:\?[^"]*)?"', version, html)
+html = re.sub(r'(href|src)="(/assets/(?:css|js)/[^"?]+)(?:\?[^"]*)?"', version, html)
 
 with open(path, 'w', encoding='utf-8') as fh:
     fh.write(html)
 
 print(f"build {build}")
 for line in html.splitlines():
-    if 'assets/css' in line or 'assets/js' in line:
+    if '/assets/css' in line or '/assets/js' in line:
         print(" ", line.strip())
