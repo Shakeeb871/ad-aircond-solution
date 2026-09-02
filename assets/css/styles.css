@@ -671,14 +671,16 @@ address{font-style:normal}
 .deco--unit-r{top:clamp(18px,3vw,46px);right:clamp(-30px,-1vw,0px);width:clamp(180px,17vw,260px)}
 .deco--leaves-l{top:clamp(10px,2vw,34px);left:clamp(-22px,-1vw,-4px);width:clamp(130px,12vw,196px)}
 .deco--leaves-br{bottom:clamp(14px,3vw,52px);right:clamp(-24px,-1vw,-4px);width:clamp(110px,10vw,168px);transform:scaleX(-1)}
+.deco--leaves-r{top:clamp(150px,20vw,300px);right:clamp(-30px,-1.5vw,-8px);width:clamp(96px,8vw,140px);transform:scaleX(-1);opacity:.4}
 .deco--shield{top:clamp(80px,10vw,150px);left:clamp(-10px,1vw,34px);width:clamp(96px,9vw,132px);opacity:.5}
 
 .services__head{max-width:880px}
 .services__title{color:var(--navy)}
 .services__title em{font-style:normal;color:var(--b-600)}
-.services__accent{
-  margin-top:10px;font-family:var(--f-display);font-weight:500;
-  font-size:.92rem;color:var(--b-700);
+/* short rule closing the introduction, as in the reference */
+.services__rule{
+  display:block;width:64px;height:3px;border-radius:2px;
+  margin:22px auto 0;background:var(--b-500);
 }
 
 /* pill eyebrow */
