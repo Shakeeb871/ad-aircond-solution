@@ -40,32 +40,21 @@ Keep one look across all of them: real service work rather than posed shots, nat
 white balance, Malaysian homes and premises, and equipment that matches the service described.
 Export as WebP or JPEG around quality 80 and compress before committing.
 
-## Service card photographs (optional)
+## Service card photographs — in use
 
-The six Our Services cards ship with hand-drawn illustrations that always
-render, so the section is complete as-is. To use photographs instead, drop
-files here and point the matching slot at them in `assets/css/styles.css`
-(section 12, "Services"):
+These six are live. The card slot is 4:3 to match the supplied files, so
+nothing is cropped. Replace a file in place (same name, same 4:3 crop) to
+change a card; the illustration under `assets/media/services/` stays as the
+fallback if a photo ever fails to load.
 
-| File to add            | CSS slot to edit                 |
-| ---------------------- | -------------------------------- |
-| `svc-repair.webp`      | `.svc__media--repair`            |
-| `svc-cleaning.webp`    | `.svc__media--cleaning`          |
-| `svc-installation.webp`| `.svc__media--installation`      |
-| `svc-maintenance.webp` | `.svc__media--maintenance`       |
-| `svc-gas.webp`         | `.svc__media--gas`               |
-| `svc-electrical.webp`  | `.svc__media--electrical`        |
-
-Each slot is a one-line change, e.g.
-
-    .svc__media--repair{--photo:url("../img/svc-repair.webp"); ...}
-
-The illustration stays underneath as the fallback, so a missing or slow
-photo never leaves an empty card.
-
-**Shoot/crop notes** — 16:10 landscape, at least 960x600, subject centred
-and slightly high in the frame (the circular icon badge overlaps the bottom
-edge of the image). Keep the lower third calm: no faces or text there.
+| File                    | CSS slot                     | Subject                          |
+| ----------------------- | ---------------------------- | -------------------------------- |
+| `svc-repair.webp`       | `.svc__media--repair`        | Technician opening an indoor unit|
+| `svc-cleaning.webp`     | `.svc__media--cleaning`      | Filter being drawn out, gloved   |
+| `svc-installation.webp` | `.svc__media--installation`  | Technician at an outdoor unit    |
+| `svc-maintenance.webp`  | `.svc__media--maintenance`   | Remote check on a wall unit      |
+| `svc-gas.webp`          | `.svc__media--gas`           | Manifold gauge set on a condenser|
+| `svc-electrical.webp`   | `.svc__media--electrical`    | Wiring and control board         |
 
 ## Brand logos (optional)
 
