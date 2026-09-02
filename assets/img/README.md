@@ -56,68 +56,31 @@ fallback if a photo ever fails to load.
 | `svc-gas.webp`          | `.svc__media--gas`           | Manifold gauge set on a condenser|
 | `svc-electrical.webp`   | `.svc__media--electrical`    | Wiring and control board         |
 
-## Brand logos (optional)
+## Brand logos — in use
 
-The Brands We Service cards render each brand as a wordmark set in the site's
-own typeface, so the section is complete without any files. Official logo
-artwork can be swapped in per card, one at a time.
+Nine logos are live, in `assets/img/brands/`: daikin, panasonic, midea, york,
+samsung, lg, sharp, hitachi, acson. Each card gets its file through a
+`--logo` custom property declared in `assets/css/styles.css`, and carries the
+brand name as a visually hidden wordmark so screen readers and search engines
+still read it.
 
-For each brand, add the logo file here (SVG preferred, otherwise a
-transparent PNG at least 400px wide) and in `assets/css/styles.css` give that
-card a `--logo` value, e.g.
+To add another brand:
 
-    .brands__item--daikin{--logo:url("../img/brands/daikin.svg")}
+1. Save the logo as `assets/img/brands/<slug>.webp` — 300x120, transparent
+   background, the mark centred with its own padding trimmed.
+2. Add one CSS line next to the others:
+   `.brands__item--<slug>{--logo:url("../img/brands/<slug>.webp")}`
+3. Add the card in `index.html`:
+   `<li class="brands__item brands__item--logo brands__item--<slug>"><span class="brands__mark">Name</span></li>`
+4. Remove that brand from the "Also serviced" line below the grid.
 
-then add the `brands__item--logo` class next to `brands__item` in
-`index.html` on that card. The wordmark stays in the markup for screen
-readers and search engines; the class only moves it out of sight so the logo
-has the card to itself.
-
-Logos are drawn at 42% of the card height and centred, so supply artwork with
-the brand's own padding trimmed off.
+Mitsubishi Electric, Toshiba, Fujitsu, Hisense, Gree, Haier and Sanyo are
+named in that line rather than shown, because no logo was supplied for them.
 
 Note: these are third-party trademarks shown to state which equipment is
 serviced. Keep each logo in its correct proportions and original colours, do
 not recolour or restyle them, and drop any brand the business does not
 actually work on.
-
-## How It Works step photographs — in use
-
-These four are live. The card slot is 4:3 to match the supplied files, so
-nothing is cropped. Replace a file in place (same name, same 4:3 crop) to
-change a step; the illustration under `assets/media/steps/` stays as the
-fallback if a photo ever fails to load.
-
-| File                 | CSS slot                     | Subject                        |
-| -------------------- | ---------------------------- | ------------------------------ |
-| `step-contact.webp`  | `.flowcard__media--contact`  | Phone showing the number       |
-| `step-schedule.webp` | `.flowcard__media--schedule` | Desk calendar, date circled    |
-| `step-onsite.webp`   | `.flowcard__media--onsite`   | Technician at the indoor unit  |
-| `step-comfort.webp`  | `.flowcard__media--comfort`  | Family in a cooled living room |
-
-## About Us photograph — in use
-
-`about.webp` (1448x1086) fills `.aboutus__photo`. It renders at up to about
-710 CSS px, so the file has enough resolution for a 2x screen. The
-`interior.svg` illustration stays as the fallback.
-
-## Our Approach photograph — in use
-
-`approach.webp` fills `.frame--workshop`. It is the photograph cropped out of
-the supplied poster (`approach-poster.webp`), taken from the region clear of
-every text overlay: the technician working at the indoor unit.
-
-The poster itself is not placed anywhere. Its headline and its three cards
-(Experienced Technicians / Practical Recommendations / Quality Workmanship)
-say the same thing this section already renders as real HTML, so using it
-whole would print that text twice — and text baked into an image cannot
-reflow, so on a phone the poster's body copy would be too small to read and
-search engines could not read any of it.
-
-`approach.webp` is only 300x250, because that is how large the clean area of
-the poster is. It renders up to 710px wide, so it is soft. Replacing it with
-the original photograph — no text overlay, 1200px wide or more, 6:5 crop —
-under the same name fixes that with no code change.
 
 ## Resolution notes
 
