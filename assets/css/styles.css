@@ -254,11 +254,11 @@ h1,h2,h3,h4,
 .nav__cta{display:flex;align-items:center;gap:10px;flex:none}
 
 .burger{
-  display:none;position:relative;z-index:96;margin-left:auto;width:46px;height:46px;
+  display:none;position:relative;z-index:96;margin-left:auto;width:52px;height:52px;
   align-items:center;justify-content:center;
   background:var(--b-50);border:1px solid var(--line);border-radius:6px;color:var(--b-800);cursor:pointer;
 }
-.burger .ico{width:22px;height:22px}
+.burger .ico{width:26px;height:26px}
 .burger__close{display:none}
 .burger.is-open .burger__open{display:none}
 .burger.is-open .burger__close{display:block}
@@ -457,29 +457,14 @@ h1,h2,h3,h4,
 }
 
 .split__media{position:relative}
-.frame{
-  border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--sh-lg);
-  aspect-ratio:6/5;border:1px solid var(--line);
-  background-size:cover,cover;background-position:center,center;background-repeat:no-repeat,no-repeat;
+/* The approach poster is a finished square graphic with its own type baked in,
+   so it is an image rather than a cropped background: it scales with the
+   column, never letterboxes, and stays as large as the space allows. */
+.poster{
+  display:block;width:100%;height:auto;max-width:600px;margin-inline:auto;
+  border-radius:var(--r-xl);border:1px solid var(--line);
+  box-shadow:var(--sh-lg);background:#fff;
 }
-/* Swap in real photography by setting --photo on the frame below. */
-.frame--workshop{
-  --photo:url("../img/approach-poster.webp");
-  aspect-ratio:1;background-color:#fff;
-  background-image:var(--photo);
-  background-size:contain;background-position:center;
-}
-
-.frame__badge span strong{display:block;font-family:var(--f-display);font-weight:600;color:var(--ink);font-size:.92rem}
-.frame__badge{
-  position:absolute;right:-10px;top:26px;
-  display:flex;align-items:center;gap:11px;
-  background:var(--b-950);color:#a9d2dc;border-radius:var(--r);
-  padding:13px 18px;box-shadow:var(--sh-md);
-}
-.frame__badge .ico{color:var(--b-300)}
-.frame__badge span strong{color:#fff}
-.frame__badge span{font-size:.78rem;line-height:1.45}
 
 
 /* ---------- About Us ---------- */
@@ -1433,18 +1418,35 @@ h1,h2,h3,h4,
 @media (max-width:1180px){
   :root{--hdr:74px}
 
+  body{padding-bottom:70px}
   .burger{display:inline-flex}
+  .quickbar{
+    position:fixed;left:0;right:0;bottom:0;z-index:80;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--line);border-top:1px solid var(--line);
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+  .quickbar__btn{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    background:#fff;padding:14px 8px;
+    font-family:var(--f-display);font-weight:600;font-size:.85rem;color:var(--ink-2);
+  }
+  .quickbar__btn .ico{width:18px;height:18px;color:var(--b-600)}
+  .quickbar__btn--wa .ico{color:#25a55c}
+  .quickbar__btn--book{background:var(--grad);color:#fff}
+  .quickbar__btn--book .ico{color:#fff}
+
   .nav{
-    position:fixed;top:0;right:0;bottom:0;width:min(370px,86vw);
+    position:fixed;top:0;right:0;bottom:0;width:min(400px,90vw);
     display:flex;flex-direction:column;align-items:stretch;gap:0;
-    background:#fff;z-index:95;padding:26px 24px calc(26px + env(safe-area-inset-bottom));
+    background:#fff;z-index:95;padding:26px 18px calc(26px + env(safe-area-inset-bottom));
     box-shadow:-20px 0 60px -30px rgba(15,39,64,.5);
     transform:translateX(102%);transition:transform .35s cubic-bezier(.3,.8,.4,1);
     overflow-y:auto;margin-left:0;
   }
   .nav.is-open{transform:translateX(0)}
-  .nav__list{flex-direction:column;align-items:stretch;gap:2px;margin-top:56px}
-  .nav__link{width:100%;justify-content:space-between;padding:14px 16px;font-size:1rem;border-radius:6px}
+  .nav__list{flex-direction:column;align-items:stretch;gap:4px;margin:64px 0 0}
+  .nav__link{width:100%;justify-content:space-between;padding:17px 14px;font-size:1.16rem;border-radius:6px}
   /* a full-width underline reads as a divider in the stacked panel */
   .nav__link::after{display:none}
   .nav__link.is-active{background:var(--b-50)}
@@ -1453,12 +1455,11 @@ h1,h2,h3,h4,
     box-shadow:none;border:0;border-left:2px solid var(--b-100);border-radius:0;
     margin:2px 0 6px 18px;padding:2px 0;display:none;
   }
-  .subnav a{padding:12px 16px}
+  .subnav a{padding:15px 16px;font-size:1.02rem}
   .has-sub.is-open .subnav{display:block}
-  .nav__cta{flex-direction:column;align-items:stretch;gap:10px;margin-top:24px;padding-top:24px;border-top:1px solid var(--line)}
-  .nav__cta .btn{width:100%}
-  .nav__cta .btn--phone{padding:12px 20px}
-  .nav__cta .btn--phone .btn__label{display:inline}
+  /* The panel is navigation only. Calling and booking live in the fixed bar at
+     the bottom of the screen, which runs across this whole range. */
+  .nav__cta{display:none}
 
   /* The hero keeps its wide-screen shape: copy, form and cards stack, but the
      photograph stays a full-bleed background behind them rather than dropping
@@ -1554,28 +1555,10 @@ h1,h2,h3,h4,
   .scope li{padding-inline:0}
   .scope li+li{border-left:0;border-top:1px solid rgba(17,42,63,.09);padding-top:22px}
   .locale__skyline{width:60%;opacity:.28}
-  .frame{aspect-ratio:4/3}
-  .frame__badge{right:12px;top:14px}
   .booking__form{grid-template-columns:1fr}
   .footer__top{grid-template-columns:minmax(0,1fr);gap:34px}
   .footer__bar{flex-direction:column;align-items:flex-start}
 
-  body{padding-bottom:70px}
-  .quickbar{
-    position:fixed;left:0;right:0;bottom:0;z-index:80;
-    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
-    background:var(--line);border-top:1px solid var(--line);
-    padding-bottom:env(safe-area-inset-bottom);
-  }
-  .quickbar__btn{
-    display:flex;align-items:center;justify-content:center;gap:8px;
-    background:#fff;padding:14px 8px;
-    font-family:var(--f-display);font-weight:600;font-size:.85rem;color:var(--ink-2);
-  }
-  .quickbar__btn .ico{width:18px;height:18px;color:var(--b-600)}
-  .quickbar__btn--wa .ico{color:#25a55c}
-  .quickbar__btn--book{background:var(--grad);color:#fff}
-  .quickbar__btn--book .ico{color:#fff}
 }
 
 @media (max-width:640px){
