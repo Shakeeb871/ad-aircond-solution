@@ -113,7 +113,10 @@ def service_ld(name, desc, slug):
             '      "addressLocality": "Kuala Lumpur",\n      "postalCode": "50400",\n'
             '      "addressRegion": "Wilayah Persekutuan Kuala Lumpur",\n'
             '      "addressCountry": "MY"\n    }\n  },\n'
-            '  "areaServed": { "@type": "City", "name": "Kuala Lumpur" },\n'
+            '  "areaServed": [\n'
+            '    { "@type": "City", "name": "Kuala Lumpur" },\n'
+            '    { "@type": "State", "name": "Selangor" }\n'
+            '  ],\n'
             f'  "url": "{SITE}{slug}"\n}}')
 
 # --- content and entry point are appended below ---
@@ -165,7 +168,7 @@ CTA = '''<section class="section callout-wrap">
       <div class="callout__scene" aria-hidden="true"></div>
       <div class="callout__skyline" aria-hidden="true"></div>
       <div class="callout__body">
-        <h2 class="h2 callout__title">Not sure what your unit needs?<em>Tell us what it is doing.</em></h2>
+        <h2 class="h2 callout__title">Book Aircond Repair or Service<em>in Kuala Lumpur &amp; Selangor.</em></h2>
         <p class="callout__lede">Describe the symptom and we will confirm which service fits before anything is booked.</p>
         <div class="callout__actions">
           <a class="btn btn--white btn--lg" href="/contact/"><svg class="ico" aria-hidden="true"><use href="#i-calendar"></use></svg>Request a Service Visit</a>
@@ -183,7 +186,7 @@ SERVICES = [
     ("ac-cleaning",           "Aircond Cleaning",           "i-wind",    "svc-cleaning.webp",     "cleaning"),
     ("ac-installation",       "Aircond Installation",       "i-cog",     "svc-installation.webp", "installation"),
     ("ac-maintenance",        "Aircond Maintenance",        "i-install", "svc-maintenance.webp",  "maintenance"),
-    ("gas-refilling",         "Gas Refilling",         "i-snow",    "svc-gas.webp",          "gas"),
+    ("gas-refilling",         "Aircond Gas Refilling", "i-snow",    "svc-gas.webp",          "gas"),
     ("ac-electrical-service", "Aircond Electrical Service", "i-bolt",    "svc-electrical.webp",   "electrical"),
 ]
 
@@ -199,7 +202,7 @@ def others(current):
   <div class="wrap">
     <header class="sec-head sec-head--tight">
       <p class="pill">More services</p>
-      <h2 class="h2 h2--sm">Everything else we look after</h2>
+      <h2 class="h2 h2--sm">Other Aircond Services We Provide</h2>
     </header>
     <div class="minigrid">{cards}
     </div>
@@ -240,18 +243,18 @@ def vision_mission():
   <div class="wrap">
     <header class="sec-head reveal">
       <p class="pill">What drives us</p>
-      <h2 class="h2 vm__title">Vision and <em>mission</em></h2>
+      <h2 class="h2 vm__title">Our Aircond Service <em>Vision &amp; Mission</em></h2>
       <span class="rule-ico" aria-hidden="true"><i class="rule-ico__line"></i><svg class="ico" aria-hidden="true"><use href="#i-snow"></use></svg><i class="rule-ico__line"></i></span>
     </header>
     <div class="vm__grid">
       <article class="vm__card reveal">
         <span class="vm__icon"><svg class="ico" aria-hidden="true"><use href="#i-target"></use></svg></span>
-        <h3 class="vm__name">Our Vision</h3>
+        <h3 class="vm__name">Our Aircond Service Vision</h3>
         <p class="vm__text">To be the air-conditioning company people in Kuala Lumpur call first &mdash; known less for how loudly we advertise than for the fact that what we fix stays fixed.</p>
       </article>
       <article class="vm__card vm__card--accent reveal" data-delay="1">
         <span class="vm__icon"><svg class="ico" aria-hidden="true"><use href="#i-heart"></use></svg></span>
-        <h3 class="vm__name">Our Mission</h3>
+        <h3 class="vm__name">Our Aircond Service Mission</h3>
         <p class="vm__text">To diagnose before we repair, explain before we invoice, and leave every home and business cooler than we found it &mdash; with work our technicians would be happy to put their own name to.</p>
       </article>
     </div>
@@ -261,10 +264,10 @@ def vision_mission():
 
 def journey():
     steps = [
-        ("Where it started", "Ad Aircond Solution began the way most trades do &mdash; one technician, a van, and the units in the neighbourhood around Titiwangsa Central."),
-        ("Word got around", "Repeat calls turned into referrals. Households that had been told to replace a unit found it could be repaired, and told their neighbours."),
-        ("Homes, then premises", "Offices, shops and other business premises came next, where a unit going down costs trading hours and the work has to fit around opening times."),
-        ("Where we are now", "A workshop at Titiwangsa Central, a team working across Kuala Lumpur, and the same rule we started with: look at the unit before recommending anything."),
+        ("Where our aircond work started", "Ad Aircond Solution began the way most trades do &mdash; one technician, a van, and the units in the neighbourhood around Titiwangsa Central."),
+        ("How word spread across KL", "Repeat calls turned into referrals. Households that had been told to replace a unit found it could be repaired, and told their neighbours."),
+        ("From home aircond to business premises", "Offices, shops and other business premises came next, where a unit going down costs trading hours and the work has to fit around opening times."),
+        ("Our aircond service today", "A workshop at Titiwangsa Central, a team working across Kuala Lumpur, and the same rule we started with: look at the unit before recommending anything."),
     ]
     items = "".join(f'''
       <li class="tl__item reveal" data-delay="{i}">
@@ -278,7 +281,7 @@ def journey():
   <div class="wrap">
     <header class="sec-head reveal">
       <p class="pill">Our journey</p>
-      <h2 class="h2 journey__title">How the business <em>grew</em></h2>
+      <h2 class="h2 journey__title">How Our Aircond Business <em>Grew in Kuala Lumpur</em></h2>
       <p class="sec-head__text">No overnight story &mdash; just work that led to the next job.</p>
     </header>
     <ol class="tl">{items}
@@ -310,7 +313,7 @@ def numbers():
   <div class="wrap">
     <header class="sec-head reveal">
       <p class="pill">At a glance</p>
-      <h2 class="h2 stats__title">What we bring <em>to every job</em></h2>
+      <h2 class="h2 stats__title">What We Bring <em>To Every Aircond Job</em></h2>
       <span class="rule-ico" aria-hidden="true"><i class="rule-ico__line"></i><svg class="ico" aria-hidden="true"><use href="#i-snow"></use></svg><i class="rule-ico__line"></i></span>
     </header>
     <ul class="stats__grid">{cards}
@@ -321,9 +324,9 @@ def numbers():
 
 def team():
     roles = [
-        ("i-user",    "Service technicians", "On the tools every day &mdash; inspection, repair, cleaning and installation across homes and business premises."),
-        ("i-headset", "Booking &amp; coordination", "The people who take your call, work out which service fits, and set a time that suits the household or the business."),
-        ("i-cog",     "Installation crew",   "Mounting, pipework, drainage and commissioning &mdash; the part that decides how well a new system performs."),
+        ("i-user",    "Aircond service technicians", "On the tools every day &mdash; inspection, repair, cleaning and installation across homes and business premises."),
+        ("i-headset", "Aircond booking &amp; coordination", "The people who take your call, work out which service fits, and set a time that suits the household or the business."),
+        ("i-cog",     "Aircond installation crew",   "Mounting, pipework, drainage and commissioning &mdash; the part that decides how well a new system performs."),
     ]
     cards = "".join(f'''
       <article class="tm reveal" data-delay="{i}">
@@ -338,7 +341,7 @@ def team():
   <div class="wrap">
     <header class="sec-head reveal">
       <p class="pill">Our team</p>
-      <h2 class="h2 teamsec__title">The people who <em>do the work</em></h2>
+      <h2 class="h2 teamsec__title">The Aircond Team <em>Behind The Work</em></h2>
       <p class="sec-head__text">Small enough that the person who takes your call knows the technician who turns up.</p>
     </header>
     <div class="tm-grid">{cards}
@@ -349,13 +352,13 @@ def team():
 
 def capability():
     items = [
-        ("i-grid",   "Every model and brand",
+        ("i-grid",   "Every aircond model and brand",
          "Wall-mounted splits, ceiling cassettes and outdoor condensers &mdash; Daikin, Panasonic, Mitsubishi Electric, LG, Samsung, York, Midea and the rest. Tell us the make and model and we will confirm before booking."),
-        ("i-badge",  "Trained technicians",
+        ("i-badge",  "Trained aircond technicians",
          "The people who arrive work on these systems daily. They are trained on the equipment they are sent to, not handed a job they have never seen."),
-        ("i-shield", "Safe electrical work",
+        ("i-shield", "Safe aircond electrical work",
          "Capacitors, wiring and control boards are the part of an air conditioner where guessing is both expensive and dangerous. That work is traced to the component and handled properly."),
-        ("i-clock",  "Around your hours",
+        ("i-clock",  "Aircond visits around your hours",
          "Households get a time that suits them. Business premises get a visit that fits around trading hours, because a shop cannot close for an aircond."),
     ]
     cards = "".join(f'''
@@ -370,7 +373,7 @@ def capability():
   <div class="wrap">
     <header class="sec-head reveal">
       <p class="pill">What we handle</p>
-      <h2 class="h2 capsec__title">Whatever the unit, <em>whoever made it</em></h2>
+      <h2 class="h2 capsec__title">Aircond Brands <em>&amp; Models We Service</em></h2>
       <p class="sec-head__text">The equipment changes from job to job. The way we approach it does not.</p>
     </header>
     <div class="cap-grid">{cards}
@@ -419,7 +422,7 @@ def problems():
             "Small faults you would rather catch early",
             "Refrigerant pressure never checked",
             "Electrical connections never inspected"]),
-        ("gas-refilling", "Gas Refilling", "i-snow", [
+        ("gas-refilling", "Aircond Gas Refilling", "i-snow", [
             "Cooling faded gradually over weeks",
             "Unit runs constantly without reaching temperature",
             "Air from the vents is cool but never cold",
@@ -451,7 +454,7 @@ def problems():
   <div class="wrap">
     <header class="sec-head">
       <p class="pill">What we repair</p>
-      <h2 class="h2 problems__title">The problems <em>we fix</em></h2>
+      <h2 class="h2 problems__title">Aircond Problems <em>We Fix</em></h2>
       <span class="rule-ico" aria-hidden="true"><i class="rule-ico__line"></i><svg class="ico" aria-hidden="true"><use href="#i-snow"></use></svg><i class="rule-ico__line"></i></span>
       <p class="sec-head__text">If your unit is doing any of these, it is on our list. Find the symptom and it tells you which service you need.</p>
     </header>
@@ -488,122 +491,122 @@ PAGES = []
 
 PAGES.append(service_page(
     "ac-repair", "Aircond Repair", "Aircond Repair",
-    "Aircond repair,", "diagnosed before it is fixed",
+    "Aircond repair in", "Kuala Lumpur &amp; Selangor",
     "A unit that has stopped cooling, stopped starting or failed mid-use gets inspected first, so the repair answers the actual fault rather than the symptom.",
     "svc-repair.webp",
     "What an aircond repair visit involves",
     ["Weak cooling, no cooling and a unit that will not start all have several possible causes. A dirty coil, a failing capacitor, a blocked drain line, a refrigerant leak and a control fault can each produce the same complaint, and each needs a different fix.",
      "So the visit begins with an inspection: the technician checks how the unit is behaving, works back to the component responsible, and explains what was found before any part is replaced. You hear what is wrong and what putting it right involves.",
      "Where a repair is not the sensible answer &mdash; an old unit with a failing compressor, for instance &mdash; we will say so rather than sell you a repair that will not last."],
-    "Faults we are called out for",
+    "Aircond faults we are called out for",
     ["Unit runs but the room does not get cold", "Unit will not switch on or trips the breaker",
      "Water dripping from the indoor unit", "Ice forming on the coil or pipework",
      "Loud rattling, grinding or buzzing", "Unit short-cycles or shuts off by itself",
      "Remote or control board not responding", "Burning or musty smell when running"],
-    "Repairs for homes and business premises",
+    "Aircond repairs for homes and business premises",
     ["We work on wall-mounted splits in homes and apartments, and on the units keeping offices, shops and other commercial premises trading. For a business, downtime matters, so tell us your opening hours when you book and we will work around them.",
      "Parts are matched to your system. If a component needs ordering, you will be told what it is and how long it takes before we proceed."],
-    "Aircond Repair in Kuala Lumpur | Ad Aircond Solution",
-    "Aircond repair in Kuala Lumpur for units that have stopped cooling, will not start, leak water or trip the breaker. Inspection first, then the fix. Call +60178570744."))
+    "Aircond Repair in KL &amp; Selangor | Ad Aircond Solution",
+    "Aircond repair in KL and Selangor for units that have stopped cooling, will not start, leak water or trip the breaker. Inspection first, then the fix. Call +60178570744."))
 
 PAGES.append(service_page(
     "ac-cleaning", "Aircond Cleaning", "Aircond Cleaning",
-    "Deep cleaning that", "restores airflow",
+    "Aircond cleaning in", "Kuala Lumpur &amp; Selangor",
     "Filters, coils, the blower wheel and the drain line are cleaned properly, so the unit moves the air it was built to move and sheds heat the way it should.",
     "svc-cleaning.webp",
-    "Why cleaning changes how a unit performs",
-    ["Dust loads up quickly in Kuala Lumpur. It settles on the filter first, then works through to the coil and the blower wheel, and as it builds the unit has to run longer to reach the same temperature.",
+    "Why aircond cleaning changes how a unit performs",
+    ["Dust loads up quickly in Kuala Lumpur and Selangor. It settles on the filter first, then works through to the coil and the blower wheel, and as it builds the unit has to run longer to reach the same temperature.",
      "A clogged coil cannot shed heat properly and a coated blower wheel cannot push air. That shows up as weak cooling and a longer running time, and it is why a unit that is only a couple of years old can feel like it has lost its edge.",
      "Cleaning also clears the drain line. A blocked drain is the usual reason water ends up marking a wall, and it is far cheaper to clear than to repair the damage it causes."],
-    "What gets cleaned",
+    "What gets cleaned in an aircond service",
     ["Filters washed and refitted", "Indoor coil cleaned down", "Blower wheel cleared of build-up",
      "Drain line flushed and checked", "Drain pan cleaned out", "Outdoor coil and fan cleaned",
      "Casing and louvres wiped down", "Cooling checked before we leave"],
-    "How often it is worth doing",
+    "How often aircond cleaning is worth doing",
     ["How often depends on the room rather than the calendar. A unit running most of the day, a home near a busy road, a kitchen, a shop floor or a household with pets will load up faster than a bedroom used only at night.",
      "We will tell you what the filters and coil actually looked like at this visit, so you can judge the right interval for your own space instead of guessing."],
-    "Aircond Cleaning &amp; Servicing in KL | Ad Aircond Solution",
-    "Aircond cleaning in Kuala Lumpur: filters, coil, blower wheel and drain line cleaned so airflow and cooling come back. Call +60178570744."))
+    "Aircond Cleaning &amp; Servicing in KL &amp; Selangor | Ad Aircond Solution",
+    "Aircond cleaning in Kuala Lumpur and Selangor: filters, coil, blower wheel and drain line cleaned so airflow and cooling come back. Call +60178570744."))
 
 PAGES.append(service_page(
     "ac-installation", "Aircond Installation", "Aircond Installation",
-    "Installation done", "properly the first time",
+    "Aircond installation in", "Kuala Lumpur &amp; Selangor",
     "Mounting, piping, drainage, electrical connection and commissioning &mdash; set up so the system performs as it was designed to from the day it is switched on.",
     "svc-installation.webp",
-    "What a proper installation covers",
+    "What a proper aircond installation covers",
     ["How well an air conditioner performs has as much to do with how it was fitted as with the unit itself. Bracket placement, pipe run length, the fall on the drain line and the electrical connection all decide whether you get the cooling you paid for.",
      "We site the indoor unit where the air will actually reach the room, run the pipework and drain with the right fall, make the electrical connection safely, then commission the system and check it is cooling as it should before we leave.",
      "If you are still choosing a unit, tell us the room size and how it is used. We will tell you what capacity suits it &mdash; oversizing costs more to run and cools less comfortably than people expect."],
-    "Included in an installation",
+    "Included in every aircond installation",
     ["Site check before the quote", "Indoor unit mounted and levelled",
      "Refrigerant pipework run and insulated", "Drain line run with correct fall",
      "Outdoor unit sited and secured", "Electrical connection made safely",
      "System vacuumed and commissioned", "Cooling verified before handover"],
-    "Replacements and additional units",
+    "Aircond replacements and additional units",
     ["Replacing an old unit is often simpler than a first installation, because the pipe run and drain may be reusable. We check their condition first rather than assuming, since reusing a pipe run in poor condition causes problems later.",
      "Adding a unit to a home or premises that already has one is straightforward. Tell us where it needs to go and we will confirm what the run involves."],
-    "Aircond Installation in Kuala Lumpur | Ad Aircond Solution",
-    "Air conditioner installation in Kuala Lumpur: mounting, pipework, drainage, electrical connection and commissioning. Call +60178570744."))
+    "Aircond Installation in KL &amp; Selangor | Ad Aircond Solution",
+    "Air conditioner installation in Kuala Lumpur and Selangor: mounting, pipework, drainage, electrical connection and commissioning. Call +60178570744."))
 
 PAGES.append(service_page(
     "ac-maintenance", "Aircond Maintenance", "Aircond Maintenance",
-    "Maintenance that", "catches faults early",
+    "Aircond maintenance in", "Kuala Lumpur &amp; Selangor",
     "Scheduled visits that keep a system running at its best and flag small issues while they are still small jobs.",
     "svc-maintenance.webp",
-    "What maintenance is for",
+    "What aircond maintenance is for",
     ["Most air conditioner failures announce themselves before they happen. A capacitor on its way out, a drain starting to block, a coil losing its ability to shed heat &mdash; each shows up as a change in how the unit behaves well before it stops.",
      "A maintenance visit is where those get noticed. The unit is cleaned, its operation checked, and anything heading for a problem is flagged while it is still cheap to deal with.",
      "The other half of it is running cost. A system kept clean reaches temperature sooner and runs for less time to hold it, which is the difference you feel on the bill rather than in the room."],
-    "Covered at each visit",
+    "Covered at each aircond maintenance visit",
     ["Filters and coil cleaned", "Drain line checked and flushed",
      "Airflow and cooling performance checked", "Refrigerant pressure checked",
      "Electrical connections inspected", "Fan and blower operation checked",
      "Outdoor unit cleaned and inspected", "Written note of anything to watch"],
-    "Scheduled cover for premises with several units",
+    "Scheduled aircond cover for premises with several units",
     ["Offices, shops and other premises running several units are easier to look after on a schedule than one call-out at a time. Units get attended in one visit, and you get a single picture of which ones are fine and which need attention.",
      "Tell us how many units you have and where they are, and we will set out what a visit covers and how often it is worth doing for your site."],
-    "Aircond Maintenance in Kuala Lumpur | Ad Aircond Solution",
-    "Scheduled aircond maintenance in Kuala Lumpur for homes and business premises. Cleaning, checks and early warning of faults. Call +60178570744."))
+    "Aircond Maintenance in KL &amp; Selangor | Ad Aircond Solution",
+    "Scheduled aircond maintenance in Kuala Lumpur and Selangor for homes and business premises. Cleaning, checks and early warning of faults. Call +60178570744."))
 
 PAGES.append(service_page(
-    "gas-refilling", "Gas Refilling", "Gas Refilling",
-    "Refrigerant checked,", "then topped up",
+    "gas-refilling", "Aircond Gas Refilling", "Aircond Gas Refilling",
+    "Aircond gas refilling in", "Kuala Lumpur &amp; Selangor",
     "Weak cooling often means low refrigerant. We check the system for the leak that caused it before refilling, so the gas stays in.",
     "svc-gas.webp",
-    "Why we look for the leak first",
+    "Why we look for the refrigerant leak first",
     ["Refrigerant is not consumed. A sealed system holds the same charge for years, so if the level has dropped it has escaped somewhere &mdash; a joint, a flare, a pipe run or the coil itself.",
      "Refilling without finding that leak means paying for gas twice: the cooling comes back for a while, then fades again as the charge escapes the same way it did the first time.",
      "So the visit starts with pressure readings and a leak check. If we find one, you are told where it is and what repairing it involves, and the system is refilled once it will hold the charge."],
-    "Signs the charge may be low",
+    "Signs your aircond gas is low",
     ["Cooling has faded gradually over weeks", "Unit runs constantly without reaching temperature",
      "Ice forming on the pipework or coil", "Air from the vents is cool but not cold",
      "Hissing or bubbling from the indoor unit", "Higher electricity use with no change in habits",
      "Oily residue near pipe joints", "Cooling is worse on the hottest days"],
-    "The right gas for your system",
+    "The right refrigerant for your aircond",
     ["Different systems take different refrigerants, and they are not interchangeable. We identify what your unit is charged with and refill with that, to the pressure the manufacturer specifies rather than by feel.",
      "If the readings show the problem is not refrigerant at all &mdash; a dirty coil and a low charge can feel identical from the room &mdash; we will tell you that instead of selling you gas you do not need."],
-    "Aircond Gas Refilling in Kuala Lumpur | Ad Aircond Solution",
-    "Aircond gas refilling in Kuala Lumpur. Leak check and pressure test first, then refilled with the correct refrigerant. Call +60178570744."))
+    "Aircond Gas Refilling in KL &amp; Selangor | Ad Aircond Solution",
+    "Aircond gas refilling in Kuala Lumpur and Selangor. Leak check and pressure test first, then refilled with the correct refrigerant. Call +60178570744."))
 
 PAGES.append(service_page(
     "ac-electrical-service", "Aircond Electrical Service", "Aircond Electrical Service",
-    "Electrical faults", "traced and handled safely",
+    "Aircond electrical service in", "Kuala Lumpur &amp; Selangor",
     "From a failed capacitor to wiring and control faults &mdash; the electrical side of an air conditioner, diagnosed and repaired properly.",
     "svc-electrical.webp",
-    "The electrical faults behind common symptoms",
+    "Aircond electrical faults behind common symptoms",
     ["A unit that will not start, starts and stops, hums without running or trips the breaker is usually an electrical problem rather than a cooling one. Capacitors, contactors, fan motors, control boards and the wiring between them are all candidates.",
      "These are the faults where guessing is expensive. Replacing a control board when the capacitor was the problem costs several times what the actual fix would have. So the fault is traced to the component before anything is replaced.",
      "This is also the part of an air conditioner where working on it yourself is genuinely dangerous. Capacitors hold a charge after the power is off, and a unit that is tripping a breaker is telling you something that should not be reset and ignored."],
-    "Electrical work we carry out",
+    "Aircond electrical work we carry out",
     ["Capacitor testing and replacement", "Contactor and relay faults",
      "Fan and blower motor faults", "Control board diagnosis",
      "Wiring and terminal faults", "Units tripping the breaker",
      "Remote and sensor faults", "Power supply checks at the unit"],
-    "When a breaker keeps tripping",
+    "When your aircond keeps tripping the breaker",
     ["A breaker that trips when the air conditioner runs is doing its job &mdash; something in the circuit is drawing more current than it should. Resetting it repeatedly does not fix the cause and is not safe.",
      "Switch the unit off at the isolator and call us. We will find what is drawing the current, whether that is the unit, its wiring or the supply, and put it right."],
-    "Aircond Electrical Service in Kuala Lumpur | Ad Aircond Solution",
-    "Aircond electrical repair in Kuala Lumpur: capacitors, wiring, control boards and units tripping the breaker. Call +60178570744."))
+    "Aircond Electrical Service in KL &amp; Selangor | Ad Aircond Solution",
+    "Aircond electrical repair in Kuala Lumpur and Selangor: capacitors, wiring, control boards and units tripping the breaker. Call +60178570744."))
 
 
 # --- services hub -----------------------------------------------------------
@@ -626,10 +629,10 @@ _svc_cards = "".join(
 
 PAGES.append({
     "dir": "services", "url": "services/", "nav": "services", "image": "svc-installation.webp",
-    "title": "Aircond Services in Kuala Lumpur | Ad Aircond Solution",
+    "title": "Aircond Services in Kuala Lumpur &amp; Selangor | Ad Aircond Solution",
     "description": "The six air conditioning services Ad Aircond Solution provides in Kuala Lumpur: repair, cleaning, installation, maintenance, gas refilling and electrical work.",
     "body": "\n".join([
-        ahero("Our Services", "Complete Aircond care,", "all in one place",
+        ahero("Our Services", "Aircond services in", "Kuala Lumpur &amp; Selangor",
               "Repair, cleaning, installation, maintenance, gas refilling and electrical work &mdash; for homes and business premises across Kuala Lumpur.",
               "svc-installation.webp",
               bc(("Home", "/"), ("Our Services", None))),
@@ -639,7 +642,7 @@ PAGES.append({
       <h2 class="hstack services__title">
         <span class="hstack__lead">Complete aircond</span>
         <span class="hstack__main">Repair, cleaning, installation &amp; maintenance</span>
-        <span class="hstack__sub">For homes &amp; businesses in Kuala Lumpur</span>
+        <span class="hstack__sub">For homes &amp; businesses in Kuala Lumpur &amp; Selangor</span>
       </h2>
       <span class="rule-ico" aria-hidden="true"><i class="rule-ico__line"></i><svg class="ico" aria-hidden="true"><use href="#i-snow"></use></svg><i class="rule-ico__line"></i></span>
       <p class="sec-head__text">Whichever one you need, the visit starts the same way &mdash; we look at the unit before recommending anything.</p>
@@ -649,7 +652,7 @@ PAGES.append({
   </div>
 </section>''',
         problems(),
-        article("Not sure which one you need?", [
+        article("Which Aircond Service Do You Need?", [
             "Most people call about a symptom rather than a service, and that is the right way round. Weak cooling can be a dirty coil, a low refrigerant charge or a failing capacitor, and those are three different jobs.",
             "Tell us what the unit is doing &mdash; how it sounds, when it started, whether it cools at all &mdash; and we will tell you which service fits before anything is booked. If it turns out to be the cheaper job, that is the one we will quote."]),
         CTA,
@@ -666,12 +669,12 @@ def _pull(start, end):
 
 PAGES.append({
     "dir": "about", "url": "about/", "nav": "about", "image": "about.webp",
-    "title": "About Us | Ad Aircond Solution, Kuala Lumpur",
+    "title": "About Us | Aircond Specialists in KL &amp; Selangor",
     "description": "Ad Aircond Solution provides air conditioning repair, servicing, maintenance and installation for homes and businesses across Kuala Lumpur. Based at Titiwangsa Central.",
     "body": "\n".join([
         ahero("About Ad Aircond Solution",
-              "The team keeping",
-              "Kuala Lumpur cool.",
+              "About Ad Aircond Solution,",
+              "aircond specialists in KL &amp; Selangor",
               "Air conditioning repair, cleaning, installation and maintenance for homes and business premises &mdash; from a workshop at Titiwangsa Central, Kuala Lumpur.",
               "cta-outdoor-unit.webp",
               bc(("Home", "/"), ("About Us", None))),
@@ -685,11 +688,11 @@ PAGES.append({
         numbers(),
         capability(),
         team(),
-        article("How we work", [
+        article("How We Approach Every Aircond Job", [
             "Every job starts with looking at the unit. A room that is not getting cold can point to a dirty coil, a blocked drain, a low refrigerant charge, a failing capacitor or a control fault, and the only way to know which is to inspect rather than assume.",
             "What we find gets explained in plain terms &mdash; what is wrong, what fixing it involves, and what it will take. If a repair is not worth doing on an old unit, we will say so.",
             "The work itself gets the same care as the diagnosis: the unit is left working properly, and the room is left as we found it."],
-            checks("What you can expect", [
+            checks("What to expect from our aircond service", [
                 "The unit inspected before anything is quoted",
                 "The fault explained in plain language",
                 "Parts matched to your system",
@@ -706,10 +709,10 @@ PAGES.append({
 
 PAGES.append({
     "dir": "contact", "url": "contact/", "nav": "contact", "image": "step-contact.webp",
-    "title": "Contact | Ad Aircond Solution, Kuala Lumpur",
+    "title": "Contact Aircond Repair &amp; Service in KL &amp; Selangor",
     "description": "Call or WhatsApp Ad Aircond Solution on +60178570744, or send your details through the form. 14, Jalan Batu Bata, Titiwangsa Central, 50400 Kuala Lumpur.",
     "body": "\n".join([
-        ahero("Contact", "Tell us what", "your aircond is doing",
+        ahero("Contact", "Contact Ad Aircond Solution", "in KL &amp; Selangor",
               "Call, WhatsApp, or send the details through the form and we will confirm the service and a time that suits you.",
               "step-contact.webp",
               bc(("Home", "/"), ("Contact", None))),
