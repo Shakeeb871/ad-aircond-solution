@@ -232,19 +232,24 @@ h1,h2,h3,h4,
 .nav__toggle .ico{transition:transform .25s ease}
 .has-sub.is-open .nav__toggle .ico{transform:rotate(180deg)}
 
+/* The panel carries no side padding and clips its own corners, so a hovered
+   item paints edge to edge instead of floating inside an inset box. */
 .subnav{
   position:absolute;top:calc(100% + 8px);left:0;min-width:236px;
   background:#fff;border:1px solid var(--line);border-radius:var(--r);
-  box-shadow:var(--sh-md);padding:8px;
+  box-shadow:var(--sh-md);padding:6px 0;overflow:hidden;
   opacity:0;visibility:hidden;transform:translateY(8px);
   transition:opacity .2s ease,transform .2s ease,visibility .2s;
 }
 .has-sub:hover .subnav,.has-sub.is-open .subnav{opacity:1;visibility:visible;transform:translateY(0)}
 .subnav a{
-  display:block;padding:10px 14px;border-radius:6px;font-size:.9rem;color:var(--ink-2);
-  transition:background-color .18s ease,color .18s ease;
+  display:block;padding:11px 18px;font-size:.9rem;color:var(--ink-2);
+  border-left:3px solid transparent;
+  transition:background-color .18s ease,color .18s ease,border-color .18s ease;
 }
-.subnav a:hover{background:var(--b-50);color:var(--b-700)}
+.subnav a:hover,.subnav a:focus-visible{
+  background:var(--b-50);color:var(--b-700);border-left-color:var(--b-500);outline:0;
+}
 
 .nav__cta{display:flex;align-items:center;gap:10px;flex:none}
 
@@ -677,13 +682,16 @@ h1,h2,h3,h4,
 }
 .deco--shield{top:clamp(80px,10vw,150px);left:clamp(-10px,1vw,34px);width:clamp(96px,9vw,132px);opacity:.5}
 
-.services__head{max-width:880px}
+/* This section reads left-aligned: the header, the rule under it, the snowflake
+   divider and every card body all start on the same left edge. */
+.services__head{max-width:880px;margin-inline:0;text-align:left}
+.services__head .rule-ico{justify-content:flex-start}
 .services__title{color:var(--navy)}
 .services__title em{font-style:normal;color:var(--b-600)}
 /* short rule closing the introduction, as in the reference */
 .services__rule{
   display:block;width:64px;height:3px;border-radius:2px;
-  margin:22px auto 0;background:var(--b-500);
+  margin:22px 0 0;background:var(--b-500);
 }
 
 /* pill eyebrow */
@@ -706,7 +714,7 @@ h1,h2,h3,h4,
 .svc{
   position:relative;background:#fff;border:1px solid var(--line);
   border-radius:var(--r-xl);box-shadow:var(--sh-sm);
-  display:flex;flex-direction:column;text-align:center;
+  display:flex;flex-direction:column;text-align:left;
   transition:transform .3s cubic-bezier(.3,.8,.4,1),box-shadow .3s ease,border-color .3s ease;
 }
 .svc:hover{transform:translateY(-6px);box-shadow:var(--sh-md);border-color:var(--b-200)}
@@ -728,7 +736,8 @@ h1,h2,h3,h4,
 
 /* circular badge straddling the image / body boundary */
 .svc__badge{
-  position:relative;z-index:1;align-self:center;margin-top:-29px;
+  position:relative;z-index:1;align-self:flex-start;
+  margin:-29px 0 0 clamp(20px,2vw,28px);
   display:inline-flex;align-items:center;justify-content:center;
   width:58px;height:58px;border-radius:50%;
   background:var(--grad);color:#fff;
@@ -736,7 +745,7 @@ h1,h2,h3,h4,
 }
 .svc__badge .ico{width:26px;height:26px}
 
-.svc__body{padding:16px clamp(20px,2vw,28px) clamp(24px,2.4vw,30px);display:flex;flex-direction:column;align-items:center;flex:1}
+.svc__body{padding:16px clamp(20px,2vw,28px) clamp(24px,2.4vw,30px);display:flex;flex-direction:column;align-items:flex-start;flex:1}
 .svc__title{font-size:1.1rem;font-weight:600;color:var(--navy)}
 .svc__rule{display:block;width:40px;height:3px;border-radius:2px;margin:11px 0 13px;background:var(--b-400)}
 .svc__text{font-size:.895rem;line-height:1.68;color:var(--muted)}
@@ -922,7 +931,7 @@ h1,h2,h3,h4,
 
 /* service cards used as links on the services page */
 .svc--link{text-decoration:none}
-.svc--link .svc__body{display:flex;flex-direction:column;align-items:center}
+.svc--link .svc__body{display:flex;flex-direction:column;align-items:flex-start}
 .svc--link .svc__title{display:block}
 .svc__go{
   display:inline-flex;align-items:center;gap:7px;margin-top:4px;
@@ -1420,10 +1429,11 @@ h1,h2,h3,h4,
   .nav__link::after{display:none}
   .nav__link.is-active{background:var(--b-50)}
   .subnav{
-    position:static;opacity:1;visibility:visible;transform:none;
+    position:static;opacity:1;visibility:visible;transform:none;overflow:visible;
     box-shadow:none;border:0;border-left:2px solid var(--b-100);border-radius:0;
     margin:2px 0 6px 18px;padding:2px 0;display:none;
   }
+  .subnav a{padding:12px 16px}
   .has-sub.is-open .subnav{display:block}
   .nav__cta{flex-direction:column;align-items:stretch;gap:10px;margin-top:24px;padding-top:24px;border-top:1px solid var(--line)}
   .nav__cta .btn{width:100%}

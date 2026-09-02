@@ -179,12 +179,12 @@ CTA = '''<section class="section callout-wrap">
 
 # directory, name, sprite icon, photo, the .svc__media-- modifier the CSS defines
 SERVICES = [
-    ("ac-repair",             "AC Repair",             "i-tools",   "svc-repair.webp",       "repair"),
-    ("ac-cleaning",           "AC Cleaning",           "i-wind",    "svc-cleaning.webp",     "cleaning"),
-    ("ac-installation",       "AC Installation",       "i-cog",     "svc-installation.webp", "installation"),
-    ("ac-maintenance",        "AC Maintenance",        "i-install", "svc-maintenance.webp",  "maintenance"),
+    ("ac-repair",             "Aircond Repair",             "i-tools",   "svc-repair.webp",       "repair"),
+    ("ac-cleaning",           "Aircond Cleaning",           "i-wind",    "svc-cleaning.webp",     "cleaning"),
+    ("ac-installation",       "Aircond Installation",       "i-cog",     "svc-installation.webp", "installation"),
+    ("ac-maintenance",        "Aircond Maintenance",        "i-install", "svc-maintenance.webp",  "maintenance"),
     ("gas-refilling",         "Gas Refilling",         "i-snow",    "svc-gas.webp",          "gas"),
-    ("ac-electrical-service", "AC Electrical Service", "i-bolt",    "svc-electrical.webp",   "electrical"),
+    ("ac-electrical-service", "Aircond Electrical Service", "i-bolt",    "svc-electrical.webp",   "electrical"),
 ]
 
 
@@ -383,7 +383,7 @@ def problems():
     """Every service listed with the faults it covers, so a visitor who knows
     the symptom but not the service name can still find the right page."""
     rows = [
-        ("ac-repair", "AC Repair", "i-tools", [
+        ("ac-repair", "Aircond Repair", "i-tools", [
             "Unit runs but the room does not get cold",
             "Unit will not switch on, or trips the breaker",
             "Water dripping from the indoor unit",
@@ -392,7 +392,7 @@ def problems():
             "Unit short-cycles or shuts off by itself",
             "Remote or control board not responding",
             "Burning or musty smell when running"]),
-        ("ac-cleaning", "AC Cleaning", "i-wind", [
+        ("ac-cleaning", "Aircond Cleaning", "i-wind", [
             "Weak airflow from the vents",
             "Dusty or musty smell when the unit starts",
             "Filters clogged and grey with dust",
@@ -401,7 +401,7 @@ def problems():
             "Water marking the wall from a blocked drain",
             "Unit running far longer to reach temperature",
             "Mould or slime in the drain pan"]),
-        ("ac-installation", "AC Installation", "i-cog", [
+        ("ac-installation", "Aircond Installation", "i-cog", [
             "First installation in a new home or premises",
             "Replacing a unit that is beyond repair",
             "Adding a unit to a room that has none",
@@ -410,7 +410,7 @@ def problems():
             "Outdoor unit sited where it cannot breathe",
             "Drain that falls the wrong way and backs up",
             "Choosing the right capacity for the room"]),
-        ("ac-maintenance", "AC Maintenance", "i-install", [
+        ("ac-maintenance", "Aircond Maintenance", "i-install", [
             "No service since the unit was installed",
             "Cooling that has quietly dropped off over months",
             "Electricity bill climbing with no change in use",
@@ -428,7 +428,7 @@ def problems():
             "Oily residue near a pipe joint",
             "Cooling worst on the hottest days",
             "Refrigerant topped up before and lost again"]),
-        ("ac-electrical-service", "AC Electrical Service", "i-bolt", [
+        ("ac-electrical-service", "Aircond Electrical Service", "i-bolt", [
             "Unit hums but the fan will not turn",
             "Breaker trips whenever the unit runs",
             "Unit starts then stops after a few seconds",
@@ -487,7 +487,7 @@ def service_page(slug, nav_name, kicker, title_a, title_b, lede, photo,
 PAGES = []
 
 PAGES.append(service_page(
-    "ac-repair", "AC Repair", "AC Repair",
+    "ac-repair", "Aircond Repair", "Aircond Repair",
     "Aircond repair,", "diagnosed before it is fixed",
     "A unit that has stopped cooling, stopped starting or failed mid-use gets inspected first, so the repair answers the actual fault rather than the symptom.",
     "svc-repair.webp",
@@ -503,11 +503,11 @@ PAGES.append(service_page(
     "Repairs for homes and business premises",
     ["We work on wall-mounted splits in homes and apartments, and on the units keeping offices, shops and other commercial premises trading. For a business, downtime matters, so tell us your opening hours when you book and we will work around them.",
      "Parts are matched to your system. If a component needs ordering, you will be told what it is and how long it takes before we proceed."],
-    "AC Repair in Kuala Lumpur | Ad Aircond Solution",
+    "Aircond Repair in Kuala Lumpur | Ad Aircond Solution",
     "Aircond repair in Kuala Lumpur for units that have stopped cooling, will not start, leak water or trip the breaker. Inspection first, then the fix. Call +60178570744."))
 
 PAGES.append(service_page(
-    "ac-cleaning", "AC Cleaning", "AC Cleaning",
+    "ac-cleaning", "Aircond Cleaning", "Aircond Cleaning",
     "Deep cleaning that", "restores airflow",
     "Filters, coils, the blower wheel and the drain line are cleaned properly, so the unit moves the air it was built to move and sheds heat the way it should.",
     "svc-cleaning.webp",
@@ -522,11 +522,11 @@ PAGES.append(service_page(
     "How often it is worth doing",
     ["How often depends on the room rather than the calendar. A unit running most of the day, a home near a busy road, a kitchen, a shop floor or a household with pets will load up faster than a bedroom used only at night.",
      "We will tell you what the filters and coil actually looked like at this visit, so you can judge the right interval for your own space instead of guessing."],
-    "AC Cleaning &amp; Servicing in Kuala Lumpur | Ad Aircond Solution",
+    "Aircond Cleaning &amp; Servicing in KL | Ad Aircond Solution",
     "Aircond cleaning in Kuala Lumpur: filters, coil, blower wheel and drain line cleaned so airflow and cooling come back. Call +60178570744."))
 
 PAGES.append(service_page(
-    "ac-installation", "AC Installation", "AC Installation",
+    "ac-installation", "Aircond Installation", "Aircond Installation",
     "Installation done", "properly the first time",
     "Mounting, piping, drainage, electrical connection and commissioning &mdash; set up so the system performs as it was designed to from the day it is switched on.",
     "svc-installation.webp",
@@ -542,11 +542,11 @@ PAGES.append(service_page(
     "Replacements and additional units",
     ["Replacing an old unit is often simpler than a first installation, because the pipe run and drain may be reusable. We check their condition first rather than assuming, since reusing a pipe run in poor condition causes problems later.",
      "Adding a unit to a home or premises that already has one is straightforward. Tell us where it needs to go and we will confirm what the run involves."],
-    "AC Installation in Kuala Lumpur | Ad Aircond Solution",
+    "Aircond Installation in Kuala Lumpur | Ad Aircond Solution",
     "Air conditioner installation in Kuala Lumpur: mounting, pipework, drainage, electrical connection and commissioning. Call +60178570744."))
 
 PAGES.append(service_page(
-    "ac-maintenance", "AC Maintenance", "AC Maintenance",
+    "ac-maintenance", "Aircond Maintenance", "Aircond Maintenance",
     "Maintenance that", "catches faults early",
     "Scheduled visits that keep a system running at its best and flag small issues while they are still small jobs.",
     "svc-maintenance.webp",
@@ -562,7 +562,7 @@ PAGES.append(service_page(
     "Scheduled cover for premises with several units",
     ["Offices, shops and other premises running several units are easier to look after on a schedule than one call-out at a time. Units get attended in one visit, and you get a single picture of which ones are fine and which need attention.",
      "Tell us how many units you have and where they are, and we will set out what a visit covers and how often it is worth doing for your site."],
-    "AC Maintenance in Kuala Lumpur | Ad Aircond Solution",
+    "Aircond Maintenance in Kuala Lumpur | Ad Aircond Solution",
     "Scheduled aircond maintenance in Kuala Lumpur for homes and business premises. Cleaning, checks and early warning of faults. Call +60178570744."))
 
 PAGES.append(service_page(
@@ -586,7 +586,7 @@ PAGES.append(service_page(
     "Aircond gas refilling in Kuala Lumpur. Leak check and pressure test first, then refilled with the correct refrigerant. Call +60178570744."))
 
 PAGES.append(service_page(
-    "ac-electrical-service", "AC Electrical Service", "AC Electrical Service",
+    "ac-electrical-service", "Aircond Electrical Service", "Aircond Electrical Service",
     "Electrical faults", "traced and handled safely",
     "From a failed capacitor to wiring and control faults &mdash; the electrical side of an air conditioner, diagnosed and repaired properly.",
     "svc-electrical.webp",
@@ -602,7 +602,7 @@ PAGES.append(service_page(
     "When a breaker keeps tripping",
     ["A breaker that trips when the air conditioner runs is doing its job &mdash; something in the circuit is drawing more current than it should. Resetting it repeatedly does not fix the cause and is not safe.",
      "Switch the unit off at the isolator and call us. We will find what is drawing the current, whether that is the unit, its wiring or the supply, and put it right."],
-    "AC Electrical Service in Kuala Lumpur | Ad Aircond Solution",
+    "Aircond Electrical Service in Kuala Lumpur | Ad Aircond Solution",
     "Aircond electrical repair in Kuala Lumpur: capacitors, wiring, control boards and units tripping the breaker. Call +60178570744."))
 
 
@@ -621,10 +621,10 @@ _svc_cards = "".join(f'''
 
 PAGES.append({
     "dir": "services", "url": "services/", "nav": "services", "image": "svc-installation.webp",
-    "title": "Our Services | Aircond Repair, Cleaning &amp; Installation in Kuala Lumpur",
+    "title": "Aircond Services in Kuala Lumpur | Ad Aircond Solution",
     "description": "The six air conditioning services Ad Aircond Solution provides in Kuala Lumpur: repair, cleaning, installation, maintenance, gas refilling and electrical work.",
     "body": "\n".join([
-        ahero("Our Services", "Complete AC care,", "all in one place",
+        ahero("Our Services", "Complete Aircond care,", "all in one place",
               "Repair, cleaning, installation, maintenance, gas refilling and electrical work &mdash; for homes and business premises across Kuala Lumpur.",
               "svc-installation.webp",
               bc(("Home", "/"), ("Our Services", None))),
