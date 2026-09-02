@@ -117,6 +117,13 @@ def service_ld(name, desc, slug):
 
 # ---------------------------------------------------------------- components
 
+def drop(html, start, end):
+    """Remove one block from a chunk of markup, from start to the end marker."""
+    i = html.index(start)
+    j = html.index(end, i) + len(end)
+    return html[:i] + html[j:]
+
+
 def bc(*items):
     """Visible breadcrumb trail; an item with no href is the current page."""
     out = [f'<li aria-current="page">{n}</li>' if h is None else f'<li><a href="{h}">{n}</a></li>'
@@ -210,6 +217,173 @@ def others(current):
       <h2 class="h2 h2--sm">Everything else we look after</h2>
     </header>
     <div class="minigrid">{cards}
+    </div>
+  </div>
+</section>'''
+
+
+# ------------------------------------------------------------------ about page
+
+def ahero(kicker, line_a, line_b, lede, photo):
+    """Full-bleed hero in the homepage's style — no form, no cards."""
+    return f'''<section class="ahero">
+  <span class="ahero__photo" aria-hidden="true"></span>
+  <div class="wrap ahero__inner">
+    <p class="tagpill"><span class="tagpill__dot"></span>{kicker}</p>
+    <h1 class="ahero__title">{line_a}<em>{line_b}</em></h1>
+    <p class="ahero__lede">{lede}</p>
+    <div class="ahero__actions">
+      <a class="btn btn--primary btn--lg" href="/contact/"><svg class="ico" aria-hidden="true"><use href="#i-calendar"></use></svg>Book a Service</a>
+      <a class="btn btn--card btn--lg" href="tel:+60178570744"><svg class="ico" aria-hidden="true"><use href="#i-phone"></use></svg>+60178570744</a>
+    </div>
+    <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li aria-current="page">About Us</li></ol></nav>
+  </div>
+  <svg class="ahero__wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path d="M0 46c220 44 460 44 720 12s500-44 720-12v44H0z" fill="#ffffff"/>
+  </svg>
+</section>'''
+
+
+def vision_mission():
+    return '''<section class="section vm">
+  <span class="deco deco--photo deco--leaves-l" aria-hidden="true"></span>
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="pill">What drives us</p>
+      <h2 class="h2 vm__title">Vision and <em>mission</em></h2>
+      <span class="rule-ico" aria-hidden="true"><i class="rule-ico__line"></i><svg class="ico" aria-hidden="true"><use href="#i-snow"></use></svg><i class="rule-ico__line"></i></span>
+    </header>
+    <div class="vm__grid">
+      <article class="vm__card reveal">
+        <span class="vm__icon"><svg class="ico" aria-hidden="true"><use href="#i-target"></use></svg></span>
+        <h3 class="vm__name">Our Vision</h3>
+        <p class="vm__text">To be the air-conditioning company people in Kuala Lumpur call first &mdash; known less for how loudly we advertise than for the fact that what we fix stays fixed.</p>
+      </article>
+      <article class="vm__card vm__card--accent reveal" data-delay="1">
+        <span class="vm__icon"><svg class="ico" aria-hidden="true"><use href="#i-heart"></use></svg></span>
+        <h3 class="vm__name">Our Mission</h3>
+        <p class="vm__text">To diagnose before we repair, explain before we invoice, and leave every home and business cooler than we found it &mdash; with work our technicians would be happy to put their own name to.</p>
+      </article>
+    </div>
+  </div>
+</section>'''
+
+
+def journey():
+    steps = [
+        ("Where it started", "Ad Aircond Solution began the way most trades do &mdash; one technician, a van, and the units in the neighbourhood around Titiwangsa Central."),
+        ("Word got around", "Repeat calls turned into referrals. Households that had been told to replace a unit found it could be repaired, and told their neighbours."),
+        ("Homes, then premises", "Offices, shops and other business premises came next, where a unit going down costs trading hours and the work has to fit around opening times."),
+        ("Where we are now", "A workshop at Titiwangsa Central, a team working across Kuala Lumpur, and the same rule we started with: look at the unit before recommending anything."),
+    ]
+    items = "".join(f'''
+      <li class="tl__item reveal" data-delay="{i}">
+        <span class="tl__dot" aria-hidden="true"></span>
+        <div class="tl__card">
+          <h3 class="tl__name">{n}</h3>
+          <p class="tl__text">{t}</p>
+        </div>
+      </li>''' for i, (n, t) in enumerate(steps))
+    return f'''<section class="section section--alt journey">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="pill">Our journey</p>
+      <h2 class="h2 journey__title">How the business <em>grew</em></h2>
+      <p class="sec-head__text">No overnight story &mdash; just work that led to the next job.</p>
+    </header>
+    <ol class="tl">{items}
+    </ol>
+  </div>
+</section>'''
+
+
+def numbers():
+    """Figures the business supplied. Each is marked so it can be checked."""
+    stats = [
+        ("i-badge",  "Certified",      "technicians",        "Trained on the systems they work on"),
+        ("i-grid",   "All major",      "brands &amp; models","Daikin, Panasonic, Mitsubishi, LG and more"),
+        ("i-pin",    "KL &amp; Selangor", "coverage",        "Based at Titiwangsa Central"),
+        ("i-tools",  "50+",            "vehicles on the road","So a technician is never far away"),
+    ]
+    cards = "".join(f'''
+      <li class="stat reveal" data-delay="{i}">
+        <span class="stat__icon"><svg class="ico" aria-hidden="true"><use href="#{ic}"></use></svg></span>
+        <p class="stat__num">{a}</p>
+        <p class="stat__label">{b}</p>
+        <p class="stat__note">{note}</p>
+      </li>''' for i, (ic, a, b, note) in enumerate(stats))
+    return f'''<!-- FIGURES TO CONFIRM: "Certified", "KL & Selangor" and "50+ vehicles"
+     were supplied by the business and have not been verified here. Correct or
+     remove any that are not accurate before launch. -->
+<section class="section stats">
+  <span class="deco deco--photo deco--unit-r" aria-hidden="true"></span>
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="pill">At a glance</p>
+      <h2 class="h2 stats__title">What we bring <em>to every job</em></h2>
+      <span class="rule-ico" aria-hidden="true"><i class="rule-ico__line"></i><svg class="ico" aria-hidden="true"><use href="#i-snow"></use></svg><i class="rule-ico__line"></i></span>
+    </header>
+    <ul class="stats__grid">{cards}
+    </ul>
+  </div>
+</section>'''
+
+
+def team():
+    roles = [
+        ("i-user",    "Service technicians", "On the tools every day &mdash; inspection, repair, cleaning and installation across homes and business premises."),
+        ("i-headset", "Booking &amp; coordination", "The people who take your call, work out which service fits, and set a time that suits the household or the business."),
+        ("i-cog",     "Installation crew",   "Mounting, pipework, drainage and commissioning &mdash; the part that decides how well a new system performs."),
+    ]
+    cards = "".join(f'''
+      <article class="tm reveal" data-delay="{i}">
+        <span class="tm__icon"><svg class="ico" aria-hidden="true"><use href="#{ic}"></use></svg></span>
+        <h3 class="tm__name">{n}</h3>
+        <p class="tm__text">{t}</p>
+      </article>''' for i, (ic, n, t) in enumerate(roles))
+    return f'''<!-- TEAM: no names or photographs have been invented. Send real names,
+     roles and permission-cleared photographs and they can replace these role
+     cards. -->
+<section class="section section--alt teamsec">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="pill">Our team</p>
+      <h2 class="h2 teamsec__title">The people who <em>do the work</em></h2>
+      <p class="sec-head__text">Small enough that the person who takes your call knows the technician who turns up.</p>
+    </header>
+    <div class="tm-grid">{cards}
+    </div>
+  </div>
+</section>'''
+
+
+def capability():
+    items = [
+        ("i-grid",   "Every model and brand",
+         "Wall-mounted splits, ceiling cassettes and outdoor condensers &mdash; Daikin, Panasonic, Mitsubishi Electric, LG, Samsung, York, Midea and the rest. Tell us the make and model and we will confirm before booking."),
+        ("i-badge",  "Trained technicians",
+         "The people who arrive work on these systems daily. They are trained on the equipment they are sent to, not handed a job they have never seen."),
+        ("i-shield", "Safe electrical work",
+         "Capacitors, wiring and control boards are the part of an air conditioner where guessing is both expensive and dangerous. That work is traced to the component and handled properly."),
+        ("i-clock",  "Around your hours",
+         "Households get a time that suits them. Business premises get a visit that fits around trading hours, because a shop cannot close for an aircond."),
+    ]
+    cards = "".join(f'''
+      <article class="cap reveal" data-delay="{i}">
+        <span class="cap__icon"><svg class="ico" aria-hidden="true"><use href="#{ic}"></use></svg></span>
+        <div class="cap__body">
+          <h3 class="cap__name">{n}</h3>
+          <p class="cap__text">{t}</p>
+        </div>
+      </article>''' for i, (ic, n, t) in enumerate(items))
+    return f'''<section class="section capsec">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="pill">What we handle</p>
+      <h2 class="h2 capsec__title">Whatever the unit, <em>whoever made it</em></h2>
+      <p class="sec-head__text">The equipment changes from job to job. The way we approach it does not.</p>
+    </header>
+    <div class="cap-grid">{cards}
     </div>
   </div>
 </section>'''
@@ -413,11 +587,21 @@ PAGES.append({
     "title": "About Us | Ad Aircond Solution, Kuala Lumpur",
     "description": "Ad Aircond Solution provides air conditioning repair, servicing, maintenance and installation for homes and businesses across Kuala Lumpur. Based at Titiwangsa Central.",
     "body": "\n".join([
-        phero("About Us", "Built on service.", "Driven by comfort.",
-              "Air conditioning repair, servicing, maintenance and installation for homes and businesses across Kuala Lumpur, from a workshop at Titiwangsa Central.",
-              "about.webp",
-              bc(("Home", "/"), ("About Us", None))),
-        _pull('<!-- ============ ABOUT US ============ -->', '</section>\n'),
+        ahero("About Ad Aircond Solution",
+              "The team keeping",
+              "Kuala Lumpur cool.",
+              "Air conditioning repair, cleaning, installation and maintenance for homes and business premises &mdash; from a workshop at Titiwangsa Central, Kuala Lumpur.",
+              "cta-outdoor-unit.webp"),
+        # The homepage block carries Our Story and Our Mission cards. This page
+        # covers both at more length in Our Journey and Vision & Mission below,
+        # so the cards come out rather than saying it twice.
+        drop(_pull('<!-- ============ ABOUT US ============ -->', '</section>\n'),
+             '<div class="idcards">', '</div>\n\n'),
+        vision_mission(),
+        journey(),
+        numbers(),
+        capability(),
+        team(),
         article("How we work", [
             "Every job starts with looking at the unit. A room that is not getting cold can point to a dirty coil, a blocked drain, a low refrigerant charge, a failing capacitor or a control fault, and the only way to know which is to inspect rather than assume.",
             "What we find gets explained in plain terms &mdash; what is wrong, what fixing it involves, and what it will take. If a repair is not worth doing on an old unit, we will say so.",
