@@ -466,7 +466,7 @@ address{font-style:normal}
 }
 /* Swap in real photography by setting --photo on the frame below. */
 .frame--interior{--photo:none;background-image:var(--photo),url("../media/interior.svg")}
-.frame--workshop{--photo:none;background-image:var(--photo),url("../media/workshop.svg")}
+.frame--workshop{--photo:url("../img/approach.webp");background-image:var(--photo),url("../media/workshop.svg")}
 
 .frame__chip{
   position:absolute;left:-14px;bottom:26px;
