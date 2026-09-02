@@ -51,7 +51,11 @@ def head(page):
 <meta name="description" content="{page["description"]}">
 <meta name="theme-color" content="#0c8a99">
 <link rel="canonical" href="{SITE}{page["url"]}">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="{page["title"]}">

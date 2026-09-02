@@ -36,7 +36,9 @@ deployment:
     - /bin/cp -R about services contact ac-repair ac-cleaning ac-installation ac-maintenance gas-refilling ac-electrical-service $DEPLOYPATH/
     # the flat pages this site used before are gone; clear any left on the server
     - /bin/rm -f $DEPLOYPATH/about.html $DEPLOYPATH/services.html $DEPLOYPATH/contact.html $DEPLOYPATH/ac-repair.html $DEPLOYPATH/ac-cleaning.html $DEPLOYPATH/ac-installation.html $DEPLOYPATH/ac-maintenance.html $DEPLOYPATH/gas-refilling.html $DEPLOYPATH/ac-electrical-service.html
-    - /bin/cp -f favicon.svg $DEPLOYPATH/
+    # site icons live at the root so browsers and iOS find them without a link
+    - /bin/cp -f favicon.ico favicon-32.png icon-192.png icon-512.png apple-touch-icon.png site.webmanifest $DEPLOYPATH/
+    - /bin/rm -f $DEPLOYPATH/favicon.svg
     - /bin/cp -f robots.txt sitemap.xml $DEPLOYPATH/
     # replace assets wholesale so files removed from the repo also leave the server
     - /bin/rm -rf $DEPLOYPATH/assets
