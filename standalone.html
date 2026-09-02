@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!-- BUILD 2026-09-02-d6abe5b · hero: light two-column with wave -->
+<!-- BUILD 2026-09-02-8ca29f7 · hero: light two-column with wave -->
 <html lang="en-MY">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="build" content="2026-09-02-d6abe5b">
+<meta name="build" content="2026-09-02-8ca29f7">
 <title>Aircond Repair &amp; Servicing in Kuala Lumpur | Ad Aircond Solution</title>
 <meta name="description" content="Air conditioning repair, cleaning, installation and maintenance for homes and businesses across Kuala Lumpur. Based at Titiwangsa Central. Call +60178570744.">
 <meta name="theme-color" content="#0c8a99">
@@ -1074,6 +1074,42 @@ h1,h2,h3,h4,
 .faq__foot a:hover{color:var(--b-800)}
 
 
+.problems__title{color:var(--navy)}
+.problems__title em{font-style:normal;color:var(--b-600)}
+.plist-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2vw,26px)}
+.plist{
+  display:flex;flex-direction:column;
+  background:#fff;border:1px solid var(--line);border-radius:var(--r-xl);
+  padding:clamp(22px,2.4vw,30px);box-shadow:var(--sh-xs);
+  transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease;
+}
+.plist:hover{transform:translateY(-4px);box-shadow:var(--sh-sm);border-color:var(--b-200)}
+.plist__head{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.plist__icon{
+  display:inline-flex;align-items:center;justify-content:center;flex:none;
+  width:46px;height:46px;border-radius:50%;background:var(--grad);color:#fff;
+  box-shadow:var(--sh-brand);
+}
+.plist__icon .ico{width:21px;height:21px}
+.plist__name{font-family:var(--f-display);font-weight:600;font-size:1.06rem;color:var(--navy)}
+.plist__items{display:grid;gap:10px;list-style:none;padding:0;margin:0;flex:1}
+.plist__items li{
+  position:relative;padding-left:22px;
+  font-size:.9rem;line-height:1.6;color:var(--muted);
+}
+.plist__items li::before{
+  content:"";position:absolute;left:0;top:.55em;
+  width:8px;height:8px;border-radius:50%;
+  background:var(--b-300);box-shadow:0 0 0 3px var(--b-50);
+}
+.plist__go{
+  display:inline-flex;align-items:center;gap:7px;margin-top:20px;
+  font-family:var(--f-display);font-weight:600;font-size:.87rem;color:var(--b-700);
+}
+.plist__go .ico{transition:transform .25s ease}
+.plist:hover .plist__go .ico{transform:translateX(4px)}
+
+
 .ahero{
   position:relative;overflow:hidden;isolation:isolate;
   padding:clamp(52px,7vw,104px) 0 clamp(78px,9vw,140px);
@@ -1308,24 +1344,6 @@ h1,h2,h3,h4,
 .brands__title{color:var(--navy)}
 .brands__title em{display:block;font-style:normal;color:var(--b-600)}
 
-
-.brands__lead{
-  display:flex;align-items:center;justify-content:center;gap:clamp(14px,2vw,26px);
-  margin:clamp(6px,1.5vw,16px) 0 clamp(26px,3vw,38px);
-  font-family:var(--f-display);font-weight:600;font-size:clamp(1.02rem,.9rem + .4vw,1.24rem);
-  color:var(--navy);text-align:center;
-}
-.brands__lead::before,.brands__lead::after{
-  content:"";flex:1;max-width:clamp(60px,12vw,168px);height:2px;border-radius:1px;
-  background:linear-gradient(90deg,rgba(20,189,184,0),var(--b-300));
-}
-.brands__lead::after{background:linear-gradient(90deg,var(--b-300),rgba(20,189,184,0))}
-.brands__lead span{flex:none}
-.brands__also{
-  max-width:66ch;margin:clamp(22px,2.6vw,32px) auto 0;text-align:center;
-  font-size:.9rem;line-height:1.7;color:var(--muted);
-}
-
 .brands__wall{
   display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
   gap:clamp(12px,1.5vw,20px);list-style:none;padding:0;margin:0;
@@ -1334,13 +1352,13 @@ h1,h2,h3,h4,
   --logo:none;
   display:flex;align-items:center;justify-content:center;
   min-height:clamp(96px,8.4vw,128px);padding:18px clamp(14px,1.8vw,26px);
-  background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);
-  box-shadow:var(--sh-sm);
+  background-color:transparent;border:0;border-radius:var(--r-lg);
+  box-shadow:none;
   background-image:var(--logo);background-repeat:no-repeat;
   background-position:center;background-size:auto clamp(34px,4vw,52px);
   transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
 }
-.brands__item:hover{transform:translateY(-3px);box-shadow:var(--sh-md);border-color:var(--b-200)}
+.brands__item:hover{transform:translateY(-3px)}
 .brands__mark{
   font-family:var(--f-display);font-weight:600;
   font-size:clamp(.88rem,.76rem + .36vw,1.1rem);
@@ -1371,20 +1389,9 @@ h1,h2,h3,h4,
   background-image:var(--photo),url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNjAwIDgwMCIgd2lkdGg9IjE2MDAiIGhlaWdodD0iODAwIiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IkRhcmsgdGVhbCBncmFkaWVudCBtZXNoIHdpdGggYWlyZmxvdyBjb250b3VycyI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9Im1CZyIgeDE9IjAiIHkxPSIwIiB4Mj0iMSIgeTI9IjEiPjxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzA4MjIyYyIvPjxzdG9wIG9mZnNldD0iMC41NSIgc3RvcC1jb2xvcj0iIzBhMzU0MiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzA2MjAyYSIvPjwvbGluZWFyR3JhZGllbnQ+CiAgICA8cmFkaWFsR3JhZGllbnQgaWQ9Im1BIiBjeD0iMC4xOCIgY3k9IjAuMiIgcj0iMC41NSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMTJjOWMwIiBzdG9wLW9wYWNpdHk9IjAuNDIiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMxMmM5YzAiIHN0b3Atb3BhY2l0eT0iMCIvPjwvcmFkaWFsR3JhZGllbnQ+CiAgICA8cmFkaWFsR3JhZGllbnQgaWQ9Im1CIiBjeD0iMC44NiIgY3k9IjAuNzgiIHI9IjAuNSI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMWE5ZmQ2IiBzdG9wLW9wYWNpdHk9IjAuMzQiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMxYTlmZDYiIHN0b3Atb3BhY2l0eT0iMCIvPjwvcmFkaWFsR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9Im1MIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMCI+PHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjN2ZmMGU0IiBzdG9wLW9wYWNpdHk9IjAiLz48c3RvcCBvZmZzZXQ9IjAuNSIgc3RvcC1jb2xvcj0iIzdmZjBlNCIgc3RvcC1vcGFjaXR5PSIwLjM1Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjN2ZmMGU0IiBzdG9wLW9wYWNpdHk9IjAiLz48L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iMTYwMCIgaGVpZ2h0PSI4MDAiIGZpbGw9InVybCgjbUJnKSIvPgogIDxyZWN0IHdpZHRoPSIxNjAwIiBoZWlnaHQ9IjgwMCIgZmlsbD0idXJsKCNtQSkiLz4KICA8cmVjdCB3aWR0aD0iMTYwMCIgaGVpZ2h0PSI4MDAiIGZpbGw9InVybCgjbUIpIi8+CiAgPGcgZmlsbD0ibm9uZSIgc3Ryb2tlPSJ1cmwoI21MKSIgc3Ryb2tlLXdpZHRoPSIyIj4KICAgIDxwYXRoIGQ9Ik0tNDAgMjEwQzI2MCAxMjAgNTYwIDMwMCA5MDAgMjEwczQ2MCA0MCA3ODAtNDAiLz4KICAgIDxwYXRoIGQ9Ik0tNDAgMzMwQzI4MCAyNDAgNTgwIDQyMCA5MjAgMzMwczQ0MCA1MCA3NjAtMzAiLz4KICAgIDxwYXRoIGQ9Ik0tNDAgNDUwQzMwMCAzNjAgNjAwIDU0MCA5NDAgNDUwczQyMCA1MCA3NDAtMzAiLz4KICAgIDxwYXRoIGQ9Ik0tNDAgNTcwQzMyMCA0OTAgNjIwIDY1MCA5NjAgNTcwczQwMCA0MCA3MjAtMzAiLz4KICA8L2c+Cjwvc3ZnPgo=");
   background-size:cover,cover;background-position:center,center;background-repeat:no-repeat,no-repeat;
 }
-.finale__inner{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.92fr);gap:clamp(34px,4.5vw,64px);align-items:center}
-.finale__text{color:#bfdfe7;margin-top:20px;max-width:520px;font-size:1.03rem;line-height:1.75}
-.finale__contacts{display:grid;gap:18px;margin-top:36px}
-.finale__contacts li{display:flex;align-items:flex-start;gap:15px}
-.finale__ico{
-  display:inline-flex;align-items:center;justify-content:center;flex:none;
-  width:46px;height:46px;border-radius:8px;
-  background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.24);color:#7ff0e4;
-}
-.finale__contacts strong{display:block;font-family:var(--f-display);font-weight:600;color:#fff;font-size:.95rem;margin-bottom:2px}
-.finale__contacts span{font-size:.9rem;color:#a9d2dc;line-height:1.55}
-.finale__contacts a{color:#a9d2dc;border-bottom:1px solid rgba(169,210,220,.35);transition:color .2s ease}
-.finale__contacts a:hover{color:#7ff0e4}
 
+.finale__inner{display:grid;justify-items:center}
+.finale__inner .booking{width:min(100%,640px)}
 .booking{background:#fff;border-radius:var(--r-xl);padding:clamp(26px,3vw,38px);box-shadow:var(--sh-lg)}
 .booking__title{font-size:1.3rem;margin-bottom:8px}
 .booking__note{font-size:.85rem;color:var(--muted-2);margin-bottom:24px}
@@ -1518,7 +1525,6 @@ h1,h2,h3,h4,
   .band__inner{grid-template-columns:minmax(0,1fr)}
   .steps{grid-template-columns:minmax(0,1fr)}
   .step:not(:last-child)::after{display:none}
-  .finale__inner{grid-template-columns:minmax(0,1fr)}
   .footer__top{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 
@@ -1535,6 +1541,7 @@ h1,h2,h3,h4,
 
 
 @media (max-width:980px){
+  .plist-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .vm__grid{grid-template-columns:minmax(0,1fr)}
   .stats__grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .cap-grid{grid-template-columns:minmax(0,1fr)}
@@ -1602,6 +1609,7 @@ h1,h2,h3,h4,
   .svc-grid{grid-template-columns:minmax(0,1fr)}
   .brands__wall{grid-template-columns:repeat(2,minmax(0,1fr))}
   .flow{grid-template-columns:minmax(0,1fr)}
+  .plist-grid{grid-template-columns:minmax(0,1fr)}
   .stats__grid{grid-template-columns:minmax(0,1fr)}
   .ahero__actions .btn{width:100%}
   .minigrid{grid-template-columns:minmax(0,1fr)}
@@ -2249,15 +2257,13 @@ h1,h2,h3,h4,
     <header class="sec-head brands__head reveal">
       <p class="pill">Brands We Service</p>
       <h2 class="h2 brands__title">We Repair All Major <em>Aircond Brands</em></h2>
-      <p class="sec-head__text">Our experienced technicians are trained to diagnose and repair all leading air conditioner brands. No matter the make or model, we&rsquo;ve got you covered.</p>
       <span class="rule-ico" aria-hidden="true">
         <i class="rule-ico__line"></i>
         <svg class="ico" aria-hidden="true" focusable="false"><use href="#i-snow"></use></svg>
         <i class="rule-ico__line"></i>
       </span>
+      <p class="sec-head__text">Our experienced technicians are trained to diagnose and repair all leading air conditioner brands. No matter the make or model, we&rsquo;ve got you covered.</p>
     </header>
-
-    <h3 class="brands__lead reveal"><span>Brands We Repair &amp; Service</span></h3>
 
     <ul class="brands__wall reveal">
       <li class="brands__item brands__item--logo brands__item--daikin"><span class="brands__mark">Daikin</span></li>
