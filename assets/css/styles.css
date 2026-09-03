@@ -1100,17 +1100,6 @@ h1,h2,h3,h4,
 .tl__name{font-family:var(--f-display);font-weight:600;font-size:1.06rem;color:var(--navy);margin-bottom:8px}
 .tl__text{font-size:.93rem;line-height:1.72;color:var(--muted)}
 
-/* Numbered variant of the timeline, for a process where the order is the point. */
-.tl--num{max-width:960px}
-.tl--num .tl__item{padding-left:64px}
-.tl__dot--num{
-  display:flex;align-items:center;justify-content:center;
-  width:42px;height:42px;left:-1px;top:14px;
-  background:var(--grad);border:0;box-shadow:var(--sh-brand);
-  font-family:var(--f-display);font-weight:700;font-size:.92rem;color:#fff;letter-spacing:.02em;
-}
-.tl__dot--num::after{content:none}
-
 /* Two-column ticked list where each point leads with its own label. */
 .blist{
   display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
