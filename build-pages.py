@@ -228,6 +228,41 @@ def others(current):
 </section>'''
 
 
+def flow_section(kicker, title_a, title_b, lede, steps):
+    """The homepage How It Works layout: four numbered cards with a photograph."""
+    items = "".join(f'''
+      <li class="flow__item reveal"{f' data-delay="{i}"' if i else ''}>
+        <span class="flow__num" aria-hidden="true">{i + 1:02d}</span>
+        <article class="flowcard">
+          <span class="flowcard__media flowcard__media--{mod}"></span>
+          <span class="flowcard__badge"><svg class="ico" aria-hidden="true"><use href="#{icon}"></use></svg></span>
+          <div class="flowcard__body">
+            <h3 class="flowcard__title">{name}</h3>
+            <p class="flowcard__text">{text}</p>
+          </div>
+        </article>
+      </li>''' for i, (mod, icon, name, text) in enumerate(steps))
+    return f'''<section class="section works" id="process">
+  <span class="deco deco--photo deco--unit-r" aria-hidden="true"></span>
+  <span class="deco deco--photo deco--leaves-l" aria-hidden="true"></span>
+  <div class="wrap">
+    <header class="sec-head works__head reveal">
+      <p class="pill">{kicker}</p>
+      <h2 class="h2 works__title">{title_a} <em>{title_b}</em></h2>
+      <span class="rule-ico" aria-hidden="true"><i class="rule-ico__line"></i><svg class="ico" aria-hidden="true"><use href="#i-snow"></use></svg><i class="rule-ico__line"></i></span>
+      <p class="sec-head__text">{lede}</p>
+    </header>
+    <ol class="flow">{items}
+    </ol>
+  </div>
+</section>'''
+
+
+def works():
+    """The homepage How It Works section itself, for pages with no steps of their own."""
+    return _pull('<section class="section works"', '</section>\n')
+
+
 def testimonials():
     """The homepage testimonials section, reused rather than written again."""
     return _pull('<section class="section testimonials"', '</section>\n')
@@ -255,29 +290,6 @@ def cards(kicker, title_a, title_b, lede, items):
     </header>
     <div class="cap-grid">{cs}
     </div>
-  </div>
-</section>'''
-
-
-def steplist(kicker, title_a, title_b, lede, steps):
-    """Numbered steps down a connector line."""
-    ls = "".join(f'''
-      <li class="tl__item reveal" data-delay="{i}">
-        <span class="tl__dot tl__dot--num" aria-hidden="true">{i + 1:02d}</span>
-        <div class="tl__card">
-          <h3 class="tl__name">{n}</h3>
-          <p class="tl__text">{t}</p>
-        </div>
-      </li>''' for i, (n, t) in enumerate(steps))
-    return f'''<section class="section section--alt journey">
-  <div class="wrap">
-    <header class="sec-head reveal">
-      <p class="pill">{kicker}</p>
-      <h2 class="h2 journey__title">{title_a} <em>{title_b}</em></h2>
-      <p class="sec-head__text">{lede}</p>
-    </header>
-    <ol class="tl tl--num">{ls}
-    </ol>
   </div>
 </section>'''
 
@@ -601,6 +613,7 @@ def service_page(slug, nav_name, kicker, title_a, title_b, lede, photo,
         ahero(kicker, title_a, title_b, lede, photo, crumb),
         article(intro_h, intro_p, checks(list_title, list_items)),
         article(second_h, second_p),
+        works(),
         others(slug),
         testimonials(),
     ])
@@ -613,27 +626,168 @@ def service_page(slug, nav_name, kicker, title_a, title_b, lede, photo,
     }
 
 
+# --- aircond repair copy ----------------------------------------------------
+
+R_FAULTS = [
+ ("i-cog", "The Compressor Hums And Stops",
+  "An outdoor unit that hums for a second and falls silent has usually lost its start capacitor, not the compressor most people fear. We measure the capacitance against the rating printed on the can and fit a matched replacement."),
+ ("i-bolt", "The Breaker Drops On Start-up",
+  "A breaker that trips the moment the aircond starts is interrupting a fault current. A shorted compressor winding, a swollen capacitor and water across the terminal block each cause it. We meter every circuit before the unit goes back on."),
+ ("i-drop", "Cooling That Faded Over Weeks",
+  "Gas does not evaporate. Cooling that faded slowly means refrigerant escaped somewhere, usually at a flare joint or a corroded bend in the evaporator. We pressurise the system with nitrogen, find the leak, repair the joint and charge to the weight on the nameplate."),
+ ("i-wind", "The Indoor Fan Will Not Turn",
+  "An indoor unit that lights up but blows nothing has a seized blower motor or a failed motor capacitor. We turn the wheel by hand, read the winding resistance and replace whichever part measures open."),
+ ("i-grid", "The Unit Ignores The Remote",
+  "A unit that runs one mode only, flashes a code or answers nothing has a fault on the indoor control board. We read the stored code and test the sensors first. A board is the expensive part and often the innocent one."),
+ ("i-therm", "It Cools, Then Stops After Ten Minutes",
+  "A room or coil thermistor that has drifted sends the board a temperature that is not there. The board then shuts the compressor down early. We check the sensor resistance against the manufacturer table and replace the one that reads wrong."),
+ ("i-home", "Water Running Down The Wall",
+  "Dust and slime build inside the drain line over a year of use until the pan overflows at the front of the casing. We flush the line, clean the pan and reset the fall on the pipe so the condensate runs away instead of backing up."),
+ ("i-tools", "A Rattle Or Grind That Started Recently",
+  "Noise that appeared suddenly points to a loose fan blade, a worn bearing or a mounting bracket that has come free. We open the casing, find the part that moved and tighten or replace it before it damages the housing."),
+ ("i-snow", "Ice On The Coil Or The Pipework",
+  "Ice forms when the coil cannot absorb heat, either because airflow dropped or the charge is low. We defrost the unit, clean the filter and coil, then read the pressures before deciding whether gas is part of the fault."),
+ ("i-gauge", "It Runs All Day And Never Reaches Temperature",
+  "A system that runs constantly and holds the room at the same reading has lost either its charge or the compressor's ability to pump. Suction and discharge pressures on the two sides tell us which of those it is."),
+]
+
+R_CHECKS = [
+ "Capacitance on the run and start capacitors, against the rating printed on the can.",
+ "Winding resistance across the compressor terminals, so a short shows before power goes back on.",
+ "Supply voltage at the isolator while the unit tries to start.",
+ "Suction and discharge pressure on both sides of the system.",
+ "Sensor resistance on the room and coil thermistors, against the manufacturer table.",
+ "Continuity through the contactor, the overload and the terminal block.",
+ "Current draw on the compressor and both fan motors.",
+ "Error code stored on the indoor board, read before anything is reset.",
+]
+
+R_STEPS = [
+ ("contact", "i-phone", "Tell Us What The Unit Is Doing",
+  "Call or WhatsApp +60178570744 with the make, the model and what you can hear or see. That tells us which parts to load into the van before we set off."),
+ ("schedule", "i-calendar", "We Agree A Time",
+  "We confirm a slot that suits the household. For a shop or an office, we book outside trading hours."),
+ ("onsite", "i-user", "The Fault Is Traced On Site",
+  "Our technician meters the components in cost order and names the one that failed. You hear the part, what it does and what replacing it involves, then you decide."),
+ ("comfort", "i-check", "Repaired, Then Tested With You There",
+  "We fit the part, run a full cooling cycle and read the temperature at the vent. The unit works before we pack up."),
+]
+
+R_TERMS = [
+ ("A figure before the work. ", "The price we give after the diagnosis is the price on the invoice."),
+ ("The failed part named. ", "You hear which component gave up and what it does."),
+ ("Parts matched to your model. ", "We fit the capacitor, motor or board specified for your unit."),
+ ("Cheap causes ruled out first. ", "A clogged coil and a tired capacitor get checked before anyone talks about a compressor."),
+ ("The common parts on the van. ", "Capacitors, contactors, thermistors and fan motors travel with the technician, so most jobs close on the first visit."),
+ ("A straight answer on old units. ", "Where a repair will not hold, we say so and tell you what a replacement involves."),
+ ("Capacitors discharged before work. ", "They hold a charge after the power is off, so the technician bleeds them before touching a terminal."),
+ ("A full cooling cycle at the end. ", "We measure the vent temperature with you in the room."),
+ ("Your space left clean. ", "We lay a sheet under the unit, catch the drips and refit the filter before leaving."),
+ ("A number to ring afterwards. ", "If the same fault comes back, call us and ask for the technician who attended."),
+]
+
+R_FAQ = [
+ ("How long does an aircond repair take?",
+  "Most repairs finish in one visit. A capacitor, a contactor, a thermistor or a fan motor is a same-visit job. A leak repair on buried pipework needs longer, and so does a compressor change. You hear which of those yours is at the diagnosis."),
+ ("Why does my aircond trip the breaker?",
+  "An aircond trips the breaker when a component draws more current than the circuit allows. A shorted compressor winding, a failed capacitor and water sitting across the terminal block each produce that fault, and each needs a different repair."),
+ ("Is it safe to keep using an aircond that trips the breaker?",
+  "No. The breaker is interrupting a fault current, and resetting it repeatedly puts the compressor and the cable at risk. Switch the unit off at the isolator and call us."),
+ ("What is a start capacitor and why does it fail?",
+  "A start capacitor stores the charge that gets the compressor turning. Heat ages the material inside it until the capacitance falls below the rating on the can, and the compressor then hums without starting."),
+ ("Can a compressor be repaired or does it need replacing?",
+  "A failed compressor is replaced, because the unit is sealed at the factory and cannot be opened. On a system over ten years old, that replacement often costs more than a new aircond. We say so before you spend it."),
+ ("Do you repair inverter aircond units?",
+  "Yes. An inverter system runs a variable-speed compressor through a driver board. The fault is traced through that board and the sensors feeding it, so the testing takes longer than it does on a fixed-speed unit."),
+ ("Why does my aircond cool for a few minutes and then stop?",
+  "An aircond that cools briefly and stops is reading a temperature that is not in the room. A drifted room or coil thermistor sends the board a false value, and the board shuts the compressor down early."),
+ ("Why does the outdoor unit run while the room stays warm?",
+  "The outdoor unit runs while the room stays warm because the system cannot move heat outside. A low refrigerant charge, a condenser coil packed with dust or a compressor that no longer pumps each produce that result."),
+ ("Why did the cooling drop off again after a repair?",
+  "Cooling drops off again when the cause was never removed. Topping up gas without repairing the leak is the usual example, because the same charge escapes through the same joint within weeks."),
+ ("Can you repair an aircond when the parts are discontinued?",
+  "No. Once the maker has stopped supplying the board or the compressor for a model, there is no repair we can stand behind. We say so at the diagnosis. Fitting a part that does not match the specification only moves the fault."),
+ ("What do you need to know when I book a repair?",
+  "We need the make, the model and what the unit is doing. The model number sits on a sticker inside the front cover. Any code on the display tells us which parts to bring."),
+ ("Do you repair aircond units in offices and shops?",
+  "Yes. We work on wall-mounted splits and ceiling cassettes in shops, offices and other commercial premises. The visit fits around your trading hours."),
+]
+
+
 PAGES = []
 
-PAGES.append(service_page(
-    "ac-repair", "Aircond Repair", "Aircond Repair",
-    "Aircond repair in", "Kuala Lumpur &amp; Selangor",
-    "A unit that has stopped cooling, stopped starting or failed mid-use gets inspected first, so the repair answers the actual fault rather than the symptom.",
-    "svc-repair.webp",
-    "What an aircond repair visit involves",
-    ["Weak cooling, no cooling and a unit that will not start all have several possible causes. A dirty coil, a failing capacitor, a blocked drain line, a refrigerant leak and a control fault can each produce the same complaint, and each needs a different fix.",
-     "So the visit begins with an inspection: the technician checks how the unit is behaving, works back to the component responsible, and explains what was found before any part is replaced. You hear what is wrong and what putting it right involves.",
-     "Where a repair is not the sensible answer &mdash; an old unit with a failing compressor, for instance &mdash; we will say so rather than sell you a repair that will not last."],
-    "Aircond faults we are called out for",
-    ["Unit runs but the room does not get cold", "Unit will not switch on or trips the breaker",
-     "Water dripping from the indoor unit", "Ice forming on the coil or pipework",
-     "Loud rattling, grinding or buzzing", "Unit short-cycles or shuts off by itself",
-     "Remote or control board not responding", "Burning or musty smell when running"],
-    "Aircond repairs for homes and business premises",
-    ["We work on wall-mounted splits in homes and apartments, and on the units keeping offices, shops and other commercial premises trading. For a business, downtime matters, so tell us your opening hours when you book and we will work around them.",
-     "Parts are matched to your system. If a component needs ordering, you will be told what it is and how long it takes before we proceed."],
-    "Aircond Repair in KL &amp; Selangor | Ad Aircond Solution",
-    "Aircond repair in KL and Selangor for units that have stopped cooling, will not start, leak water or trip the breaker. Inspection first, then the fix. Call +60178570744."))
+PAGES.append({
+    "dir": "ac-repair", "url": "ac-repair/", "nav": "services", "image": "svc-repair.webp",
+    "title": "Aircond Repair in KL &amp; Selangor | Ad Aircond Solution",
+    "description": "Aircond repair across Kuala Lumpur and Selangor for units that will not cool, will not start, trip the breaker or drip water. The fault is traced before anything is replaced.",
+    "body": "\n".join([
+        ahero("Aircond Repair", "Aircond repair in", "Kuala Lumpur &amp; Selangor",
+              "A unit that has stopped cooling, will not start or drips onto the floor needs the fault found before anything is replaced. We test first, name the part that failed, then repair it.",
+              "svc-repair.webp",
+              bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Repair", None))),
+
+        '''<section class="section section--tight">
+  <div class="wrap">
+    <div class="prose prose--solo reveal">
+      <p>Your aircond runs, the fan turns, and the room sits at the same temperature it was an hour ago. Or it will not start at all, and the breaker drops the moment you press the button on the remote.</p>
+      <p>A unit left like that keeps drawing current while it cools nothing, so the bill climbs through a month you spent uncomfortable. A slow refrigerant leak also starves the compressor of oil, and the compressor is the most expensive part in the outdoor unit.</p>
+      <p>We repair wall-mounted splits, ceiling cassettes and the outdoor condensers that serve them, in homes and business premises across Kuala Lumpur and Selangor. Call +60178570744 with the make and model from the sticker inside the front cover.</p>
+    </div>
+  </div>
+</section>''',
+
+        '''<section class="section section--alt approach">
+  <div class="wrap split">
+    <div class="split__copy reveal">
+      <p class="eyebrow"><span class="eyebrow__dot"></span>How a repair visit runs</p>
+      <h2 class="h2">What Happens Before Anything Is Replaced</h2>
+      <p class="body">One complaint has several possible causes, so the visit starts with testing. A room that will not cool can come from a coil packed with dust, a tired capacitor or a leak in the refrigerant circuit. It can also be a control board that has stopped switching the compressor. Each needs a different repair, and only one of them is expensive.</p>
+      <p class="body">Our technician works through them in cost order and tells you which one failed. You hear the part name, what it does and what the repair involves before any work starts. Where the unit is fifteen years old and the compressor has gone, we say so instead of quoting a repair that will not hold.</p>
+    </div>
+    <div class="split__media reveal" data-delay="1">
+      <img class="poster" src="/assets/img/svc-repair.webp" width="600" height="450"
+           alt="An Ad Aircond Solution technician testing the indoor unit of a wall-mounted aircond during a repair visit."
+           loading="lazy" decoding="async">
+    </div>
+  </div>
+</section>''',
+
+        cards("Faults we repair", "Aircond Faults", "We Are Called Out For",
+              "Ten of the repairs we do most across Kuala Lumpur and Selangor, and what sits behind each one.",
+              R_FAULTS),
+
+        f'''<section class="section">
+  <div class="wrap prose__grid">
+    <div class="prose reveal">
+      <h2 class="h2 h2--sm">What We Test Before We Quote</h2>
+      <p>A quote given before the testing is a guess, and a guess gets paid for twice. Our technician meters the circuit and the refrigerant side first, then puts a figure on the repair that fault needs.</p>
+      <p>Eight readings cover almost every fault on a split system. They take a few minutes each and they are what separates replacing the right part from replacing the expensive one.</p>
+    </div>
+    <div class="prose__aside reveal" data-delay="1">{checks("Read at every repair visit", R_CHECKS)}</div>
+  </div>
+</section>''',
+
+        flow_section("How It Works", "How An Aircond Repair", "Visit Runs",
+                     "Four steps, and you approve the price before anything comes apart.",
+                     R_STEPS),
+
+        benefits("What you get", "What An Aircond Repair", "Includes",
+                 "The terms we work to on every repair in Kuala Lumpur and Selangor.",
+                 R_TERMS),
+
+        faq_block("Aircond Repair", "Questions We Get Asked",
+                  "If yours is not here, call or WhatsApp +60178570744 and we will answer it straight.",
+                  R_FAQ),
+        others("ac-repair"),
+        testimonials(),
+    ]),
+    "jsonld": "[\n" + service_ld(
+        "Aircond Repair",
+        "Aircond repair for units that will not cool, will not start, trip the breaker or leak water, across Kuala Lumpur and Selangor.",
+        "ac-repair/") + ",\n" + crumbs(
+        ("Home", ""), ("Our Services", "services/"), ("Aircond Repair", "ac-repair/")
+        ) + ",\n" + faq_ld(R_FAQ) + "\n]",
+})
 
 PAGES.append(service_page(
     "ac-cleaning", "Aircond Cleaning", "Aircond Cleaning",
@@ -859,6 +1013,7 @@ PAGES.append({
   </div>
 </section>''',
         problems(),
+        works(),
         article("Which Aircond Service Do You Need?", [
             "Most people call about a symptom rather than a service, and that is the right way round. Weak cooling can be a dirty coil, a low refrigerant charge or a failing capacitor, and those are three different jobs.",
             "Tell us what the unit is doing &mdash; how it sounds, when it started, whether it cools at all &mdash; and we will tell you which service fits before anything is booked. If it turns out to be the cheaper job, that is the one we will quote."]),
@@ -920,9 +1075,11 @@ PAGES.append({
   </div>
 </section>''',
 
-        steplist("How it works", "A Simple,", "Stress-Free Process",
-                 "Four steps from your first message to a unit that is cooling properly again.",
-                 PROCESS),
+        flow_section("How It Works", "A Simple,", "Stress-Free Process",
+                     "Four steps from your first message to a unit that is cooling properly again.",
+                     [(m, i, n, t) for (m, i), (n, t) in
+                      zip([("contact", "i-phone"), ("schedule", "i-calendar"),
+                           ("onsite", "i-user"), ("comfort", "i-check")], PROCESS)]),
 
         benefits("Why us", "Benefits Of Hiring", "Our Aircond Services",
                  "What a properly serviced aircond gives you back, beyond the repair itself.",
@@ -966,6 +1123,7 @@ PAGES.append({
         numbers(),
         capability(),
         team(),
+        works(),
         article("How We Approach Every Aircond Job", [
             "Every job starts with looking at the unit. A room that is not getting cold can point to a dirty coil, a blocked drain, a low refrigerant charge, a failing capacitor or a control fault, and the only way to know which is to inspect rather than assume.",
             "What we find gets explained in plain terms &mdash; what is wrong, what fixing it involves, and what it will take. If a repair is not worth doing on an old unit, we will say so.",
@@ -995,6 +1153,7 @@ PAGES.append({
               "step-contact.webp",
               bc(("Home", "/"), ("Contact", None))),
         read("partials/booking.html"),
+        works(),
     ]),
     "jsonld": crumbs(("Home", ""), ("Contact", "contact/")),
 })
