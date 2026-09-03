@@ -131,22 +131,25 @@ h1,h2,h3,h4,
 
 /* ---------- 4. Buttons ---------- */
 .btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:9px;
-  font-family:var(--f-display);font-weight:600;font-size:.9rem;letter-spacing:-.01em;
-  padding:11px 20px;border-radius:var(--r-btn);border:1.5px solid transparent;
-  cursor:pointer;white-space:nowrap;
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-family:var(--f-display);font-weight:600;font-size:.88rem;letter-spacing:-.01em;
+  padding:9px 16px;border-radius:var(--r-btn);border:1.5px solid transparent;
+  cursor:pointer;white-space:nowrap;line-height:1.2;
   transition:transform .2s cubic-bezier(.3,.8,.4,1),box-shadow .2s ease,background-color .2s ease,color .2s ease,border-color .2s ease;
 }
 .btn:hover{transform:translateY(-2px)}
 .btn:active{transform:translateY(0)}
-.btn--lg{padding:13px 22px;font-size:.95rem}
+.btn--lg{padding:11px 19px;font-size:.92rem}
 .btn--block{width:100%}
+/* the shared 20px icon reads oversized next to .88rem button text */
+.btn .ico{width:17px;height:17px}
 /* the tinted icon tile the hero CTA carries in the reference */
 .btn__ico{
   display:inline-flex;align-items:center;justify-content:center;
-  width:28px;height:28px;border-radius:5px;background:rgba(255,255,255,.2);margin-left:-4px;
+  width:22px;height:22px;border-radius:5px;background:rgba(255,255,255,.2);
+  margin-left:-3px;margin-block:-3px;
 }
-.btn__ico .ico{width:16px;height:16px}
+.btn__ico .ico{width:14px;height:14px}
 
 .btn--primary{background:var(--grad);color:#fff;box-shadow:var(--sh-brand)}
 /* WhatsApp keeps its own green, because a recoloured WhatsApp button stops
@@ -171,7 +174,7 @@ h1,h2,h3,h4,
 .btn--outline{background:#fff;color:var(--b-800);border-color:var(--b-200)}
 .btn--outline:hover{background:var(--b-50);border-color:var(--b-400)}
 
-.btn--soft{background:var(--b-50);color:var(--b-800);font-size:.86rem;padding:10px 18px}
+.btn--soft{background:var(--b-50);color:var(--b-800);font-size:.84rem;padding:8px 14px}
 
 .btn--card{
   background:#fff;color:var(--navy);border-color:var(--line);
@@ -181,7 +184,7 @@ h1,h2,h3,h4,
 
 .btn--phone{
   background:#fff;color:var(--navy);border-color:var(--b-300);
-  padding:10px 16px;font-size:.86rem;
+  padding:8px 14px;font-size:.84rem;
 }
 .btn--phone .ico{color:var(--b-600)}
 .btn--phone:hover{border-color:var(--b-400);background:var(--b-50)}
@@ -404,7 +407,7 @@ h1,h2,h3,h4,
 }
 .reqfield input.is-invalid{border-color:#e0645c;background:#fff6f5}
 .reqcard__error{margin:0 0 10px;font-size:.83rem;color:#c9453c}
-.reqcard__submit{position:relative;padding:14px 52px 14px 20px;margin-top:6px}
+.reqcard__submit{position:relative;padding:12px 48px 12px 18px;margin-top:6px}
 .reqcard__send{
   position:absolute;right:7px;top:50%;transform:translateY(-50%);
   display:inline-flex;align-items:center;justify-content:center;
@@ -1415,7 +1418,7 @@ h1,h2,h3,h4,
 }
 
 @media (max-width:1240px){
-  .btn--phone{padding:11px}
+  .btn--phone{padding:9px}
   .btn--phone .btn__label{display:none}
 }
 
