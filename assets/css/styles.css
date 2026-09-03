@@ -143,14 +143,6 @@ h1,h2,h3,h4,
 .btn--block{width:100%}
 /* the shared 20px icon reads oversized next to .88rem button text */
 .btn .ico{width:17px;height:17px}
-/* the tinted icon tile the hero CTA carries in the reference */
-.btn__ico{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:22px;height:22px;border-radius:5px;background:rgba(255,255,255,.2);
-  margin-left:-3px;margin-block:-3px;
-}
-.btn__ico .ico{width:14px;height:14px}
-
 .btn--primary{background:var(--grad);color:#fff;box-shadow:var(--sh-brand)}
 /* WhatsApp keeps its own green, because a recoloured WhatsApp button stops
    being recognised as one at a glance. */
