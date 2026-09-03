@@ -182,40 +182,26 @@ def cta_banner(label, lede):
 </section>''' % (lede, label)
 
 
-# Review platforms shown above the page heading.
-#
-# SCORE and COUNT are None on purpose. No verified Google or Trustpilot figure
-# has been supplied, and printing one nobody can check breaks the brief, breaks
-# Google's and Trustpilot's own rules on displaying review content, and is the
-# kind of claim a customer tests in one click. Fill both in and the stars, the
-# score and the review count appear on every page at once.
+# Review platforms shown above the page heading. Not links: the row states the
+# rating and nothing else.
 REVIEWS = [
-    # sprite id, platform, profile URL, score, review count
-    ("i-google", "Google",
-     "https://www.google.com/maps/search/?api=1&query=Ad+Aircond+Solution+Kuala+Lumpur",
-     None, None),
-    ("i-trustpilot", "Trustpilot",
-     "https://www.trustpilot.com/review/adaircondsolution.com",
-     None, None),
+    ("i-google", "Google", "5"),
+    ("i-trustpilot", "Trustpilot", "5"),
 ]
 
 
 def ratings():
-    """The review-platform row that sits above the page heading."""
+    """The review row above the page heading. Stars only, nothing clickable."""
     out = []
-    for icon, name, url, score, count in REVIEWS:
-        if score is None:
-            body = '<span class="ratings__name">%s reviews</span>' % name
-        else:
-            stars = '<svg class="ico" aria-hidden="true"><use href="#i-star"></use></svg>' * 5
-            body = ('<span class="ratings__score">%s</span>'
-                    '<span class="ratings__stars" role="img" aria-label="Rated %s out of 5">%s</span>'
-                    '<span class="ratings__name">%s, %s reviews</span>'
-                    % (score, score, stars, name, count))
+    for icon, name, score in REVIEWS:
+        stars = '<svg class="ico" aria-hidden="true"><use href="#i-star"></use></svg>' * 5
         out.append(
-            '\n      <a class="ratings__item" href="%s" target="_blank" rel="noopener nofollow">'
+            '\n      <div class="ratings__item">'
             '\n        <svg class="ratings__logo" aria-hidden="true" focusable="false">'
-            '<use href="#%s"></use></svg>\n        %s\n      </a>' % (url, icon, body))
+            '<use href="#%s"></use></svg>'
+            '\n        <span class="ratings__stars" role="img" aria-label="Rated %s out of 5 on %s">%s</span>'
+            '\n        <span class="ratings__name">%s</span>'
+            '\n      </div>' % (icon, score, name, stars, name))
     return '<div class="ratings">' + "".join(out) + '\n    </div>'
 
 
@@ -389,7 +375,7 @@ def faq_ld(qa):
 
 # ------------------------------------------------------------------ about page
 
-def ahero(kicker, line_a, line_b, lede, photo, crumb, cta="Book A Visit"):
+def ahero(line_a, line_b, lede, photo, crumb, cta="Book A Visit"):
     """The standard page hero: homepage styling, no form and no cards.
 
     The photograph is set here rather than in the stylesheet because a url()
@@ -399,16 +385,12 @@ def ahero(kicker, line_a, line_b, lede, photo, crumb, cta="Book A Visit"):
     return f'''<section class="ahero">
   <span class="ahero__photo" aria-hidden="true" style="background-image:url(&quot;/assets/img/{photo}&quot;)"></span>
   <div class="wrap ahero__inner">
-    <div class="herotop">
-      <p class="tagpill"><span class="tagpill__dot"></span>{kicker}</p>
-      {ratings()}
-    </div>
+    <div class="herotop">{ratings()}</div>
     <h1 class="ahero__title">{line_a} <em>{line_b}</em></h1>
     <p class="ahero__lede">{lede}</p>
     <div class="ahero__actions">
       <a class="btn btn--primary btn--lg" href="/contact/"><svg class="ico" aria-hidden="true"><use href="#i-calendar"></use></svg>{cta}</a>
       <a class="btn btn--wa btn--lg" href="https://wa.me/60178570744" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-whatsapp"></use></svg>WhatsApp Us</a>
-      <a class="btn btn--card btn--lg" href="tel:+60178570744"><svg class="ico" aria-hidden="true"><use href="#i-phone"></use></svg>+60178570744</a>
     </div>
     {crumb}
   </div>
@@ -1190,7 +1172,7 @@ PAGES.append({
     "title": "Aircond Repair in KL &amp; Selangor | Ad Aircond Solution",
     "description": "Aircond repair across Kuala Lumpur and Selangor for units that will not cool, will not start, trip the breaker or drip water. The fault is traced before anything is replaced.",
     "body": "\n".join([
-        ahero("Aircond Repair", "Aircond repair in", "Kuala Lumpur &amp; Selangor",
+        ahero("Aircond repair in", "Kuala Lumpur &amp; Selangor",
               "A unit that has stopped cooling, will not start or drips onto the floor needs the fault found before anything is replaced. We test first, name the part that failed, then repair it.",
               "svc-repair.webp",
               bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Repair", None)), "Book A Repair Visit"),
@@ -1263,7 +1245,7 @@ PAGES.append({
     "title": "Aircond Cleaning in KL &amp; Selangor | Ad Aircond Solution",
     "description": "Aircond cleaning across Kuala Lumpur and Selangor: filters, evaporator coil, blower wheel, drain pan and line, and the outdoor condenser. Call +60178570744.",
     "body": "\n".join([
-        ahero("Aircond Cleaning", "Aircond cleaning in", "Kuala Lumpur &amp; Selangor",
+        ahero("Aircond cleaning in", "Kuala Lumpur &amp; Selangor",
               "Filters, the evaporator coil, the blower wheel and the drain line collect dust and biofilm through the year. We strip them back so the unit moves the air it was built to move.",
               "svc-cleaning.webp",
               bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Cleaning", None)), "Book A Cleaning"),
@@ -1336,7 +1318,7 @@ PAGES.append({
     "title": "Aircond Installation in KL &amp; Selangor | Ad Aircond Solution",
     "description": "Aircond installation across Kuala Lumpur and Selangor. Capacity sized to the room, fresh flare joints, a vacuum before charging and a drain set to fall. Call +60178570744.",
     "body": "\n".join([
-        ahero("Aircond Installation", "Aircond installation in", "Kuala Lumpur &amp; Selangor",
+        ahero("Aircond installation in", "Kuala Lumpur &amp; Selangor",
               "A new unit performs the way it was fitted. We size it to the room, run the pipe and the drain properly, and vacuum the system before the gas goes in.",
               "svc-installation.webp",
               bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Installation", None)), "Get An Install Quote"),
@@ -1409,7 +1391,7 @@ PAGES.append({
     "title": "Aircond Maintenance in KL &amp; Selangor | Ad Aircond Solution",
     "description": "Scheduled aircond maintenance across Kuala Lumpur and Selangor. Readings logged every visit, terminals checked, the charge verified, a record per unit. Call +60178570744.",
     "body": "\n".join([
-        ahero("Aircond Maintenance", "Aircond maintenance in", "Kuala Lumpur &amp; Selangor",
+        ahero("Aircond maintenance in", "Kuala Lumpur &amp; Selangor",
               "Booked visits on an interval that suits how you use the units. The readings go down on paper each time, so a slow decline shows up as a number.",
               "svc-maintenance.webp",
               bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Maintenance", None)), "Start A Service Plan"),
@@ -1482,7 +1464,7 @@ PAGES.append({
     "title": "Aircond Gas Refilling in KL &amp; Selangor | Ad Aircond Solution",
     "description": "Aircond gas refilling across Kuala Lumpur and Selangor. We find the leak first, recover the old charge, then weigh the new one in to the nameplate figure. Call +60178570744.",
     "body": "\n".join([
-        ahero("Aircond Gas Refilling", "Aircond gas refilling in", "Kuala Lumpur &amp; Selangor",
+        ahero("Aircond gas refilling in", "Kuala Lumpur &amp; Selangor",
               "Refrigerant does not get used up, so a system that is low has lost it somewhere. We find the hole, repair it, then weigh the charge back in to the figure on the plate.",
               "svc-gas.webp",
               bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Gas Refilling", None)), "Book A Leak Test"),
@@ -1556,7 +1538,7 @@ PAGES.append({
     "title": "Aircond Electrical Service in KL &amp; Selangor | Ad Aircond Solution",
     "description": "Aircond electrical faults traced across KL and Selangor: tripping RCCBs, contactors, driver boards, chewed cable and burnt terminals. Call +60178570744.",
     "body": "\n".join([
-        ahero("Aircond Electrical Service", "Aircond electrical service in", "Kuala Lumpur &amp; Selangor",
+        ahero("Aircond electrical service in", "Kuala Lumpur &amp; Selangor",
               "Tripping breakers, dead compressors and boards that post a code. We test the circuit with the power off before anything is switched back on.",
               "svc-electrical.webp",
               bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Electrical Service", None)), "Book An Electrical Check"),
@@ -1730,7 +1712,7 @@ PAGES.append({
     "title": "Aircond Services in Kuala Lumpur &amp; Selangor | Ad Aircond Solution",
     "description": "The seven aircond services we provide across Kuala Lumpur and Selangor: servicing, repair, cleaning, installation, maintenance, gas refilling and electrical work.",
     "body": "\n".join([
-        ahero("Our Services", "Aircond services in", "Kuala Lumpur &amp; Selangor",
+        ahero("Aircond services in", "Kuala Lumpur &amp; Selangor",
               "General servicing, repair, cleaning, installation, maintenance, gas refilling and electrical work &mdash; for homes and business premises across Kuala Lumpur and Selangor.",
               "svc-installation.webp",
               bc(("Home", "/"), ("Our Services", None)), "Find The Right Service"),
@@ -1768,7 +1750,7 @@ PAGES.append({
     "title": "Top-Rated Aircond Service in KL &amp; Selangor | Ad Aircond Solution",
     "description": "Aircond service, repair, maintenance and installation for homes and businesses across Kuala Lumpur and Selangor. Honest diagnosis before any work. Call +60178570744.",
     "body": "\n".join([
-        ahero("Aircond Service", "Top-rated aircond service", "in KL &amp; Selangor",
+        ahero("Top-rated aircond service", "in KL &amp; Selangor",
               "In Kuala Lumpur&rsquo;s constant heat, your air conditioner is essential. When it stops working, your day can feel uncomfortable. We offer reliable maintenance, accurate repairs and smooth installations for homes and businesses throughout KL and Selangor.",
               "step-onsite.webp",
               bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Service", None)), "Book An Aircond Service"),
@@ -1845,8 +1827,7 @@ PAGES.append({
     "title": "About Us | Aircond Specialists in KL &amp; Selangor",
     "description": "Ad Aircond Solution provides air conditioning repair, servicing, maintenance and installation for homes and businesses across Kuala Lumpur. Based at Titiwangsa Central.",
     "body": "\n".join([
-        ahero("About Ad Aircond Solution",
-              "About Ad Aircond Solution,",
+        ahero("About Ad Aircond Solution,",
               "aircond specialists in KL &amp; Selangor",
               "Air conditioning repair, cleaning, installation and maintenance for homes and business premises &mdash; from a workshop at Titiwangsa Central, Kuala Lumpur.",
               "cta-outdoor-unit.webp",
@@ -1887,7 +1868,7 @@ PAGES.append({
     "title": "Contact Aircond Repair &amp; Service in KL &amp; Selangor",
     "description": "Call or WhatsApp Ad Aircond Solution on +60178570744, or send your details through the form. 14, Jalan Batu Bata, Titiwangsa Central, 50400 Kuala Lumpur.",
     "body": "\n".join([
-        ahero("Contact", "Contact Ad Aircond Solution", "in KL &amp; Selangor",
+        ahero("Contact Ad Aircond Solution", "in KL &amp; Selangor",
               "Call, WhatsApp, or send the details through the form and we will confirm the service and a time that suits you.",
               "step-contact.webp",
               bc(("Home", "/"), ("Contact", None)), "Send Your Details"),
