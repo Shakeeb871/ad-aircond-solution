@@ -892,6 +892,96 @@ I_FAQ = [
 ]
 
 
+# --- aircond maintenance copy -----------------------------------------------
+
+M_ITEMS = [
+ ("i-calendar", "Units That Only Get Booked When They Stop",
+  "A unit usually gets attention on the day it fails. Maintenance puts the visit in the diary instead, so the coil, the drain and the electrics are looked at while everything still works."),
+ ("i-gauge", "Cooling That Drifts Down Slowly",
+  "A system loses performance in steps small enough to live with. We log the vent temperature at every visit. A drop of two degrees across three visits then shows up as a number instead of a feeling."),
+ ("i-bolt", "Terminals That Work Loose Over Time",
+  "Every start heats the terminal block and every stop cools it, and that cycle backs the screws off over the years. A loose terminal arcs and burns, so the connections are checked and retightened."),
+ ("i-tools", "Bearings Starting To Go",
+  "A fan bearing gives warning long before it seizes, first as a change in tone and then as a rise in running current. Caught at that point it is a bearing. Left alone it becomes a motor."),
+ ("i-drop", "Drains Cleared Before The Wet Months",
+  "Humidity keeps a drain line working all year here, and a partial blockage only shows when the pan fills faster than it empties. A visit ahead of the heaviest rain clears it while it is still partial."),
+ ("i-shield", "Warranty Conditions On A New Unit",
+  "Most makers ask for servicing at set intervals before they will stand behind a claim. We write down the date and the work at every visit, so the evidence exists if you ever need it."),
+ ("i-building", "Premises Running Several Units",
+  "Ten units in a shop or an office need a register, not somebody's memory. Each machine carries its own dates, readings and parts, so nobody guesses which one was done last."),
+ ("i-therm", "A Charge Verified, Not Topped Up",
+  "A low reading is a leak, not a refill falling due. We check the charge against the nameplate figure at each visit and trace the loss when that figure has moved."),
+ ("i-users", "Rented Homes And End-Of-Tenancy Arguments",
+  "A landlord who cannot show when a unit was last serviced tends to pay for the disagreement. A dated record per unit settles it before anyone opens the deposit."),
+ ("i-snow", "Older Units Kept Running Sensibly",
+  "A system past ten years still earns its place while the running figures hold. We watch the current draw and the pressures, and name the point where planning a replacement beats booking more visits."),
+]
+
+M_CHECKS = [
+ "Vent temperature at the indoor unit, logged against the last visit.",
+ "Running current on the compressor, compared with the figure from last time.",
+ "Refrigerant charge verified against the nameplate, and any change traced.",
+ "Terminal screws retightened at the indoor and outdoor connections.",
+ "Filter condition graded, with the date it was last washed.",
+ "Drain flow timed, with water poured into the pan.",
+ "Fan bearing noise and vibration noted on both units.",
+ "Any part showing early wear listed, with what it will need and when.",
+]
+
+M_STEPS = [
+ ("contact", "i-phone", "Tell Us What You Run",
+  "Call or WhatsApp +60178570744 with how many units you have, where they sit and roughly how old they are. That decides how often a visit is worth booking."),
+ ("schedule", "i-calendar", "We Set The Interval",
+  "A bedroom split used at night sits on one interval. A shop unit running twelve hours a day in a dusty street sits on another. You get the dates before the first visit."),
+ ("onsite", "i-user", "The Visit And The Readings",
+  "The technician works the list, takes the readings and puts right anything small on the spot. Nothing larger goes ahead without your say."),
+ ("comfort", "i-check", "The Record Comes To You",
+  "You get what was found, what was done and what to watch, unit by unit. The next date goes in the diary before we leave."),
+]
+
+M_TERMS = [
+ ("An interval set on how you use them. ", "A unit in a dusty shop is booked more often than a bedroom split, and you hear the reason."),
+ ("A record per unit, not per address. ", "Each machine carries its own dates, readings and parts history."),
+ ("Readings compared with last time. ", "One reading tells you little. The one before it tells you whether the unit is drifting."),
+ ("Small jobs done on the visit. ", "A loose terminal, a stiff louvre or a slow drain is sorted while the technician is there."),
+ ("Larger work quoted, never assumed. ", "Anything beyond the visit is priced and put to you before it happens."),
+ ("Warranty evidence kept. ", "The dates and the work are written down, so a claim to the maker has something behind it."),
+ ("The charge checked against the plate. ", "We verify the figure instead of adding gas out of habit."),
+ ("Early wear flagged with a timescale. ", "You hear which part is going and roughly when, so it stays your decision."),
+ ("Trading hours worked around. ", "Shops and offices get the visit before opening or after closing, one unit at a time."),
+ ("A straight answer when a unit is finished. ", "Where the running figures say a replacement is the better spend, we say so instead of selling more visits."),
+]
+
+M_FAQ = [
+ ("What is the difference between maintenance and a cleaning?",
+  "A cleaning washes the filters, the coil, the blower wheel and the drain. Maintenance covers that work and adds the readings, the electrical checks and a written record, so drift and early wear show up between visits."),
+ ("What decides how often a unit needs a visit?",
+  "Three things decide it: the hours the unit runs, how dusty the air around it is, and how many people share the room. A bedroom split used at night sits at one end of that range. A shop unit running all day sits at the other."),
+ ("Do I have to commit to a schedule?",
+  "No. You can book a single visit and decide afterwards. Where you run several units, agreeing the dates in advance saves the call each time and keeps every record in one place."),
+ ("Will maintenance stop my aircond breaking down?",
+  "No, not every time. A capacitor can fail between visits and a board can go without warning. What maintenance removes are the failures that build slowly, and those account for most of them."),
+ ("Does maintenance keep the manufacturer warranty valid?",
+  "Usually yes. Most makers ask for servicing at stated intervals and want evidence when a claim is made. Read the terms in your own warranty booklet. We record the date and the work at every visit."),
+ ("What do you record at each visit?",
+  "We record the vent temperature, the running current, the refrigerant charge against the nameplate, the drain flow and the condition of the filters. Every figure is written against the last one taken."),
+ ("Can you maintain units in an office without disturbing work?",
+  "Yes. Shops and offices get the visit before opening or after closing. The units are done one at a time, so the floor stays usable."),
+ ("What happens if you find a fault during a maintenance visit?",
+  "Small work is done on the spot. Anything larger is priced and put to you before it goes ahead. A maintenance visit never turns into a repair bill you did not agree."),
+ ("Is maintenance worth it on an older unit?",
+  "Yes, while the running figures hold. An older compressor still moves heat, and the visits keep small faults from finishing it early. Where the current draw and the pressures say the unit is at its end, we tell you to plan the replacement."),
+ ("Do you maintain units you did not install?",
+  "Yes. The first visit takes longer, because we record the model, the age and a baseline set of readings for each unit. After that the visits run to the same list as any other."),
+ ("What should I have ready for the first visit?",
+  "Have the model numbers to hand if you can find them, and clear access to the indoor units and the outdoor position. For a business, tell us which rooms cannot be disturbed and when."),
+ ("Who is responsible for maintenance in a rented home?",
+  "The tenancy agreement decides it, and reading that before a unit fails is worth the five minutes. Many agreements in Kuala Lumpur put routine servicing on the tenant and repairs on the owner."),
+ ("Do you remind me when the next visit is due?",
+  "Yes. The next date goes in the diary before we leave, and we call ahead of it to confirm the time still suits you."),
+]
+
+
 PAGES = []
 
 PAGES.append({
@@ -1113,25 +1203,78 @@ PAGES.append({
         ) + ",\n" + faq_ld(I_FAQ) + "\n]",
 })
 
-PAGES.append(service_page(
-    "ac-maintenance", "Aircond Maintenance", "Aircond Maintenance",
-    "Aircond maintenance in", "Kuala Lumpur &amp; Selangor",
-    "Scheduled visits that keep a system running at its best and flag small issues while they are still small jobs.",
-    "svc-maintenance.webp",
-    "What aircond maintenance is for",
-    ["Most air conditioner failures announce themselves before they happen. A capacitor on its way out, a drain starting to block, a coil losing its ability to shed heat &mdash; each shows up as a change in how the unit behaves well before it stops.",
-     "A maintenance visit is where those get noticed. The unit is cleaned, its operation checked, and anything heading for a problem is flagged while it is still cheap to deal with.",
-     "The other half of it is running cost. A system kept clean reaches temperature sooner and runs for less time to hold it, which is the difference you feel on the bill rather than in the room."],
-    "Covered at each aircond maintenance visit",
-    ["Filters and coil cleaned", "Drain line checked and flushed",
-     "Airflow and cooling performance checked", "Refrigerant pressure checked",
-     "Electrical connections inspected", "Fan and blower operation checked",
-     "Outdoor unit cleaned and inspected", "Written note of anything to watch"],
-    "Scheduled aircond cover for premises with several units",
-    ["Offices, shops and other premises running several units are easier to look after on a schedule than one call-out at a time. Units get attended in one visit, and you get a single picture of which ones are fine and which need attention.",
-     "Tell us how many units you have and where they are, and we will set out what a visit covers and how often it is worth doing for your site."],
-    "Aircond Maintenance in KL &amp; Selangor | Ad Aircond Solution",
-    "Scheduled aircond maintenance in Kuala Lumpur and Selangor for homes and business premises. Cleaning, checks and early warning of faults. Call +60178570744."))
+PAGES.append({
+    "dir": "ac-maintenance", "url": "ac-maintenance/", "nav": "services", "image": "svc-maintenance.webp",
+    "title": "Aircond Maintenance in KL &amp; Selangor | Ad Aircond Solution",
+    "description": "Scheduled aircond maintenance across Kuala Lumpur and Selangor. Readings logged every visit, terminals checked, the charge verified, a record per unit. Call +60178570744.",
+    "body": "\n".join([
+        ahero("Aircond Maintenance", "Aircond maintenance in", "Kuala Lumpur &amp; Selangor",
+              "Booked visits on an interval that suits how you use the units. The readings go down on paper each time, so a slow decline shows up as a number.",
+              "svc-maintenance.webp",
+              bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Maintenance", None))),
+
+        '''<section class="section section--tight">
+  <div class="wrap">
+    <div class="prose prose--solo reveal">
+      <p>Nobody books an aircond visit while the room is still cold. The unit gets used, the cooling slips a little each month, and the first call goes out on the evening it stops.</p>
+      <p>By then the cheap window has closed. A bearing that whined for six months has taken the motor with it. A loose terminal has burnt its block, and a slow leak has run the compressor short of oil. Each of those was visible months earlier to anyone holding a meter.</p>
+      <p>We run booked maintenance on wall splits and ceiling cassettes, in homes, shops and offices around Kuala Lumpur and out through Selangor. Tell us on +60178570744 how many units you have and how hard they work, and we will set the interval.</p>
+    </div>
+  </div>
+</section>''',
+
+        '''<section class="section section--alt approach">
+  <div class="wrap split">
+    <div class="split__copy reveal">
+      <p class="eyebrow"><span class="eyebrow__dot"></span>Maintenance against cleaning</p>
+      <h2 class="h2">What Maintenance Catches That A Clean Does Not</h2>
+      <p class="body">A cleaning gets the dust off the filter, the coil, the blower wheel and the drain, and the unit cools better that afternoon. Maintenance includes that work and then adds the part a wash cannot do, which is measurement. The vent temperature, the running current and the charge get written down and compared with the last visit.</p>
+      <p class="body">One reading on its own says almost nothing. Two readings six months apart say whether a unit is holding or sliding. That gap is the difference between changing a bearing and changing a motor. Where the numbers say a unit is finished, we tell you to plan the replacement instead of booking more visits.</p>
+    </div>
+    <div class="split__media reveal" data-delay="1">
+      <img class="poster" src="/assets/img/svc-maintenance.webp" width="600" height="450"
+           alt="An Ad Aircond Solution technician taking readings during a scheduled aircond maintenance visit in Kuala Lumpur."
+           loading="lazy" decoding="async">
+    </div>
+  </div>
+</section>''',
+
+        cards("What maintenance covers", "What A Booked Visit", "Picks Up Early",
+              "Ten of the things a scheduled visit catches while they are still small jobs.",
+              M_ITEMS),
+
+        f'''<section class="section">
+  <div class="wrap prose__grid">
+    <div class="prose reveal">
+      <h2 class="h2 h2--sm">What Each Visit Records</h2>
+      <p>Eight figures go on the sheet at every visit, and each one is written next to the figure from last time. That is what turns a service call into a history.</p>
+      <p>The history is what lets us tell you a bearing has six months in it, instead of finding out on the day it stops.</p>
+    </div>
+    <div class="prose__aside reveal" data-delay="1">{checks("Logged at every visit", M_CHECKS)}</div>
+  </div>
+</section>''',
+
+        flow_section("How It Works", "How A Maintenance", "Schedule Starts",
+                     "Four steps, and the interval is set on how hard your units actually work.",
+                     M_STEPS),
+
+        benefits("What you get", "What Aircond Maintenance", "Includes",
+                 "What every booked visit covers, and what lands with you afterwards.",
+                 M_TERMS),
+
+        faq_block("Aircond Maintenance", "Questions About Scheduled Visits",
+                  "Something not covered here? Ring +60178570744 and we will tell you straight whether a schedule is worth it for your units.",
+                  M_FAQ),
+        others("ac-maintenance"),
+        testimonials(),
+    ]),
+    "jsonld": "[\n" + service_ld(
+        "Aircond Maintenance",
+        "Scheduled aircond maintenance with readings logged per unit at every visit, across Kuala Lumpur and Selangor.",
+        "ac-maintenance/") + ",\n" + crumbs(
+        ("Home", ""), ("Our Services", "services/"), ("Aircond Maintenance", "ac-maintenance/")
+        ) + ",\n" + faq_ld(M_FAQ) + "\n]",
+})
 
 PAGES.append(service_page(
     "gas-refilling", "Aircond Gas Refilling", "Aircond Gas Refilling",
