@@ -192,23 +192,45 @@ SERVICES = [
 ]
 
 
+def _pull(start, end):
+    """Reuse a block that already exists on the homepage."""
+    return between(start, end)
+
+
+# The six cards are lifted from the homepage rather than written again, so the
+# section has one layout wherever it appears and the two can never drift. Here
+# each card is the link to its own service; <a> takes flow content, so the
+# heading and the fault list carry over unchanged.
+_home_cards = re.findall(r'<article class="svc\b[^"]*"[^>]*>.*?</article>', home, re.S)
+assert len(_home_cards) == len(SERVICES), (len(_home_cards), len(SERVICES))
+
+def _as_link(card, slug):
+    card = re.sub(r'^<article class="svc\b[^"]*"[^>]*>',
+                  f'<a class="svc svc--link reveal" href="/{slug}/">', card, count=1)
+    return card[:-len('</article>')] + '</a>'
+
+
 def others(current):
-    cards = "".join(f'''
-      <a class="minicard" href="/{slug}/">
-        <span class="minicard__icon"><svg class="ico" aria-hidden="true"><use href="#{icon}"></use></svg></span>
-        <span class="minicard__name">{name}</span>
-        <svg class="ico ico--sm minicard__go" aria-hidden="true"><use href="#i-arrow"></use></svg>
-      </a>''' for slug, name, icon, _, _m in SERVICES if slug != current)
-    return f'''<section class="section section--alt">
+    """The same cards the homepage shows, minus the service you are already on."""
+    cards = "".join(
+        "\n      " + _as_link(card, slug).replace("\n", "\n  ")
+        for card, (slug, *_r) in zip(_home_cards, SERVICES) if slug != current)
+    return f'''<section class="section section--alt services">
   <div class="wrap">
-    <header class="sec-head sec-head--tight">
+    <header class="sec-head services__head reveal">
       <p class="pill">More services</p>
-      <h2 class="h2 h2--sm">Other Aircond Services We Provide</h2>
+      <h2 class="h2 services__title">Other Aircond Services <em>We Provide</em></h2>
+      <span class="rule-ico" aria-hidden="true"><i class="rule-ico__line"></i><svg class="ico" aria-hidden="true"><use href="#i-snow"></use></svg><i class="rule-ico__line"></i></span>
     </header>
-    <div class="minigrid">{cards}
+    <div class="svc-grid">{cards}
     </div>
   </div>
 </section>'''
+
+
+def testimonials():
+    """The homepage testimonials section, reused rather than written again."""
+    return _pull('<section class="section testimonials"', '</section>\n')
 
 
 # --------------------------------------------------- blocks for the hub page
@@ -580,7 +602,7 @@ def service_page(slug, nav_name, kicker, title_a, title_b, lede, photo,
         article(intro_h, intro_p, checks(list_title, list_items)),
         article(second_h, second_p),
         others(slug),
-        CTA,
+        testimonials(),
     ])
     return {
         "dir": slug, "url": url, "nav": "services", "image": photo,
@@ -808,18 +830,6 @@ FAQ = [
 ]
 
 
-# The six cards are lifted from the homepage rather than written again, so the
-# section has one layout wherever it appears and the two can never drift. Here
-# each card is the link to its own service; <a> takes flow content, so the
-# heading and the fault list carry over unchanged.
-_home_cards = re.findall(r'<article class="svc\b[^"]*"[^>]*>.*?</article>', home, re.S)
-assert len(_home_cards) == len(SERVICES), (len(_home_cards), len(SERVICES))
-
-def _as_link(card, slug):
-    card = re.sub(r'^<article class="svc\b[^"]*"[^>]*>',
-                  f'<a class="svc svc--link reveal" href="/{slug}/">', card, count=1)
-    return card[:-len('</article>')] + '</a>'
-
 _svc_cards = "".join(
     "\n      " + _as_link(card, slug).replace("\n", "\n  ")
     for card, (slug, *_r) in zip(_home_cards, SERVICES))
@@ -922,7 +932,7 @@ PAGES.append({
                   "If yours is not here, call or WhatsApp us on +60178570744 and we will answer it straight.",
                   FAQ),
         others("aircond-service"),
-        CTA,
+        testimonials(),
     ]),
     "jsonld": "[\n" + service_ld(
         "Aircond Service",
@@ -934,10 +944,6 @@ PAGES.append({
 
 
 # --- about ------------------------------------------------------------------
-
-def _pull(start, end):
-    """Reuse a block that already exists on the homepage."""
-    return between(start, end)
 
 PAGES.append({
     "dir": "about", "url": "about/", "nav": "about", "image": "about.webp",
