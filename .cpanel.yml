@@ -28,6 +28,11 @@ deployment:
     # and aborted every deploy. It is installed from deploy/htaccess.conf here
     # instead, before the guard below, so it lands in both layouts.
     - /bin/cp -f deploy/htaccess.conf $DEPLOYPATH/.htaccess
+    # Proof the file actually landed. After a deploy, the log should show the
+    # line count and the first rewrite target. If it does not, .htaccess never
+    # reached the docroot and no redirect can be working.
+    - echo "htaccess installed at $DEPLOYPATH/.htaccess:" $(wc -l < $DEPLOYPATH/.htaccess) "lines"
+    - grep -m1 'adaircondsolution.com%{REQUEST_URI}' $DEPLOYPATH/.htaccess || echo 'WARNING: redirect rules missing from .htaccess'
     - if [ "$LIVEPATH" = "$REPOPATH" ]; then echo "Repository is the website folder - the working tree is already the live site, nothing else to copy."; exit 0; fi
     # homepage and the single-file copy
     - /bin/cp -f index.html standalone.html $DEPLOYPATH/
