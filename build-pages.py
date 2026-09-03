@@ -182,6 +182,7 @@ CTA = '''<section class="section callout-wrap">
 
 # directory, name, sprite icon, photo, the .svc__media-- modifier the CSS defines
 SERVICES = [
+    ("aircond-service",       "Aircond Service",            "i-therm",   "step-comfort.webp",     "service"),
     ("ac-repair",             "Aircond Repair",             "i-tools",   "svc-repair.webp",       "repair"),
     ("ac-cleaning",           "Aircond Cleaning",           "i-wind",    "svc-cleaning.webp",     "cleaning"),
     ("ac-installation",       "Aircond Installation",       "i-cog",     "svc-installation.webp", "installation"),
@@ -825,26 +826,16 @@ _svc_cards = "".join(
 
 PAGES.append({
     "dir": "services", "url": "services/", "nav": "services", "image": "svc-installation.webp",
-    "title": "Top-Rated Aircond Service in KL &amp; Selangor | Ad Aircond Solution",
-    "description": "Aircond service, repair, maintenance and installation for homes and businesses across Kuala Lumpur and Selangor. Honest diagnosis before any work. Call +60178570744.",
+    "title": "Aircond Services in Kuala Lumpur &amp; Selangor | Ad Aircond Solution",
+    "description": "The seven aircond services we provide across Kuala Lumpur and Selangor: servicing, repair, cleaning, installation, maintenance, gas refilling and electrical work.",
     "body": "\n".join([
-        ahero("Aircond Service", "Top-rated aircond service", "in KL &amp; Selangor",
-              "In Kuala Lumpur&rsquo;s constant heat, your air conditioner is essential. When it stops working, your day can feel uncomfortable. We offer reliable maintenance, accurate repairs and smooth installations for homes and businesses throughout KL and Selangor.",
+        ahero("Our Services", "Aircond services in", "Kuala Lumpur &amp; Selangor",
+              "General servicing, repair, cleaning, installation, maintenance, gas refilling and electrical work &mdash; for homes and business premises across Kuala Lumpur and Selangor.",
               "svc-installation.webp",
-              bc(("Home", "/"), ("Aircond Service", None))),
-
-        f'''<section class="section section--tight">
-  <div class="wrap">
-    <div class="prose prose--solo reveal">
-      <p>At Ad Aircond Solution, we know how frustrating it is when the cool air stops. We offer reliable maintenance, accurate repairs, and smooth installations for homes and businesses throughout KL and Selangor.</p>
-      <p>Our technicians focus on lasting repairs instead of quick fixes. When your unit is properly serviced, it keeps your rooms at the right temperature and protects important parts from breaking down. We help you avoid stressful breakdowns during the hottest months by spotting small problems early.</p>
-    </div>
-  </div>
-</section>''',
-
+              bc(("Home", "/"), ("Our Services", None))),
         f'''<section class="section services">
   <div class="wrap">
-    <header class="sec-head services__head reveal">
+    <header class="sec-head services__head">
       <h2 class="hstack services__title">
         <span class="hstack__lead">Complete aircond</span>
         <span class="hstack__main">Repair, cleaning, installation &amp; maintenance</span>
@@ -857,8 +848,38 @@ PAGES.append({
     </div>
   </div>
 </section>''',
+        problems(),
+        article("Which Aircond Service Do You Need?", [
+            "Most people call about a symptom rather than a service, and that is the right way round. Weak cooling can be a dirty coil, a low refrigerant charge or a failing capacitor, and those are three different jobs.",
+            "Tell us what the unit is doing &mdash; how it sounds, when it started, whether it cools at all &mdash; and we will tell you which service fits before anything is booked. If it turns out to be the cheaper job, that is the one we will quote."]),
+        CTA,
+    ]),
+    "jsonld": crumbs(("Home", ""), ("Our Services", "services/")),
+})
 
-        f'''<section class="section section--alt approach">
+
+# --- aircond service --------------------------------------------------------
+
+PAGES.append({
+    "dir": "aircond-service", "url": "aircond-service/", "nav": "services", "image": "step-onsite.webp",
+    "title": "Top-Rated Aircond Service in KL &amp; Selangor | Ad Aircond Solution",
+    "description": "Aircond service, repair, maintenance and installation for homes and businesses across Kuala Lumpur and Selangor. Honest diagnosis before any work. Call +60178570744.",
+    "body": "\n".join([
+        ahero("Aircond Service", "Top-rated aircond service", "in KL &amp; Selangor",
+              "In Kuala Lumpur&rsquo;s constant heat, your air conditioner is essential. When it stops working, your day can feel uncomfortable. We offer reliable maintenance, accurate repairs and smooth installations for homes and businesses throughout KL and Selangor.",
+              "step-onsite.webp",
+              bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Service", None))),
+
+        '''<section class="section section--tight">
+  <div class="wrap">
+    <div class="prose prose--solo reveal">
+      <p>At Ad Aircond Solution, we know how frustrating it is when the cool air stops. We offer reliable maintenance, accurate repairs, and smooth installations for homes and businesses throughout KL and Selangor.</p>
+      <p>Our technicians focus on lasting repairs instead of quick fixes. When your unit is properly serviced, it keeps your rooms at the right temperature and protects important parts from breaking down. We help you avoid stressful breakdowns during the hottest months by spotting small problems early.</p>
+    </div>
+  </div>
+</section>''',
+
+        '''<section class="section section--alt approach">
   <div class="wrap split">
     <div class="split__copy reveal">
       <p class="eyebrow"><span class="eyebrow__dot"></span>Trained technicians</p>
@@ -900,9 +921,15 @@ PAGES.append({
         faq_block("Frequently Asked Questions", "About Our Services",
                   "If yours is not here, call or WhatsApp us on +60178570744 and we will answer it straight.",
                   FAQ),
+        others("aircond-service"),
         CTA,
     ]),
-    "jsonld": "[\n" + crumbs(("Home", ""), ("Aircond Service", "services/")) + ",\n" + faq_ld(FAQ) + "\n]",
+    "jsonld": "[\n" + service_ld(
+        "Aircond Service",
+        "Aircond service, repair, maintenance and installation for homes and businesses across Kuala Lumpur and Selangor.",
+        "aircond-service/") + ",\n" + crumbs(
+        ("Home", ""), ("Our Services", "services/"), ("Aircond Service", "aircond-service/")
+        ) + ",\n" + faq_ld(FAQ) + "\n]",
 })
 
 
