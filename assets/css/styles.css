@@ -719,6 +719,8 @@ h1,h2,h3,h4,
 
 /* card grid — two rows of three */
 .svc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(22px,2.6vw,34px)}
+/* An odd last card would otherwise sit alone against the left edge. */
+.svc-grid>:last-child:nth-child(3n+1){grid-column:2}
 .svc{
   position:relative;background:#fff;border:1px solid var(--line);
   border-radius:var(--r-xl);box-shadow:var(--sh-sm);
@@ -735,6 +737,7 @@ h1,h2,h3,h4,
 }
 /* Each slot layers an optional photograph over the illustrated fallback.
    Drop a photo at the named path and change --photo to url("...") to use it. */
+.svc__media--service{--photo:url("../img/step-comfort.webp");background-image:var(--photo),url("../media/services/repair.svg")}
 .svc__media--repair{--photo:url("../img/svc-repair.webp");background-image:var(--photo),url("../media/services/repair.svg")}
 .svc__media--cleaning{--photo:url("../img/svc-cleaning.webp");background-image:var(--photo),url("../media/services/cleaning.svg")}
 .svc__media--installation{--photo:url("../img/svc-installation.webp");background-image:var(--photo),url("../media/services/installation.svg")}
@@ -1519,6 +1522,7 @@ h1,h2,h3,h4,
 
 @media (max-width:1120px){
   .svc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .svc-grid>:last-child:nth-child(3n+1){grid-column:auto}
   .brands__wall{grid-template-columns:repeat(2,minmax(0,1fr))}
   .flow{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:clamp(32px,4vw,44px)}
   .tsplit{grid-template-columns:minmax(0,1fr);gap:clamp(30px,4vw,44px)}

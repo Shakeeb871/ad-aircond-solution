@@ -32,10 +32,10 @@ deployment:
     # homepage and the single-file copy
     - /bin/cp -f index.html standalone.html $DEPLOYPATH/
     # every generated page lives at <name>/index.html so the URL is /<name>/
-    - /bin/rm -rf $DEPLOYPATH/about $DEPLOYPATH/services $DEPLOYPATH/contact $DEPLOYPATH/ac-repair $DEPLOYPATH/ac-cleaning $DEPLOYPATH/ac-installation $DEPLOYPATH/ac-maintenance $DEPLOYPATH/gas-refilling $DEPLOYPATH/ac-electrical-service
-    - /bin/cp -R about services contact ac-repair ac-cleaning ac-installation ac-maintenance gas-refilling ac-electrical-service $DEPLOYPATH/
+    - /bin/rm -rf $DEPLOYPATH/about $DEPLOYPATH/services $DEPLOYPATH/aircond-service $DEPLOYPATH/contact $DEPLOYPATH/ac-repair $DEPLOYPATH/ac-cleaning $DEPLOYPATH/ac-installation $DEPLOYPATH/ac-maintenance $DEPLOYPATH/gas-refilling $DEPLOYPATH/ac-electrical-service
+    - /bin/cp -R about services aircond-service contact ac-repair ac-cleaning ac-installation ac-maintenance gas-refilling ac-electrical-service $DEPLOYPATH/
     # the flat pages this site used before are gone; clear any left on the server
-    - /bin/rm -f $DEPLOYPATH/about.html $DEPLOYPATH/services.html $DEPLOYPATH/contact.html $DEPLOYPATH/ac-repair.html $DEPLOYPATH/ac-cleaning.html $DEPLOYPATH/ac-installation.html $DEPLOYPATH/ac-maintenance.html $DEPLOYPATH/gas-refilling.html $DEPLOYPATH/ac-electrical-service.html
+    - /bin/rm -f $DEPLOYPATH/about.html $DEPLOYPATH/services.html $DEPLOYPATH/aircond-service.html $DEPLOYPATH/contact.html $DEPLOYPATH/ac-repair.html $DEPLOYPATH/ac-cleaning.html $DEPLOYPATH/ac-installation.html $DEPLOYPATH/ac-maintenance.html $DEPLOYPATH/gas-refilling.html $DEPLOYPATH/ac-electrical-service.html
     # site icons live at the root so browsers and iOS find them without a link
     - /bin/cp -f favicon.ico favicon-32.png icon-192.png icon-512.png apple-touch-icon.png site.webmanifest $DEPLOYPATH/
     - /bin/rm -f $DEPLOYPATH/favicon.svg
