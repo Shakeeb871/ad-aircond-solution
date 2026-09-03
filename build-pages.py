@@ -162,22 +162,61 @@ def article(heading, paras, aside=None):
 </section>'''
 
 
-CTA = '''<section class="section callout-wrap">
+def cta_banner(label, lede):
+    """The closing banner. Each page passes its own wording, so no two match."""
+    return '''<section class="section callout-wrap">
   <div class="wrap">
     <div class="callout">
       <div class="callout__scene" aria-hidden="true"></div>
       <div class="callout__skyline" aria-hidden="true"></div>
       <div class="callout__body">
         <h2 class="h2 callout__title">Book Aircond Repair or Service <em>in Kuala Lumpur &amp; Selangor.</em></h2>
-        <p class="callout__lede">Describe the symptom and we will confirm which service fits before anything is booked.</p>
+        <p class="callout__lede">%s</p>
         <div class="callout__actions">
-          <a class="btn btn--white btn--lg" href="/contact/"><svg class="ico" aria-hidden="true"><use href="#i-calendar"></use></svg>Request a Service Visit</a>
-          <a class="btn btn--glass btn--lg" href="https://wa.me/60178570744" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-whatsapp"></use></svg>WhatsApp us</a>
+          <a class="btn btn--white btn--lg" href="/contact/"><svg class="ico" aria-hidden="true"><use href="#i-calendar"></use></svg>%s</a>
+          <a class="btn btn--glass btn--lg" href="https://wa.me/60178570744" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-whatsapp"></use></svg>Message On WhatsApp</a>
         </div>
       </div>
     </div>
   </div>
-</section>'''
+</section>''' % (lede, label)
+
+
+# Review platforms shown above the page heading.
+#
+# SCORE and COUNT are None on purpose. No verified Google or Trustpilot figure
+# has been supplied, and printing one nobody can check breaks the brief, breaks
+# Google's and Trustpilot's own rules on displaying review content, and is the
+# kind of claim a customer tests in one click. Fill both in and the stars, the
+# score and the review count appear on every page at once.
+REVIEWS = [
+    # sprite id, platform, profile URL, score, review count
+    ("i-google", "Google",
+     "https://www.google.com/maps/search/?api=1&query=Ad+Aircond+Solution+Kuala+Lumpur",
+     None, None),
+    ("i-trustpilot", "Trustpilot",
+     "https://www.trustpilot.com/review/adaircondsolution.com",
+     None, None),
+]
+
+
+def ratings():
+    """The review-platform row that sits above the page heading."""
+    out = []
+    for icon, name, url, score, count in REVIEWS:
+        if score is None:
+            body = '<span class="ratings__name">%s reviews</span>' % name
+        else:
+            stars = '<svg class="ico" aria-hidden="true"><use href="#i-star"></use></svg>' * 5
+            body = ('<span class="ratings__score">%s</span>'
+                    '<span class="ratings__stars" role="img" aria-label="Rated %s out of 5">%s</span>'
+                    '<span class="ratings__name">%s, %s reviews</span>'
+                    % (score, score, stars, name, count))
+        out.append(
+            '\n      <a class="ratings__item" href="%s" target="_blank" rel="noopener nofollow">'
+            '\n        <svg class="ratings__logo" aria-hidden="true" focusable="false">'
+            '<use href="#%s"></use></svg>\n        %s\n      </a>' % (url, icon, body))
+    return '<div class="ratings">' + "".join(out) + '\n    </div>'
 
 
 # directory, name, sprite icon, photo, the .svc__media-- modifier the CSS defines
@@ -350,7 +389,7 @@ def faq_ld(qa):
 
 # ------------------------------------------------------------------ about page
 
-def ahero(kicker, line_a, line_b, lede, photo, crumb):
+def ahero(kicker, line_a, line_b, lede, photo, crumb, cta="Book A Visit"):
     """The standard page hero: homepage styling, no form and no cards.
 
     The photograph is set here rather than in the stylesheet because a url()
@@ -360,11 +399,15 @@ def ahero(kicker, line_a, line_b, lede, photo, crumb):
     return f'''<section class="ahero">
   <span class="ahero__photo" aria-hidden="true" style="background-image:url(&quot;/assets/img/{photo}&quot;)"></span>
   <div class="wrap ahero__inner">
-    <p class="tagpill"><span class="tagpill__dot"></span>{kicker}</p>
+    <div class="herotop">
+      <p class="tagpill"><span class="tagpill__dot"></span>{kicker}</p>
+      {ratings()}
+    </div>
     <h1 class="ahero__title">{line_a} <em>{line_b}</em></h1>
     <p class="ahero__lede">{lede}</p>
     <div class="ahero__actions">
-      <a class="btn btn--primary btn--lg" href="/contact/"><svg class="ico" aria-hidden="true"><use href="#i-calendar"></use></svg>Book a Service</a>
+      <a class="btn btn--primary btn--lg" href="/contact/"><svg class="ico" aria-hidden="true"><use href="#i-calendar"></use></svg>{cta}</a>
+      <a class="btn btn--wa btn--lg" href="https://wa.me/60178570744" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-whatsapp"></use></svg>WhatsApp Us</a>
       <a class="btn btn--card btn--lg" href="tel:+60178570744"><svg class="ico" aria-hidden="true"><use href="#i-phone"></use></svg>+60178570744</a>
     </div>
     {crumb}
@@ -1150,7 +1193,7 @@ PAGES.append({
         ahero("Aircond Repair", "Aircond repair in", "Kuala Lumpur &amp; Selangor",
               "A unit that has stopped cooling, will not start or drips onto the floor needs the fault found before anything is replaced. We test first, name the part that failed, then repair it.",
               "svc-repair.webp",
-              bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Repair", None))),
+              bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Repair", None)), "Book A Repair Visit"),
 
         '''<section class="section section--tight">
   <div class="wrap">
@@ -1223,7 +1266,7 @@ PAGES.append({
         ahero("Aircond Cleaning", "Aircond cleaning in", "Kuala Lumpur &amp; Selangor",
               "Filters, the evaporator coil, the blower wheel and the drain line collect dust and biofilm through the year. We strip them back so the unit moves the air it was built to move.",
               "svc-cleaning.webp",
-              bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Cleaning", None))),
+              bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Cleaning", None)), "Book A Cleaning"),
 
         '''<section class="section section--tight">
   <div class="wrap">
@@ -1296,7 +1339,7 @@ PAGES.append({
         ahero("Aircond Installation", "Aircond installation in", "Kuala Lumpur &amp; Selangor",
               "A new unit performs the way it was fitted. We size it to the room, run the pipe and the drain properly, and vacuum the system before the gas goes in.",
               "svc-installation.webp",
-              bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Installation", None))),
+              bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Installation", None)), "Get An Install Quote"),
 
         '''<section class="section section--tight">
   <div class="wrap">
@@ -1369,7 +1412,7 @@ PAGES.append({
         ahero("Aircond Maintenance", "Aircond maintenance in", "Kuala Lumpur &amp; Selangor",
               "Booked visits on an interval that suits how you use the units. The readings go down on paper each time, so a slow decline shows up as a number.",
               "svc-maintenance.webp",
-              bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Maintenance", None))),
+              bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Maintenance", None)), "Start A Service Plan"),
 
         '''<section class="section section--tight">
   <div class="wrap">
@@ -1442,7 +1485,7 @@ PAGES.append({
         ahero("Aircond Gas Refilling", "Aircond gas refilling in", "Kuala Lumpur &amp; Selangor",
               "Refrigerant does not get used up, so a system that is low has lost it somewhere. We find the hole, repair it, then weigh the charge back in to the figure on the plate.",
               "svc-gas.webp",
-              bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Gas Refilling", None))),
+              bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Gas Refilling", None)), "Book A Leak Test"),
 
         '''<section class="section section--tight">
   <div class="wrap">
@@ -1516,7 +1559,7 @@ PAGES.append({
         ahero("Aircond Electrical Service", "Aircond electrical service in", "Kuala Lumpur &amp; Selangor",
               "Tripping breakers, dead compressors and boards that post a code. We test the circuit with the power off before anything is switched back on.",
               "svc-electrical.webp",
-              bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Electrical Service", None))),
+              bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Electrical Service", None)), "Book An Electrical Check"),
 
         '''<section class="section section--tight">
   <div class="wrap">
@@ -1690,7 +1733,7 @@ PAGES.append({
         ahero("Our Services", "Aircond services in", "Kuala Lumpur &amp; Selangor",
               "General servicing, repair, cleaning, installation, maintenance, gas refilling and electrical work &mdash; for homes and business premises across Kuala Lumpur and Selangor.",
               "svc-installation.webp",
-              bc(("Home", "/"), ("Our Services", None))),
+              bc(("Home", "/"), ("Our Services", None)), "Find The Right Service"),
         f'''<section class="section services">
   <div class="wrap">
     <header class="sec-head services__head">
@@ -1711,7 +1754,8 @@ PAGES.append({
         article("Which Aircond Service Do You Need?", [
             "Most people call about a symptom rather than a service, and that is the right way round. Weak cooling can be a dirty coil, a low refrigerant charge or a failing capacitor, and those are three different jobs.",
             "Tell us what the unit is doing &mdash; how it sounds, when it started, whether it cools at all &mdash; and we will tell you which service fits before anything is booked. If it turns out to be the cheaper job, that is the one we will quote."]),
-        CTA,
+        cta_banner("Get A Recommendation",
+                   "Describe the symptom and we will confirm which service fits before anything is booked."),
     ]),
     "jsonld": crumbs(("Home", ""), ("Our Services", "services/")),
 })
@@ -1727,7 +1771,7 @@ PAGES.append({
         ahero("Aircond Service", "Top-rated aircond service", "in KL &amp; Selangor",
               "In Kuala Lumpur&rsquo;s constant heat, your air conditioner is essential. When it stops working, your day can feel uncomfortable. We offer reliable maintenance, accurate repairs and smooth installations for homes and businesses throughout KL and Selangor.",
               "step-onsite.webp",
-              bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Service", None))),
+              bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Service", None)), "Book An Aircond Service"),
 
         '''<section class="section section--tight">
   <div class="wrap">
@@ -1806,7 +1850,7 @@ PAGES.append({
               "aircond specialists in KL &amp; Selangor",
               "Air conditioning repair, cleaning, installation and maintenance for homes and business premises &mdash; from a workshop at Titiwangsa Central, Kuala Lumpur.",
               "cta-outdoor-unit.webp",
-              bc(("Home", "/"), ("About Us", None))),
+              bc(("Home", "/"), ("About Us", None)), "Talk To The Team"),
         # The homepage block carries Our Story and Our Mission cards. This page
         # covers both at more length in Our Journey and Vision & Mission below,
         # so the cards come out rather than saying it twice.
@@ -1829,7 +1873,8 @@ PAGES.append({
                 "Work carried out at the agreed time",
                 "The space left clean afterwards",
                 "A straight answer when a repair is not worth it"])),
-        CTA,
+        cta_banner("Arrange A Visit",
+                   "Tell us the make, the model and what the unit is doing, and we will set a time."),
     ]),
     "jsonld": crumbs(("Home", ""), ("About Us", "about/")),
 })
@@ -1845,7 +1890,7 @@ PAGES.append({
         ahero("Contact", "Contact Ad Aircond Solution", "in KL &amp; Selangor",
               "Call, WhatsApp, or send the details through the form and we will confirm the service and a time that suits you.",
               "step-contact.webp",
-              bc(("Home", "/"), ("Contact", None))),
+              bc(("Home", "/"), ("Contact", None)), "Send Your Details"),
         read("partials/booking.html"),
         works(),
     ]),
