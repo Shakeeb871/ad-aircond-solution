@@ -604,28 +604,6 @@ def problems():
 
 # ---------------------------------------------------------------------- pages
 
-def service_page(slug, nav_name, kicker, title_a, title_b, lede, photo,
-                 intro_h, intro_p, list_title, list_items,
-                 second_h, second_p, meta_title, meta_desc):
-    url = f"{slug}/"
-    crumb = bc(("Home", "/"), ("Our Services", "/services/"), (nav_name, None))
-    body = "\n".join([
-        ahero(kicker, title_a, title_b, lede, photo, crumb),
-        article(intro_h, intro_p, checks(list_title, list_items)),
-        article(second_h, second_p),
-        works(),
-        others(slug),
-        testimonials(),
-    ])
-    return {
-        "dir": slug, "url": url, "nav": "services", "image": photo,
-        "title": meta_title, "description": meta_desc, "body": body,
-        # two graphs in one tag must be a JSON array, not two objects
-        "jsonld": "[\n" + service_ld(nav_name, meta_desc, url) + ",\n" + crumbs(
-            ("Home", ""), ("Our Services", "services/"), (nav_name, url)) + "\n]",
-    }
-
-
 # --- aircond repair copy ----------------------------------------------------
 
 R_FAULTS = [
@@ -1072,6 +1050,96 @@ G_FAQ = [
 ]
 
 
+# --- aircond electrical service copy ----------------------------------------
+
+E_ITEMS = [
+ ("i-bolt", "The RCCB Drops, But Not The MCB",
+  "An RCCB opens when current escapes to earth. On an aircond that points at moisture inside the outdoor terminal box, or a compressor winding breaking down to its own shell. Both show up on an insulation test."),
+ ("i-cog", "Pitted Or Welded Contactor Points",
+  "A contactor makes and breaks the compressor supply thousands of times, and every break draws a small arc. The contacts pit and then stick, so the compressor either refuses to start or refuses to stop."),
+ ("i-grid", "Inverter Driver Board Faults",
+  "An inverter switches its compressor through a power module on the outdoor board. Once that module goes, the unit posts a code and the compressor never turns, while the supply sits there perfectly healthy."),
+ ("i-shield", "Interconnect Cable Chewed Or Baked",
+  "The cable between the two units lives outside, takes sun all year and interests rodents. A nicked core arcs across to its neighbour, and the unit then reports a fault its symptoms do not explain."),
+ ("i-therm", "The Overload Protector Cutting In",
+  "Every compressor carries a thermal switch that opens when the shell runs too hot. A unit that works for twenty minutes, dies, then restarts an hour later is being saved by that device from something else."),
+ ("i-snow", "Storm Damage To Both Boards",
+  "A spike off a Kuala Lumpur thunderstorm can take the indoor control board and the outdoor driver in the same second. We test both, because replacing one and finding the other gone is an expensive lesson."),
+ ("i-install", "Thin Cable Or A Shared Circuit",
+  "A unit fed off a lighting circuit, or through cable too thin for its starting current, loses voltage every time the compressor kicks in. The lights dim, the unit labours, and the cable warms."),
+ ("i-tools", "Terminal Blocks That Have Burnt",
+  "A block that has arced leaves a black mark and a melted housing behind it. The block gets replaced and the cable ends are cut back to clean copper, because burnt strands never clamp properly again."),
+ ("i-users", "Error Codes Pointing At A Sensor",
+  "A code on the display names a circuit, not a component. We read it, then test the sensor and the wiring on that circuit. A sensor costs a fraction of a board and fails far more often."),
+ ("i-home", "No Isolator At The Outdoor Unit",
+  "Without a local isolator, the unit gets worked on with the whole circuit dead or, worse, with it live. Fitting one is a short job that makes this visit and every visit after it safer."),
+]
+
+E_CHECKS = [
+ "Voltage measured at the outdoor terminals under starting load.",
+ "Insulation resistance from each compressor winding down to earth.",
+ "Contactor coil and contacts, checked for chatter and pitting.",
+ "Earth continuity traced from the unit back to the consumer unit.",
+ "Interconnect cable inspected along its whole run for damage.",
+ "Cable size and breaker rating compared with the unit's nameplate.",
+ "Fault history read off the board and matched to the maker's code table.",
+ "Terminal blocks at both units examined for heat marking.",
+]
+
+E_STEPS = [
+ ("contact", "i-phone", "Tell Us What Trips And When",
+  "Call or WhatsApp +60178570744 and say which device goes, the MCB or the RCCB, and whether it drops at start-up or after the unit has been running. Those point at different faults."),
+ ("schedule", "i-calendar", "Leave It Off Until We Arrive",
+  "Switch the unit off at the isolator and stop resetting the breaker. A device reset onto a live fault does a little more damage every time it closes."),
+ ("onsite", "i-user", "Tested Before Anything Is Powered",
+  "The technician meters the circuit, the windings and the cable with the supply dead, then brings it up in stages. Nothing gets energised just to see what happens."),
+ ("comfort", "i-check", "Repaired And Left Safe",
+  "The failed part is replaced, the connections are remade in clean copper, and the unit runs while we read the current draw with you there."),
+]
+
+E_TERMS = [
+ ("Testing before power. ", "Windings, cable and earth are measured with the supply off, so nothing is energised to find out."),
+ ("The device that tripped identified. ", "You are told whether it was the MCB, the RCCB or the compressor's own overload, and what each one means."),
+ ("Both boards checked after a surge. ", "Indoor and outdoor are tested separately, because one failure takes the blame for the other."),
+ ("Cable ends cut back to clean copper. ", "Burnt strands come off instead of being re-clamped into a fresh block."),
+ ("Cable and breaker checked against the plate. ", "Where the circuit was never rated for the unit, you hear that before we fit another part."),
+ ("An isolator fitted where there is none. ", "It makes this call and every later one safer to work on."),
+ ("Codes read, never guessed at. ", "The stored code is matched to the maker's table before any part is ordered."),
+ ("No board sold on a sensor fault. ", "The circuit the code names gets tested first, and boards are the last thing we change."),
+ ("Current draw read at the end. ", "The unit runs while we measure it, so you watch the repair hold under load."),
+ ("A straight answer on work outside our scope. ", "The house circuit beyond the isolator belongs to a licensed electrician, and we say so when that is what the fault needs."),
+]
+
+E_FAQ = [
+ ("My aircond trips the RCCB but not the MCB. What does that mean?",
+  "An RCCB opens on current leaking to earth. On an aircond that usually means moisture inside the outdoor terminal box, or a compressor winding breaking down to the shell. An insulation test separates the two."),
+ ("What is the difference between an MCB and an RCCB?",
+  "An MCB opens on too much current, which means an overload or a short circuit. An RCCB opens on current escaping to earth, which means a leak. Which device trips tells us where to start looking."),
+ ("What is the compressor overload protector?",
+  "The overload protector is a thermal switch fitted to the compressor that opens when the shell runs too hot. It is a safety device, so a unit cutting out on it has a fault elsewhere driving the heat."),
+ ("Can a lightning strike damage my aircond?",
+  "Yes. A surge through the supply commonly takes the indoor control board and the outdoor driver board in one go. We test both, because replacing one and then finding the other gone costs twice."),
+ ("How do you tell whether the board or a sensor has failed?",
+  "A stored error code names a circuit, not a component. We test the sensor and its wiring on that circuit first. A sensor costs a fraction of a board and gives up far more often."),
+ ("Why does my aircond dim the lights when it starts?",
+  "The compressor pulls a heavy current for a moment at start-up. A thin cable or a shared circuit drops voltage while that happens. Lights on the same circuit dim, and the unit runs on less than it needs."),
+ ("Do you work on the house wiring as well?",
+  "No, not beyond the aircond circuit. The consumer unit and the fixed wiring of the property are work for a licensed electrician. We tell you plainly when that is what the fault needs."),
+ ("What is an isolator, and do I need one?",
+  "An isolator is a local switch beside the outdoor unit that cuts its supply. It lets the unit be worked on without killing power to the rest of the house, and safe servicing depends on having one."),
+ ("Can rodents really damage the aircond cable?",
+  "Yes. The cable between the indoor and outdoor units runs outside and gets chewed. A nicked core arcs across to its neighbour, and the unit then reports a fault that makes no sense against what you are seeing."),
+ ("Are inverter boards repaired or replaced?",
+  "The board is normally replaced. A burnt track or a single failed relay is sometimes repairable. A failed power module means a board change, because the maker supplies the module as part of the board."),
+ ("Why does the unit run on fan but never cool?",
+  "Fan mode uses the indoor blower circuit alone. Cooling brings in the contactor, the compressor and the outdoor fan. A unit that blows without cooling has a fault on the outdoor side, or in whatever switches it."),
+ ("Does an aircond need earthing?",
+  "Yes. Both units are metal cased and carry mains voltage inside. The earth path back to the consumer unit is what lets an RCCB protect you. We check earth continuity on every electrical call."),
+ ("How long can I leave a tripping aircond switched off?",
+  "As long as you need to, and that is the safer choice while you wait. An unpowered unit cannot damage itself further, and moisture in a terminal box often dries enough to show us where it got in."),
+]
+
+
 PAGES = []
 
 PAGES.append({
@@ -1439,25 +1507,80 @@ PAGES.append({
         ) + ",\n" + faq_ld(G_FAQ) + "\n]",
 })
 
-PAGES.append(service_page(
-    "ac-electrical-service", "Aircond Electrical Service", "Aircond Electrical Service",
-    "Aircond electrical service in", "Kuala Lumpur &amp; Selangor",
-    "From a failed capacitor to wiring and control faults &mdash; the electrical side of an air conditioner, diagnosed and repaired properly.",
-    "svc-electrical.webp",
-    "Aircond electrical faults behind common symptoms",
-    ["A unit that will not start, starts and stops, hums without running or trips the breaker is usually an electrical problem rather than a cooling one. Capacitors, contactors, fan motors, control boards and the wiring between them are all candidates.",
-     "These are the faults where guessing is expensive. Replacing a control board when the capacitor was the problem costs several times what the actual fix would have. So the fault is traced to the component before anything is replaced.",
-     "This is also the part of an air conditioner where working on it yourself is genuinely dangerous. Capacitors hold a charge after the power is off, and a unit that is tripping a breaker is telling you something that should not be reset and ignored."],
-    "Aircond electrical work we carry out",
-    ["Capacitor testing and replacement", "Contactor and relay faults",
-     "Fan and blower motor faults", "Control board diagnosis",
-     "Wiring and terminal faults", "Units tripping the breaker",
-     "Remote and sensor faults", "Power supply checks at the unit"],
-    "When your aircond keeps tripping the breaker",
-    ["A breaker that trips when the air conditioner runs is doing its job &mdash; something in the circuit is drawing more current than it should. Resetting it repeatedly does not fix the cause and is not safe.",
-     "Switch the unit off at the isolator and call us. We will find what is drawing the current, whether that is the unit, its wiring or the supply, and put it right."],
-    "Aircond Electrical Service in KL &amp; Selangor | Ad Aircond Solution",
-    "Aircond electrical repair in Kuala Lumpur and Selangor: capacitors, wiring, control boards and units tripping the breaker. Call +60178570744."))
+PAGES.append({
+    "dir": "ac-electrical-service", "url": "ac-electrical-service/", "nav": "services",
+    "image": "svc-electrical.webp",
+    "title": "Aircond Electrical Service in KL &amp; Selangor | Ad Aircond Solution",
+    "description": "Aircond electrical faults traced across KL and Selangor: tripping RCCBs, contactors, driver boards, chewed cable and burnt terminals. Call +60178570744.",
+    "body": "\n".join([
+        ahero("Aircond Electrical Service", "Aircond electrical service in", "Kuala Lumpur &amp; Selangor",
+              "Tripping breakers, dead compressors and boards that post a code. We test the circuit with the power off before anything is switched back on.",
+              "svc-electrical.webp",
+              bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Electrical Service", None))),
+
+        '''<section class="section section--tight">
+  <div class="wrap">
+    <div class="prose prose--solo reveal">
+      <p>You press the button and the house goes dark. Or the display flashes two characters nobody can decode. The outdoor unit sits in silence while the indoor fan carries on.</p>
+      <p>The temptation is to walk to the box and push the breaker back up. Every reset onto a live fault welds a contact further, cooks a winding a little more, or arcs across a terminal already black. The second reset usually costs more than the first.</p>
+      <p>We trace aircond electrical faults on splits and cassettes for households and businesses, right through Kuala Lumpur and Selangor. Ring +60178570744 and tell us which device is tripping and when it goes.</p>
+    </div>
+  </div>
+</section>''',
+
+        '''<section class="section section--alt approach">
+  <div class="wrap split">
+    <div class="split__copy reveal">
+      <p class="eyebrow"><span class="eyebrow__dot"></span>Where electrical faults hide</p>
+      <h2 class="h2">The Fault Is Not Always Inside The Aircond</h2>
+      <p class="body">An electrical callout starts at the supply end, not at the machine. The voltage, the breaker rating, the isolator and the cable running between the two units all sit outside the aircond. Any one of them can produce a symptom that looks exactly like a dead compressor.</p>
+      <p class="body">So the meter comes out before the screwdriver. Windings get tested to earth, the cable is followed along its run, and the stored code is matched to the maker's table. Where the answer turns out to be the house circuit beyond the isolator, that is work for a licensed electrician and we say so.</p>
+    </div>
+    <div class="split__media reveal" data-delay="1">
+      <img class="poster" src="/assets/img/svc-electrical.webp" width="600" height="450"
+           alt="An Ad Aircond Solution technician testing the control wiring inside an aircond unit in Kuala Lumpur."
+           loading="lazy" decoding="async">
+    </div>
+  </div>
+</section>''',
+
+        cards("What we trace", "Aircond Electrical Faults", "And Where They Sit",
+              "Ten of the electrical faults we get called out for, and what is behind each one.",
+              E_ITEMS),
+
+        f'''<section class="section">
+  <div class="wrap prose__grid">
+    <div class="prose reveal">
+      <h2 class="h2 h2--sm">What Gets Tested On An Electrical Call</h2>
+      <p>Eight measurements are taken before the unit is asked to run again. Most of them happen with the supply dead, which is rather the point.</p>
+      <p>An electrical fault found by switching on and watching costs a component. Found with a meter, it costs a reading.</p>
+    </div>
+    <div class="prose__aside reveal" data-delay="1">{checks("Measured on every call", E_CHECKS)}</div>
+  </div>
+</section>''',
+
+        flow_section("How It Works", "How An Electrical", "Callout Runs",
+                     "Four steps, and the first thing we ask is that you leave it switched off.",
+                     E_STEPS),
+
+        benefits("What you get", "What An Electrical Service", "Includes",
+                 "How every electrical call is handled, and the point where we hand over.",
+                 E_TERMS),
+
+        faq_block("Aircond Electrical Service", "Questions About Electrical Faults",
+                  "Not here? Ring +60178570744, say which device trips and when, and we will tell you what it points at.",
+                  E_FAQ),
+        others("ac-electrical-service"),
+        testimonials(),
+    ]),
+    "jsonld": "[\n" + service_ld(
+        "Aircond Electrical Service",
+        "Aircond electrical fault tracing and repair covering tripping devices, contactors, driver boards, wiring and terminals, across Kuala Lumpur and Selangor.",
+        "ac-electrical-service/") + ",\n" + crumbs(
+        ("Home", ""), ("Our Services", "services/"),
+        ("Aircond Electrical Service", "ac-electrical-service/")
+        ) + ",\n" + faq_ld(E_FAQ) + "\n]",
+})
 
 
 # --- services hub -----------------------------------------------------------
