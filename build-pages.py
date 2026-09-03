@@ -184,14 +184,21 @@ def cta_banner(label, lede):
 
 # Review platforms shown above the page heading. Not links: the row states the
 # rating and nothing else.
+# Icon, platform, score. The score is written out beside the stars so the row
+# reads as a sentence rather than a decoration a reader has to interpret.
 REVIEWS = [
-    ("i-google", "Google", "5"),
-    ("i-trustpilot", "Trustpilot", "5"),
+    ("i-google", "Google", "5.0"),
+    ("i-trustpilot", "Trustpilot", "5.0"),
 ]
 
 
 def ratings():
-    """The review row above the page heading. Stars only, nothing clickable."""
+    """The review row above the page heading.
+
+    Each item states the score in words next to the stars, so the row still
+    says what it means when the icons fail to load or a reader skims past the
+    graphics. Nothing in it is a link.
+    """
     out = []
     for icon, name, score in REVIEWS:
         stars = '<svg class="ico" aria-hidden="true"><use href="#i-star"></use></svg>' * 5
@@ -199,9 +206,11 @@ def ratings():
             '\n      <div class="ratings__item">'
             '\n        <svg class="ratings__logo" aria-hidden="true" focusable="false">'
             '<use href="#%s"></use></svg>'
-            '\n        <span class="ratings__stars" role="img" aria-label="Rated %s out of 5 on %s">%s</span>'
-            '\n        <span class="ratings__name">%s</span>'
-            '\n      </div>' % (icon, score, name, stars, name))
+            '\n        <span class="ratings__stars" aria-hidden="true">%s</span>'
+            '\n        <span class="ratings__text">'
+            '<strong class="ratings__score">%s</strong> out of 5 on %s'
+            '</span>'
+            '\n      </div>' % (icon, stars, score, name))
     return '<div class="ratings">' + "".join(out) + '\n    </div>'
 
 
