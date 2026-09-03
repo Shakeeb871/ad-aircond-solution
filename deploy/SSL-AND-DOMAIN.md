@@ -51,6 +51,35 @@ Add the property as **https://adaircondsolution.com** and submit
 `https://adaircondsolution.com/sitemap.xml`. A Domain property covers every
 variant at once and is the simpler choice if DNS access is available.
 
+## "Not secure" in the browser
+
+That message means the browser did not get a valid certificate for
+`adaircondsolution.com`. It is a server-side state, not a page problem. The
+site's own files reference no `http://` resource anywhere, so mixed content is
+ruled out.
+
+Work through these in order:
+
+1. **cPanel → Security → SSL/TLS Status.** Does `adaircondsolution.com` show a
+   valid certificate, or does it say "AutoSSL Domain Validated" / nothing at
+   all? If there is no certificate, tick both the domain and `www` and press
+   **Run AutoSSL**. Issue usually completes within minutes.
+2. **Certificate on the wrong name.** A padlock warning naming a different host
+   means the server answered with its own shared certificate. The domain has no
+   certificate of its own yet, so the answer is the same: run AutoSSL.
+3. **`www` missing from the certificate.** If the apex works but `www` warns,
+   AutoSSL covered one name and not the other. Re-run it with both ticked.
+4. **DNS not pointing here yet.** AutoSSL validates by fetching a token over
+   HTTP, so it fails while the A record still points at the old host. Check the
+   A record resolves to this server before re-running.
+5. **cPanel's own "Force HTTPS Redirect".** Leave that switch **off**.
+   `htaccess.conf` already does the redirect, and running both can produce a
+   redirect loop.
+
+If the certificate cannot be issued today and the site has to stay reachable,
+comment out the four "force https" lines in `htaccess.conf`, deploy, and put
+them back once AutoSSL succeeds. The file marks exactly which lines those are.
+
 ## What the rules do
 
 `htaccess.conf` sends any request that is not https, or arrives on a `www`
