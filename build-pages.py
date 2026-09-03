@@ -168,7 +168,7 @@ CTA = '''<section class="section callout-wrap">
       <div class="callout__scene" aria-hidden="true"></div>
       <div class="callout__skyline" aria-hidden="true"></div>
       <div class="callout__body">
-        <h2 class="h2 callout__title">Book Aircond Repair or Service<em>in Kuala Lumpur &amp; Selangor.</em></h2>
+        <h2 class="h2 callout__title">Book Aircond Repair or Service <em>in Kuala Lumpur &amp; Selangor.</em></h2>
         <p class="callout__lede">Describe the symptom and we will confirm which service fits before anything is booked.</p>
         <div class="callout__actions">
           <a class="btn btn--white btn--lg" href="/contact/"><svg class="ico" aria-hidden="true"><use href="#i-calendar"></use></svg>Request a Service Visit</a>
@@ -210,6 +210,109 @@ def others(current):
 </section>'''
 
 
+# --------------------------------------------------- blocks for the hub page
+
+def cards(kicker, title_a, title_b, lede, items):
+    """Two-column icon cards: an icon, a name and a paragraph."""
+    cs = "".join(f'''
+      <article class="cap reveal" data-delay="{i % 2}">
+        <span class="cap__icon"><svg class="ico" aria-hidden="true"><use href="#{ic}"></use></svg></span>
+        <div class="cap__body">
+          <h3 class="cap__name">{n}</h3>
+          <p class="cap__text">{t}</p>
+        </div>
+      </article>''' for i, (ic, n, t) in enumerate(items))
+    return f'''<section class="section capsec">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="pill">{kicker}</p>
+      <h2 class="h2 capsec__title">{title_a} <em>{title_b}</em></h2>
+      <span class="rule-ico" aria-hidden="true"><i class="rule-ico__line"></i><svg class="ico" aria-hidden="true"><use href="#i-snow"></use></svg><i class="rule-ico__line"></i></span>
+      <p class="sec-head__text">{lede}</p>
+    </header>
+    <div class="cap-grid">{cs}
+    </div>
+  </div>
+</section>'''
+
+
+def steplist(kicker, title_a, title_b, lede, steps):
+    """Numbered steps down a connector line."""
+    ls = "".join(f'''
+      <li class="tl__item reveal" data-delay="{i}">
+        <span class="tl__dot tl__dot--num" aria-hidden="true">{i + 1:02d}</span>
+        <div class="tl__card">
+          <h3 class="tl__name">{n}</h3>
+          <p class="tl__text">{t}</p>
+        </div>
+      </li>''' for i, (n, t) in enumerate(steps))
+    return f'''<section class="section section--alt journey">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="pill">{kicker}</p>
+      <h2 class="h2 journey__title">{title_a} <em>{title_b}</em></h2>
+      <p class="sec-head__text">{lede}</p>
+    </header>
+    <ol class="tl tl--num">{ls}
+    </ol>
+  </div>
+</section>'''
+
+
+def benefits(kicker, title_a, title_b, lede, items):
+    """A two-column ticked list where each point leads with its own label."""
+    ls = "".join(f'''
+      <li><span class="checks__ico"><svg class="ico" aria-hidden="true"><use href="#i-check"></use></svg></span>
+        <span><strong>{n}</strong>{t}</span></li>''' for n, t in items)
+    return f'''<section class="section blist-wrap">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <p class="pill">{kicker}</p>
+      <h2 class="h2 capsec__title">{title_a} <em>{title_b}</em></h2>
+      <p class="sec-head__text">{lede}</p>
+    </header>
+    <ul class="blist reveal" data-delay="1">{ls}
+    </ul>
+  </div>
+</section>'''
+
+
+def faq_block(title_a, title_b, lede, qa):
+    items = "".join(f'''
+      <details class="faq__item" name="faq"{" open" if i == 0 else ""}>
+        <summary class="faq__q">
+          <span>{q}</span>
+          <span class="faq__mark" aria-hidden="true"><svg class="ico" focusable="false"><use href="#i-chevron"></use></svg></span>
+        </summary>
+        <div class="faq__a"><p>{a}</p></div>
+      </details>''' for i, (q, a) in enumerate(qa))
+    return f'''<section class="section faq" id="faq">
+  <span class="deco deco--photo deco--leaves-l" aria-hidden="true"></span>
+  <div class="wrap">
+    <header class="sec-head faq__head reveal">
+      <p class="pill">FAQ</p>
+      <h2 class="h2 faq__title">{title_a} <em>{title_b}</em></h2>
+      <span class="rule-ico" aria-hidden="true"><i class="rule-ico__line"></i><svg class="ico" aria-hidden="true"><use href="#i-snow"></use></svg><i class="rule-ico__line"></i></span>
+      <p class="sec-head__text">{lede}</p>
+    </header>
+    <div class="faq__list reveal" data-delay="1">{items}
+    </div>
+  </div>
+</section>'''
+
+
+def faq_ld(qa):
+    """FAQPage structured data for the questions rendered above."""
+    def esc(t):
+        return (t.replace('&mdash;', '\u2014').replace('&amp;', '&')
+                 .replace('&rsquo;', '\u2019').replace('"', '\\"'))
+    els = ",\n".join(
+        '    {"@type":"Question","name":"%s","acceptedAnswer":{"@type":"Answer","text":"%s"}}'
+        % (esc(q), esc(a)) for q, a in qa)
+    return ('{\n  "@context": "https://schema.org",\n  "@type": "FAQPage",\n'
+            '  "mainEntity": [\n' + els + '\n  ]\n}')
+
+
 # ------------------------------------------------------------------ about page
 
 def ahero(kicker, line_a, line_b, lede, photo, crumb):
@@ -223,7 +326,7 @@ def ahero(kicker, line_a, line_b, lede, photo, crumb):
   <span class="ahero__photo" aria-hidden="true" style="background-image:url(&quot;/assets/img/{photo}&quot;)"></span>
   <div class="wrap ahero__inner">
     <p class="tagpill"><span class="tagpill__dot"></span>{kicker}</p>
-    <h1 class="ahero__title">{line_a}<em>{line_b}</em></h1>
+    <h1 class="ahero__title">{line_a} <em>{line_b}</em></h1>
     <p class="ahero__lede">{lede}</p>
     <div class="ahero__actions">
       <a class="btn btn--primary btn--lg" href="/contact/"><svg class="ico" aria-hidden="true"><use href="#i-calendar"></use></svg>Book a Service</a>
@@ -611,6 +714,99 @@ PAGES.append(service_page(
 
 # --- services hub -----------------------------------------------------------
 
+# The supplied services-page copy, kept whole.
+SYMPTOMS = [
+ ("i-drop", "Water Leaking From The Indoor Unit",
+  "Finding a puddle on your floor is stressful. This usually means a blocked drainage pipe or an overflowing condensation pan. We clear these blockages and check the water flow to protect your walls and furniture from damage."),
+ ("i-therm", "Insufficient Cooling Performance",
+  "It is frustrating when your aircond runs but the room stays warm. This often happens when dirty filters or clogged coils block airflow. We deep-clean these parts so your unit can cool your room quickly."),
+ ("i-cog", "Unusual System Noises",
+  "Hearing rattling or grinding from your aircond can be worrying. These sounds often mean loose hardware, a struggling fan motor, or worn bearings. Our technician will secure the parts and fix the noise before it causes bigger problems."),
+ ("i-wind", "Foul Odours During Operation",
+  "No one wants their home to smell musty. These odours occur when mould or bacteria grow on damp coils and drain pans. Our chemical wash removes these contaminants, leaving your air fresh and safe to breathe."),
+ ("i-gauge", "Frequent System Cycling",
+  "If your aircond keeps turning on and off, it wastes electricity. This usually means the thermostat is faulty or airflow is blocked. We recalibrate the sensors and fix the airflow so your aircond runs smoothly."),
+ ("i-snow", "Frozen Evaporator Coils",
+  "Finding ice inside your aircond on a hot day can be confusing. It means the system cannot absorb heat, often due to low refrigerant or blocked airflow. We melt the ice, clean the blower, and adjust gas pressure to fix the problem."),
+ ("i-bolt", "Electrical Tripping",
+  "If turning on your aircond shuts off your home&rsquo;s power, it is a serious safety issue. The compressor may draw too much current. We check your wiring and capacitors to ensure your system runs safely."),
+ ("i-chat", "Unresponsive Remote Control",
+  "If your remote does not work, even with new batteries, the aircond&rsquo;s infrared receiver may have failed. We test the signal and replace the sensor so you can control your aircond again."),
+ ("i-wind", "Weak Airflow From The Vents",
+  "If you barely feel air from the vent, the blower motor may be failing or the filter may be blocked with dust. We check the motor and clean the dirt to restore strong airflow."),
+ ("i-install", "Outdoor Unit Not Running",
+  "If the indoor unit blows warm air and the outdoor compressor is silent, a small but important part like a start capacitor or contactor may have failed. We test and replace these parts to restore your system."),
+]
+
+CHECKLIST = [
+ "Comparing the present pressure of the refrigerant gas with the manufacturer&rsquo;s reliable operational guidelines.",
+ "Checking electrical terminals and wiring for any signs of dangerous heat damage or loose connections.",
+ "Checking the physical condition and cleanliness of the sensitive indoor evaporator coils.",
+ "Removing any dirt or solid obstructions that are clogging the outdoor condenser unit.",
+ "Making sure that the primary condensation line is flushed so that water does not back up into your room.",
+ "Checking the mechanical condition and electrical power consumption of both the fan and compressor motors.",
+ "Setting the thermostat sensors so that they accurately measure the temperature in the room.",
+ "Adjusting the blower wheel so that it rotates smoothly and quietly, like a whisper.",
+]
+
+PROCESS = [
+ ("Contact Us",
+  "Call or message our support team at +60178570744. Let us know the issue, and we will find an appointment time that fits your schedule."),
+ ("Thorough Diagnosis",
+  "Our technician will come to your KL or Selangor address, listen to your concerns, and inspect the unit to identify the exact problem."),
+ ("Honest Repair",
+  "After you approve our recommendation, we start work. We use the right tools to clean, repair, or adjust your system safely."),
+ ("Final Testing",
+  "We test the air conditioner through a full cooling cycle to make sure your room is properly cooled before we finish the job."),
+]
+
+BENEFITS = [
+ ("Targeted fixes, not guesses. ", "We find the real cause of the problem so you do not have to call a technician again soon after."),
+ ("Faster cooling. ", "Clearing out dirt and blockages helps your aircond cool the room much faster."),
+ ("Added years to your aircond. ", "Professional care reduces strain on your unit, so you will not need to buy a new one as soon."),
+ ("Lighter electricity bills. ", "When your air conditioner works efficiently, it uses less energy and lowers your monthly bills."),
+ ("No mid-summer breakdowns. ", "By fixing worn parts early, you avoid breakdowns during hot weather."),
+ ("Family safety first. ", "We know how to handle high-voltage connections, so you do not have to worry about electrical safety at home."),
+ ("Healthier air. ", "Removing hidden mould and dust means your family breathes cleaner, fresher air."),
+ ("Complete transparency. ", "We explain our work clearly, so you always know what your equipment needs and what you are paying for."),
+ ("Respect for your time. ", "We arrive on time and keep any disruption to your day as short as possible."),
+ ("Always here for you. ", "Our support continues after we leave. If you have a question later, just give us a call."),
+]
+
+FAQ = [
+ ("How frequently should I have my home air conditioner serviced?",
+  "In order to keep your house properly cooled, we suggest having it serviced on a regular basis once every four to six months. If your air conditioner operates continuously throughout the day or is situated in a dusty commercial area, then having it cleaned every three months is the most advisable option."),
+ ("Why is my air conditioner leaking water inside the room?",
+  "Over time, wet dirt creates a thick sludge that clogs your condensation drainage pipe. With nowhere else to drain, the water backs up, overflows the internal collection pan, and drips down your wall."),
+ ("Do I need to top up the aircond gas during every service?",
+  "No, you do not. Refrigerant gas never naturally depletes or evaporates. A technician only needs to add gas if your copper pipes have developed a physical crack or leak that lets refrigerant escape."),
+ ("How long does a standard air conditioning service take?",
+  "A standard, thorough cleaning usually takes about 45 to 60 minutes per unit. If the system is heavily soiled or placed in an awkward, hard-to-reach spot, it might take a bit longer to ensure the job is done perfectly."),
+ ("Should I repair my old air conditioner or replace it entirely?",
+  "If your aircond is over a decade old and the main compressor dies, replacement is usually the smartest financial move. Minor sensor faults, dirty filters, or small electrical issues are almost always worth a quick repair."),
+ ("What causes my air conditioner to make a loud rattling noise?",
+  "A loud rattling noise indicates that something inside has literally shaken loose over time. It could be a vibrating plastic panel or worn-out fan bearings that need professional tightening or replacement."),
+ ("When is a chemical wash necessary for my air conditioning unit?",
+  "When standard water washing cannot cut through years of deeply baked-on grime and sticky mould, a chemical wash safely strips it all away. This intensive cleaning restores airflow to a heavily neglected unit."),
+ ("Can you service both inverter and non-inverter air conditioning systems?",
+  "Absolutely. We are fully equipped and trained to handle the straightforward mechanics of traditional non-inverter units, as well as the delicate circuit boards of modern, energy-saving inverter technology."),
+ ("Why has my electricity bill increased without changing my aircond usage?",
+  "When filters and coils are clogged with thick dust, your compressor runs constantly to reach your desired temperature. This strain drastically increases your daily electricity consumption."),
+ ("What causes a foul, musty smell when I turn on the air conditioner?",
+  "That sour, musty smell is actually mould and bacteria growing in the dark, damp corners of your aircond&rsquo;s internal drain pan. A deep professional cleaning washes those contaminants away, leaving the air fresh instantly."),
+ ("Why does ice form on my indoor air conditioning unit?",
+  "Ice forms when a dirty blower or low gas prevents the aircond from pushing the cold air into your room. Instead, that freezing temperature stays trapped inside the casing, freezing the natural moisture directly onto the copper coils."),
+ ("Is it normal for the outdoor condenser unit to be noisy?",
+  "A steady, low hum from the compressor and fan is completely normal. However, if you hear screeching, aggressive vibrating, or loud clanking, turn the unit off and call us before the motor permanently destroys itself."),
+ ("Why does my air conditioner turn on and off every few minutes?",
+  "A confused thermostat sensor usually causes this frustrating, rapid loop. It can also happen if your filters are so dirty that the system cannot precisely read the actual temperature of the air circulating in the room."),
+ ("How quickly can I book a service appointment in Kuala Lumpur?",
+  "We know how uncomfortable a hot room can be, so we always aim to be at your door within 24 to 48 hours of your call. We route our technicians as efficiently as KL traffic allows to solve your cooling emergencies fast."),
+ ("Which areas do you cover for air conditioning services?",
+  "We provide complete maintenance, repair, and installation services for residential and commercial properties all across Kuala Lumpur and Selangor. Call us at +60178570744, and we will confirm exactly when we can reach your neighbourhood."),
+]
+
+
 # The six cards are lifted from the homepage rather than written again, so the
 # section has one layout wherever it appears and the two can never drift. Here
 # each card is the link to its own service; <a> takes flow content, so the
@@ -629,16 +825,26 @@ _svc_cards = "".join(
 
 PAGES.append({
     "dir": "services", "url": "services/", "nav": "services", "image": "svc-installation.webp",
-    "title": "Aircond Services in Kuala Lumpur &amp; Selangor | Ad Aircond Solution",
-    "description": "The six air conditioning services Ad Aircond Solution provides in Kuala Lumpur: repair, cleaning, installation, maintenance, gas refilling and electrical work.",
+    "title": "Top-Rated Aircond Service in KL &amp; Selangor | Ad Aircond Solution",
+    "description": "Aircond service, repair, maintenance and installation for homes and businesses across Kuala Lumpur and Selangor. Honest diagnosis before any work. Call +60178570744.",
     "body": "\n".join([
-        ahero("Our Services", "Aircond services in", "Kuala Lumpur &amp; Selangor",
-              "Repair, cleaning, installation, maintenance, gas refilling and electrical work &mdash; for homes and business premises across Kuala Lumpur.",
+        ahero("Aircond Service", "Top-rated aircond service", "in KL &amp; Selangor",
+              "In Kuala Lumpur&rsquo;s constant heat, your air conditioner is essential. When it stops working, your day can feel uncomfortable. We offer reliable maintenance, accurate repairs and smooth installations for homes and businesses throughout KL and Selangor.",
               "svc-installation.webp",
-              bc(("Home", "/"), ("Our Services", None))),
+              bc(("Home", "/"), ("Aircond Service", None))),
+
+        f'''<section class="section section--tight">
+  <div class="wrap">
+    <div class="prose prose--solo reveal">
+      <p>At Ad Aircond Solution, we know how frustrating it is when the cool air stops. We offer reliable maintenance, accurate repairs, and smooth installations for homes and businesses throughout KL and Selangor.</p>
+      <p>Our technicians focus on lasting repairs instead of quick fixes. When your unit is properly serviced, it keeps your rooms at the right temperature and protects important parts from breaking down. We help you avoid stressful breakdowns during the hottest months by spotting small problems early.</p>
+    </div>
+  </div>
+</section>''',
+
         f'''<section class="section services">
   <div class="wrap">
-    <header class="sec-head services__head">
+    <header class="sec-head services__head reveal">
       <h2 class="hstack services__title">
         <span class="hstack__lead">Complete aircond</span>
         <span class="hstack__main">Repair, cleaning, installation &amp; maintenance</span>
@@ -651,13 +857,52 @@ PAGES.append({
     </div>
   </div>
 </section>''',
-        problems(),
-        article("Which Aircond Service Do You Need?", [
-            "Most people call about a symptom rather than a service, and that is the right way round. Weak cooling can be a dirty coil, a low refrigerant charge or a failing capacitor, and those are three different jobs.",
-            "Tell us what the unit is doing &mdash; how it sounds, when it started, whether it cools at all &mdash; and we will tell you which service fits before anything is booked. If it turns out to be the cheaper job, that is the one we will quote."]),
+
+        f'''<section class="section section--alt approach">
+  <div class="wrap split">
+    <div class="split__copy reveal">
+      <p class="eyebrow"><span class="eyebrow__dot"></span>Trained technicians</p>
+      <h2 class="h2">Expert Aircond Servicing That Respects Your Budget</h2>
+      <p class="body">You should always know who is coming into your home and working on your equipment. Our technicians are not only trained but also understand the details of modern cooling systems. Their experience helps us find hidden issues that others might miss.</p>
+      <p class="body">We understand that repairs can be stressful, especially when you worry about cost. That is why we explain your equipment&rsquo;s condition clearly before starting work. Our honest approach helps you avoid unnecessary part replacements and keeps your system safe. We focus only on what your aircond needs, so you get quality service at a fair price.</p>
+    </div>
+    <div class="split__media reveal" data-delay="1">
+      <img class="poster" src="/assets/img/svc-repair.webp" width="600" height="450"
+           alt="An Ad Aircond Solution technician servicing a wall-mounted unit in a Kuala Lumpur home."
+           loading="lazy" decoding="async">
+    </div>
+  </div>
+</section>''',
+
+        cards("What we fix", "Our Aircond Services", "Include",
+              "Ten of the faults we are called out for most, and what we do about each one.",
+              SYMPTOMS),
+
+        f'''<section class="section">
+  <div class="wrap prose__grid">
+    <div class="prose reveal">
+      <h2 class="h2 h2--sm">Our Complete System Inspection Checklist</h2>
+      <p>Every service visit is a chance to catch small problems before they become bigger issues. Our standard inspection is thorough so you can feel confident in your equipment.</p>
+      <p>During our visit, we check the points listed here, and you hear what we found before anything is replaced.</p>
+    </div>
+    <div class="prose__aside reveal" data-delay="1">{checks("Checked at every visit", CHECKLIST)}</div>
+  </div>
+</section>''',
+
+        steplist("How it works", "A Simple,", "Stress-Free Process",
+                 "Four steps from your first message to a unit that is cooling properly again.",
+                 PROCESS),
+
+        benefits("Why us", "Benefits Of Hiring", "Our Aircond Services",
+                 "What a properly serviced aircond gives you back, beyond the repair itself.",
+                 BENEFITS),
+
+        faq_block("Frequently Asked Questions", "About Our Services",
+                  "If yours is not here, call or WhatsApp us on +60178570744 and we will answer it straight.",
+                  FAQ),
         CTA,
     ]),
-    "jsonld": crumbs(("Home", ""), ("Our Services", "services/")),
+    "jsonld": "[\n" + crumbs(("Home", ""), ("Aircond Service", "services/")) + ",\n" + faq_ld(FAQ) + "\n]",
 })
 
 
