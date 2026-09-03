@@ -330,7 +330,8 @@ h1,h2,h3,h4,
 .ratings__logo{width:17px;height:17px;flex:none}
 .ratings__stars{display:inline-flex;gap:1px;color:var(--star)}
 .ratings__stars .ico{width:14px;height:14px}
-.ratings__name{font-size:.8rem;font-weight:500;color:var(--ink-2);white-space:nowrap}
+.ratings__text{font-size:.8rem;font-weight:500;color:var(--ink-2);white-space:nowrap}
+.ratings__score{font-family:var(--f-display);font-weight:700;font-size:.88rem;color:var(--navy)}
 
 .hero__title{
   margin-top:20px;
