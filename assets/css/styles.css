@@ -103,7 +103,7 @@ address{font-style:normal}
    engines and for anyone reading the source. Acronyms such as AC and
    contractions such as We're are left intact by the browser. */
 h1,h2,h3,h4,
-.svc__title,.minicard__name,.faq__q,.stat__label{text-transform:capitalize}
+.svc__title,.faq__q,.stat__label{text-transform:capitalize}
 
 .h2{font-size:clamp(1.72rem,1.15rem + 2.3vw,2.85rem);font-weight:600}
 .h2--sm{font-size:clamp(1.45rem,1.1rem + 1.4vw,2.1rem)}
@@ -465,7 +465,6 @@ h1,h2,h3,h4,
   border-radius:var(--r-xl);border:1px solid var(--line);
   box-shadow:var(--sh-lg);background:#fff;
 }
-
 
 /* ---------- About Us ---------- */
 .aboutus{position:relative;overflow:hidden;background:#fff}
@@ -921,24 +920,6 @@ h1,h2,h3,h4,
   width:22px;height:22px;border-radius:50%;background:var(--b-50);color:var(--b-600);
 }
 .checks__ico .ico{width:13px;height:13px}
-
-.minigrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,1.8vw,22px)}
-.minicard{
-  display:flex;align-items:center;gap:14px;
-  background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);
-  padding:clamp(16px,1.8vw,22px);box-shadow:var(--sh-xs);
-  font-family:var(--f-display);font-weight:600;color:var(--navy);
-  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease;
-}
-.minicard:hover{transform:translateY(-3px);box-shadow:var(--sh-sm);border-color:var(--b-200)}
-.minicard__icon{
-  display:inline-flex;align-items:center;justify-content:center;flex:none;
-  width:44px;height:44px;border-radius:50%;background:var(--b-50);color:var(--b-700);
-}
-.minicard__icon .ico{width:21px;height:21px}
-.minicard__name{flex:1;min-width:0;font-size:.98rem}
-.minicard__go{color:var(--b-500);transition:transform .25s ease}
-.minicard:hover .minicard__go{transform:translateX(4px)}
 
 /* service cards used as links on the services page */
 /* On the services hub the whole card is the link. It carries the same body as
@@ -1542,7 +1523,6 @@ h1,h2,h3,h4,
   .tm-grid{grid-template-columns:minmax(0,1fr)}
   .ahero__photo{width:100%;opacity:.2;-webkit-mask-image:none;mask-image:none}
   .prose__grid{grid-template-columns:minmax(0,1fr)}
-  .minigrid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .treviews{grid-template-columns:minmax(0,1fr)}
   /* stacked: the artwork sits behind the whole banner, so the side mask and the
      reserved right gutter both go away and the wash becomes vertical */
@@ -1599,7 +1579,6 @@ h1,h2,h3,h4,
   .plist-grid{grid-template-columns:minmax(0,1fr)}
   .stats__grid{grid-template-columns:minmax(0,1fr)}
   .ahero__actions .btn{width:100%}
-  .minigrid{grid-template-columns:minmax(0,1fr)}
   .callout__actions .btn{width:100%}
   /* the featured card's footer needs the same stacked treatment down here */
   .review--lead .review__foot{grid-template-columns:auto minmax(0,1fr)}
