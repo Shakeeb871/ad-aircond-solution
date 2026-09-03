@@ -982,6 +982,96 @@ M_FAQ = [
 ]
 
 
+# --- aircond gas refilling copy ---------------------------------------------
+
+G_ITEMS = [
+ ("i-drop", "Flare Joints At The Indoor Unit",
+  "Most leaks start at a flare, where a copper cone is clamped against a brass seat. Vibration and a torque figure guessed on fitting day work that seal loose over a couple of years."),
+ ("i-cog", "Weeping Cores In The Service Valves",
+  "The valve cores use the same design as a tyre valve, and the rubber seat inside hardens with heat. A weeping core empties a system across one season, and the part itself costs almost nothing."),
+ ("i-install", "Corrosion On The Outdoor Coil",
+  "A condenser near a main road or the coast takes salt and exhaust on bare aluminium. Pitting opens a pinhole in a U-bend, and the gas leaves through a hole you need a detector to locate."),
+ ("i-tools", "Vibration Cracks Near The Compressor",
+  "The discharge line leaving a compressor takes a shake on every start for years. A work-hardened bend eventually splits, usually within a hand's width of the weld."),
+ ("i-gauge", "Charged By Weight, Never By Feel",
+  "The nameplate on the outdoor unit gives the factory charge in grams. We weigh it in on scales, because a system judged on gauge pressure alone ends up over filled or under filled."),
+ ("i-snow", "A System Carrying Too Much Gas",
+  "Extra refrigerant is a fault, not extra cooling. Liquid reaches the compressor, head pressure climbs, and the unit draws more current while cooling the room less."),
+ ("i-therm", "An Undercharged Unit Left Running",
+  "A system short of gas runs the evaporator too cold and the compressor too hot. Ice forms along the suction line while the discharge side bakes, and the oil breaks down inside the shell."),
+ ("i-shield", "R22 Units Still In Service",
+  "Older systems run R22, which is out of production and priced accordingly where stock exists. We put the cost of a top-up beside the cost of a changeover before you commit to either."),
+ ("i-bolt", "R32 And Its Handling Rules",
+  "R32 is classed as mildly flammable and carries its own charging, recovery and storage rules. The cylinders, gauges and recovery kit for it stay separate from the older blends."),
+ ("i-wind", "Gas Lost After A Repair",
+  "A joint opened for a repair has to be evacuated and recharged, never closed up and topped off. Air left in the line after brazing does more harm than the fault that opened it."),
+]
+
+G_CHECKS = [
+ "Standing pressure read and compared against the ambient temperature.",
+ "Both service valves and their cores checked for a weep.",
+ "Every flare at the indoor and outdoor unit tested with detector or solution.",
+ "Evaporator and condenser coils swept with an electronic leak detector.",
+ "Dry nitrogen held in the system, to show where it holds and where it does not.",
+ "Whatever charge remains recovered into a cylinder, never vented to air.",
+ "Moisture pulled out under vacuum once a joint has been opened.",
+ "New charge weighed in on scales to the nameplate figure.",
+]
+
+G_STEPS = [
+ ("contact", "i-phone", "Tell Us How The Cooling Went",
+  "Call or WhatsApp +60178570744 and say how long the cooling has been fading and whether ice has appeared anywhere. Slow loss and sudden loss point at different places."),
+ ("schedule", "i-calendar", "Booked As A Leak Test",
+  "The visit goes in the diary as a test first. Where the system turns out to be holding its charge, you have not paid for gas nobody needed to add."),
+ ("onsite", "i-user", "The Leak Traced And Repaired",
+  "The technician sweeps the joints and the coils, finds where the gas is going, and repairs the joint or the section. You hear what failed before anything is charged."),
+ ("comfort", "i-check", "Evacuated, Weighed In, Tested",
+  "The line is pulled down under vacuum, the charge weighed in to the nameplate figure, and the unit run while we read the vent temperature."),
+]
+
+G_TERMS = [
+ ("A leak test before a refill. ", "We look for where the gas went before selling you any to replace it."),
+ ("The charge weighed, not guessed. ", "Scales and the nameplate figure, so the system holds what it was designed to hold."),
+ ("The old charge recovered. ", "Whatever is left goes into a cylinder instead of into the air outside your window."),
+ ("The nameplate figure shown to you. ", "You see the number printed on the outdoor unit and the number on the scales."),
+ ("Nitrogen used to prove the repair. ", "The joint is pressurised and held before any refrigerant goes near it."),
+ ("A vacuum after every opened joint. ", "Air and moisture come out of the pipework before the charge goes in."),
+ ("The gas your plate specifies. ", "R32, R410A and R22 are not interchangeable, and we bring the one your unit takes."),
+ ("Running readings after the fill. ", "Vent temperature and pressures taken with the unit going, so you watch it work."),
+ ("Told when a refill is poor value. ", "A corroded evaporator on an old system is a replacement decision, and we say so instead of filling it twice."),
+ ("No top-up sold on a healthy system. ", "Where the pressures read correct, the fault sits somewhere else and that is where we go looking."),
+]
+
+G_FAQ = [
+ ("How do I know if my aircond is low on gas?",
+  "A unit low on gas cools weakly, runs without ever stopping, and often grows ice on the copper at the outdoor valves. The air at the vent feels cool without turning cold, and the room never reaches the setting."),
+ ("Why does an aircond lose refrigerant at all?",
+  "A sealed circuit loses gas only through a hole. Flare joints work loose, valve cores weep, coils corrode into a pinhole, and vibration cracks a line near the compressor. Every one of those is findable."),
+ ("Can you top up the gas without finding the leak?",
+  "We can, and it is usually the wrong spend. Gas put into a leaking system leaves by the same hole at the same rate, so the second bill arrives within weeks or months."),
+ ("What happens after the leak is repaired?",
+  "The system is pressurised with dry nitrogen and held, which proves the repair. It is then evacuated under vacuum to pull out air and moisture, and the charge is weighed in to the figure on the nameplate."),
+ ("How much refrigerant does my aircond need?",
+  "The outdoor unit carries a nameplate giving the factory charge in grams, and that is the figure we weigh in. A pipe run longer than the factory length needs a stated amount added for each extra metre."),
+ ("What happens if too much gas goes in?",
+  "An overcharged system runs at high head pressure and can return liquid to the compressor. The unit draws more current, cools less and wears faster, so more gas never means more cooling."),
+ ("Can an R22 system still be refilled?",
+  "It can, where stock is available, and the price reflects a gas that is out of production. On an older unit the honest comparison is a top-up against a changeover, and we give you both before you decide."),
+ ("Is R32 safe to use in a home?",
+  "Yes, within its handling rules. R32 is classified as mildly flammable. Charging, recovery and storage follow different rules to the older blends, and the equipment for it is kept apart."),
+ ("Will adding gas fix ice on the pipework?",
+  "Sometimes. Ice forms when the coil runs too cold, and a low charge is one cause. A choked filter or a failing blower produces the same ice, so the airflow gets checked before the gauges come out."),
+ ("Do you recover the old gas or release it?",
+  "We recover it. Whatever remains in the system goes into a recovery cylinder before any joint is opened, because venting refrigerant is wasteful and avoidable."),
+ ("How often should an aircond need gas?",
+  "Never, on a system that is not leaking. A unit that has needed gas twice in two years has a leak nobody found, and the next visit should be a leak test."),
+ ("Can a leak be repaired, or does the part get replaced?",
+  "It depends where the leak sits. A flare is remade, a valve core is swapped, and a pipe section is cut out and rejoined. A pinhole in an evaporator or condenser coil usually means that coil is replaced."),
+ ("Do you refill ceiling cassettes and commercial units?",
+  "Yes. The method is the same on a cassette or a shop unit, though the leak test takes longer where pipework runs above a ceiling. We tell you at the visit what access the job needs."),
+]
+
+
 PAGES = []
 
 PAGES.append({
@@ -1276,25 +1366,78 @@ PAGES.append({
         ) + ",\n" + faq_ld(M_FAQ) + "\n]",
 })
 
-PAGES.append(service_page(
-    "gas-refilling", "Aircond Gas Refilling", "Aircond Gas Refilling",
-    "Aircond gas refilling in", "Kuala Lumpur &amp; Selangor",
-    "Weak cooling often means low refrigerant. We check the system for the leak that caused it before refilling, so the gas stays in.",
-    "svc-gas.webp",
-    "Why we look for the refrigerant leak first",
-    ["Refrigerant is not consumed. A sealed system holds the same charge for years, so if the level has dropped it has escaped somewhere &mdash; a joint, a flare, a pipe run or the coil itself.",
-     "Refilling without finding that leak means paying for gas twice: the cooling comes back for a while, then fades again as the charge escapes the same way it did the first time.",
-     "So the visit starts with pressure readings and a leak check. If we find one, you are told where it is and what repairing it involves, and the system is refilled once it will hold the charge."],
-    "Signs your aircond gas is low",
-    ["Cooling has faded gradually over weeks", "Unit runs constantly without reaching temperature",
-     "Ice forming on the pipework or coil", "Air from the vents is cool but not cold",
-     "Hissing or bubbling from the indoor unit", "Higher electricity use with no change in habits",
-     "Oily residue near pipe joints", "Cooling is worse on the hottest days"],
-    "The right refrigerant for your aircond",
-    ["Different systems take different refrigerants, and they are not interchangeable. We identify what your unit is charged with and refill with that, to the pressure the manufacturer specifies rather than by feel.",
-     "If the readings show the problem is not refrigerant at all &mdash; a dirty coil and a low charge can feel identical from the room &mdash; we will tell you that instead of selling you gas you do not need."],
-    "Aircond Gas Refilling in KL &amp; Selangor | Ad Aircond Solution",
-    "Aircond gas refilling in Kuala Lumpur and Selangor. Leak check and pressure test first, then refilled with the correct refrigerant. Call +60178570744."))
+PAGES.append({
+    "dir": "gas-refilling", "url": "gas-refilling/", "nav": "services", "image": "svc-gas.webp",
+    "title": "Aircond Gas Refilling in KL &amp; Selangor | Ad Aircond Solution",
+    "description": "Aircond gas refilling across Kuala Lumpur and Selangor. We find the leak first, recover the old charge, then weigh the new one in to the nameplate figure. Call +60178570744.",
+    "body": "\n".join([
+        ahero("Aircond Gas Refilling", "Aircond gas refilling in", "Kuala Lumpur &amp; Selangor",
+              "Refrigerant does not get used up, so a system that is low has lost it somewhere. We find the hole, repair it, then weigh the charge back in to the figure on the plate.",
+              "svc-gas.webp",
+              bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Gas Refilling", None))),
+
+        '''<section class="section section--tight">
+  <div class="wrap">
+    <div class="prose prose--solo reveal">
+      <p>The air at the vent is cool but never cold. The unit runs all evening without switching off, and there is frost on the copper where the pipes meet the outdoor unit.</p>
+      <p>Somebody will offer to top it up. Six weeks later the room is warm again, because gas poured into a leaking circuit leaves through the same hole at the same rate. Meanwhile the compressor has been running short of the refrigerant that carries its oil. That bill dwarfs the one for the gas.</p>
+      <p>We trace refrigerant leaks, repair them and recharge the system. Wall splits and ceiling cassettes, in KL homes and across the Selangor suburbs. Ring +60178570744 and tell us how long the cooling has been slipping.</p>
+    </div>
+  </div>
+</section>''',
+
+        '''<section class="section section--alt approach">
+  <div class="wrap split">
+    <div class="split__copy reveal">
+      <p class="eyebrow"><span class="eyebrow__dot"></span>What a low charge really means</p>
+      <h2 class="h2">A Sealed System Should Never Need Topping Up</h2>
+      <p class="body">Refrigerant works in a closed loop. It changes between liquid and gas thousands of times a day, carries heat out of your room, and comes back to do it again. Nothing consumes it and nothing burns it off. A unit that has lost pressure has a hole, and the only useful question is where.</p>
+      <p class="body">That is why a refill on its own is a poor spend, and why the visit starts with a test instead of a cylinder. Where the system turns out to be holding its charge, the weak cooling comes from somewhere else. We go and look there instead of selling you gas.</p>
+    </div>
+    <div class="split__media reveal" data-delay="1">
+      <img class="poster" src="/assets/img/svc-gas.webp" width="600" height="450"
+           alt="An Ad Aircond Solution technician checking refrigerant pressures at the outdoor unit with gauges in Kuala Lumpur."
+           loading="lazy" decoding="async">
+    </div>
+  </div>
+</section>''',
+
+        cards("Where the gas goes", "Where Refrigerant Escapes", "And What We Do",
+              "Ten of the places a leak turns up, and the charging faults that come with them.",
+              G_ITEMS),
+
+        f'''<section class="section">
+  <div class="wrap prose__grid">
+    <div class="prose reveal">
+      <h2 class="h2 h2--sm">What We Do Before Any Gas Goes In</h2>
+      <p>Eight steps sit between the gauges going on and the cylinder coming off the scales. Skipping them is how a system gets filled twice in one year.</p>
+      <p>The order matters as much as the list. A charge weighed into a circuit that still holds air and moisture will cool the room this week and cost you a compressor later.</p>
+    </div>
+    <div class="prose__aside reveal" data-delay="1">{checks("Done on every recharge", G_CHECKS)}</div>
+  </div>
+</section>''',
+
+        flow_section("How It Works", "How A Refrigerant", "Job Runs",
+                     "Four steps, and the first one is a test rather than a cylinder.",
+                     G_STEPS),
+
+        benefits("What you get", "What A Gas Refill", "Includes",
+                 "What happens on every recharge, and what you are told before it starts.",
+                 G_TERMS),
+
+        faq_block("Aircond Gas Refilling", "Questions About Refrigerant",
+                  "Not covered here? Ring +60178570744 and describe what the unit is doing, and we will tell you whether gas is even the problem.",
+                  G_FAQ),
+        others("gas-refilling"),
+        testimonials(),
+    ]),
+    "jsonld": "[\n" + service_ld(
+        "Aircond Gas Refilling",
+        "Refrigerant leak tracing, repair and recharging by weight for aircond systems across Kuala Lumpur and Selangor.",
+        "gas-refilling/") + ",\n" + crumbs(
+        ("Home", ""), ("Our Services", "services/"), ("Aircond Gas Refilling", "gas-refilling/")
+        ) + ",\n" + faq_ld(G_FAQ) + "\n]",
+})
 
 PAGES.append(service_page(
     "ac-electrical-service", "Aircond Electrical Service", "Aircond Electrical Service",
