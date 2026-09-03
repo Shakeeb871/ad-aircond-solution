@@ -804,6 +804,94 @@ C_FAQ = [
 ]
 
 
+# --- aircond installation copy ----------------------------------------------
+
+I_CASES = [
+ ("i-home", "The First Unit In A New Home",
+  "A room with no aircond needs its capacity worked out before anything is bought. We measure the floor area, count the glazing and note which wall takes the afternoon sun, then name the horsepower that suits it."),
+ ("i-gauge", "A Unit Too Small For The Room",
+  "A room that never quite gets cold on a 1.0 HP unit usually carries more heat load than the unit was picked for. The fault is the sizing, not the machine, and an undersized system runs flat out and still loses."),
+ ("i-install", "Replacing A Unit Beyond Repair",
+  "A replacement goes back on the same wall in most cases, and the old pipework is tested before anyone reuses it. Copper that carried a burnt-out compressor holds acid and debris, so that run comes out."),
+ ("i-cog", "Moving A Unit To Another Room",
+  "A relocation is a full install with a recovery at the start. We pump the gas back into the outdoor unit, disconnect it, re-run the pipe and drain at the new position, then vacuum and recharge."),
+ ("i-drop", "The Drain Has To Fall The Whole Way",
+  "Condensate moves by gravity alone, so the drain line needs a continuous fall to the outlet. A dip anywhere along the run holds water, and that is where the smell and the overflow begin."),
+ ("i-wind", "Where The Condenser Can Breathe",
+  "A condenser pushed into a tight recess re-breathes its own hot air and loses capacity on the days you need it most. We site it with clearance at the coil face and at the fan discharge."),
+ ("i-bolt", "The Circuit Has To Carry It",
+  "A new unit needs a cable and a breaker rated for its starting current, with an isolator in reach of the outdoor unit. We check what is already there, because a shared socket circuit will trip."),
+ ("i-tools", "Pipe Runs, Trunking And Wall Cores",
+  "The pipe, the drain and the cable travel together inside trunking, and the wall core is drilled with a fall to the outside. A kinked pipe restricts flow for the life of the unit."),
+ ("i-building", "Several Units In One Premises",
+  "Shops and offices usually need the work staged so the floor keeps trading. We fit in the order that suits your day and leave each unit running before starting the next."),
+ ("i-snow", "The Vacuum Before The Gas",
+  "Air and moisture left inside the pipework turn into acid and ice once the system runs. We evacuate the line with a vacuum pump and hold it, which also proves the joints before the charge is released."),
+]
+
+I_CHECKS = [
+ "Capacity worked out from the floor area, the glazing and the wall the room faces.",
+ "Bracket fixed into masonry, set level, and rated for the weight it carries.",
+ "Pipe run kept as short and as straight as the layout allows.",
+ "Flare joints cut and formed on the day, then torqued to the figure in the manual.",
+ "Drain line set with a continuous fall to the outlet and tested with water.",
+ "System evacuated with a vacuum pump and held, to prove every joint.",
+ "Isolator fitted within reach of the outdoor unit.",
+ "Vent temperature and running pressures read once the charge is in.",
+]
+
+I_STEPS = [
+ ("contact", "i-phone", "Send The Room And The Model",
+  "Call or WhatsApp +60178570744 with the room size and, for a replacement, the model coming out. Photographs of the wall and the outdoor position often save a visit."),
+ ("schedule", "i-calendar", "Site Visit And Quote",
+  "We look at the wall, the outdoor position, the drain route and the circuit. The quote covers the unit, the pipe run and the labour, and it holds unless the layout changes."),
+ ("onsite", "i-user", "Fitting Day",
+  "We sheet the room, core the wall, fix the bracket, run the pipe and drain inside trunking, and set the condenser on its feet or its bracket."),
+ ("comfort", "i-check", "Vacuumed, Charged, Commissioned",
+  "The system is evacuated, the charge released, and the unit run while we read the temperatures. You get the remote and a walk through the settings before we leave."),
+]
+
+I_TERMS = [
+ ("A quote after the site visit. ", "The figure covers the unit, the pipe run and the labour, and you see it before anything is ordered."),
+ ("Capacity sized to the room. ", "We work it out from the floor area and the glazing, so the unit is not asked to do more than it can."),
+ ("Fresh flare joints every time. ", "Each flare is cut and formed on the day, then torqued to the figure in the manual."),
+ ("A vacuum before the charge. ", "The line is evacuated and held, because air and moisture inside a refrigerant circuit turn into acid."),
+ ("The drain proved with water. ", "We check the fall the whole way to the outlet before the trunking goes on."),
+ ("The circuit checked first. ", "We confirm the cable, the breaker and the isolator will carry the unit before we fit it."),
+ ("Trunking set square to the wall. ", "Pipework is boxed and run to the building lines, so nothing is left hanging exposed."),
+ ("The old unit disconnected properly. ", "On a replacement we recover the gas instead of venting it, then disconnect and lift the unit down."),
+ ("Commissioning readings taken. ", "The unit runs with the cover back on while we read the vent temperature and the pressures."),
+ ("A walk through the settings. ", "Before we go you see the modes, the timer and the fan speeds on your own remote."),
+]
+
+I_FAQ = [
+ ("What size aircond do I need for my room?",
+  "The size comes from the room. As a working guide, 1.0 HP suits a bedroom of roughly 100 to 120 square feet. A room with large windows or an afternoon-sun wall needs a step up. We measure before quoting."),
+ ("How long does an aircond installation take?",
+  "The time depends on the pipe run and the outdoor position. A wall split beside an accessible balcony is quicker than a condenser going onto a first-floor bracket. We give you the window at the site visit."),
+ ("Can I reuse the old pipework for a new unit?",
+  "Sometimes. Copper in good condition and of the right diameter can be reused once it has been flushed and pressure tested. Pipework that carried a burnt-out compressor holds acid and debris, and that run is replaced."),
+ ("Why does the system need a vacuum before the gas goes in?",
+  "The vacuum pulls air and moisture out of the pipework. Moisture inside a refrigerant circuit forms acid and freezes at the expansion valve, and both shorten the life of the compressor."),
+ ("Do you supply the unit, or do I buy it myself?",
+  "Either works. Tell us the model you have in mind and we will confirm it suits the room. Give us the room instead and we will name the capacity to buy."),
+ ("How far apart can the indoor and outdoor units be?",
+  "Most wall splits allow a pipe run of about 15 metres, and the manual for your model gives the exact limit. A run beyond the factory length needs extra refrigerant added to the charge."),
+ ("Where should the outdoor unit be placed?",
+  "The condenser needs clear air at the coil face and at the fan discharge. A recess, a boxed-in balcony or a position facing a close wall makes the unit re-breathe its own hot air and lose capacity."),
+ ("Does a new aircond need its own circuit?",
+  "Yes. The unit needs a cable and a breaker rated for its starting current, with an isolator within reach of the outdoor unit. A shared socket circuit trips once the compressor starts."),
+ ("What is the difference between R32 and R410A?",
+  "R32 is a single refrigerant and R410A is a blend of two. An R32 unit carries a smaller charge for the same cooling, and the two gases cannot be mixed or swapped in one system."),
+ ("Can you install an aircond in a rented apartment?",
+  "Yes, with the owner's permission for the wall core and the outdoor position. Management in most Kuala Lumpur condominiums also sets rules on where a condenser may sit, so check those before booking."),
+ ("Will the installation damage my wall?",
+  "The wall is cored once, at the diameter the pipe set needs, and trunking covers the run. We sheet the floor and the furniture, and we clear the dust before leaving."),
+ ("Do you install ceiling cassette units?",
+  "Yes. A cassette needs a ceiling void deep enough for the body and its drain pump, plus access for the pipe and drain runs. We check the void at the site visit before quoting."),
+]
+
+
 PAGES = []
 
 PAGES.append({
@@ -952,25 +1040,78 @@ PAGES.append({
         ) + ",\n" + faq_ld(C_FAQ) + "\n]",
 })
 
-PAGES.append(service_page(
-    "ac-installation", "Aircond Installation", "Aircond Installation",
-    "Aircond installation in", "Kuala Lumpur &amp; Selangor",
-    "Mounting, piping, drainage, electrical connection and commissioning &mdash; set up so the system performs as it was designed to from the day it is switched on.",
-    "svc-installation.webp",
-    "What a proper aircond installation covers",
-    ["How well an air conditioner performs has as much to do with how it was fitted as with the unit itself. Bracket placement, pipe run length, the fall on the drain line and the electrical connection all decide whether you get the cooling you paid for.",
-     "We site the indoor unit where the air will actually reach the room, run the pipework and drain with the right fall, make the electrical connection safely, then commission the system and check it is cooling as it should before we leave.",
-     "If you are still choosing a unit, tell us the room size and how it is used. We will tell you what capacity suits it &mdash; oversizing costs more to run and cools less comfortably than people expect."],
-    "Included in every aircond installation",
-    ["Site check before the quote", "Indoor unit mounted and levelled",
-     "Refrigerant pipework run and insulated", "Drain line run with correct fall",
-     "Outdoor unit sited and secured", "Electrical connection made safely",
-     "System vacuumed and commissioned", "Cooling verified before handover"],
-    "Aircond replacements and additional units",
-    ["Replacing an old unit is often simpler than a first installation, because the pipe run and drain may be reusable. We check their condition first rather than assuming, since reusing a pipe run in poor condition causes problems later.",
-     "Adding a unit to a home or premises that already has one is straightforward. Tell us where it needs to go and we will confirm what the run involves."],
-    "Aircond Installation in KL &amp; Selangor | Ad Aircond Solution",
-    "Air conditioner installation in Kuala Lumpur and Selangor: mounting, pipework, drainage, electrical connection and commissioning. Call +60178570744."))
+PAGES.append({
+    "dir": "ac-installation", "url": "ac-installation/", "nav": "services", "image": "svc-installation.webp",
+    "title": "Aircond Installation in KL &amp; Selangor | Ad Aircond Solution",
+    "description": "Aircond installation across Kuala Lumpur and Selangor. Capacity sized to the room, fresh flare joints, a vacuum before charging and a drain set to fall. Call +60178570744.",
+    "body": "\n".join([
+        ahero("Aircond Installation", "Aircond installation in", "Kuala Lumpur &amp; Selangor",
+              "A new unit performs the way it was fitted. We size it to the room, run the pipe and the drain properly, and vacuum the system before the gas goes in.",
+              "svc-installation.webp",
+              bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Installation", None))),
+
+        '''<section class="section section--tight">
+  <div class="wrap">
+    <div class="prose prose--solo reveal">
+      <p>You have bought the unit, or you are about to, and the shop has quoted a fitting price with the box. What that price covers is the part nobody explains until the room fails to cool two summers later.</p>
+      <p>An undersized unit runs without a break and still leaves the room warm. A drain laid flat backs water down the wall within months. Air left in the pipework turns into acid and takes the compressor with it. None of that shows on the day the unit is switched on.</p>
+      <p>We fit wall splits and ceiling cassettes for households and businesses right across the Klang Valley, in Kuala Lumpur and in Selangor. Ring +60178570744 with the room size, or the model you already have, and we will arrange a look at the wall.</p>
+    </div>
+  </div>
+</section>''',
+
+        '''<section class="section section--alt approach">
+  <div class="wrap split">
+    <div class="split__copy reveal">
+      <p class="eyebrow"><span class="eyebrow__dot"></span>Why fitting decides performance</p>
+      <h2 class="h2">The Install Sets How The Unit Runs For Years</h2>
+      <p class="body">Two identical units on two identical walls can cool very differently. The difference sits in four things. The capacity chosen for the room. The length and shape of the pipe run. The fall on the drain, and whether the air came out before the gas went in. Each is decided once, on fitting day, and each is expensive to revisit.</p>
+      <p class="body">So the work starts at the wall, before anyone opens the box. Where the wall, the drain route or the circuit will not carry the unit you have picked, we say so at the site visit. You then get the option that does work.</p>
+    </div>
+    <div class="split__media reveal" data-delay="1">
+      <img class="poster" src="/assets/img/svc-installation.webp" width="600" height="450"
+           alt="An Ad Aircond Solution technician fitting an outdoor condenser unit during an installation in Kuala Lumpur."
+           loading="lazy" decoding="async">
+    </div>
+  </div>
+</section>''',
+
+        cards("What we fit", "Aircond Installations", "We Take On",
+              "Ten of the jobs and decisions that come up on an install, and how each one is handled.",
+              I_CASES),
+
+        f'''<section class="section">
+  <div class="wrap prose__grid">
+    <div class="prose reveal">
+      <h2 class="h2 h2--sm">What A Proper Install Covers</h2>
+      <p>Most of what decides a unit's performance is buried behind the trunking within a day of being done. That is why the list below matters more than the badge on the front cover.</p>
+      <p>Eight items make up the standard on every unit we fit, whether it goes into a bedroom or a shop floor.</p>
+    </div>
+    <div class="prose__aside reveal" data-delay="1">{checks("Done on every install", I_CHECKS)}</div>
+  </div>
+</section>''',
+
+        flow_section("How It Works", "From Site Visit", "To First Cold Air",
+                     "Four steps, and the quote comes after somebody has seen the wall.",
+                     I_STEPS),
+
+        benefits("What you get", "What An Aircond Installation", "Includes",
+                 "The standard every unit we fit is held to, and what you see before we go.",
+                 I_TERMS),
+
+        faq_block("Aircond Installation", "Questions Before You Fit",
+                  "Something here we have not covered? Ring +60178570744 and ask the technician who would be doing the job.",
+                  I_FAQ),
+        others("ac-installation"),
+        testimonials(),
+    ]),
+    "jsonld": "[\n" + service_ld(
+        "Aircond Installation",
+        "Aircond installation for wall splits and ceiling cassettes across Kuala Lumpur and Selangor, sized to the room and commissioned on the day.",
+        "ac-installation/") + ",\n" + crumbs(
+        ("Home", ""), ("Our Services", "services/"), ("Aircond Installation", "ac-installation/")
+        ) + ",\n" + faq_ld(I_FAQ) + "\n]",
+})
 
 PAGES.append(service_page(
     "ac-maintenance", "Aircond Maintenance", "Aircond Maintenance",
