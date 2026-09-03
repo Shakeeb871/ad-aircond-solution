@@ -133,7 +133,7 @@ h1,h2,h3,h4,
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
   font-family:var(--f-display);font-weight:600;font-size:.88rem;letter-spacing:-.01em;
-  padding:9px 16px;border-radius:var(--r-btn);border:1.5px solid transparent;
+  padding:9px 16px;border-radius:var(--r-btn);border:0;
   cursor:pointer;white-space:nowrap;line-height:1.2;
   transition:transform .2s cubic-bezier(.3,.8,.4,1),box-shadow .2s ease,background-color .2s ease,color .2s ease,border-color .2s ease;
 }
@@ -154,33 +154,17 @@ h1,h2,h3,h4,
 .btn--white{background:#fff;color:var(--b-800);box-shadow:0 16px 34px -18px rgba(4,35,45,.5)}
 .btn--white:hover{background:var(--b-50)}
 
-.btn--ghost{background:transparent;color:var(--b-800);border-color:var(--line)}
-.btn--ghost:hover{border-color:var(--b-300);background:var(--b-50)}
+.btn--glass{background:rgba(255,255,255,.18);color:#fff;backdrop-filter:blur(6px)}
+.btn--glass:hover{background:rgba(255,255,255,.28)}
 
-.btn--ghost-dark{background:transparent;color:var(--ink);border-color:var(--line)}
-.btn--ghost-dark:hover{border-color:var(--b-300);color:var(--b-700);background:var(--b-50)}
-
-.btn--glass{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.4);backdrop-filter:blur(6px)}
-.btn--glass:hover{background:rgba(255,255,255,.22)}
-
-.btn--outline{background:#fff;color:var(--b-800);border-color:var(--b-200)}
-.btn--outline:hover{background:var(--b-50);border-color:var(--b-400)}
-
-.btn--soft{background:var(--b-50);color:var(--b-800);font-size:.84rem;padding:8px 14px}
-
-.btn--card{
-  background:#fff;color:var(--navy);border-color:var(--line);
-  box-shadow:0 12px 30px -18px rgba(15,39,64,.45);
-}
-.btn--card:hover{border-color:var(--b-300);color:var(--b-700)}
-
+/* Sits on the white header, so a tint stands in for the outline it used to
+   carry and keeps it reading as a button. */
 .btn--phone{
-  background:#fff;color:var(--navy);border-color:var(--b-300);
+  background:var(--b-50);color:var(--navy);
   padding:8px 14px;font-size:.84rem;
 }
 .btn--phone .ico{color:var(--b-600)}
-.btn--phone:hover{border-color:var(--b-400);background:var(--b-50)}
-.btn--soft:hover{background:var(--b-100)}
+.btn--phone:hover{background:var(--b-100)}
 
 .link-arrow{
   display:inline-flex;align-items:center;gap:7px;
