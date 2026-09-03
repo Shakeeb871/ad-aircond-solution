@@ -714,6 +714,96 @@ R_FAQ = [
 ]
 
 
+# --- aircond cleaning copy --------------------------------------------------
+
+C_SIGNS = [
+ ("i-wind", "Weak Air Out Of The Vents",
+  "The blower wheel is a drum of small curved blades. Dust packs into each one until the wheel moves a fraction of its rated air. We take the wheel out where the model allows and clear every blade."),
+ ("i-therm", "The Room Takes Hours To Cool",
+  "Dust on the evaporator fins sits between the room air and the cold metal, so the coil cannot pull heat out fast enough. We wash the fins down across the full face of the coil."),
+ ("i-drop", "A Sour Smell For The First Minute",
+  "The drain pan stays damp between cycles, and biofilm grows across it and the lower fins. A chemical wash lifts that layer off the aluminium, and the smell leaves with it."),
+ ("i-users", "Dust Landing On The Furniture",
+  "Once a filter loads past its capacity, air finds the gaps at the edges and carries dust straight through. Washing the filter and clearing the coil stops the unit spreading what it collected."),
+ ("i-gauge", "The Bill Climbed And Nothing Changed",
+  "A bill that rose without a change in use is usually a coated coil, not a failing compressor. The unit runs longer to reach the same room temperature, and the meter records every extra minute."),
+ ("i-snow", "The Unit Has Never Been Opened",
+  "A split fitted five years ago and never serviced holds a mat of dust across the coil and a filled blower wheel. The first clean on a unit like that takes the longest and returns the most airflow."),
+ ("i-building", "Cassettes In Shops And Offices",
+  "A ceiling cassette pulls air through a larger filter area and sits above head height, so nobody sees the dust until the cooling drops. We drop the panel, wash the filters and clean the four-way blower."),
+ ("i-install", "The Outdoor Coil Is Packed With Grit",
+  "A condenser facing a car park or a back lane fills with grit and leaves. The fan then pushes air at a blocked face. We rinse the coil and clear the fan guard."),
+ ("i-shield", "Someone In The House Has Asthma",
+  "Mould sitting in the drain pan and on the lower fins goes into the room every time the fan starts. A chemical wash removes the growth from the aluminium instead of rinsing the surface."),
+ ("i-cog", "Fins Bent Flat Across The Coil",
+  "Bent fins block air the same way dust does, usually after a clean done with a pressure washer. We comb them straight while the coil is open and the damage is reachable."),
+]
+
+C_COVERS = [
+ "Filters washed, dried and refitted, never brushed off and put back wet.",
+ "Evaporator fins washed across the full face of the coil.",
+ "Blower wheel taken out where the model allows, and each blade cleared.",
+ "Drain pan lifted and scrubbed, so the biofilm leaves with it.",
+ "Drain line flushed until the water runs clear at the outlet.",
+ "Front cover, louvres and the intake grille washed down.",
+ "Condenser coil rinsed and the fan guard cleared of leaves and grit.",
+ "Airflow at the vent checked at the end, with the unit running.",
+]
+
+C_STEPS = [
+ ("contact", "i-phone", "Tell Us How Many Units",
+  "Call or WhatsApp +60178570744 with the number of units, the type and roughly when they were last opened. A cassette takes longer than a wall split, so that sets the slot we book."),
+ ("schedule", "i-calendar", "We Book The Slot",
+  "Households get a time that suits them. Shops and offices get a slot before opening or after closing, so the floor stays clear while we work."),
+ ("onsite", "i-user", "Sheeted, Stripped And Washed",
+  "We sheet the wall and the floor, take the cover off and wash the filter, the coil, the blower wheel and the pan. The board and its connections stay covered."),
+ ("comfort", "i-check", "Refitted And Running",
+  "The unit goes back together and runs with you in the room. You feel the air at the vent and see the drain running before we pack up."),
+]
+
+C_TERMS = [
+ ("A price agreed before we start. ", "You hear the figure when you book, and it does not move once we are in the room."),
+ ("Every unit sheeted. ", "We lay plastic under the indoor unit and cover the floor before the front cover comes off."),
+ ("The filter washed, not tapped out. ", "It goes back dry, because a damp filter grows back what we just removed."),
+ ("The blower wheel cleared. ", "This is the part a quick clean skips, and it is where most of the lost airflow sits."),
+ ("The drain line flushed to the outlet. ", "We run water through until it comes out clean at the far end."),
+ ("Chemical wash only where the coil needs it. ", "We say at the start whether yours does, so nobody is sold one by default."),
+ ("Nothing sprayed near the control board. ", "The board and its connections are covered before any water goes into the casing."),
+ ("The drain checked before we refit. ", "Water goes into the pan and has to leave it, so a blockage shows up while the unit is still open."),
+ ("The room left as we found it. ", "We take the sheets out, wipe the floor and put the filter back in its slot."),
+ ("A straight answer when cleaning is not the fix. ", "Where the cooling loss comes from a leak or a failed part, we say so and book the repair."),
+]
+
+C_FAQ = [
+ ("What is the difference between a normal wash and a chemical wash?",
+  "A normal wash rinses dust off the filters, the fins and the drain pan with water. A chemical wash uses a coil cleaner. It breaks down the oily film and biofilm bonded to the aluminium, which water alone leaves in place."),
+ ("Do you need to take the indoor unit off the wall to clean it?",
+  "No, not for a standard clean. The cover, the filters and the drain pan come away with the unit on the wall. We sheet the wall and floor, then wash the coil in place."),
+ ("Does cleaning an aircond improve the cooling?",
+  "Yes, where the loss came from dust. A coil and a blower wheel packed with dust cut both the airflow and the heat transfer, and clearing them brings both back. Cooling lost to a leak or a failed part will not return with a clean."),
+ ("Can I clean the aircond filter myself?",
+  "Yes. Lift the front cover, slide the filters out, rinse them under a tap and let them dry fully before refitting. That is worth doing monthly. It does not reach the coil, the blower wheel or the drain pan, which is where the airflow goes."),
+ ("What is the blower wheel and why does it matter?",
+  "The blower wheel is the drum of curved blades behind the indoor coil that pushes air into the room. Dust packs into each blade until the wheel turns at full speed while moving a fraction of its rated air."),
+ ("Will cleaning damage the fins on the coil?",
+  "No, not at controlled water pressure. Aluminium fins bend flat under a pressure washer, and bent fins block air the same way dust does. We wash at low pressure and comb any damage we find."),
+ ("Do you clean ceiling cassette units?",
+  "Yes. The panel drops on its hinges, the filters lift out, and the four-way blower and the drain pan are cleaned in place. A cassette holds more dust than a wall split because the filter area is larger."),
+ ("Does cleaning use any refrigerant gas?",
+  "No. A clean touches the filters, the coil surfaces, the blower wheel, the drain pan and the drain line. The refrigerant circuit stays sealed, so nothing is added and nothing is removed."),
+ ("What should I do before the technician arrives?",
+  "Clear the floor under the indoor unit and move anything you would rather not have covered. We bring sheets for the wall and the floor. Access to a tap and a drain makes the work quicker."),
+ ("Why does the smell come back weeks after a clean?",
+  "The smell returns when the growth was rinsed instead of removed. Biofilm bonds to the aluminium and to the drain pan. A water rinse leaves the base layer behind, and it grows again in the damp."),
+ ("Can a dirty aircond make the room feel damp?",
+  "Yes. A blocked drain leaves water standing in the pan, and a coil that cannot hold its temperature stops pulling moisture out of the air. The room then feels heavy even while the unit runs."),
+ ("Do you clean the outdoor unit as well?",
+  "Yes. We rinse the condenser coil and clear the fan guard. A blocked outdoor coil cannot dump the heat that the indoor coil collected."),
+ ("Is it worth cleaning a unit that is over ten years old?",
+  "Yes, in most cases. An older compressor still moves heat, and clean surfaces let it work at the level it has left. Where a unit fails to cool with the coil already clean, the money is better spent on the repair."),
+]
+
+
 PAGES = []
 
 PAGES.append({
@@ -789,24 +879,78 @@ PAGES.append({
         ) + ",\n" + faq_ld(R_FAQ) + "\n]",
 })
 
-PAGES.append(service_page(
-    "ac-cleaning", "Aircond Cleaning", "Aircond Cleaning",
-    "Aircond cleaning in", "Kuala Lumpur &amp; Selangor",
-    "Filters, coils, the blower wheel and the drain line are cleaned properly, so the unit moves the air it was built to move and sheds heat the way it should.",
-    "svc-cleaning.webp",
-    "Why aircond cleaning changes how a unit performs",
-    ["Dust loads up quickly in Kuala Lumpur and Selangor. It settles on the filter first, then works through to the coil and the blower wheel, and as it builds the unit has to run longer to reach the same temperature.",
-     "A clogged coil cannot shed heat properly and a coated blower wheel cannot push air. That shows up as weak cooling and a longer running time, and it is why a unit that is only a couple of years old can feel like it has lost its edge.",
-     "Cleaning also clears the drain line. A blocked drain is the usual reason water ends up marking a wall, and it is far cheaper to clear than to repair the damage it causes."],
-    "What gets cleaned in an aircond service",
-    ["Filters washed and refitted", "Indoor coil cleaned down", "Blower wheel cleared of build-up",
-     "Drain line flushed and checked", "Drain pan cleaned out", "Outdoor coil and fan cleaned",
-     "Casing and louvres wiped down", "Cooling checked before we leave"],
-    "How often aircond cleaning is worth doing",
-    ["How often depends on the room rather than the calendar. A unit running most of the day, a home near a busy road, a kitchen, a shop floor or a household with pets will load up faster than a bedroom used only at night.",
-     "We will tell you what the filters and coil actually looked like at this visit, so you can judge the right interval for your own space instead of guessing."],
-    "Aircond Cleaning &amp; Servicing in KL &amp; Selangor | Ad Aircond Solution",
-    "Aircond cleaning in Kuala Lumpur and Selangor: filters, coil, blower wheel and drain line cleaned so airflow and cooling come back. Call +60178570744."))
+PAGES.append({
+    "dir": "ac-cleaning", "url": "ac-cleaning/", "nav": "services", "image": "svc-cleaning.webp",
+    "title": "Aircond Cleaning in KL &amp; Selangor | Ad Aircond Solution",
+    "description": "Aircond cleaning across Kuala Lumpur and Selangor: filters, evaporator coil, blower wheel, drain pan and line, and the outdoor condenser. Call +60178570744.",
+    "body": "\n".join([
+        ahero("Aircond Cleaning", "Aircond cleaning in", "Kuala Lumpur &amp; Selangor",
+              "Filters, the evaporator coil, the blower wheel and the drain line collect dust and biofilm through the year. We strip them back so the unit moves the air it was built to move.",
+              "svc-cleaning.webp",
+              bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Cleaning", None))),
+
+        '''<section class="section section--tight">
+  <div class="wrap">
+    <div class="prose prose--solo reveal">
+      <p>The aircond is on, the remote says 24, and the room takes an hour to feel it. Air leaves the vents in a weak stream, and there is a sour smell for the first minute after start-up.</p>
+      <p>Dust on the evaporator fins works as insulation. The coil cannot pull heat out of the room, so the compressor keeps running to make up for it. That shows on the bill every month it stays there. The damp layer in the drain pan also grows mould, and that is what the fan pushes into the room.</p>
+      <p>We clean wall splits, ceiling cassettes and the condensers that serve them, in houses, apartments, shops and offices across Kuala Lumpur and Selangor. Call +60178570744 and tell us how many units you have and when they were last opened.</p>
+    </div>
+  </div>
+</section>''',
+
+        '''<section class="section section--alt approach">
+  <div class="wrap split">
+    <div class="split__copy reveal">
+      <p class="eyebrow"><span class="eyebrow__dot"></span>Why cleaning changes the cooling</p>
+      <h2 class="h2">Why A Dirty Coil Costs You Cooling</h2>
+      <p class="body">Air conditioning works by moving heat, and the evaporator coil is where that happens. Dust settles on the aluminium fins in a layer thin enough to ignore. It still sits between the room air and the cold metal. The coil then sheds less heat per minute, and the compressor runs longer to cover the gap.</p>
+      <p class="body">The blower wheel collects the same dust. Each of its blades is a small curved scoop. Once the scoops fill, the wheel spins at full speed while moving a fraction of its rated air. Cleaning both is what brings the cold back, and no amount of gas will do it.</p>
+    </div>
+    <div class="split__media reveal" data-delay="1">
+      <img class="poster" src="/assets/img/svc-cleaning.webp" width="600" height="450"
+           alt="An Ad Aircond Solution technician washing the evaporator coil of a wall-mounted aircond in Kuala Lumpur."
+           loading="lazy" decoding="async">
+    </div>
+  </div>
+</section>''',
+
+        cards("What we clean", "Signs Your Aircond", "Needs Cleaning",
+              "Ten of the reasons people call us for a clean, and what sits behind each one.",
+              C_SIGNS),
+
+        f'''<section class="section">
+  <div class="wrap prose__grid">
+    <div class="prose reveal">
+      <h2 class="h2 h2--sm">What A Cleaning Covers</h2>
+      <p>A clean that stops at the filter buys a few days. Dust travels past the filter into the coil, the blower wheel and the pan, so those are the surfaces the work has to reach.</p>
+      <p>Eight items make up a standard clean on a wall split. A cassette takes the same list with a larger filter area to wash.</p>
+    </div>
+    <div class="prose__aside reveal" data-delay="1">{checks("Done on every unit", C_COVERS)}</div>
+  </div>
+</section>''',
+
+        flow_section("How It Works", "How We Clean", "An Aircond",
+                     "Four steps, and the unit runs with you in the room before we pack up.",
+                     C_STEPS),
+
+        benefits("What you get", "What An Aircond Cleaning", "Includes",
+                 "What is covered on every clean we do, and what we will tell you before we start.",
+                 C_TERMS),
+
+        faq_block("Aircond Cleaning", "Questions About Cleaning",
+                  "Anything else about a clean, put it to us on +60178570744 and we will give you a straight answer.",
+                  C_FAQ),
+        others("ac-cleaning"),
+        testimonials(),
+    ]),
+    "jsonld": "[\n" + service_ld(
+        "Aircond Cleaning",
+        "Aircond cleaning covering filters, the evaporator coil, the blower wheel, the drain pan and line, and the outdoor condenser, across Kuala Lumpur and Selangor.",
+        "ac-cleaning/") + ",\n" + crumbs(
+        ("Home", ""), ("Our Services", "services/"), ("Aircond Cleaning", "ac-cleaning/")
+        ) + ",\n" + faq_ld(C_FAQ) + "\n]",
+})
 
 PAGES.append(service_page(
     "ac-installation", "Aircond Installation", "Aircond Installation",
