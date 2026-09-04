@@ -106,6 +106,7 @@ h1,h2,h3,h4,
 .svc__title,.faq__q,.stat__label{text-transform:capitalize}
 
 .h2{font-size:clamp(1.72rem,1.15rem + 2.3vw,2.85rem);font-weight:600}
+.h2 em{font-style:normal;font-weight:400;color:var(--navy)}
 .h2--sm{font-size:clamp(1.45rem,1.1rem + 1.4vw,2.1rem)}
 .h2--light{color:#fff}.body{color:var(--muted);line-height:1.78}
 
@@ -119,7 +120,7 @@ h1,h2,h3,h4,
 .eyebrow--light{color:#b8f4ee}
 .eyebrow--light .eyebrow__dot{background:#7ff0e4;box-shadow:0 0 0 4px rgba(127,240,228,.2)}
 
-.sec-head{max-width:660px;margin:0 auto clamp(26px,3.4vw,40px);text-align:center}.sec-head__text{margin-top:16px;color:var(--muted);font-size:1.02rem}
+.sec-head{max-width:720px;margin:0 0 clamp(26px,3.4vw,40px)}.sec-head__text{max-width:62ch;margin-top:16px;color:var(--muted);font-size:1.02rem}
 
 .section{padding:clamp(38px,4.5vw,67px) 0}
 .section--alt{background:var(--surface-alt)}
@@ -461,13 +462,11 @@ h1,h2,h3,h4,
 
 /* eyebrow with the rule under it */
 .kicker{
-  font-family:var(--f-display);font-weight:700;font-size:.78rem;
-  letter-spacing:.18em;text-transform:uppercase;color:var(--b-700);
-  padding-bottom:10px;margin-bottom:22px;position:relative;
+  display:inline-flex;align-items:center;gap:12px;margin-bottom:18px;
+  font-family:var(--f-display);font-weight:600;font-size:.72rem;
+  letter-spacing:.15em;text-transform:uppercase;color:var(--b-700);
 }
-.kicker::after{
-  content:"";position:absolute;left:0;bottom:0;width:64px;height:3px;border-radius:2px;background:var(--b-500);
-}
+.kicker::before{content:"";width:28px;height:2px;border-radius:1px;background:var(--b-400)}
 
 /* Stacked headline: one accent word set large over the service line, with a
    quiet qualifier underneath. All three lines run in caps, so the class has
@@ -639,45 +638,19 @@ h1,h2,h3,h4,
   -webkit-mask-image:radial-gradient(94% 88% at 62% 50%,#000 26%,transparent 66%);
   mask-image:radial-gradient(94% 88% at 62% 50%,#000 26%,transparent 66%);
 }
-.deco--leaves-l{
-  top:clamp(10px,2vw,34px);left:clamp(-30px,-2vw,-8px);
-  width:clamp(150px,14vw,220px);aspect-ratio:4/3;
-  background-image:url("../img/deco-leaves.webp");opacity:.85;
-}
-.deco--leaves-br{bottom:clamp(14px,3vw,52px);right:clamp(-24px,-1vw,-4px);width:clamp(110px,10vw,168px);transform:scaleX(-1)}
-.deco--leaves-r{
-  top:clamp(150px,20vw,300px);right:clamp(-24px,-1.5vw,-6px);
-  width:clamp(84px,7vw,124px);aspect-ratio:1;transform:scaleX(-1) rotate(-12deg);
-  background-image:url("../img/deco-leaf.webp");opacity:.6;
-}
-.deco--shield{top:clamp(80px,10vw,150px);left:clamp(-10px,1vw,34px);width:clamp(96px,9vw,132px);opacity:.5}
 
 /* This section reads left-aligned: the header, the rule under it, the snowflake
    divider and every card body all start on the same left edge. */
-.services__head{max-width:880px;margin-inline:0;text-align:left}
-.services__head .rule-ico{justify-content:flex-start}
+.services__head{max-width:880px}
 .services__title{color:var(--navy)}
-.services__title em{font-style:normal;color:var(--b-600)}
-/* short rule closing the introduction, as in the reference */
-.services__rule{
-  display:block;width:64px;height:3px;border-radius:2px;
-  margin:22px 0 0;background:var(--b-500);
-}
-
-/* pill eyebrow */
+/* section eyebrow: a rule and a label, no badge */
 .pill{
-  display:inline-flex;align-items:center;
-  padding:6px 16px;margin-bottom:16px;border-radius:999px;
-  background:var(--b-100);color:var(--b-800);
+  display:inline-flex;align-items:center;gap:12px;
+  margin-bottom:14px;color:var(--b-700);
   font-family:var(--f-display);font-weight:600;
-  font-size:.74rem;letter-spacing:.13em;text-transform:uppercase;
+  font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;
 }
-
-/* short divider with a centred snowflake */
-.rule-ico{display:flex;align-items:center;justify-content:center;gap:12px;margin:18px 0 4px}
-.rule-ico__line{display:block;width:clamp(34px,5vw,54px);height:2px;border-radius:1px;background:linear-gradient(90deg,rgba(20,189,184,0),var(--b-300))}
-.rule-ico__line:last-child{background:linear-gradient(90deg,var(--b-300),rgba(20,189,184,0))}
-.rule-ico .ico{width:22px;height:22px;color:var(--b-400)}
+.pill::before{content:"";width:28px;height:2px;border-radius:1px;background:var(--b-400)}
 
 /* card grid — two rows of three */
 .svc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(22px,2.6vw,34px)}
@@ -719,8 +692,7 @@ h1,h2,h3,h4,
 .svc__badge .ico{width:26px;height:26px}
 
 .svc__body{padding:16px clamp(20px,2vw,28px) clamp(24px,2.4vw,30px);display:flex;flex-direction:column;align-items:flex-start;flex:1}
-.svc__title{font-size:1.1rem;font-weight:600;color:var(--navy)}
-.svc__rule{display:block;width:40px;height:3px;border-radius:2px;margin:11px 0 13px;background:var(--b-400)}
+.svc__title{font-size:1.1rem;font-weight:600;color:var(--navy);margin-bottom:10px}
 .svc__text{font-size:.895rem;line-height:1.68;color:var(--muted)}
 .svc__lead{
   margin-top:16px;font-family:var(--f-display);font-weight:600;
@@ -746,9 +718,7 @@ h1,h2,h3,h4,
 .works{position:relative;overflow:hidden;background:linear-gradient(180deg,#ffffff 0%,#f6fcfd 100%)}
 .works>.wrap{position:relative;z-index:1}
 .works__head{max-width:1000px}
-.works__head .sec-head__text{max-width:640px;margin-inline:auto}
 .works__title{color:var(--navy)}
-.works__title em{font-style:normal;color:var(--b-600)}
 
 .flow{
   display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
@@ -781,7 +751,7 @@ h1,h2,h3,h4,
 
 .flowcard{
   position:relative;z-index:1;flex:1;
-  display:flex;flex-direction:column;text-align:center;
+  display:flex;flex-direction:column;
   background:#fff;border:1px solid var(--line);border-radius:var(--r-xl);
   box-shadow:var(--sh-sm);padding-top:24px;
   transition:transform .3s cubic-bezier(.3,.8,.4,1),box-shadow .3s ease,border-color .3s ease;
@@ -888,9 +858,17 @@ h1,h2,h3,h4,
 .faq>.wrap{position:relative;z-index:1}
 .faq__head{max-width:760px}
 .faq__title{color:var(--navy)}
-.faq__title em{font-style:normal;color:var(--b-600)}
 
-.faq__list{max-width:860px;margin:0 auto;display:grid;gap:clamp(10px,1.2vw,14px)}
+.faq__list{display:grid;gap:clamp(10px,1.2vw,14px)}
+/* On a wide screen the heading holds the left column and the questions run
+   down the right, so the section is not one more centred stack. */
+@media (min-width:1024px){
+  .faq .wrap{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);
+             gap:clamp(40px,5vw,84px);align-items:start}
+  .faq__head{margin-bottom:0}
+  .faq__head .h2{font-size:clamp(1.5rem,1.1rem + 1vw,1.95rem)}
+  .faq__foot{grid-column:2;margin-top:22px}
+}
 .faq__item{
   background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);
   box-shadow:var(--sh-xs);overflow:hidden;
@@ -936,7 +914,7 @@ h1,h2,h3,h4,
 }
 
 .faq__foot{
-  margin-top:clamp(22px,2.6vw,32px);text-align:center;
+  margin-top:clamp(22px,2.6vw,32px);
   font-size:.94rem;color:var(--muted);
 }
 .faq__foot a{color:var(--b-700);font-weight:600}
@@ -944,7 +922,6 @@ h1,h2,h3,h4,
 
 /* ---------- 16f. Services page: problems we repair ---------- */
 .problems__title{color:var(--navy)}
-.problems__title em{font-style:normal;color:var(--b-600)}
 .plist-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,2vw,26px)}
 .plist{
   display:flex;flex-direction:column;
@@ -1010,7 +987,6 @@ h1,h2,h3,h4,
 .vm{position:relative;overflow:hidden}
 .vm>.wrap{position:relative;z-index:1}
 .vm__title,.stats__title,.journey__title,.capsec__title,.teamsec__title{color:var(--navy)}
-.vm__title em,.stats__title em,.journey__title em,.capsec__title em,.teamsec__title em{font-style:normal;color:var(--b-600)}
 .vm__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,2.4vw,30px)}
 .vm__card{
   background:#fff;border:1px solid var(--line);border-radius:var(--r-xl);
@@ -1032,7 +1008,7 @@ h1,h2,h3,h4,
 .vm__card--accent .vm__text{color:#dcf7f6}
 
 /* journey timeline */
-.tl{position:relative;list-style:none;padding:0;margin:0;max-width:900px;margin-inline:auto}
+.tl{position:relative;list-style:none;padding:0;margin:0;max-width:900px}
 .tl::before{
   content:"";position:absolute;left:11px;top:8px;bottom:8px;width:2px;
   background:linear-gradient(180deg,var(--b-300),rgba(20,189,184,.15));
@@ -1149,12 +1125,6 @@ h1,h2,h3,h4,
 }
 .tvouch__text{margin-top:9px;font-size:.885rem;line-height:1.68;color:var(--muted);max-width:34ch}
 
-.tintro__leaves{
-  display:block;width:min(100%,420px);aspect-ratio:4/3;
-  margin-top:clamp(18px,2.5vw,30px);pointer-events:none;
-  background:url("../img/deco-leaves.webp") left center/contain no-repeat;
-  opacity:.9;
-}
 
 /* --- right: review cards --- */
 .treviews{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,1.9vw,26px)}
@@ -1168,10 +1138,6 @@ h1,h2,h3,h4,
 .review:hover{transform:translateY(-5px);box-shadow:var(--sh-md);border-color:var(--b-200)}
 .review--lead{grid-column:1 / -1}
 
-.review__mark{
-  position:absolute;top:clamp(18px,2vw,26px);right:clamp(18px,2vw,26px);
-  width:clamp(38px,4vw,56px);height:auto;color:var(--b-100);pointer-events:none;
-}
 .review__top{position:relative;display:flex;gap:clamp(16px,1.8vw,24px);flex:1}
 .review__icon{
   display:inline-flex;align-items:center;justify-content:center;flex:none;
@@ -1182,7 +1148,6 @@ h1,h2,h3,h4,
 .review__intro{min-width:0;flex:1;padding-right:clamp(30px,3.5vw,54px)}
 .review:not(.review--lead) .review__top{gap:15px}
 .review:not(.review--lead) .review__icon{width:46px;height:46px}
-.review:not(.review--lead) .review__mark{width:34px;top:16px;right:16px}
 .review:not(.review--lead) .review__intro{padding-right:26px}
 .stars{display:inline-flex;align-items:center;gap:4px}
 .stars .ico{width:16px;height:16px;color:var(--star)}
@@ -1224,16 +1189,16 @@ h1,h2,h3,h4,
 .brands>.wrap{position:relative;z-index:1}
 .brands__head{max-width:760px;margin-bottom:clamp(22px,2.6vw,34px)}
 .brands__title{color:var(--navy)}
-.brands__title em{display:block;font-style:normal;color:var(--b-600)}
+.brands__title em{display:block}
 
 .brands__wall{
-  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:clamp(12px,1.5vw,20px);list-style:none;padding:0;margin:0;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));
+  gap:clamp(10px,1.2vw,18px);list-style:none;padding:0;margin:0;
 }
 .brands__item{
   --logo:none;
   display:flex;align-items:center;justify-content:center;
-  min-height:clamp(96px,8.4vw,128px);padding:18px clamp(14px,1.8vw,26px);
+  min-height:clamp(76px,6vw,92px);padding:14px clamp(12px,1.4vw,20px);
   background-color:transparent;border:0;border-radius:var(--r-lg);
   box-shadow:none;
   background-image:var(--logo);background-repeat:no-repeat;
@@ -1447,7 +1412,6 @@ h1,h2,h3,h4,
   .flow{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:clamp(32px,4vw,44px)}
   .tsplit{grid-template-columns:minmax(0,1fr);gap:clamp(30px,4vw,44px)}
   .tintro__glyph{left:auto;right:clamp(0px,4vw,60px)}
-  .tintro__leaves{display:none}
   .flow__item:nth-child(2n)::before,.flow__item:nth-child(2n)::after{display:none}
   .deco{display:none}
 }
