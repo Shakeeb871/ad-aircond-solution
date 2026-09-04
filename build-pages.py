@@ -124,18 +124,11 @@ def service_ld(name, desc, slug):
 
 # ---------------------------------------------------------------- components
 
-RULE = ('<span class="rule-ico" aria-hidden="true"><i class="rule-ico__line"></i>'
-        '<svg class="ico" aria-hidden="true"><use href="#i-snow"></use></svg>'
-        '<i class="rule-ico__line"></i></span>')
-
-
-def sec_head(pill, h2_class, title_a, title_b, lede=None, rule=True, cls=" reveal"):
-    """The heading block every section opens with: a pill, a two-tone h2, and
-    optionally the snowflake rule and a standfirst underneath."""
+def sec_head(pill, h2_class, title_a, title_b, lede=None, cls=" reveal"):
+    """The heading block every section opens with: an eyebrow, a heading whose
+    second clause carries the weight contrast, and an optional standfirst."""
     parts = [f'<p class="pill">{pill}</p>',
              f'<h2 class="h2 {h2_class}">{title_a} <em>{title_b}</em></h2>']
-    if rule:
-        parts.append(RULE)
     if lede:
         parts.append(f'<p class="sec-head__text">{lede}</p>')
     return (f'<header class="sec-head{cls}">'
@@ -292,7 +285,6 @@ def flow_section(kicker, title_a, title_b, lede, steps):
       </li>''' for i, (mod, icon, name, text) in enumerate(steps))
     return f'''<section class="section works" id="process">
   <span class="deco deco--photo deco--unit-r" aria-hidden="true"></span>
-  <span class="deco deco--photo deco--leaves-l" aria-hidden="true"></span>
   <div class="wrap">
     {sec_head(kicker, 'works__title', title_a, title_b, lede, cls=' works__head reveal')}
     <ol class="flow">{items}
@@ -355,7 +347,7 @@ def aside_checks(heading, paras, list_title, items):
 
 # --------------------------------------------------- blocks for the hub page
 
-def cards(kicker, title_a, title_b, lede, items, rule=True, stagger=2):
+def cards(kicker, title_a, title_b, lede, items, stagger=2):
     """Two-column icon cards: an icon, a name and a paragraph.
 
     stagger sets how the reveal delay repeats down the grid; None makes every
@@ -371,7 +363,7 @@ def cards(kicker, title_a, title_b, lede, items, rule=True, stagger=2):
       </article>''' for i, (ic, n, t) in enumerate(items))
     return f'''<section class="section capsec">
   <div class="wrap">
-    {sec_head(kicker, 'capsec__title', title_a, title_b, lede, rule=rule)}
+    {sec_head(kicker, 'capsec__title', title_a, title_b, lede)}
     <div class="cap-grid">{cs}
     </div>
   </div>
@@ -385,7 +377,7 @@ def benefits(kicker, title_a, title_b, lede, items):
         <span><strong>{n}</strong>{t}</span></li>''' for n, t in items)
     return f'''<section class="section blist-wrap">
   <div class="wrap">
-    {sec_head(kicker, 'capsec__title', title_a, title_b, lede, rule=False)}
+    {sec_head(kicker, 'capsec__title', title_a, title_b, lede)}
     <ul class="blist reveal" data-delay="1">{ls}
     </ul>
   </div>
@@ -402,7 +394,6 @@ def faq_block(title_a, title_b, lede, qa):
         <div class="faq__a"><p>{a}</p></div>
       </details>''' for i, (q, a) in enumerate(qa))
     return f'''<section class="section faq" id="faq">
-  <span class="deco deco--photo deco--leaves-l" aria-hidden="true"></span>
   <div class="wrap">
     {sec_head('FAQ', 'faq__title', title_a, title_b, lede, cls=' faq__head reveal')}
     <div class="faq__list reveal" data-delay="1">{items}
@@ -452,7 +443,6 @@ def ahero(line_a, line_b, lede, photo, crumb, cta="Book A Visit"):
 
 def vision_mission():
     return f'''<section class="section vm">
-  <span class="deco deco--photo deco--leaves-l" aria-hidden="true"></span>
   <div class="wrap">
     {sec_head('What drives us', 'vm__title', 'Our Aircond Service', 'Vision &amp; Mission')}
     <div class="vm__grid">
@@ -488,7 +478,7 @@ def journey():
       </li>''' for i, (n, t) in enumerate(steps))
     return f'''<section class="section section--alt journey">
   <div class="wrap">
-    {sec_head('Our journey', 'journey__title', 'How Our Aircond Business', 'Grew in Kuala Lumpur', 'No overnight story &mdash; just work that led to the next job.', rule=False)}
+    {sec_head('Our journey', 'journey__title', 'How Our Aircond Business', 'Grew in Kuala Lumpur', 'No overnight story &mdash; just work that led to the next job.')}
     <ol class="tl">{items}
     </ol>
   </div>
@@ -540,7 +530,7 @@ def team():
      cards. -->
 <section class="section section--alt teamsec">
   <div class="wrap">
-    {sec_head('Our team', 'teamsec__title', 'The Aircond Team', 'Behind The Work', 'Small enough that the person who takes your call knows the technician who turns up.', rule=False)}
+    {sec_head('Our team', 'teamsec__title', 'The Aircond Team', 'Behind The Work', 'Small enough that the person who takes your call knows the technician who turns up.')}
     <div class="tm-grid">{cards}
     </div>
   </div>
@@ -562,7 +552,7 @@ CAPABILITIES = [
 def capability():
     return cards('What we handle', 'Aircond Brands', '&amp; Models We Service',
                  'The equipment changes from job to job. The way we approach it does not.',
-                 CAPABILITIES, rule=False, stagger=None)
+                 CAPABILITIES, stagger=None)
 
 
 def problems():
@@ -1529,7 +1519,6 @@ PAGES.append({
         <span class="hstack__main">Repair, cleaning, installation &amp; maintenance</span>
         <span class="hstack__sub">For homes &amp; businesses in Kuala Lumpur &amp; Selangor</span>
       </h2>
-      <span class="rule-ico" aria-hidden="true"><i class="rule-ico__line"></i><svg class="ico" aria-hidden="true"><use href="#i-snow"></use></svg><i class="rule-ico__line"></i></span>
       <p class="sec-head__text">Whichever one you need, the visit starts the same way &mdash; we look at the unit before recommending anything.</p>
     </header>
     <div class="svc-grid">{_svc_cards}
