@@ -124,6 +124,24 @@ def service_ld(name, desc, slug):
 
 # ---------------------------------------------------------------- components
 
+RULE = ('<span class="rule-ico" aria-hidden="true"><i class="rule-ico__line"></i>'
+        '<svg class="ico" aria-hidden="true"><use href="#i-snow"></use></svg>'
+        '<i class="rule-ico__line"></i></span>')
+
+
+def sec_head(pill, h2_class, title_a, title_b, lede=None, rule=True, cls=" reveal"):
+    """The heading block every section opens with: a pill, a two-tone h2, and
+    optionally the snowflake rule and a standfirst underneath."""
+    parts = [f'<p class="pill">{pill}</p>',
+             f'<h2 class="h2 {h2_class}">{title_a} <em>{title_b}</em></h2>']
+    if rule:
+        parts.append(RULE)
+    if lede:
+        parts.append(f'<p class="sec-head__text">{lede}</p>')
+    return (f'<header class="sec-head{cls}">'
+            + "".join("\n      " + p for p in parts) + '\n    </header>')
+
+
 def drop(html, start, end):
     """Remove one block from a chunk of markup, from start to the end marker."""
     i = html.index(start)
@@ -251,11 +269,7 @@ def others(current):
         for card, (slug, *_r) in zip(_home_cards, SERVICES) if slug != current)
     return f'''<section class="section section--alt services">
   <div class="wrap">
-    <header class="sec-head services__head reveal">
-      <p class="pill">More services</p>
-      <h2 class="h2 services__title">Other Aircond Services <em>We Provide</em></h2>
-      <span class="rule-ico" aria-hidden="true"><i class="rule-ico__line"></i><svg class="ico" aria-hidden="true"><use href="#i-snow"></use></svg><i class="rule-ico__line"></i></span>
-    </header>
+    {sec_head('More services', 'services__title', 'Other Aircond Services', 'We Provide', cls=' services__head reveal')}
     <div class="svc-grid">{cards}
     </div>
   </div>
@@ -280,12 +294,7 @@ def flow_section(kicker, title_a, title_b, lede, steps):
   <span class="deco deco--photo deco--unit-r" aria-hidden="true"></span>
   <span class="deco deco--photo deco--leaves-l" aria-hidden="true"></span>
   <div class="wrap">
-    <header class="sec-head works__head reveal">
-      <p class="pill">{kicker}</p>
-      <h2 class="h2 works__title">{title_a} <em>{title_b}</em></h2>
-      <span class="rule-ico" aria-hidden="true"><i class="rule-ico__line"></i><svg class="ico" aria-hidden="true"><use href="#i-snow"></use></svg><i class="rule-ico__line"></i></span>
-      <p class="sec-head__text">{lede}</p>
-    </header>
+    {sec_head(kicker, 'works__title', title_a, title_b, lede, cls=' works__head reveal')}
     <ol class="flow">{items}
     </ol>
   </div>
@@ -302,12 +311,58 @@ def testimonials():
     return _pull('<section class="section testimonials"', '</section>\n')
 
 
+def prose(paras):
+    """A run of body copy on its own, full width."""
+    ps = "".join(f"\n      <p>{p}</p>" for p in paras)
+    return f'''<section class="section section--tight">
+  <div class="wrap">
+    <div class="prose prose--solo reveal">{ps}
+    </div>
+  </div>
+</section>'''
+
+
+def approach(eyebrow, heading, paras, photo, alt):
+    """Copy beside a photograph: the how-we-work block every service page runs."""
+    ps = "".join(f'\n      <p class="body">{p}</p>' for p in paras)
+    return f'''<section class="section section--alt approach">
+  <div class="wrap split">
+    <div class="split__copy reveal">
+      <p class="eyebrow"><span class="eyebrow__dot"></span>{eyebrow}</p>
+      <h2 class="h2">{heading}</h2>{ps}
+    </div>
+    <div class="split__media reveal" data-delay="1">
+      <img class="poster" src="/assets/img/{photo}" width="600" height="450"
+           alt="{alt}"
+           loading="lazy" decoding="async">
+    </div>
+  </div>
+</section>'''
+
+
+def aside_checks(heading, paras, list_title, items):
+    """Copy on the left, a ticked list of what gets checked on the right."""
+    ps = "".join(f"\n      <p>{p}</p>" for p in paras)
+    return f'''<section class="section">
+  <div class="wrap prose__grid">
+    <div class="prose reveal">
+      <h2 class="h2 h2--sm">{heading}</h2>{ps}
+    </div>
+    <div class="prose__aside reveal" data-delay="1">{checks(list_title, items)}</div>
+  </div>
+</section>'''
+
+
 # --------------------------------------------------- blocks for the hub page
 
-def cards(kicker, title_a, title_b, lede, items):
-    """Two-column icon cards: an icon, a name and a paragraph."""
+def cards(kicker, title_a, title_b, lede, items, rule=True, stagger=2):
+    """Two-column icon cards: an icon, a name and a paragraph.
+
+    stagger sets how the reveal delay repeats down the grid; None makes every
+    card wait a little longer than the one above it.
+    """
     cs = "".join(f'''
-      <article class="cap reveal" data-delay="{i % 2}">
+      <article class="cap reveal" data-delay="{i % stagger if stagger else i}">
         <span class="cap__icon"><svg class="ico" aria-hidden="true"><use href="#{ic}"></use></svg></span>
         <div class="cap__body">
           <h3 class="cap__name">{n}</h3>
@@ -316,12 +371,7 @@ def cards(kicker, title_a, title_b, lede, items):
       </article>''' for i, (ic, n, t) in enumerate(items))
     return f'''<section class="section capsec">
   <div class="wrap">
-    <header class="sec-head reveal">
-      <p class="pill">{kicker}</p>
-      <h2 class="h2 capsec__title">{title_a} <em>{title_b}</em></h2>
-      <span class="rule-ico" aria-hidden="true"><i class="rule-ico__line"></i><svg class="ico" aria-hidden="true"><use href="#i-snow"></use></svg><i class="rule-ico__line"></i></span>
-      <p class="sec-head__text">{lede}</p>
-    </header>
+    {sec_head(kicker, 'capsec__title', title_a, title_b, lede, rule=rule)}
     <div class="cap-grid">{cs}
     </div>
   </div>
@@ -335,11 +385,7 @@ def benefits(kicker, title_a, title_b, lede, items):
         <span><strong>{n}</strong>{t}</span></li>''' for n, t in items)
     return f'''<section class="section blist-wrap">
   <div class="wrap">
-    <header class="sec-head reveal">
-      <p class="pill">{kicker}</p>
-      <h2 class="h2 capsec__title">{title_a} <em>{title_b}</em></h2>
-      <p class="sec-head__text">{lede}</p>
-    </header>
+    {sec_head(kicker, 'capsec__title', title_a, title_b, lede, rule=False)}
     <ul class="blist reveal" data-delay="1">{ls}
     </ul>
   </div>
@@ -358,12 +404,7 @@ def faq_block(title_a, title_b, lede, qa):
     return f'''<section class="section faq" id="faq">
   <span class="deco deco--photo deco--leaves-l" aria-hidden="true"></span>
   <div class="wrap">
-    <header class="sec-head faq__head reveal">
-      <p class="pill">FAQ</p>
-      <h2 class="h2 faq__title">{title_a} <em>{title_b}</em></h2>
-      <span class="rule-ico" aria-hidden="true"><i class="rule-ico__line"></i><svg class="ico" aria-hidden="true"><use href="#i-snow"></use></svg><i class="rule-ico__line"></i></span>
-      <p class="sec-head__text">{lede}</p>
-    </header>
+    {sec_head('FAQ', 'faq__title', title_a, title_b, lede, cls=' faq__head reveal')}
     <div class="faq__list reveal" data-delay="1">{items}
     </div>
   </div>
@@ -410,14 +451,10 @@ def ahero(line_a, line_b, lede, photo, crumb, cta="Book A Visit"):
 
 
 def vision_mission():
-    return '''<section class="section vm">
+    return f'''<section class="section vm">
   <span class="deco deco--photo deco--leaves-l" aria-hidden="true"></span>
   <div class="wrap">
-    <header class="sec-head reveal">
-      <p class="pill">What drives us</p>
-      <h2 class="h2 vm__title">Our Aircond Service <em>Vision &amp; Mission</em></h2>
-      <span class="rule-ico" aria-hidden="true"><i class="rule-ico__line"></i><svg class="ico" aria-hidden="true"><use href="#i-snow"></use></svg><i class="rule-ico__line"></i></span>
-    </header>
+    {sec_head('What drives us', 'vm__title', 'Our Aircond Service', 'Vision &amp; Mission')}
     <div class="vm__grid">
       <article class="vm__card reveal">
         <span class="vm__icon"><svg class="ico" aria-hidden="true"><use href="#i-target"></use></svg></span>
@@ -451,11 +488,7 @@ def journey():
       </li>''' for i, (n, t) in enumerate(steps))
     return f'''<section class="section section--alt journey">
   <div class="wrap">
-    <header class="sec-head reveal">
-      <p class="pill">Our journey</p>
-      <h2 class="h2 journey__title">How Our Aircond Business <em>Grew in Kuala Lumpur</em></h2>
-      <p class="sec-head__text">No overnight story &mdash; just work that led to the next job.</p>
-    </header>
+    {sec_head('Our journey', 'journey__title', 'How Our Aircond Business', 'Grew in Kuala Lumpur', 'No overnight story &mdash; just work that led to the next job.', rule=False)}
     <ol class="tl">{items}
     </ol>
   </div>
@@ -483,11 +516,7 @@ def numbers():
 <section class="section stats">
   <span class="deco deco--photo deco--unit-r" aria-hidden="true"></span>
   <div class="wrap">
-    <header class="sec-head reveal">
-      <p class="pill">At a glance</p>
-      <h2 class="h2 stats__title">What We Bring <em>To Every Aircond Job</em></h2>
-      <span class="rule-ico" aria-hidden="true"><i class="rule-ico__line"></i><svg class="ico" aria-hidden="true"><use href="#i-snow"></use></svg><i class="rule-ico__line"></i></span>
-    </header>
+    {sec_head('At a glance', 'stats__title', 'What We Bring', 'To Every Aircond Job')}
     <ul class="stats__grid">{cards}
     </ul>
   </div>
@@ -511,47 +540,29 @@ def team():
      cards. -->
 <section class="section section--alt teamsec">
   <div class="wrap">
-    <header class="sec-head reveal">
-      <p class="pill">Our team</p>
-      <h2 class="h2 teamsec__title">The Aircond Team <em>Behind The Work</em></h2>
-      <p class="sec-head__text">Small enough that the person who takes your call knows the technician who turns up.</p>
-    </header>
+    {sec_head('Our team', 'teamsec__title', 'The Aircond Team', 'Behind The Work', 'Small enough that the person who takes your call knows the technician who turns up.', rule=False)}
     <div class="tm-grid">{cards}
     </div>
   </div>
 </section>'''
 
 
+CAPABILITIES = [
+    ("i-grid",   "Every aircond model and brand",
+     "Wall-mounted splits, ceiling cassettes and outdoor condensers &mdash; Daikin, Panasonic, Mitsubishi Electric, LG, Samsung, York, Midea and the rest. Tell us the make and model and we will confirm before booking."),
+    ("i-badge",  "Trained aircond technicians",
+     "The people who arrive work on these systems daily. They are trained on the equipment they are sent to, not handed a job they have never seen."),
+    ("i-shield", "Safe aircond electrical work",
+     "Capacitors, wiring and control boards are the part of an air conditioner where guessing is both expensive and dangerous. That work is traced to the component and handled properly."),
+    ("i-clock",  "Aircond visits around your hours",
+     "Households get a time that suits them. Business premises get a visit that fits around trading hours, because a shop cannot close for an aircond."),
+]
+
+
 def capability():
-    items = [
-        ("i-grid",   "Every aircond model and brand",
-         "Wall-mounted splits, ceiling cassettes and outdoor condensers &mdash; Daikin, Panasonic, Mitsubishi Electric, LG, Samsung, York, Midea and the rest. Tell us the make and model and we will confirm before booking."),
-        ("i-badge",  "Trained aircond technicians",
-         "The people who arrive work on these systems daily. They are trained on the equipment they are sent to, not handed a job they have never seen."),
-        ("i-shield", "Safe aircond electrical work",
-         "Capacitors, wiring and control boards are the part of an air conditioner where guessing is both expensive and dangerous. That work is traced to the component and handled properly."),
-        ("i-clock",  "Aircond visits around your hours",
-         "Households get a time that suits them. Business premises get a visit that fits around trading hours, because a shop cannot close for an aircond."),
-    ]
-    cards = "".join(f'''
-      <article class="cap reveal" data-delay="{i}">
-        <span class="cap__icon"><svg class="ico" aria-hidden="true"><use href="#{ic}"></use></svg></span>
-        <div class="cap__body">
-          <h3 class="cap__name">{n}</h3>
-          <p class="cap__text">{t}</p>
-        </div>
-      </article>''' for i, (ic, n, t) in enumerate(items))
-    return f'''<section class="section capsec">
-  <div class="wrap">
-    <header class="sec-head reveal">
-      <p class="pill">What we handle</p>
-      <h2 class="h2 capsec__title">Aircond Brands <em>&amp; Models We Service</em></h2>
-      <p class="sec-head__text">The equipment changes from job to job. The way we approach it does not.</p>
-    </header>
-    <div class="cap-grid">{cards}
-    </div>
-  </div>
-</section>'''
+    return cards('What we handle', 'Aircond Brands', '&amp; Models We Service',
+                 'The equipment changes from job to job. The way we approach it does not.',
+                 CAPABILITIES, rule=False, stagger=None)
 
 
 def problems():
@@ -624,16 +635,43 @@ def problems():
       </article>''' for i, (slug, name, ic, faults) in enumerate(rows))
     return f'''<section class="section section--alt problems">
   <div class="wrap">
-    <header class="sec-head">
-      <p class="pill">What we repair</p>
-      <h2 class="h2 problems__title">Aircond Problems <em>We Fix</em></h2>
-      <span class="rule-ico" aria-hidden="true"><i class="rule-ico__line"></i><svg class="ico" aria-hidden="true"><use href="#i-snow"></use></svg><i class="rule-ico__line"></i></span>
-      <p class="sec-head__text">If your unit is doing any of these, it is on our list. Find the symptom and it tells you which service you need.</p>
-    </header>
+    {sec_head('What we repair', 'problems__title', 'Aircond Problems', 'We Fix', 'If your unit is doing any of these, it is on our list. Find the symptom and it tells you which service you need.', cls='')}
     <div class="plist-grid">{cards}
     </div>
   </div>
 </section>'''
+
+
+def service_page(slug, name, image, title, description, ld,
+                 hero, intro, split, faults, tests, flow, terms, faq):
+    """One service page.
+
+    All seven run the same ten blocks in the same order, so nothing here is
+    laid out per page: each page hands over its copy and the shape comes from
+    this one place. Change the shape here and every service page follows.
+    """
+    line_a, line_b, lede, cta = hero
+    return {
+        "dir": slug, "url": f"{slug}/", "nav": "services", "image": image,
+        "title": title, "description": description,
+        "body": "\n".join([
+            ahero(line_a, line_b, lede, image,
+                  bc(("Home", "/"), ("Our Services", "/services/"), (name, None)), cta),
+            prose(intro),
+            approach(*split),
+            cards(*faults),
+            aside_checks(*tests),
+            flow_section("How It Works", *flow),
+            benefits(*terms),
+            faq_block(*faq),
+            others(slug),
+            testimonials(),
+        ]),
+        "jsonld": "[\n" + service_ld(name, ld, f"{slug}/")
+                  + ",\n" + crumbs(("Home", ""), ("Our Services", "services/"),
+                                   (name, f"{slug}/"))
+                  + ",\n" + faq_ld(faq[-1]) + "\n]",
+    }
 
 
 # ---------------------------------------------------------------------- pages
@@ -1176,445 +1214,203 @@ E_FAQ = [
 
 PAGES = []
 
-PAGES.append({
-    "dir": "ac-repair", "url": "ac-repair/", "nav": "services", "image": "svc-repair.webp",
-    "title": "Aircond Repair in KL &amp; Selangor | Ad Aircond Solution",
-    "description": "Aircond repair across Kuala Lumpur and Selangor for units that will not cool, will not start, trip the breaker or drip water. The fault is traced before anything is replaced.",
-    "body": "\n".join([
-        ahero("Aircond repair in", "Kuala Lumpur &amp; Selangor",
-              "A unit that has stopped cooling, will not start or drips onto the floor needs the fault found before anything is replaced. We test first, name the part that failed, then repair it.",
-              "svc-repair.webp",
-              bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Repair", None)), "Book A Repair Visit"),
+PAGES.append(service_page(
+    slug="ac-repair", name="Aircond Repair", image="svc-repair.webp",
+    title="Aircond Repair in KL &amp; Selangor | Ad Aircond Solution",
+    description="Aircond repair across Kuala Lumpur and Selangor for units that will not cool, will not start, trip the breaker or drip water. The fault is traced before anything is replaced.",
+    ld="Aircond repair for units that will not cool, will not start, trip the breaker or leak water, across Kuala Lumpur and Selangor.",
+    hero=("Aircond repair in", "Kuala Lumpur &amp; Selangor",
+          "A unit that has stopped cooling, will not start or drips onto the floor needs the fault found before anything is replaced. We test first, name the part that failed, then repair it.",
+          "Book A Repair Visit"),
+    intro=["Your aircond runs, the fan turns, and the room sits at the same temperature it was an hour ago. Or it will not start at all, and the breaker drops the moment you press the button on the remote.",
+           "A unit left like that keeps drawing current while it cools nothing, so the bill climbs through a month you spent uncomfortable. A slow refrigerant leak also starves the compressor of oil, and the compressor is the most expensive part in the outdoor unit.",
+           "We repair wall-mounted splits, ceiling cassettes and the outdoor condensers that serve them, in homes and business premises across Kuala Lumpur and Selangor. Call +60178570744 with the make and model from the sticker inside the front cover."],
+    split=("How a repair visit runs", "What Happens Before Anything Is Replaced",
+           ["One complaint has several possible causes, so the visit starts with testing. A room that will not cool can come from a coil packed with dust, a tired capacitor or a leak in the refrigerant circuit. It can also be a control board that has stopped switching the compressor. Each needs a different repair, and only one of them is expensive.",
+            "Our technician works through them in cost order and tells you which one failed. You hear the part name, what it does and what the repair involves before any work starts. Where the unit is fifteen years old and the compressor has gone, we say so instead of quoting a repair that will not hold."],
+           "svc-repair.webp", "An Ad Aircond Solution technician testing the indoor unit of a wall-mounted aircond during a repair visit."),
+    faults=("Faults we repair", "Aircond Faults", "We Are Called Out For",
+            "Ten of the repairs we do most across Kuala Lumpur and Selangor, and what sits behind each one.",
+            R_FAULTS),
+    tests=("What We Test Before We Quote",
+           ["A quote given before the testing is a guess, and a guess gets paid for twice. Our technician meters the circuit and the refrigerant side first, then puts a figure on the repair that fault needs.",
+            "Eight readings cover almost every fault on a split system. They take a few minutes each and they are what separates replacing the right part from replacing the expensive one."],
+           "Read at every repair visit", R_CHECKS),
+    flow=("How An Aircond Repair", "Visit Runs",
+          "Four steps, and you approve the price before anything comes apart.",
+          R_STEPS),
+    terms=("What you get", "What An Aircond Repair", "Includes",
+           "The terms we work to on every repair in Kuala Lumpur and Selangor.",
+           R_TERMS),
+    faq=("Aircond Repair", "Questions We Get Asked",
+         "If yours is not here, call or WhatsApp +60178570744 and we will answer it straight.",
+         R_FAQ),
+))
 
-        '''<section class="section section--tight">
-  <div class="wrap">
-    <div class="prose prose--solo reveal">
-      <p>Your aircond runs, the fan turns, and the room sits at the same temperature it was an hour ago. Or it will not start at all, and the breaker drops the moment you press the button on the remote.</p>
-      <p>A unit left like that keeps drawing current while it cools nothing, so the bill climbs through a month you spent uncomfortable. A slow refrigerant leak also starves the compressor of oil, and the compressor is the most expensive part in the outdoor unit.</p>
-      <p>We repair wall-mounted splits, ceiling cassettes and the outdoor condensers that serve them, in homes and business premises across Kuala Lumpur and Selangor. Call +60178570744 with the make and model from the sticker inside the front cover.</p>
-    </div>
-  </div>
-</section>''',
+PAGES.append(service_page(
+    slug="ac-cleaning", name="Aircond Cleaning", image="svc-cleaning.webp",
+    title="Aircond Cleaning in KL &amp; Selangor | Ad Aircond Solution",
+    description="Aircond cleaning across Kuala Lumpur and Selangor: filters, evaporator coil, blower wheel, drain pan and line, and the outdoor condenser. Call +60178570744.",
+    ld="Aircond cleaning covering filters, the evaporator coil, the blower wheel, the drain pan and line, and the outdoor condenser, across Kuala Lumpur and Selangor.",
+    hero=("Aircond cleaning in", "Kuala Lumpur &amp; Selangor",
+          "Filters, the evaporator coil, the blower wheel and the drain line collect dust and biofilm through the year. We strip them back so the unit moves the air it was built to move.",
+          "Book A Cleaning"),
+    intro=["The aircond is on, the remote says 24, and the room takes an hour to feel it. Air leaves the vents in a weak stream, and there is a sour smell for the first minute after start-up.",
+           "Dust on the evaporator fins works as insulation. The coil cannot pull heat out of the room, so the compressor keeps running to make up for it. That shows on the bill every month it stays there. The damp layer in the drain pan also grows mould, and that is what the fan pushes into the room.",
+           "We clean wall splits, ceiling cassettes and the condensers that serve them, in houses, apartments, shops and offices across Kuala Lumpur and Selangor. Call +60178570744 and tell us how many units you have and when they were last opened."],
+    split=("Why cleaning changes the cooling", "Why A Dirty Coil Costs You Cooling",
+           ["Air conditioning works by moving heat, and the evaporator coil is where that happens. Dust settles on the aluminium fins in a layer thin enough to ignore. It still sits between the room air and the cold metal. The coil then sheds less heat per minute, and the compressor runs longer to cover the gap.",
+            "The blower wheel collects the same dust. Each of its blades is a small curved scoop. Once the scoops fill, the wheel spins at full speed while moving a fraction of its rated air. Cleaning both is what brings the cold back, and no amount of gas will do it."],
+           "svc-cleaning.webp", "An Ad Aircond Solution technician washing the evaporator coil of a wall-mounted aircond in Kuala Lumpur."),
+    faults=("What we clean", "Signs Your Aircond", "Needs Cleaning",
+            "Ten of the reasons people call us for a clean, and what sits behind each one.",
+            C_SIGNS),
+    tests=("What A Cleaning Covers",
+           ["A clean that stops at the filter buys a few days. Dust travels past the filter into the coil, the blower wheel and the pan, so those are the surfaces the work has to reach.",
+            "Eight items make up a standard clean on a wall split. A cassette takes the same list with a larger filter area to wash."],
+           "Done on every unit", C_COVERS),
+    flow=("How We Clean", "An Aircond",
+          "Four steps, and the unit runs with you in the room before we pack up.",
+          C_STEPS),
+    terms=("What you get", "What An Aircond Cleaning", "Includes",
+           "What is covered on every clean we do, and what we will tell you before we start.",
+           C_TERMS),
+    faq=("Aircond Cleaning", "Questions About Cleaning",
+         "Anything else about a clean, put it to us on +60178570744 and we will give you a straight answer.",
+         C_FAQ),
+))
 
-        '''<section class="section section--alt approach">
-  <div class="wrap split">
-    <div class="split__copy reveal">
-      <p class="eyebrow"><span class="eyebrow__dot"></span>How a repair visit runs</p>
-      <h2 class="h2">What Happens Before Anything Is Replaced</h2>
-      <p class="body">One complaint has several possible causes, so the visit starts with testing. A room that will not cool can come from a coil packed with dust, a tired capacitor or a leak in the refrigerant circuit. It can also be a control board that has stopped switching the compressor. Each needs a different repair, and only one of them is expensive.</p>
-      <p class="body">Our technician works through them in cost order and tells you which one failed. You hear the part name, what it does and what the repair involves before any work starts. Where the unit is fifteen years old and the compressor has gone, we say so instead of quoting a repair that will not hold.</p>
-    </div>
-    <div class="split__media reveal" data-delay="1">
-      <img class="poster" src="/assets/img/svc-repair.webp" width="600" height="450"
-           alt="An Ad Aircond Solution technician testing the indoor unit of a wall-mounted aircond during a repair visit."
-           loading="lazy" decoding="async">
-    </div>
-  </div>
-</section>''',
+PAGES.append(service_page(
+    slug="ac-installation", name="Aircond Installation", image="svc-installation.webp",
+    title="Aircond Installation in KL &amp; Selangor | Ad Aircond Solution",
+    description="Aircond installation across Kuala Lumpur and Selangor. Capacity sized to the room, fresh flare joints, a vacuum before charging and a drain set to fall. Call +60178570744.",
+    ld="Aircond installation for wall splits and ceiling cassettes across Kuala Lumpur and Selangor, sized to the room and commissioned on the day.",
+    hero=("Aircond installation in", "Kuala Lumpur &amp; Selangor",
+          "A new unit performs the way it was fitted. We size it to the room, run the pipe and the drain properly, and vacuum the system before the gas goes in.",
+          "Get An Install Quote"),
+    intro=["You have bought the unit, or you are about to, and the shop has quoted a fitting price with the box. What that price covers is the part nobody explains until the room fails to cool two summers later.",
+           "An undersized unit runs without a break and still leaves the room warm. A drain laid flat backs water down the wall within months. Air left in the pipework turns into acid and takes the compressor with it. None of that shows on the day the unit is switched on.",
+           "We fit wall splits and ceiling cassettes for households and businesses right across the Klang Valley, in Kuala Lumpur and in Selangor. Ring +60178570744 with the room size, or the model you already have, and we will arrange a look at the wall."],
+    split=("Why fitting decides performance", "The Install Sets How The Unit Runs For Years",
+           ["Two identical units on two identical walls can cool very differently. The difference sits in four things. The capacity chosen for the room. The length and shape of the pipe run. The fall on the drain, and whether the air came out before the gas went in. Each is decided once, on fitting day, and each is expensive to revisit.",
+            "So the work starts at the wall, before anyone opens the box. Where the wall, the drain route or the circuit will not carry the unit you have picked, we say so at the site visit. You then get the option that does work."],
+           "svc-installation.webp", "An Ad Aircond Solution technician fitting an outdoor condenser unit during an installation in Kuala Lumpur."),
+    faults=("What we fit", "Aircond Installations", "We Take On",
+            "Ten of the jobs and decisions that come up on an install, and how each one is handled.",
+            I_CASES),
+    tests=("What A Proper Install Covers",
+           ["Most of what decides a unit's performance is buried behind the trunking within a day of being done. That is why the list below matters more than the badge on the front cover.",
+            "Eight items make up the standard on every unit we fit, whether it goes into a bedroom or a shop floor."],
+           "Done on every install", I_CHECKS),
+    flow=("From Site Visit", "To First Cold Air",
+          "Four steps, and the quote comes after somebody has seen the wall.",
+          I_STEPS),
+    terms=("What you get", "What An Aircond Installation", "Includes",
+           "The standard every unit we fit is held to, and what you see before we go.",
+           I_TERMS),
+    faq=("Aircond Installation", "Questions Before You Fit",
+         "Something here we have not covered? Ring +60178570744 and ask the technician who would be doing the job.",
+         I_FAQ),
+))
 
-        cards("Faults we repair", "Aircond Faults", "We Are Called Out For",
-              "Ten of the repairs we do most across Kuala Lumpur and Selangor, and what sits behind each one.",
-              R_FAULTS),
+PAGES.append(service_page(
+    slug="ac-maintenance", name="Aircond Maintenance", image="svc-maintenance.webp",
+    title="Aircond Maintenance in KL &amp; Selangor | Ad Aircond Solution",
+    description="Scheduled aircond maintenance across Kuala Lumpur and Selangor. Readings logged every visit, terminals checked, the charge verified, a record per unit. Call +60178570744.",
+    ld="Scheduled aircond maintenance with readings logged per unit at every visit, across Kuala Lumpur and Selangor.",
+    hero=("Aircond maintenance in", "Kuala Lumpur &amp; Selangor",
+          "Booked visits on an interval that suits how you use the units. The readings go down on paper each time, so a slow decline shows up as a number.",
+          "Start A Service Plan"),
+    intro=["Nobody books an aircond visit while the room is still cold. The unit gets used, the cooling slips a little each month, and the first call goes out on the evening it stops.",
+           "By then the cheap window has closed. A bearing that whined for six months has taken the motor with it. A loose terminal has burnt its block, and a slow leak has run the compressor short of oil. Each of those was visible months earlier to anyone holding a meter.",
+           "We run booked maintenance on wall splits and ceiling cassettes, in homes, shops and offices around Kuala Lumpur and out through Selangor. Tell us on +60178570744 how many units you have and how hard they work, and we will set the interval."],
+    split=("Maintenance against cleaning", "What Maintenance Catches That A Clean Does Not",
+           ["A cleaning gets the dust off the filter, the coil, the blower wheel and the drain, and the unit cools better that afternoon. Maintenance includes that work and then adds the part a wash cannot do, which is measurement. The vent temperature, the running current and the charge get written down and compared with the last visit.",
+            "One reading on its own says almost nothing. Two readings six months apart say whether a unit is holding or sliding. That gap is the difference between changing a bearing and changing a motor. Where the numbers say a unit is finished, we tell you to plan the replacement instead of booking more visits."],
+           "svc-maintenance.webp", "An Ad Aircond Solution technician taking readings during a scheduled aircond maintenance visit in Kuala Lumpur."),
+    faults=("What maintenance covers", "What A Booked Visit", "Picks Up Early",
+            "Ten of the things a scheduled visit catches while they are still small jobs.",
+            M_ITEMS),
+    tests=("What Each Visit Records",
+           ["Eight figures go on the sheet at every visit, and each one is written next to the figure from last time. That is what turns a service call into a history.",
+            "The history is what lets us tell you a bearing has six months in it, instead of finding out on the day it stops."],
+           "Logged at every visit", M_CHECKS),
+    flow=("How A Maintenance", "Schedule Starts",
+          "Four steps, and the interval is set on how hard your units actually work.",
+          M_STEPS),
+    terms=("What you get", "What Aircond Maintenance", "Includes",
+           "What every booked visit covers, and what lands with you afterwards.",
+           M_TERMS),
+    faq=("Aircond Maintenance", "Questions About Scheduled Visits",
+         "Something not covered here? Ring +60178570744 and we will tell you straight whether a schedule is worth it for your units.",
+         M_FAQ),
+))
 
-        f'''<section class="section">
-  <div class="wrap prose__grid">
-    <div class="prose reveal">
-      <h2 class="h2 h2--sm">What We Test Before We Quote</h2>
-      <p>A quote given before the testing is a guess, and a guess gets paid for twice. Our technician meters the circuit and the refrigerant side first, then puts a figure on the repair that fault needs.</p>
-      <p>Eight readings cover almost every fault on a split system. They take a few minutes each and they are what separates replacing the right part from replacing the expensive one.</p>
-    </div>
-    <div class="prose__aside reveal" data-delay="1">{checks("Read at every repair visit", R_CHECKS)}</div>
-  </div>
-</section>''',
+PAGES.append(service_page(
+    slug="gas-refilling", name="Aircond Gas Refilling", image="svc-gas.webp",
+    title="Aircond Gas Refilling in KL &amp; Selangor | Ad Aircond Solution",
+    description="Aircond gas refilling across Kuala Lumpur and Selangor. We find the leak first, recover the old charge, then weigh the new one in to the nameplate figure. Call +60178570744.",
+    ld="Refrigerant leak tracing, repair and recharging by weight for aircond systems across Kuala Lumpur and Selangor.",
+    hero=("Aircond gas refilling in", "Kuala Lumpur &amp; Selangor",
+          "Refrigerant does not get used up, so a system that is low has lost it somewhere. We find the hole, repair it, then weigh the charge back in to the figure on the plate.",
+          "Book A Leak Test"),
+    intro=["The air at the vent is cool but never cold. The unit runs all evening without switching off, and there is frost on the copper where the pipes meet the outdoor unit.",
+           "Somebody will offer to top it up. Six weeks later the room is warm again, because gas poured into a leaking circuit leaves through the same hole at the same rate. Meanwhile the compressor has been running short of the refrigerant that carries its oil. That bill dwarfs the one for the gas.",
+           "We trace refrigerant leaks, repair them and recharge the system. Wall splits and ceiling cassettes, in KL homes and across the Selangor suburbs. Ring +60178570744 and tell us how long the cooling has been slipping."],
+    split=("What a low charge really means", "A Sealed System Should Never Need Topping Up",
+           ["Refrigerant works in a closed loop. It changes between liquid and gas thousands of times a day, carries heat out of your room, and comes back to do it again. Nothing consumes it and nothing burns it off. A unit that has lost pressure has a hole, and the only useful question is where.",
+            "That is why a refill on its own is a poor spend, and why the visit starts with a test instead of a cylinder. Where the system turns out to be holding its charge, the weak cooling comes from somewhere else. We go and look there instead of selling you gas."],
+           "svc-gas.webp", "An Ad Aircond Solution technician checking refrigerant pressures at the outdoor unit with gauges in Kuala Lumpur."),
+    faults=("Where the gas goes", "Where Refrigerant Escapes", "And What We Do",
+            "Ten of the places a leak turns up, and the charging faults that come with them.",
+            G_ITEMS),
+    tests=("What We Do Before Any Gas Goes In",
+           ["Eight steps sit between the gauges going on and the cylinder coming off the scales. Skipping them is how a system gets filled twice in one year.",
+            "The order matters as much as the list. A charge weighed into a circuit that still holds air and moisture will cool the room this week and cost you a compressor later."],
+           "Done on every recharge", G_CHECKS),
+    flow=("How A Refrigerant", "Job Runs",
+          "Four steps, and the first one is a test rather than a cylinder.",
+          G_STEPS),
+    terms=("What you get", "What A Gas Refill", "Includes",
+           "What happens on every recharge, and what you are told before it starts.",
+           G_TERMS),
+    faq=("Aircond Gas Refilling", "Questions About Refrigerant",
+         "Not covered here? Ring +60178570744 and describe what the unit is doing, and we will tell you whether gas is even the problem.",
+         G_FAQ),
+))
 
-        flow_section("How It Works", "How An Aircond Repair", "Visit Runs",
-                     "Four steps, and you approve the price before anything comes apart.",
-                     R_STEPS),
-
-        benefits("What you get", "What An Aircond Repair", "Includes",
-                 "The terms we work to on every repair in Kuala Lumpur and Selangor.",
-                 R_TERMS),
-
-        faq_block("Aircond Repair", "Questions We Get Asked",
-                  "If yours is not here, call or WhatsApp +60178570744 and we will answer it straight.",
-                  R_FAQ),
-        others("ac-repair"),
-        testimonials(),
-    ]),
-    "jsonld": "[\n" + service_ld(
-        "Aircond Repair",
-        "Aircond repair for units that will not cool, will not start, trip the breaker or leak water, across Kuala Lumpur and Selangor.",
-        "ac-repair/") + ",\n" + crumbs(
-        ("Home", ""), ("Our Services", "services/"), ("Aircond Repair", "ac-repair/")
-        ) + ",\n" + faq_ld(R_FAQ) + "\n]",
-})
-
-PAGES.append({
-    "dir": "ac-cleaning", "url": "ac-cleaning/", "nav": "services", "image": "svc-cleaning.webp",
-    "title": "Aircond Cleaning in KL &amp; Selangor | Ad Aircond Solution",
-    "description": "Aircond cleaning across Kuala Lumpur and Selangor: filters, evaporator coil, blower wheel, drain pan and line, and the outdoor condenser. Call +60178570744.",
-    "body": "\n".join([
-        ahero("Aircond cleaning in", "Kuala Lumpur &amp; Selangor",
-              "Filters, the evaporator coil, the blower wheel and the drain line collect dust and biofilm through the year. We strip them back so the unit moves the air it was built to move.",
-              "svc-cleaning.webp",
-              bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Cleaning", None)), "Book A Cleaning"),
-
-        '''<section class="section section--tight">
-  <div class="wrap">
-    <div class="prose prose--solo reveal">
-      <p>The aircond is on, the remote says 24, and the room takes an hour to feel it. Air leaves the vents in a weak stream, and there is a sour smell for the first minute after start-up.</p>
-      <p>Dust on the evaporator fins works as insulation. The coil cannot pull heat out of the room, so the compressor keeps running to make up for it. That shows on the bill every month it stays there. The damp layer in the drain pan also grows mould, and that is what the fan pushes into the room.</p>
-      <p>We clean wall splits, ceiling cassettes and the condensers that serve them, in houses, apartments, shops and offices across Kuala Lumpur and Selangor. Call +60178570744 and tell us how many units you have and when they were last opened.</p>
-    </div>
-  </div>
-</section>''',
-
-        '''<section class="section section--alt approach">
-  <div class="wrap split">
-    <div class="split__copy reveal">
-      <p class="eyebrow"><span class="eyebrow__dot"></span>Why cleaning changes the cooling</p>
-      <h2 class="h2">Why A Dirty Coil Costs You Cooling</h2>
-      <p class="body">Air conditioning works by moving heat, and the evaporator coil is where that happens. Dust settles on the aluminium fins in a layer thin enough to ignore. It still sits between the room air and the cold metal. The coil then sheds less heat per minute, and the compressor runs longer to cover the gap.</p>
-      <p class="body">The blower wheel collects the same dust. Each of its blades is a small curved scoop. Once the scoops fill, the wheel spins at full speed while moving a fraction of its rated air. Cleaning both is what brings the cold back, and no amount of gas will do it.</p>
-    </div>
-    <div class="split__media reveal" data-delay="1">
-      <img class="poster" src="/assets/img/svc-cleaning.webp" width="600" height="450"
-           alt="An Ad Aircond Solution technician washing the evaporator coil of a wall-mounted aircond in Kuala Lumpur."
-           loading="lazy" decoding="async">
-    </div>
-  </div>
-</section>''',
-
-        cards("What we clean", "Signs Your Aircond", "Needs Cleaning",
-              "Ten of the reasons people call us for a clean, and what sits behind each one.",
-              C_SIGNS),
-
-        f'''<section class="section">
-  <div class="wrap prose__grid">
-    <div class="prose reveal">
-      <h2 class="h2 h2--sm">What A Cleaning Covers</h2>
-      <p>A clean that stops at the filter buys a few days. Dust travels past the filter into the coil, the blower wheel and the pan, so those are the surfaces the work has to reach.</p>
-      <p>Eight items make up a standard clean on a wall split. A cassette takes the same list with a larger filter area to wash.</p>
-    </div>
-    <div class="prose__aside reveal" data-delay="1">{checks("Done on every unit", C_COVERS)}</div>
-  </div>
-</section>''',
-
-        flow_section("How It Works", "How We Clean", "An Aircond",
-                     "Four steps, and the unit runs with you in the room before we pack up.",
-                     C_STEPS),
-
-        benefits("What you get", "What An Aircond Cleaning", "Includes",
-                 "What is covered on every clean we do, and what we will tell you before we start.",
-                 C_TERMS),
-
-        faq_block("Aircond Cleaning", "Questions About Cleaning",
-                  "Anything else about a clean, put it to us on +60178570744 and we will give you a straight answer.",
-                  C_FAQ),
-        others("ac-cleaning"),
-        testimonials(),
-    ]),
-    "jsonld": "[\n" + service_ld(
-        "Aircond Cleaning",
-        "Aircond cleaning covering filters, the evaporator coil, the blower wheel, the drain pan and line, and the outdoor condenser, across Kuala Lumpur and Selangor.",
-        "ac-cleaning/") + ",\n" + crumbs(
-        ("Home", ""), ("Our Services", "services/"), ("Aircond Cleaning", "ac-cleaning/")
-        ) + ",\n" + faq_ld(C_FAQ) + "\n]",
-})
-
-PAGES.append({
-    "dir": "ac-installation", "url": "ac-installation/", "nav": "services", "image": "svc-installation.webp",
-    "title": "Aircond Installation in KL &amp; Selangor | Ad Aircond Solution",
-    "description": "Aircond installation across Kuala Lumpur and Selangor. Capacity sized to the room, fresh flare joints, a vacuum before charging and a drain set to fall. Call +60178570744.",
-    "body": "\n".join([
-        ahero("Aircond installation in", "Kuala Lumpur &amp; Selangor",
-              "A new unit performs the way it was fitted. We size it to the room, run the pipe and the drain properly, and vacuum the system before the gas goes in.",
-              "svc-installation.webp",
-              bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Installation", None)), "Get An Install Quote"),
-
-        '''<section class="section section--tight">
-  <div class="wrap">
-    <div class="prose prose--solo reveal">
-      <p>You have bought the unit, or you are about to, and the shop has quoted a fitting price with the box. What that price covers is the part nobody explains until the room fails to cool two summers later.</p>
-      <p>An undersized unit runs without a break and still leaves the room warm. A drain laid flat backs water down the wall within months. Air left in the pipework turns into acid and takes the compressor with it. None of that shows on the day the unit is switched on.</p>
-      <p>We fit wall splits and ceiling cassettes for households and businesses right across the Klang Valley, in Kuala Lumpur and in Selangor. Ring +60178570744 with the room size, or the model you already have, and we will arrange a look at the wall.</p>
-    </div>
-  </div>
-</section>''',
-
-        '''<section class="section section--alt approach">
-  <div class="wrap split">
-    <div class="split__copy reveal">
-      <p class="eyebrow"><span class="eyebrow__dot"></span>Why fitting decides performance</p>
-      <h2 class="h2">The Install Sets How The Unit Runs For Years</h2>
-      <p class="body">Two identical units on two identical walls can cool very differently. The difference sits in four things. The capacity chosen for the room. The length and shape of the pipe run. The fall on the drain, and whether the air came out before the gas went in. Each is decided once, on fitting day, and each is expensive to revisit.</p>
-      <p class="body">So the work starts at the wall, before anyone opens the box. Where the wall, the drain route or the circuit will not carry the unit you have picked, we say so at the site visit. You then get the option that does work.</p>
-    </div>
-    <div class="split__media reveal" data-delay="1">
-      <img class="poster" src="/assets/img/svc-installation.webp" width="600" height="450"
-           alt="An Ad Aircond Solution technician fitting an outdoor condenser unit during an installation in Kuala Lumpur."
-           loading="lazy" decoding="async">
-    </div>
-  </div>
-</section>''',
-
-        cards("What we fit", "Aircond Installations", "We Take On",
-              "Ten of the jobs and decisions that come up on an install, and how each one is handled.",
-              I_CASES),
-
-        f'''<section class="section">
-  <div class="wrap prose__grid">
-    <div class="prose reveal">
-      <h2 class="h2 h2--sm">What A Proper Install Covers</h2>
-      <p>Most of what decides a unit's performance is buried behind the trunking within a day of being done. That is why the list below matters more than the badge on the front cover.</p>
-      <p>Eight items make up the standard on every unit we fit, whether it goes into a bedroom or a shop floor.</p>
-    </div>
-    <div class="prose__aside reveal" data-delay="1">{checks("Done on every install", I_CHECKS)}</div>
-  </div>
-</section>''',
-
-        flow_section("How It Works", "From Site Visit", "To First Cold Air",
-                     "Four steps, and the quote comes after somebody has seen the wall.",
-                     I_STEPS),
-
-        benefits("What you get", "What An Aircond Installation", "Includes",
-                 "The standard every unit we fit is held to, and what you see before we go.",
-                 I_TERMS),
-
-        faq_block("Aircond Installation", "Questions Before You Fit",
-                  "Something here we have not covered? Ring +60178570744 and ask the technician who would be doing the job.",
-                  I_FAQ),
-        others("ac-installation"),
-        testimonials(),
-    ]),
-    "jsonld": "[\n" + service_ld(
-        "Aircond Installation",
-        "Aircond installation for wall splits and ceiling cassettes across Kuala Lumpur and Selangor, sized to the room and commissioned on the day.",
-        "ac-installation/") + ",\n" + crumbs(
-        ("Home", ""), ("Our Services", "services/"), ("Aircond Installation", "ac-installation/")
-        ) + ",\n" + faq_ld(I_FAQ) + "\n]",
-})
-
-PAGES.append({
-    "dir": "ac-maintenance", "url": "ac-maintenance/", "nav": "services", "image": "svc-maintenance.webp",
-    "title": "Aircond Maintenance in KL &amp; Selangor | Ad Aircond Solution",
-    "description": "Scheduled aircond maintenance across Kuala Lumpur and Selangor. Readings logged every visit, terminals checked, the charge verified, a record per unit. Call +60178570744.",
-    "body": "\n".join([
-        ahero("Aircond maintenance in", "Kuala Lumpur &amp; Selangor",
-              "Booked visits on an interval that suits how you use the units. The readings go down on paper each time, so a slow decline shows up as a number.",
-              "svc-maintenance.webp",
-              bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Maintenance", None)), "Start A Service Plan"),
-
-        '''<section class="section section--tight">
-  <div class="wrap">
-    <div class="prose prose--solo reveal">
-      <p>Nobody books an aircond visit while the room is still cold. The unit gets used, the cooling slips a little each month, and the first call goes out on the evening it stops.</p>
-      <p>By then the cheap window has closed. A bearing that whined for six months has taken the motor with it. A loose terminal has burnt its block, and a slow leak has run the compressor short of oil. Each of those was visible months earlier to anyone holding a meter.</p>
-      <p>We run booked maintenance on wall splits and ceiling cassettes, in homes, shops and offices around Kuala Lumpur and out through Selangor. Tell us on +60178570744 how many units you have and how hard they work, and we will set the interval.</p>
-    </div>
-  </div>
-</section>''',
-
-        '''<section class="section section--alt approach">
-  <div class="wrap split">
-    <div class="split__copy reveal">
-      <p class="eyebrow"><span class="eyebrow__dot"></span>Maintenance against cleaning</p>
-      <h2 class="h2">What Maintenance Catches That A Clean Does Not</h2>
-      <p class="body">A cleaning gets the dust off the filter, the coil, the blower wheel and the drain, and the unit cools better that afternoon. Maintenance includes that work and then adds the part a wash cannot do, which is measurement. The vent temperature, the running current and the charge get written down and compared with the last visit.</p>
-      <p class="body">One reading on its own says almost nothing. Two readings six months apart say whether a unit is holding or sliding. That gap is the difference between changing a bearing and changing a motor. Where the numbers say a unit is finished, we tell you to plan the replacement instead of booking more visits.</p>
-    </div>
-    <div class="split__media reveal" data-delay="1">
-      <img class="poster" src="/assets/img/svc-maintenance.webp" width="600" height="450"
-           alt="An Ad Aircond Solution technician taking readings during a scheduled aircond maintenance visit in Kuala Lumpur."
-           loading="lazy" decoding="async">
-    </div>
-  </div>
-</section>''',
-
-        cards("What maintenance covers", "What A Booked Visit", "Picks Up Early",
-              "Ten of the things a scheduled visit catches while they are still small jobs.",
-              M_ITEMS),
-
-        f'''<section class="section">
-  <div class="wrap prose__grid">
-    <div class="prose reveal">
-      <h2 class="h2 h2--sm">What Each Visit Records</h2>
-      <p>Eight figures go on the sheet at every visit, and each one is written next to the figure from last time. That is what turns a service call into a history.</p>
-      <p>The history is what lets us tell you a bearing has six months in it, instead of finding out on the day it stops.</p>
-    </div>
-    <div class="prose__aside reveal" data-delay="1">{checks("Logged at every visit", M_CHECKS)}</div>
-  </div>
-</section>''',
-
-        flow_section("How It Works", "How A Maintenance", "Schedule Starts",
-                     "Four steps, and the interval is set on how hard your units actually work.",
-                     M_STEPS),
-
-        benefits("What you get", "What Aircond Maintenance", "Includes",
-                 "What every booked visit covers, and what lands with you afterwards.",
-                 M_TERMS),
-
-        faq_block("Aircond Maintenance", "Questions About Scheduled Visits",
-                  "Something not covered here? Ring +60178570744 and we will tell you straight whether a schedule is worth it for your units.",
-                  M_FAQ),
-        others("ac-maintenance"),
-        testimonials(),
-    ]),
-    "jsonld": "[\n" + service_ld(
-        "Aircond Maintenance",
-        "Scheduled aircond maintenance with readings logged per unit at every visit, across Kuala Lumpur and Selangor.",
-        "ac-maintenance/") + ",\n" + crumbs(
-        ("Home", ""), ("Our Services", "services/"), ("Aircond Maintenance", "ac-maintenance/")
-        ) + ",\n" + faq_ld(M_FAQ) + "\n]",
-})
-
-PAGES.append({
-    "dir": "gas-refilling", "url": "gas-refilling/", "nav": "services", "image": "svc-gas.webp",
-    "title": "Aircond Gas Refilling in KL &amp; Selangor | Ad Aircond Solution",
-    "description": "Aircond gas refilling across Kuala Lumpur and Selangor. We find the leak first, recover the old charge, then weigh the new one in to the nameplate figure. Call +60178570744.",
-    "body": "\n".join([
-        ahero("Aircond gas refilling in", "Kuala Lumpur &amp; Selangor",
-              "Refrigerant does not get used up, so a system that is low has lost it somewhere. We find the hole, repair it, then weigh the charge back in to the figure on the plate.",
-              "svc-gas.webp",
-              bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Gas Refilling", None)), "Book A Leak Test"),
-
-        '''<section class="section section--tight">
-  <div class="wrap">
-    <div class="prose prose--solo reveal">
-      <p>The air at the vent is cool but never cold. The unit runs all evening without switching off, and there is frost on the copper where the pipes meet the outdoor unit.</p>
-      <p>Somebody will offer to top it up. Six weeks later the room is warm again, because gas poured into a leaking circuit leaves through the same hole at the same rate. Meanwhile the compressor has been running short of the refrigerant that carries its oil. That bill dwarfs the one for the gas.</p>
-      <p>We trace refrigerant leaks, repair them and recharge the system. Wall splits and ceiling cassettes, in KL homes and across the Selangor suburbs. Ring +60178570744 and tell us how long the cooling has been slipping.</p>
-    </div>
-  </div>
-</section>''',
-
-        '''<section class="section section--alt approach">
-  <div class="wrap split">
-    <div class="split__copy reveal">
-      <p class="eyebrow"><span class="eyebrow__dot"></span>What a low charge really means</p>
-      <h2 class="h2">A Sealed System Should Never Need Topping Up</h2>
-      <p class="body">Refrigerant works in a closed loop. It changes between liquid and gas thousands of times a day, carries heat out of your room, and comes back to do it again. Nothing consumes it and nothing burns it off. A unit that has lost pressure has a hole, and the only useful question is where.</p>
-      <p class="body">That is why a refill on its own is a poor spend, and why the visit starts with a test instead of a cylinder. Where the system turns out to be holding its charge, the weak cooling comes from somewhere else. We go and look there instead of selling you gas.</p>
-    </div>
-    <div class="split__media reveal" data-delay="1">
-      <img class="poster" src="/assets/img/svc-gas.webp" width="600" height="450"
-           alt="An Ad Aircond Solution technician checking refrigerant pressures at the outdoor unit with gauges in Kuala Lumpur."
-           loading="lazy" decoding="async">
-    </div>
-  </div>
-</section>''',
-
-        cards("Where the gas goes", "Where Refrigerant Escapes", "And What We Do",
-              "Ten of the places a leak turns up, and the charging faults that come with them.",
-              G_ITEMS),
-
-        f'''<section class="section">
-  <div class="wrap prose__grid">
-    <div class="prose reveal">
-      <h2 class="h2 h2--sm">What We Do Before Any Gas Goes In</h2>
-      <p>Eight steps sit between the gauges going on and the cylinder coming off the scales. Skipping them is how a system gets filled twice in one year.</p>
-      <p>The order matters as much as the list. A charge weighed into a circuit that still holds air and moisture will cool the room this week and cost you a compressor later.</p>
-    </div>
-    <div class="prose__aside reveal" data-delay="1">{checks("Done on every recharge", G_CHECKS)}</div>
-  </div>
-</section>''',
-
-        flow_section("How It Works", "How A Refrigerant", "Job Runs",
-                     "Four steps, and the first one is a test rather than a cylinder.",
-                     G_STEPS),
-
-        benefits("What you get", "What A Gas Refill", "Includes",
-                 "What happens on every recharge, and what you are told before it starts.",
-                 G_TERMS),
-
-        faq_block("Aircond Gas Refilling", "Questions About Refrigerant",
-                  "Not covered here? Ring +60178570744 and describe what the unit is doing, and we will tell you whether gas is even the problem.",
-                  G_FAQ),
-        others("gas-refilling"),
-        testimonials(),
-    ]),
-    "jsonld": "[\n" + service_ld(
-        "Aircond Gas Refilling",
-        "Refrigerant leak tracing, repair and recharging by weight for aircond systems across Kuala Lumpur and Selangor.",
-        "gas-refilling/") + ",\n" + crumbs(
-        ("Home", ""), ("Our Services", "services/"), ("Aircond Gas Refilling", "gas-refilling/")
-        ) + ",\n" + faq_ld(G_FAQ) + "\n]",
-})
-
-PAGES.append({
-    "dir": "ac-electrical-service", "url": "ac-electrical-service/", "nav": "services",
-    "image": "svc-electrical.webp",
-    "title": "Aircond Electrical Service in KL &amp; Selangor | Ad Aircond Solution",
-    "description": "Aircond electrical faults traced across KL and Selangor: tripping RCCBs, contactors, driver boards, chewed cable and burnt terminals. Call +60178570744.",
-    "body": "\n".join([
-        ahero("Aircond electrical service in", "Kuala Lumpur &amp; Selangor",
-              "Tripping breakers, dead compressors and boards that post a code. We test the circuit with the power off before anything is switched back on.",
-              "svc-electrical.webp",
-              bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Electrical Service", None)), "Book An Electrical Check"),
-
-        '''<section class="section section--tight">
-  <div class="wrap">
-    <div class="prose prose--solo reveal">
-      <p>You press the button and the house goes dark. Or the display flashes two characters nobody can decode. The outdoor unit sits in silence while the indoor fan carries on.</p>
-      <p>The temptation is to walk to the box and push the breaker back up. Every reset onto a live fault welds a contact further, cooks a winding a little more, or arcs across a terminal already black. The second reset usually costs more than the first.</p>
-      <p>We trace aircond electrical faults on splits and cassettes for households and businesses, right through Kuala Lumpur and Selangor. Ring +60178570744 and tell us which device is tripping and when it goes.</p>
-    </div>
-  </div>
-</section>''',
-
-        '''<section class="section section--alt approach">
-  <div class="wrap split">
-    <div class="split__copy reveal">
-      <p class="eyebrow"><span class="eyebrow__dot"></span>Where electrical faults hide</p>
-      <h2 class="h2">The Fault Is Not Always Inside The Aircond</h2>
-      <p class="body">An electrical callout starts at the supply end, not at the machine. The voltage, the breaker rating, the isolator and the cable running between the two units all sit outside the aircond. Any one of them can produce a symptom that looks exactly like a dead compressor.</p>
-      <p class="body">So the meter comes out before the screwdriver. Windings get tested to earth, the cable is followed along its run, and the stored code is matched to the maker's table. Where the answer turns out to be the house circuit beyond the isolator, that is work for a licensed electrician and we say so.</p>
-    </div>
-    <div class="split__media reveal" data-delay="1">
-      <img class="poster" src="/assets/img/svc-electrical.webp" width="600" height="450"
-           alt="An Ad Aircond Solution technician testing the control wiring inside an aircond unit in Kuala Lumpur."
-           loading="lazy" decoding="async">
-    </div>
-  </div>
-</section>''',
-
-        cards("What we trace", "Aircond Electrical Faults", "And Where They Sit",
-              "Ten of the electrical faults we get called out for, and what is behind each one.",
-              E_ITEMS),
-
-        f'''<section class="section">
-  <div class="wrap prose__grid">
-    <div class="prose reveal">
-      <h2 class="h2 h2--sm">What Gets Tested On An Electrical Call</h2>
-      <p>Eight measurements are taken before the unit is asked to run again. Most of them happen with the supply dead, which is rather the point.</p>
-      <p>An electrical fault found by switching on and watching costs a component. Found with a meter, it costs a reading.</p>
-    </div>
-    <div class="prose__aside reveal" data-delay="1">{checks("Measured on every call", E_CHECKS)}</div>
-  </div>
-</section>''',
-
-        flow_section("How It Works", "How An Electrical", "Callout Runs",
-                     "Four steps, and the first thing we ask is that you leave it switched off.",
-                     E_STEPS),
-
-        benefits("What you get", "What An Electrical Service", "Includes",
-                 "How every electrical call is handled, and the point where we hand over.",
-                 E_TERMS),
-
-        faq_block("Aircond Electrical Service", "Questions About Electrical Faults",
-                  "Not here? Ring +60178570744, say which device trips and when, and we will tell you what it points at.",
-                  E_FAQ),
-        others("ac-electrical-service"),
-        testimonials(),
-    ]),
-    "jsonld": "[\n" + service_ld(
-        "Aircond Electrical Service",
-        "Aircond electrical fault tracing and repair covering tripping devices, contactors, driver boards, wiring and terminals, across Kuala Lumpur and Selangor.",
-        "ac-electrical-service/") + ",\n" + crumbs(
-        ("Home", ""), ("Our Services", "services/"),
-        ("Aircond Electrical Service", "ac-electrical-service/")
-        ) + ",\n" + faq_ld(E_FAQ) + "\n]",
-})
+PAGES.append(service_page(
+    slug="ac-electrical-service", name="Aircond Electrical Service", image="svc-electrical.webp",
+    title="Aircond Electrical Service in KL &amp; Selangor | Ad Aircond Solution",
+    description="Aircond electrical faults traced across KL and Selangor: tripping RCCBs, contactors, driver boards, chewed cable and burnt terminals. Call +60178570744.",
+    ld="Aircond electrical fault tracing and repair covering tripping devices, contactors, driver boards, wiring and terminals, across Kuala Lumpur and Selangor.",
+    hero=("Aircond electrical service in", "Kuala Lumpur &amp; Selangor",
+          "Tripping breakers, dead compressors and boards that post a code. We test the circuit with the power off before anything is switched back on.",
+          "Book An Electrical Check"),
+    intro=["You press the button and the house goes dark. Or the display flashes two characters nobody can decode. The outdoor unit sits in silence while the indoor fan carries on.",
+           "The temptation is to walk to the box and push the breaker back up. Every reset onto a live fault welds a contact further, cooks a winding a little more, or arcs across a terminal already black. The second reset usually costs more than the first.",
+           "We trace aircond electrical faults on splits and cassettes for households and businesses, right through Kuala Lumpur and Selangor. Ring +60178570744 and tell us which device is tripping and when it goes."],
+    split=("Where electrical faults hide", "The Fault Is Not Always Inside The Aircond",
+           ["An electrical callout starts at the supply end, not at the machine. The voltage, the breaker rating, the isolator and the cable running between the two units all sit outside the aircond. Any one of them can produce a symptom that looks exactly like a dead compressor.",
+            "So the meter comes out before the screwdriver. Windings get tested to earth, the cable is followed along its run, and the stored code is matched to the maker's table. Where the answer turns out to be the house circuit beyond the isolator, that is work for a licensed electrician and we say so."],
+           "svc-electrical.webp", "An Ad Aircond Solution technician testing the control wiring inside an aircond unit in Kuala Lumpur."),
+    faults=("What we trace", "Aircond Electrical Faults", "And Where They Sit",
+            "Ten of the electrical faults we get called out for, and what is behind each one.",
+            E_ITEMS),
+    tests=("What Gets Tested On An Electrical Call",
+           ["Eight measurements are taken before the unit is asked to run again. Most of them happen with the supply dead, which is rather the point.",
+            "An electrical fault found by switching on and watching costs a component. Found with a meter, it costs a reading."],
+           "Measured on every call", E_CHECKS),
+    flow=("How An Electrical", "Callout Runs",
+          "Four steps, and the first thing we ask is that you leave it switched off.",
+          E_STEPS),
+    terms=("What you get", "What An Electrical Service", "Includes",
+           "How every electrical call is handled, and the point where we hand over.",
+           E_TERMS),
+    faq=("Aircond Electrical Service", "Questions About Electrical Faults",
+         "Not here? Ring +60178570744, say which device trips and when, and we will tell you what it points at.",
+         E_FAQ),
+))
 
 
 # --- services hub -----------------------------------------------------------
@@ -1754,79 +1550,39 @@ PAGES.append({
 
 # --- aircond service --------------------------------------------------------
 
-PAGES.append({
-    "dir": "aircond-service", "url": "aircond-service/", "nav": "services", "image": "step-onsite.webp",
-    "title": "Top-Rated Aircond Service in KL &amp; Selangor | Ad Aircond Solution",
-    "description": "Aircond service, repair, maintenance and installation for homes and businesses across Kuala Lumpur and Selangor. Honest diagnosis before any work. Call +60178570744.",
-    "body": "\n".join([
-        ahero("Top-rated aircond service", "in KL &amp; Selangor",
-              "In Kuala Lumpur&rsquo;s constant heat, your air conditioner is essential. When it stops working, your day can feel uncomfortable. We offer reliable maintenance, accurate repairs and smooth installations for homes and businesses throughout KL and Selangor.",
-              "step-onsite.webp",
-              bc(("Home", "/"), ("Our Services", "/services/"), ("Aircond Service", None)), "Book An Aircond Service"),
-
-        '''<section class="section section--tight">
-  <div class="wrap">
-    <div class="prose prose--solo reveal">
-      <p>At Ad Aircond Solution, we know how frustrating it is when the cool air stops. We offer reliable maintenance, accurate repairs, and smooth installations for homes and businesses throughout KL and Selangor.</p>
-      <p>Our technicians focus on lasting repairs instead of quick fixes. When your unit is properly serviced, it keeps your rooms at the right temperature and protects important parts from breaking down. We help you avoid stressful breakdowns during the hottest months by spotting small problems early.</p>
-    </div>
-  </div>
-</section>''',
-
-        '''<section class="section section--alt approach">
-  <div class="wrap split">
-    <div class="split__copy reveal">
-      <p class="eyebrow"><span class="eyebrow__dot"></span>Trained technicians</p>
-      <h2 class="h2">Expert Aircond Servicing That Respects Your Budget</h2>
-      <p class="body">You should always know who is coming into your home and working on your equipment. Our technicians are not only trained but also understand the details of modern cooling systems. Their experience helps us find hidden issues that others might miss.</p>
-      <p class="body">We understand that repairs can be stressful, especially when you worry about cost. That is why we explain your equipment&rsquo;s condition clearly before starting work. Our honest approach helps you avoid unnecessary part replacements and keeps your system safe. We focus only on what your aircond needs, so you get quality service at a fair price.</p>
-    </div>
-    <div class="split__media reveal" data-delay="1">
-      <img class="poster" src="/assets/img/svc-repair.webp" width="600" height="450"
-           alt="An Ad Aircond Solution technician servicing a wall-mounted unit in a Kuala Lumpur home."
-           loading="lazy" decoding="async">
-    </div>
-  </div>
-</section>''',
-
-        cards("What we fix", "Our Aircond Services", "Include",
-              "Ten of the faults we are called out for most, and what we do about each one.",
-              SYMPTOMS),
-
-        f'''<section class="section">
-  <div class="wrap prose__grid">
-    <div class="prose reveal">
-      <h2 class="h2 h2--sm">Our Complete System Inspection Checklist</h2>
-      <p>Every service visit is a chance to catch small problems before they become bigger issues. Our standard inspection is thorough so you can feel confident in your equipment.</p>
-      <p>During our visit, we check the points listed here, and you hear what we found before anything is replaced.</p>
-    </div>
-    <div class="prose__aside reveal" data-delay="1">{checks("Checked at every visit", CHECKLIST)}</div>
-  </div>
-</section>''',
-
-        flow_section("How It Works", "A Simple,", "Stress-Free Process",
-                     "Four steps from your first message to a unit that is cooling properly again.",
-                     [(m, i, n, t) for (m, i), (n, t) in
-                      zip([("contact", "i-phone"), ("schedule", "i-calendar"),
-                           ("onsite", "i-user"), ("comfort", "i-check")], PROCESS)]),
-
-        benefits("Why us", "Benefits Of Hiring", "Our Aircond Services",
-                 "What a properly serviced aircond gives you back, beyond the repair itself.",
-                 BENEFITS),
-
-        faq_block("Frequently Asked Questions", "About Our Services",
-                  "If yours is not here, call or WhatsApp us on +60178570744 and we will answer it straight.",
-                  FAQ),
-        others("aircond-service"),
-        testimonials(),
-    ]),
-    "jsonld": "[\n" + service_ld(
-        "Aircond Service",
-        "Aircond service, repair, maintenance and installation for homes and businesses across Kuala Lumpur and Selangor.",
-        "aircond-service/") + ",\n" + crumbs(
-        ("Home", ""), ("Our Services", "services/"), ("Aircond Service", "aircond-service/")
-        ) + ",\n" + faq_ld(FAQ) + "\n]",
-})
+PAGES.append(service_page(
+    slug="aircond-service", name="Aircond Service", image="step-onsite.webp",
+    title="Top-Rated Aircond Service in KL &amp; Selangor | Ad Aircond Solution",
+    description="Aircond service, repair, maintenance and installation for homes and businesses across Kuala Lumpur and Selangor. Honest diagnosis before any work. Call +60178570744.",
+    ld="Aircond service, repair, maintenance and installation for homes and businesses across Kuala Lumpur and Selangor.",
+    hero=("Top-rated aircond service", "in KL &amp; Selangor",
+          "In Kuala Lumpur&rsquo;s constant heat, your air conditioner is essential. When it stops working, your day can feel uncomfortable. We offer reliable maintenance, accurate repairs and smooth installations for homes and businesses throughout KL and Selangor.",
+          "Book An Aircond Service"),
+    intro=["At Ad Aircond Solution, we know how frustrating it is when the cool air stops. We offer reliable maintenance, accurate repairs, and smooth installations for homes and businesses throughout KL and Selangor.",
+           "Our technicians focus on lasting repairs instead of quick fixes. When your unit is properly serviced, it keeps your rooms at the right temperature and protects important parts from breaking down. We help you avoid stressful breakdowns during the hottest months by spotting small problems early."],
+    split=("Trained technicians", "Expert Aircond Servicing That Respects Your Budget",
+           ["You should always know who is coming into your home and working on your equipment. Our technicians are not only trained but also understand the details of modern cooling systems. Their experience helps us find hidden issues that others might miss.",
+            "We understand that repairs can be stressful, especially when you worry about cost. That is why we explain your equipment&rsquo;s condition clearly before starting work. Our honest approach helps you avoid unnecessary part replacements and keeps your system safe. We focus only on what your aircond needs, so you get quality service at a fair price."],
+           "svc-repair.webp", "An Ad Aircond Solution technician servicing a wall-mounted unit in a Kuala Lumpur home."),
+    faults=("What we fix", "Our Aircond Services", "Include",
+            "Ten of the faults we are called out for most, and what we do about each one.",
+            SYMPTOMS),
+    tests=("Our Complete System Inspection Checklist",
+           ["Every service visit is a chance to catch small problems before they become bigger issues. Our standard inspection is thorough so you can feel confident in your equipment.",
+            "During our visit, we check the points listed here, and you hear what we found before anything is replaced."],
+           "Checked at every visit", CHECKLIST),
+    flow=("A Simple,", "Stress-Free Process",
+          "Four steps from your first message to a unit that is cooling properly again.",
+          [(m, i, n, t) for (m, i), (n, t) in
+          zip([("contact", "i-phone"), ("schedule", "i-calendar"),
+          ("onsite", "i-user"), ("comfort", "i-check")], PROCESS)]),
+    terms=("Why us", "Benefits Of Hiring", "Our Aircond Services",
+           "What a properly serviced aircond gives you back, beyond the repair itself.",
+           BENEFITS),
+    faq=("Frequently Asked Questions", "About Our Services",
+         "If yours is not here, call or WhatsApp us on +60178570744 and we will answer it straight.",
+         FAQ),
+))
 
 
 # --- about ------------------------------------------------------------------
